@@ -1,0 +1,17 @@
+---
+title: "html2"
+author: "name"
+date: "`r Sys.Date()`"
+output: 
+  bookdown::html_document2:
+    df_print: kable
+    toc: true
+    config:
+      toc:
+        collapsed: 2
+    toc_depth: 4
+    toc_float: true
+    
+    theme: default
+    highlight: tango
+---
