@@ -1,7 +1,12 @@
 # rUM
 This is a collection of R things for folks at UM (The University of Miami).
 
-To install this: `devtools::install_github("RaymondBalise/rUM")`
+To install this: 
+
+```r
+if (!requireNamespace("devtools")) install.packages("devtools")
+devtools::install_github("RaymondBalise/rUM")
+```
 
 ## Markdown Headers
 
