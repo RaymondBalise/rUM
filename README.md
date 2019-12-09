@@ -11,7 +11,7 @@ To install this: `devtools::install_github("RaymondBalise/rUM")`
   + html2 with rUM
   + html2 Details with rUM
   + pdf2 showing LaTeX with rUM
-  
+
 ## Headers
 
 ### html2 with rUM
