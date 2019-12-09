@@ -8,6 +8,9 @@ Authors@R:
            email = "balise@miami.edu",
            comment = c(ORCID = "0000-0002-9856-5901"))
 Description: This holds some markdown templates.
+Imports:
+    rmarkdown,
+    bookdown
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
