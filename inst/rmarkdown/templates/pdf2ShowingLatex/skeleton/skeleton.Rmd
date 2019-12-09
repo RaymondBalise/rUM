@@ -1,0 +1,25 @@
+---
+title: "pdf2"
+author: "name"
+date: "`r Sys.Date()`"
+output: 
+  bookdown::pdf_document2:
+    toc: TRUE
+
+header-includes: 
+  \usepackage{float}
+  \let\origfigure\figure
+  \let\endorigfigure\endfigure
+  \renewenvironment{figure}[1][2] {
+      \expandafter\origfigure\expandafter[H]
+  } {
+      \endorigfigure
+  }
+  \usepackage{longtable}
+---
+
+```{r setup, include=FALSE, message=FALSE}
+
+```
+
+# 
