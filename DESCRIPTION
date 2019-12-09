@@ -1,0 +1,13 @@
+Package: rUM
+Title: Hold some R Stuff for UM Projects
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Raymond",
+           family = "Balise",
+           role = c("aut", "cre"),
+           email = "balise@miami.edu",
+           comment = c(ORCID = "0000-0002-9856-5901"))
+Description: This holds some markdown templates.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
