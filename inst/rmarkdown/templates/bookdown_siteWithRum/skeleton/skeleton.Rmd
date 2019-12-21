@@ -22,7 +22,7 @@ bibliography: bibliography.bib
 
 Save this file as index.Rmd
 
-Add the style.css file and bibliography.bib files to the directory hold with this file.  They can be found here: https://github.com/RaymondBalise/rUM/tree/master/inst/bookFiles.  Right click on the files and choose something like Save Link As... Chrome may try to rename style.css as style.html.  Tell it to **name it style.css**.
+Add the style.css file and bibliography.bib files to the directory hold with this file.  They can be found here: https://github.com/RaymondBalise/rUM/tree/master/inst/bookFiles.  Click the Raw button.  Use the file menu to save the file.  Be sure to keep the original names.
 
 ```{r setup, include=FALSE, message=FALSE}
 
