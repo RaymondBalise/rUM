@@ -8,7 +8,7 @@ output:
   bookdown::gitbook: 
     config:
       toc:
-        collapsed: 2
+        collapse: 2
     toc_depth: 4
     css: "style.css"
     number_sections: true
