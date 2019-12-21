@@ -1,0 +1,30 @@
+--- 
+title: "yourTitle"
+author: "yourName"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook: 
+    config:
+      toc:
+        collapsed: 2
+    toc_depth: 4
+    css: "style.css"
+    number_sections: true
+description: "notesGoHere"
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography.bib
+---
+# 
+
+Save this file as index.Rmd
+Add the style.css file and bibliography.bib files to the directory hold with this file.
+They can be found: https://github.com/RaymondBalise/rUM/tree/master/inst/bookFiles 
+
+```{r setup, include=FALSE, message=FALSE}
+
+```
+
+# 

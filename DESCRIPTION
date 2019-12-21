@@ -1,6 +1,6 @@
 Package: rUM
-Title: Hold some R Stuff for UM Projects
-Version: 0.0.3
+Title: Hold some R Markdown Stuff for UM Projects
+Version: 0.0.4
 Authors@R: 
     person(given = "Raymond",
            family = "Balise",

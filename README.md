@@ -16,6 +16,7 @@ devtools::install_github("RaymondBalise/rUM")
   + html2 with rUM
   + html2 Details with rUM
   + pdf2 showing LaTeX with rUM
+  + bookdown_site with rUM 
 
 ## Headers
 
@@ -28,3 +29,5 @@ This shows a table of conents
 ### pdf2 showing LaTeX with rUM
 PDF report where table and figures don't float to other pages.  Many thanks to https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc
 
+### bookdown_site with rUM 
+A bookdown website with a good table of contents for a book
