@@ -19,7 +19,9 @@ header-includes:
 ---
 
 ```{r setup, include=FALSE, message=FALSE}
-
+library(conflicted)
+suppressMessages(conflict_prefer("filter", "dplyr"))
+suppressPackageStartupMessages(library(tidyverse))
 ```
 
 # 
