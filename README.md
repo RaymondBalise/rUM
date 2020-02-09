@@ -1,4 +1,4 @@
-# rUM
+# rUM <a href='https://raymondbalise.github.io/rUM/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 This is a collection of R things for folks at UM (The University of Miami).
 
 There are R Markdown templates.  They include they YAML header and startup blocks that load the tidyverse and conflicted packages.  The plan is to add UM thesis and disertation Markdown templates.
