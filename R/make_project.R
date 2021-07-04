@@ -1,7 +1,10 @@
 #' Make an Analysis Project
 #' 
-#' @description This function makes a R project that includes an analysis.Rmd file with 
-#' conflicted and tidyverse.  This is used by the research_project.dcf file.
+#' @description This function makes an R project that includes an analysis.Rmd 
+#' file with conflicted and tidyverse and an aggressive .gitignore.  The 
+#' .gitignore is designed to help protect against leaking data (with protected 
+#' health information). This function is used by the research_project.dcf file 
+#' to make the files.
 #'
 #' @param path Path automatically sent by research_project.dcf
 #'
@@ -9,7 +12,7 @@
 #' @import conflicted
 #' @importFrom utils download.file
 #'
-#' @return a project
+#' @return Creates a project directory with stuff in it.
 #' @export
 
 make_project <- function(path) {
@@ -58,6 +61,11 @@ make_project <- function(path) {
   writeLines(contents, con = file.path(path, "analysis.Rmd"))
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
 
-  download.file("https://gist.githubusercontent.com/RaymondBalise/300d99c2b6450feda3ed5a816f396191/raw/a38f77aab743a2670dbb80ab0278b30745527243/.gitignore",
+  gist_path <- paste0(
+    "https://gist.githubusercontent.com/RaymondBalise/",
+    "300d99c2b6450feda3ed5a816f396191/raw/",
+    "a38f77aab743a2670dbb80ab0278b30745527243/.gitignore"
+  )
+  download.file(gist_path,
                 paste0(path, "/.gitignore"))
-    }
+}

@@ -10,9 +10,12 @@ make_project(path)
 \item{path}{Path automatically sent by research_project.dcf}
 }
 \value{
-a project
+Creates a project directory with stuff in it.
 }
 \description{
-This function makes a R project that includes an analysis.Rmd file with 
-conflicted and tidyverse.  This is used by the research_project.dcf file.
+This function makes an R project that includes an analysis.Rmd 
+file with conflicted and tidyverse and an aggressive .gitignore.  The 
+.gitignore is designed to help protect against leaking data (with protected 
+health information). This function is used by the research_project.dcf file 
+to make the files.
 }
