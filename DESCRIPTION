@@ -10,6 +10,8 @@ Authors@R:
 Description: This holds some r markdown templates and a template to create a 
     research project in RStudio.
 Imports:
+    conflicted,
+    tidyverse,
     rmarkdown,
     bookdown
 License: MIT + file LICENSE

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hold some R Markdown Stuff for UM Projects • rUM</title>
+<title>Hold Templates for R UM Projects • rUM</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -17,8 +17,9 @@
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Hold some R Markdown Stuff for UM Projects">
-<meta property="og:description" content="This holds some markdown templates.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Hold Templates for R UM Projects">
+<meta property="og:description" content="This holds some r markdown templates and a template to create a 
+    research project in RStudio.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -70,7 +71,12 @@
 <a href="#rum-" class="anchor" aria-hidden="true"></a>rUM <a href="https://raymondbalise.github.io/rUM/" class="external-link"><img src="reference/figures/logo.png" align="right" height="139"></a>
 </h1></div>
 <p>This is a collection of R things for folks at UM (The University of Miami).</p>
-<p>There are R Markdown templates. They include they YAML header and startup blocks that load the tidyverse and conflicted packages. The plan is to add UM thesis and disertation Markdown templates.</p>
+<p>rUM include:</p>
+<ul>
+<li>A research project template. It creates a new RStudio project that has an analysis R markdown file with tidyverse and conflicted.</li>
+<li>R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.</li>
+</ul>
+<p>The plan is to add UM thesis and dissertation Markdown templates.</p>
 <div id="how-to-i-add-rum" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-to-i-add-rum" class="anchor" aria-hidden="true"></a>How to I add rUM?</h2>
@@ -83,6 +89,16 @@
 <a href="#where-can-i-get-rum" class="anchor" aria-hidden="true"></a>Where can I get rUM?</h2>
 <p><a href="https://raymondbalise.github.io/rUM/" class="external-link uri">https://raymondbalise.github.io/rUM/</a></p>
 <p><a href="https://github.com/RaymondBalise/rUM" class="external-link uri">https://github.com/RaymondBalise/rUM</a></p>
+</div>
+<div id="how-do-i-make-rum-research-project" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-do-i-make-rum-research-project" class="anchor" aria-hidden="true"></a>How do I make rUM research project?</h2>
+<ol style="list-style-type: decimal">
+<li>Use File &gt; New Project &gt; New Directory</li>
+<li>Scroll down and then click <strong>Research Project Template</strong>
+</li>
+<li>Specify where you want your research project to be saved.</li>
+</ol>
 </div>
 <div id="how-do-i-use-rum-for-markdown-headers" class="section level2">
 <h2 class="hasAnchor">
@@ -99,10 +115,9 @@
 <li>pdf2 showing LaTeX with rUM</li>
 <li>bookdown_site with rUM</li>
 </ul>
-</div>
-<div id="what-are-the-headers" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-are-the-headers" class="anchor" aria-hidden="true"></a>What are the headers?</h2>
+<div id="what-are-the-headers" class="section level3">
+<h3 class="hasAnchor">
+<a href="#what-are-the-headers" class="anchor" aria-hidden="true"></a>What are the headers?</h3>
 <div id="html2-with-rum" class="section level4">
 <h4 class="hasAnchor">
 <a href="#html2-with-rum" class="anchor" aria-hidden="true"></a>html2 with rUM</h4>
@@ -111,7 +126,7 @@
 <div id="html2-details-with-rum" class="section level4">
 <h4 class="hasAnchor">
 <a href="#html2-details-with-rum" class="anchor" aria-hidden="true"></a>html2 Details with rUM</h4>
-<p>This shows a table of conents</p>
+<p>This shows a table of contents</p>
 </div>
 <div id="pdf2-showing-latex-with-rum" class="section level4">
 <h4 class="hasAnchor">
@@ -122,6 +137,7 @@
 <h4 class="hasAnchor">
 <a href="#bookdown_site-with-rum" class="anchor" aria-hidden="true"></a>bookdown_site with rUM</h4>
 <p>A bookdown website with a good table of contents for a book</p>
+</div>
 </div>
 </div>
 </div>

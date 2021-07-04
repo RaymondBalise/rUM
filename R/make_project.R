@@ -1,9 +1,13 @@
 #' Make an Analysis Project
 #' 
-#' This function makes a R project that includes an analysis.Rmd file with 
+#' @description This function makes a R project that includes an analysis.Rmd file with 
 #' conflicted and tidyverse.  This is used by the research_project.dcf file.
 #'
 #' @param path Path automatically sent by research_project.dcf
+#'
+#' @import tidyverse 
+#' @import conflicted
+#' @importFrom utils download.file
 #'
 #' @return a project
 #' @export
@@ -16,8 +20,8 @@ make_project <- function(path) {
   # generate header
   header <- c(
     '---',
-    'title: "html"',
-    'author: ""',
+    'title: "title_goes_here"',
+    'author: "me"',
     'date: "`r Sys.Date()`"',
     'output:', 
     '  bookdown::html_document2:',
@@ -32,7 +36,15 @@ make_project <- function(path) {
     '',
     '# suppress "`summarise()` has grouped output by " messages',
     'options(dplyr.summarise.inform=F) ', 
-    '```'
+    '```',
+    '',
+    '# Introduction',
+    '',
+    '# Method',
+    '',
+    '# Results',
+    '',
+    '# Conclusion'
 )
   
   
@@ -44,5 +56,8 @@ make_project <- function(path) {
   
   # write to index file
   writeLines(contents, con = file.path(path, "analysis.Rmd"))
-  dir.create(paste0(path, "/data"),recursive = TRUE, showWarnings = FALSE)
-}
+  dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
+
+  download.file("https://gist.githubusercontent.com/RaymondBalise/300d99c2b6450feda3ed5a816f396191/raw/a38f77aab743a2670dbb80ab0278b30745527243/.gitignore",
+                paste0(path, "/.gitignore"))
+    }
