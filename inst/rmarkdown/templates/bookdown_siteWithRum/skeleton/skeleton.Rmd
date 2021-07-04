@@ -18,16 +18,35 @@ editor_options:
 bibliography: bibliography.bib
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = TRUE,
+	warning = TRUE
+)
+```
+
 # 
 
 Save this file as index.Rmd
 
 Add the style.css file and bibliography.bib files to the directory hold with this file.  They can be found here: https://github.com/RaymondBalise/rUM/tree/master/inst/bookFiles.  Click the Raw button.  Use the file menu to save the file.  Be sure to keep the original names.
 
-```{r setup, include=FALSE, message=FALSE}
+```{r tidyverse, include=FALSE, message=FALSE}
 library(conflicted)
-suppressMessages(conflict_prefer("filter", "dplyr"))
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("lag", "dplyr", quiet = TRUE)
 suppressPackageStartupMessages(library(tidyverse))
+
+# suppress "`summarise()` has grouped output by " messages
+options(dplyr.summarise.inform=F)  
 ```
+
+```{r tidymodels, include=FALSE}
+suppressPackageStartupMessages(library(tidymodels))
+tidymodels_prefer()
+suppressMessages(conflict_prefer("spec", "yardstick"))
+```
+
 
 # 

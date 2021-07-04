@@ -18,10 +18,28 @@ header-includes:
   \usepackage{longtable}
 ---
 
-```{r setup, include=FALSE, message=FALSE}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = TRUE,
+	warning = TRUE
+)
+```
+
+```{r tidyverse, include=FALSE, message=FALSE}
 library(conflicted)
-suppressMessages(conflict_prefer("filter", "dplyr"))
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("lag", "dplyr", quiet = TRUE)
 suppressPackageStartupMessages(library(tidyverse))
+
+# suppress "`summarise()` has grouped output by " messages
+options(dplyr.summarise.inform=F)  
+```
+
+```{r tidymodels, include=FALSE}
+suppressPackageStartupMessages(library(tidymodels))
+tidymodels_prefer()
+suppressMessages(conflict_prefer("spec", "yardstick"))
 ```
 
 # 

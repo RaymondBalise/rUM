@@ -1,3 +1,7 @@
+# rUM 0.1
+
+* Aded tidymodels with conflicted to setup
+
 # rUM 0.0.5
 
 * Added tidyverse and conflicted to setup
