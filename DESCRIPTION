@@ -1,5 +1,5 @@
 Package: rUM
-Title: Hold some R Markdown Stuff for UM Projects
+Title: Hold Templates for R UM Projects
 Version: 0.1
 Authors@R: 
     person(given = "Raymond",
@@ -7,10 +7,12 @@ Authors@R:
            role = c("aut", "cre"),
            email = "balise@miami.edu",
            comment = c(ORCID = "0000-0002-9856-5901"))
-Description: This holds some markdown templates.
+Description: This holds some r markdown templates and a template to create a 
+    research project in RStudio.
 Imports:
     rmarkdown,
     bookdown
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
+LazyData: FALSE
+RoxygenNote: 7.1.1
