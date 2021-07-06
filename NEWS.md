@@ -1,3 +1,5 @@
+# rUM 0.2
+
 # rUM 0.1
 
 * Aded tidymodels with conflicted to setup
