@@ -29,6 +29,7 @@ make_project <- function(path) {
     'output:', 
     '  bookdown::html_document2:',
     '  df_print: kable',
+    'bibliography: references.bib',
     '---',
     '',
     '```{r tidyverse}',
@@ -44,6 +45,7 @@ make_project <- function(path) {
     '# Introduction',
     '',
     '# Method',
+    'Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)` with the `tidyverse` (`r packageVersion("tidyverse")`) and `table1` (`r packageVersion("tidyverse")`) packages used to preprocess and summarize data.[@wickham2019; @table1_2021]',
     '',
     '# Results',
     '',
@@ -60,12 +62,18 @@ make_project <- function(path) {
   # write to index file
   writeLines(contents, con = file.path(path, "analysis.Rmd"))
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
-
-  gist_path <- paste0(
+  
+  gist_path_ignore <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "300d99c2b6450feda3ed5a816f396191/raw/",
     "a38f77aab743a2670dbb80ab0278b30745527243/.gitignore"
   )
-  download.file(gist_path,
-                paste0(path, "/.gitignore"))
+  download.file(gist_path_ignore, paste0(path, "/.gitignore"))
+  
+  gist_path_bib <- paste(
+    "https://gist.githubusercontent.com/RaymondBalise/",
+    "10abfed28ea343e4e7ce7752e39a5195/raw/",
+    "0fd86d2aad871c1501ab887f93290be269f453a0/references.bib"
+  )
+  download.file(gist_path_bib, paste0(path, "/references.bib"))
 }
