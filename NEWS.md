@@ -1,8 +1,10 @@
 # rUM 0.2
 
+* Added methods section and bibliography
+
 # rUM 0.1
 
-* Aded tidymodels with conflicted to setup
+* Added tidymodels with conflicted to setup
 
 # rUM 0.0.5
 

@@ -23,16 +23,17 @@ make_project <- function(path) {
   # generate header
   header <- c(
     '---',
-    'title: "title_goes_here"',
-    'author: "me"',
+    'title: "your_title_goes_here"',
+    'author: "your_name_goes_here"',
     'date: "`r Sys.Date()`"',
     'output:', 
     '  bookdown::html_document2:',
     '  df_print: kable',
     'bibliography: references.bib',
+    'csl: the-new-england-journal-of-medicine.csl',
     '---',
     '',
-    '```{r tidyverse}',
+    '```{r tidyverse, echo=FALSE}',
     'library(conflicted)',
     'conflict_prefer("filter", "dplyr", quiet = TRUE)',
     'conflict_prefer("lag", "dplyr", quiet = TRUE)',
@@ -45,11 +46,13 @@ make_project <- function(path) {
     '# Introduction',
     '',
     '# Method',
-    'Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)` with the `tidyverse` (`r packageVersion("tidyverse")`) and `table1` (`r packageVersion("tidyverse")`) packages used to preprocess and summarize data.[@wickham2019; @table1_2021]',
+    'Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)` with the `tidyverse` (`r packageVersion("tidyverse")`) and `table1` (`r packageVersion("tidyverse")`) packages used to preprocess and summarize data.[@r2021; @wickham2019; @table1_2021]',
     '',
     '# Results',
     '',
-    '# Conclusion'
+    '# Conclusion',
+    '',
+    '# References {-}'
 )
   
   
@@ -70,10 +73,17 @@ make_project <- function(path) {
   )
   download.file(gist_path_ignore, paste0(path, "/.gitignore"))
   
-  gist_path_bib <- paste(
+  gist_path_bib <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "10abfed28ea343e4e7ce7752e39a5195/raw/",
-    "0fd86d2aad871c1501ab887f93290be269f453a0/references.bib"
+    "1a23db4d2db372c6cf3564a41054727b3bdfeb06/references.bib"
   )
   download.file(gist_path_bib, paste0(path, "/references.bib"))
+  
+  download.file(
+    "https://www.zotero.org/styles/the-new-england-journal-of-medicine", 
+    paste0(path, "/the-new-england-journal-of-medicine.csl")
+  )
+    
+
 }
