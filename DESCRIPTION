@@ -15,6 +15,10 @@ Imports:
     rmarkdown,
     bookdown
 License: MIT + file LICENSE
+URL: 
+    https://raymondbalise.github.io/rUM/,
+    https://github.com/RaymondBalise/rUM
+BugReports: https://github.com/RaymondBalise/rUM/issues
 Encoding: UTF-8
 LazyData: FALSE
 RoxygenNote: 7.1.1
