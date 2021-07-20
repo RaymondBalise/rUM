@@ -1,3 +1,5 @@
+# rUM 0.2.1
+
 # rUM 0.2
 
 * Added methods section and bibliography
