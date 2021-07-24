@@ -18,8 +18,10 @@ Authors@R:
         comment = c(ORCID = "0000-0003-1341-4555")
       )
     )
-Description: This holds some r markdown templates and a template to create a 
+Description: This holds some r markdown templates and a template to create a
     research project in RStudio.
+Depends: 
+    R (>= 3.5)
 Imports:
     bookdown,
     conflicted,

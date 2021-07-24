@@ -7,6 +7,7 @@
 
 * Updated documentation
 * Added dependency on the `table1::` package
+* To match dependency on `table1::`, we now depend on R (>= 3.5)
 
 
 # rUM 0.2.1
