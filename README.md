@@ -1,7 +1,7 @@
 # rUM <a href='https://raymondbalise.github.io/rUM/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 This is a collection of R things from your friends at UM (The University of Miami).
 
-rUM include:
+rUM includes:
 
 + A research project template.  It creates a new RStudio project that has an analysis R markdown file with tidyverse and conflicted.
 + R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.

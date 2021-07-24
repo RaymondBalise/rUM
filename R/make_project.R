@@ -21,6 +21,11 @@
 #'    Language (\code{.csl}) file for the New England Journal of Medicine.
 #'    
 #' @export
+#' 
+#' @examples 
+#' \dontrun{
+#'   make_project(path = "~/test_project")
+#' }
 
 make_project <- function(path) {
   
@@ -76,7 +81,7 @@ make_project <- function(path) {
     '  "packages.bib"',
     ')',
     '```'
-)
+  )
   
   # collect into single text string
   contents <- paste(
@@ -105,4 +110,5 @@ make_project <- function(path) {
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine", 
     paste0(path, "/the-new-england-journal-of-medicine.csl")
   )
+  
 }

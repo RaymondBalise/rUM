@@ -25,3 +25,8 @@ file with conflicted and tidyverse and an aggressive .gitignore.  The
 health information). This function is used by the research_project.dcf file 
 to make the files.
 }
+\examples{
+\dontrun{
+  make_project(path = "~/test_project")
+}
+}

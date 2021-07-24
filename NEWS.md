@@ -2,6 +2,7 @@
 
 * Added automatic second bibliography file that writes all packages used in a project
 * Added rUM to methods section of the research template
+* Added first draft of a vignette
 
 #### Minor Changes
 

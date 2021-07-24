@@ -1,5 +1,5 @@
 Package: rUM
-Title: R Templates from The University of Miami
+Title: R Templates from the University of Miami
 Version: 0.3.0
 Authors@R: 
     c(
@@ -29,6 +29,7 @@ Imports:
     table1,
     tidyverse
 Suggests:
+    knitr,
     tidymodels,
     tinytex
 License: MIT + file LICENSE
@@ -39,3 +40,4 @@ BugReports: https://github.com/RaymondBalise/rUM/issues
 Encoding: UTF-8
 LazyData: FALSE
 RoxygenNote: 7.1.1
+VignetteBuilder: knitr
