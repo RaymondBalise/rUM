@@ -1,19 +1,21 @@
 Package: rUM
 Title: R Templates From The University of Miami
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: 
     person(given = "Raymond",
            family = "Balise",
            role = c("aut", "cre"),
            email = "balise@miami.edu",
            comment = c(ORCID = "0000-0002-9856-5901"))
-Description: This holds some r markdown templates and a template to create a 
+Description: This holds some R Markdown templates and a template to create a 
     research project in RStudio.
 Imports:
     conflicted,
     tidyverse,
     rmarkdown,
     bookdown
+Suggests:
+    tinytex
 License: MIT + file LICENSE
 URL: 
     https://raymondbalise.github.io/rUM/,

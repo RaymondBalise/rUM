@@ -29,7 +29,7 @@ make_project <- function(path) {
     'output:', 
     '  bookdown::html_document2:',
     '    number_sections: false',
-    'bibliography: references.bib',
+    'bibliography: [references.bib, packages.bib]',
     'csl: the-new-england-journal-of-medicine.csl',
     '---',
     '',
@@ -50,15 +50,26 @@ make_project <- function(path) {
     '# Introduction',
     '',
     '# Method',
-    'Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)` with the `tidyverse` (`r packageVersion("tidyverse")`) and `table1` (`r packageVersion("tidyverse")`) packages used to preprocess and summarize data.[@r2021; @wickham2019; @table1_2021]',
+    'Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)` with the `tidyverse` (`r packageVersion("tidyverse")`), `rUM` (`r packageVersion("rum")`), `table1` (`r packageVersion("tidyverse")`) packages used to preprocess and summarize data.[@R-base; @R-tidyverse; @tidyverse2019; @R-rUM; @R-table1]',
     '',
     '# Results',
     '',
     '# Conclusion',
     '',
-    '# References {-}'
+    '# References {-}',
+    '',
+    '```{r include=FALSE}',
+    '# automatically create a bib database for loaded R packages & rUM',
+    'knitr::write_bib(',
+    '  c(',
+    '    .packages(),',
+    '    "rUM",',
+    '    "table1"',
+    '  ),', 
+    '  "packages.bib"',
+    ')',
+    '```'
 )
-  
   
   # collect into single text string
   contents <- paste(
@@ -76,18 +87,15 @@ make_project <- function(path) {
     "a38f77aab743a2670dbb80ab0278b30745527243/.gitignore"
   )
   download.file(gist_path_ignore, paste0(path, "/.gitignore"))
-  
-  gist_path_bib <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/",
-    "10abfed28ea343e4e7ce7752e39a5195/raw/",
-    "1a23db4d2db372c6cf3564a41054727b3bdfeb06/references.bib"
-  )
-  download.file(gist_path_bib, paste0(path, "/references.bib"))
+
+  # write an empty packages bibliography file - needed to knit the first time
+  writeLines("", con = file.path(path, "packages.bib"))
+    
+  # write an empty user bibliography file
+  writeLines("", con = file.path(path, "references.bib"))
   
   download.file(
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine", 
     paste0(path, "/the-new-england-journal-of-medicine.csl")
   )
-    
-
 }

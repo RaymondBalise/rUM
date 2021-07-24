@@ -1,4 +1,11 @@
+# rUM 0.3.0
+
+* Added automatic second bibliography file that writes all packages used in a project
+* Added rUM to methods section of the research template
+
 # rUM 0.2.1
+
+* Fixes in DESCRIPTION file
 
 # rUM 0.2
 
@@ -11,7 +18,7 @@
 # rUM 0.0.5
 
 * Added tidyverse and conflicted to setup
-* Added a `NEWS.md` file to track changes to the package.
+* Added a `NEWS.md` file to track changes to the package
 * Added Website
 
 # rUM (development version)
