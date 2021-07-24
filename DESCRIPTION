@@ -21,10 +21,11 @@ Authors@R:
 Description: This holds some r markdown templates and a template to create a 
     research project in RStudio.
 Imports:
+    bookdown,
     conflicted,
-    tidyverse,
     rmarkdown,
-    bookdown
+    table1,
+    tidyverse
 Suggests:
     tidymodels,
     tinytex

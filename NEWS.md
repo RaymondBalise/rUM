@@ -3,6 +3,12 @@
 * Added automatic second bibliography file that writes all packages used in a project
 * Added rUM to methods section of the research template
 
+#### Minor Changes
+
+* Updated documentation
+* Added dependency on the `table1::` package
+
+
 # rUM 0.2.1
 
 * Fixes in DESCRIPTION file
