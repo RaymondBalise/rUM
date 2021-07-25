@@ -1,6 +1,7 @@
 Package: rUM
 Title: R Templates from the University of Miami
 Version: 0.3.0
+Date: 2021-07-24
 Authors@R: 
     c(
       person(
@@ -38,6 +39,5 @@ URL:
     https://github.com/RaymondBalise/rUM
 BugReports: https://github.com/RaymondBalise/rUM/issues
 Encoding: UTF-8
-LazyData: FALSE
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
