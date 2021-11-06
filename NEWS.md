@@ -1,3 +1,8 @@
+# rUM 0.3.1
+
+* Fixed capitalization bug in `make_project()`.
+  * `packageVersion("rum")` is now `packageVersion("rUM")`
+
 # rUM 0.3.0
 
 * Added automatic second bibliography file that writes all packages used in a project
