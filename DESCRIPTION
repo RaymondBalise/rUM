@@ -1,7 +1,7 @@
 Package: rUM
 Title: R Templates from the University of Miami
-Version: 0.3.1
-Date: 2021-11-06
+Version: 0.3.2
+Date: 2022-03-06
 Authors@R: 
     c(
       person(

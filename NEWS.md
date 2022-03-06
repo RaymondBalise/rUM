@@ -1,7 +1,11 @@
+# rUM 0.3.2
+
+* Fixed package version for table1 to be `packageVersion("table1")` instead of `packageVersion("tidyverse")`
+
 # rUM 0.3.1
 
 * Fixed capitalization bug in `make_project()`.
-  * `packageVersion("rum")` is now `packageVersion("rUM")`
+* `packageVersion("rum")` is now `packageVersion("rUM")`
 
 # rUM 0.3.0
 
