@@ -1,4 +1,4 @@
-# rUM <a href='https://raymondbalise.github.io/rUM/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# rUM <a href='https://raymondbalise.github.io/rUM/'><img src='man/figures/logo.png' align="right" width="139" /></a>
 This is a collection of R things from your friends at UM (The University of Miami).
 
 rUM includes:
