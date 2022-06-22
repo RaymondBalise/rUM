@@ -115,7 +115,7 @@ make_project <-
   
     }
       else{
-        c("Oh! you already have an analisis file")
+        c("Oh! you already have an analysis file")
         }
     }
 
