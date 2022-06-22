@@ -27,8 +27,10 @@
 #'   make_project(path = "~/test_project")
 #' }
 
-make_project <- function(path) {
+make_project <- 
   
+  function(path){
+      if(!file.exists("analysis.Rmd")){
   # ensure path exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
   
@@ -111,4 +113,9 @@ make_project <- function(path) {
     paste0(path, "/the-new-england-journal-of-medicine.csl")
   )
   
-}
+    }
+      else{
+        c("Oh! you already have an analisis file")
+        }
+    }
+
