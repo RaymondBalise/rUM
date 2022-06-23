@@ -1,3 +1,9 @@
+# rUM 1.0
+
+* Add quarto options in project creation template/wizard
+* Add quarto support for make_project
+* Update .gitignore
+
 # rUM 0.3.2
 
 * Fixed package version for table1 to be `packageVersion("table1")` instead of `packageVersion("tidyverse")`

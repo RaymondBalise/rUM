@@ -4,11 +4,14 @@
 \alias{make_project}
 \title{Make an Analysis Project}
 \usage{
-make_project(path)
+make_project(path, type = "Quarto (analysis.qmd)")
 }
 \arguments{
 \item{path}{Path automatically set by research_project.dcf (see
 \code{./rstudio/templates/project/})}
+
+\item{type}{Choose between "Quarto (analysis.qmd)") or 
+"R Markdown (analysis.Rmd)"(see \code{./rstudio/templates/project/})}
 }
 \value{
 Creates a project directory with the following contents: a template
@@ -20,10 +23,10 @@ Creates a project directory with the following contents: a template
 }
 \description{
 This function makes an R project that includes an analysis.Rmd 
-file with conflicted and tidyverse and an aggressive .gitignore.  The 
-.gitignore is designed to help protect against leaking data (with protected 
-health information). This function is used by the research_project.dcf file 
-to make the files.
+or analysis.qmd file with conflicted and tidyverse and an aggressive 
+.gitignore.  The  .gitignore is designed to help protect against leaking data
+(with protected  health information). This function is used by the RStudio
+research_project.dcf file to make the files.
 }
 \examples{
 \dontrun{

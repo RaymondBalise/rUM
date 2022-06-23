@@ -3,4 +3,5 @@
 export(make_project)
 import(conflicted)
 import(tidyverse)
+importFrom(rlang,abort)
 importFrom(utils,download.file)

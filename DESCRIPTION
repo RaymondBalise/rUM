@@ -1,7 +1,7 @@
 Package: rUM
 Title: R Templates from the University of Miami
-Version: 0.3.2
-Date: 2022-03-06
+Version: 1.0
+Date: 2022-06-24
 Authors@R: 
     c(
       person(
@@ -24,13 +24,14 @@ Description: This holds some r markdown templates and a template to create a
 Depends: 
     R (>= 3.5)
 Imports:
-    bookdown,
     conflicted,
-    rmarkdown,
-    table1,
+    rlang,
     tidyverse
 Suggests:
+    bookdown,
     knitr,
+    rmarkdown,
+    table1,
     tidymodels,
     tinytex
 License: MIT + file LICENSE
@@ -39,5 +40,5 @@ URL:
     https://github.com/RaymondBalise/rUM
 BugReports: https://github.com/RaymondBalise/rUM/issues
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 VignetteBuilder: knitr
