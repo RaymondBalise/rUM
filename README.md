@@ -11,8 +11,8 @@ The plan is to add UM thesis and dissertation Markdown templates.
 ## How to I add rUM?
 
 ```r
-if (!requireNamespace("devtools")) install.packages("devtools")
-devtools::install_github("RaymondBalise/rUM")
+if (!requireNamespace("remotes")) install.packages("remotes")
+remotes::install_github("RaymondBalise/rUM")
 ```
 
 ## Where can I get rUM?
