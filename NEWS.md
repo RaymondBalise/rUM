@@ -2,6 +2,8 @@
 
 * Add quarto options in project creation template/wizard
 * Add quarto support for make_project
+* Add rStudio project files
+* Add check to make sure analysis does not exist - Thanks to Francisco Cardozo
 * Update .gitignore
 
 # rUM 0.3.2

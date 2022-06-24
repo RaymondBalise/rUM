@@ -17,6 +17,13 @@ Authors@R:
         role = "aut",
         email = "gabriel.odom@fiu.edu",
         comment = c(ORCID = "0000-0003-1341-4555")
+      ),
+      person(
+        given = "Francisco",
+        family = "Cardozo",
+        role = "ctb",
+        email = "foc9@miami.edu",
+        comment = c(ORCID = "0000-0002-1925-4954")
       )
     )
 Description: This holds some r markdown templates and a template to create a

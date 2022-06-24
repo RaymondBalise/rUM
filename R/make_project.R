@@ -15,6 +15,7 @@
 #' @import conflicted
 #' @importFrom rlang abort
 #' @importFrom utils download.file
+#' @importFrom usethis create_project
 #'
 #' @return Creates a project directory with the following contents: a template
 #'    \code{.Rmd} file called "analysis", a subdirectory for data, a template
@@ -35,19 +36,31 @@ make_project <- function(path, type = "Quarto (analysis.qmd)") {
   # ensure path exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
   
+  # If the project object does not exist add it.
+  if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
+    usethis::create_project(path = path, open = TRUE, rstudio = TRUE)    
+  }
 
+  # Paths to gist files for analysis - these need to update of the gist changes.
   gist_path_rmd <- paste0(
     "https://gist.github.com/RaymondBalise/ef56efda4a9260d8415a2cde94cbad1b/",
     "raw/30c3b705d75137462f6032d5e04f714ef21bdc1e/analysis.Rmd"
   )
-  
   gist_path_qmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "224f0b7b107a6b800c610d46c8b6f236/raw/",
     "be428df13715028c063b56bc492b53211f3cd498/analysis.qmd"
   )
   
-
+  # Prevent user from overwriting an analysis file
+  if (file.exists(paste0(path, "/analysis.Rmd")) | 
+      file.exists(paste0(path, "/analysis.qmd"))   
+  ) {
+    abort(
+      "The directory you choose already has an analysis file. Stopping."
+    )
+  } 
+  
   if (type == "R Markdown (analysis.Rmd)") {
     download.file(gist_path_rmd, paste0(path, "/analysis.Rmd"))
   } else if (type == "Quarto (analysis.qmd)") {
@@ -60,6 +73,7 @@ make_project <- function(path, type = "Quarto (analysis.qmd)") {
   
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
   
+  # Path to gitignore this must be updated if the gist changes.
   gist_path_ignore <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "300d99c2b6450feda3ed5a816f396191/raw/",
