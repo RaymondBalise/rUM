@@ -23,10 +23,34 @@ https://github.com/RaymondBalise/rUM
 ## How do I make rUM research project?
 
 1. Use File > New Project > New Directory
-1. Scroll down and then click **Research Project Template**
+1. Scroll down and then click **rUM Research Project Template**
 1. Specify where you want your research project to be saved.
 
-## How do I use rUM for markdown headers?
+#### How do change the reference style for my paper?
+The default reference style is the New England Journal of Medicine.  The style is set by the [Citation Style Language](https://citationstyles.org/) (`csl:`) option near the top of the file.  To use a different style, download a csl file from [https://www.zotero.org/styles/](https://www.zotero.org/styles/) into the folder with your analysis file.  Then change *the-new-england-journal-of-medicine.csl* to the name of the file you downloaded.
+
+#### How do I control what files appear in my reference section?
+The analysis file includes this code near the bottom:
+
+```
+  c(
+    .packages(),
+    "rUM",
+    "table1"
+  ),
+```
+
+If you want to acknowledge a package that is not used directly in your analysis file, add its name inside of the `c()` function.  The authors of the packages that you used for exploratory data analysis will thank you.  
+
+After you knit/render the analysis file once the packages will appear in the "packages.bib" file in the same directory/folder as your analysis file. If you are using the RStudio **Visual Editor**, put the cursor when you want to add the citation, then use the Insert Menu and choose *@ Citation...* and pick the article.  If you are using the Visual Studio **Source Editor**, open the "packages.bib" file, find the manual reference for the package that you want to add and copy it.  For example, if you needed to add a reference to the `rUM` package you would find this line:
+
+```
+@Manual{R-rUM
+```
+
+and copy the reference name.  Here the name is `R-rUM`. Paste that where you want the citation like this `[@R-rUM]`.
+
+## How do I use rUM for `R Markdown` headers?
 
 1. Use File > New File > RMarkdown...
 1. Click **From Template**
@@ -36,7 +60,7 @@ https://github.com/RaymondBalise/rUM
   + pdf2 showing LaTeX with rUM
   + bookdown_site with rUM 
   
-This will create a new subdirectory in your current working directory with the same name as the name of the `.Rmd` file you specified. Within this directory, you will find the analysis RMarkdown file. For example, if you created an RMarkdown file called `wrangle_cytometry_data.Rmd` with the steps above, then your current directory will now have a subdirectory called `wrangle_cytometry_data/` which will contain the file `wrangle_cytometry_data.Rmd` and any subsequent files from the knitting process (such as `.PDF`, `.html`, or `.docx` files created by knitting the RMarkdown document).
+This will create a new subdirectory in your current working directory with the same name as the name of the `.Rmd` file you specified. Within this directory, you will find the analysis R Markdown file. For example, if you created an R Markdown file called `wrangle_cytometry_data.Rmd` with the steps above, then your current directory will now have a subdirectory called `wrangle_cytometry_data/` which will contain the file `wrangle_cytometry_data.Rmd` and any subsequent files from the knitting process (such as `.PDF`, `.html`, or `.docx` files created by knitting the RMarkdown document).
 
 ### What are the headers?
 
