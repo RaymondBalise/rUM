@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width=6, 
+  fig.height=4
 )
 ```
 
@@ -45,11 +47,15 @@ We would like to create a research project, so we use the `rUM` package. It crea
 
 ## Setup
 1. Use File > New Project > New Directory
-1. Scroll down and then select *Research Project Template*
-![](project_template.png)
-1. Specify where you want your research project to be saved.
-![](save_project_here.png)
+1. Scroll down and then select **Research Project Template**
 
+    ![](project_template.png){width=50%}
+
+1. Specify where you want your research project to be saved.
+
+    ![](save_project_here.png){width=50%}
+
+You will now have a new project directory created 
 
 
 
