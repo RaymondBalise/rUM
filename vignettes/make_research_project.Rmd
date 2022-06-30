@@ -1,7 +1,6 @@
 ---
 title: "Creating a Research Project with rUM"
 output: rmarkdown::html_vignette
-  code-copy: true
 vignette: >
   %\VignetteIndexEntry{Make a Research Project}
   %\VignetteEngine{knitr::rmarkdown}
@@ -27,7 +26,7 @@ The plan is to add UM thesis and dissertation Markdown templates.
 
 
 
-# Where to order rUM
+# rUM on the Menu
 1. <https://raymondbalise.github.io/rUM/>
 
 1. <https://github.com/RaymondBalise/rUM>
@@ -41,11 +40,16 @@ library(rUM)
 ```
 
 
-# rUM on the Menu
+# Mix your own rUM
 We would like to create a research project, so we use the `rUM` package. It creates a new RStudio project that has an analysis R markdown file using the `tidyverse` and `conflicted` packages. For more advanced analysis, we can also create R markdown files which use the `tidymodels` package.
 
 ## Setup
-(To create a research project, see the steps here: <https://raymondbalise.github.io/rUM/>.)
+1. Use File > New Project > New Directory
+1. Scroll down and then select *Research Project Template*
+![](project_template.png)
+1. Specify where you want your research project to be saved.
+![](save_project_here.png)
+
 
 
 
