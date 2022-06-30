@@ -1,5 +1,5 @@
 ---
-title: "Make a Research Project"
+title: "Creating a Research Project with rUM"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Make a Research Project}
@@ -10,23 +10,42 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  #eval = FALSE,
   comment = "#>"
 )
 ```
+
+# Introduction
+This is collection of R things from your friends at UM (the University of Miami).
+
+`rUM` includes:
+* A research project template. It creates a new RStudio project that has an analysis R markdown file with tidyverse and conflicted.
+* R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.
+
+The plan is to add UM thesis and dissertation Markdown templates.
+
+
+
+# Where to order some rUM
+<https://raymondbalise.github.io/rUM/>
+
+<https://github.com/RaymondBalise/rUM>
+
 
 ```{r setup}
 library(rUM)
 ```
 
-# Introduction
+
+# rUM on the Menu
 We would like to create a research project, so we use the `rUM` package. It creates a new RStudio project that has an analysis R markdown file using the `tidyverse` and `conflicted` packages. For more advanced analysis, we can also create R markdown files which use the `tidymodels` package.
 
+## Setup
+(To create a research project, see the steps here: <https://raymondbalise.github.io/rUM/>.)
 
-# Setup
-To create a research project, see the steps here: <https://raymondbalise.github.io/rUM/>.
 
 
-# Session
+## Session
 If you are new to R, ignore this.
 ```{r}
 sessionInfo()
