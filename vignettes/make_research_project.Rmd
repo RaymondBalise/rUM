@@ -1,6 +1,7 @@
 ---
 title: "Creating a Research Project with rUM"
 output: rmarkdown::html_vignette
+  code-copy: true
 vignette: >
   %\VignetteIndexEntry{Make a Research Project}
   %\VignetteEngine{knitr::rmarkdown}
@@ -10,10 +11,10 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  #eval = FALSE,
   comment = "#>"
 )
 ```
+
 
 # Introduction
 This is collection of R things from your friends at UM (the University of Miami).
@@ -26,13 +27,16 @@ The plan is to add UM thesis and dissertation Markdown templates.
 
 
 
-# Where to order some rUM
-<https://raymondbalise.github.io/rUM/>
+# Where to order rUM
+1. <https://raymondbalise.github.io/rUM/>
 
-<https://github.com/RaymondBalise/rUM>
+1. <https://github.com/RaymondBalise/rUM>
 
+1. or
+```r
+if (!require("remotes")) installed.packages("remotes")
+remotes::install_cran("rUM")
 
-```{r setup}
 library(rUM)
 ```
 
