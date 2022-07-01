@@ -11,6 +11,9 @@
 #'
 #' @import tidyverse 
 #' @import conflicted
+#' @import bookdown
+#' @import rmarkdown
+#' @import table1
 #' @importFrom utils download.file
 #'
 #' @return Creates a project directory with the following contents: a template

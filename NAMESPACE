@@ -2,7 +2,10 @@
 
 export(make_project)
 export(make_quarto_project)
+import(bookdown)
 import(conflicted)
 import(quarto)
+import(rmarkdown)
+import(table1)
 import(tidyverse)
 importFrom(utils,download.file)
