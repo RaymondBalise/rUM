@@ -110,6 +110,17 @@ Newly created files:
 
 
 
+## `rUM` infused Markdown headers
+
+1. Navigate to File > New File > RMarkdown
+1. Select **From Template**
+
+    ![](from_template.png){width=70%}
+
+1. Choose a template:
+
+
+
 ### Session
 If you are new to R, ignore this.
 ```{r}
