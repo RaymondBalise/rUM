@@ -110,6 +110,33 @@ Newly created files:
 
 
 
+## Would you rather a `quarto`+`rUM` ?
+
+Here's another way to get more `rUM` with [`quarto`](https://quarto.org/). If you already have already created a folder containing important files for your project:
+
+1. Navigate to File > New Project > Existing Directory
+1. Specify the location of where your research project will be saved.
+
+    ![](existing_directory.png){width=70%}
+    
+1. Run the following script in your console:
+
+```
+PATH <- getwd()
+make_quarto_project(PATH)
+```
+
+Instead of `analysis.Rmd` you will now see [`analysis.qmd`](#fig:analysis_quarto_rUM) with all of the other important `rUM` files.
+
+```{=html}
+<br>
+<p id="fig:analysis_quarto_rUM" >
+</p>
+``` 
+![](analysis_quarto_rUM.png){width=80%}
+
+
+
 ## `rUM` infused Markdown headers
 
 1. Navigate to File > New File > RMarkdown
