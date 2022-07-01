@@ -87,7 +87,7 @@ A new project directory has been created and it will be populated with [these fi
 * [`analysis.Rmd`](#fig:analysis_markdown) is a markdown boilerplate for writing your research project. It has a preconfigured YAML header; setup chunk; Introduction, Methods, Results, Conclusion, and Reference sections; and a code chunk to construct your bibliography using `knitr::write_bib()`.
 * An empty folder named `data`. This folder is also listed in the `.gitignore` meaning that files stored in this folder are also safe from accidental disclosure.
 * A .Rproj with the same name as your project folder.
-* `packages.bib` and `references.bib` to be filled as you progress in your research project writing (refer to the Methods and References sections, respectively, within the `analysis.Rmd` file for initial examples of how to use).
+* `packages.bib` and `references.bib` to be filled as you progress in your research project writing (refer to the Methods and References sections, respectively, within the [`analysis.Rmd`](#fig:analysis_markdown) file for initial examples of how to use).
 * `the-new-england-journal-of-medicine.csl` is the citation style language (CSL) based on the [New England Journal of Medicine](https://catalyst.nejm.org/pb-assets/images/NEJM%20Catalyst%20Reference%20style-1589400257323.pdf) recommendations and best practices. 
  
 
