@@ -44,7 +44,7 @@ library(rUM)
 ```
 
 
-## Ordering `rUM` the easy way
+## Ordering `rUM` from the Menu
 
 We would like to create a research project, so we use the `rUM` package. It creates a new RStudio project that has an analysis R markdown file using the `tidyverse` and `conflicted` packages. For more advanced analysis, we can also create R markdown files which use the `tidymodels` package.
 
@@ -58,7 +58,7 @@ We would like to create a research project, so we use the `rUM` package. It crea
     ![](save_project_here.png){width=70%}
     
 
-## Mixing `rUM` yourself
+## Mixing `rUM` into an existing directory
 
 What if you already have already created a folder containing important files for your project? Pretty easy... just create a new project in your existing folder! This will now be your project directory (with the `*.Rproj`). 
 
@@ -70,7 +70,7 @@ What if you already have already created a folder containing important files for
 1. Run the following script in your console:
 
 ```
-PATH <- getwd()
+PATH <- "~/Documents/blah"   # change this to where you would like your project to be saved
 make_project(PATH)
 ```
 
@@ -79,7 +79,7 @@ Let the `rUM` soak in and ease your worries.
 
 
 
-## Your `rUM` is now served
+## After your `rUM` has been served
 
 A new project directory has been created and it will be populated with [these files](#fig:created_rUM_files):
 
@@ -151,7 +151,7 @@ A bookdown website with a good table of contents for a book
 
 
 
-## Would you rather a `quarto`+`rUM` ?
+## Would you rather `quarto` + '`rUM` (add a "quart o' rUM")?
 
 Here's another way to get more `rUM` with [`quarto`](https://quarto.org/). If you already have already created a folder containing important files for your project:
 
