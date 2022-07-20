@@ -1,0 +1,19 @@
+---
+title: "Create a Markdown Research Project with `rUM`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create a Markdown Research Project with `rUM`}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(rUM)
+```
