@@ -31,10 +31,15 @@
 #'   make_project(path = "~/test_project")
 #' }
 
-make_project <- function(path, type = "Quarto (analysis.qmd)") {
+make_project <- function(
+    path,
+    type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)")
+  ) {
   
+  type <- match.arg(type)
   # ensure path exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
+  
   
   # If the project object does not exist add it.
   if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
