@@ -4,7 +4,10 @@
 \alias{make_project}
 \title{Make an Analysis Project}
 \usage{
-make_project(path, type = "Quarto (analysis.qmd)")
+make_project(
+  path,
+  type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)")
+)
 }
 \arguments{
 \item{path}{Path automatically set by research_project.dcf (see
