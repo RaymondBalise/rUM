@@ -10,6 +10,10 @@ The plan is to add UM thesis and dissertation Markdown templates.
 
 ## How to I add rUM?
 
+First you need to install `quarto` from [here](https://quarto.org/docs/get-started/).
+
+Then you should run this in the console of RStudio:
+
 ```r
 if (!requireNamespace("remotes")) install.packages("remotes")
 remotes::install_github("RaymondBalise/rUM")
