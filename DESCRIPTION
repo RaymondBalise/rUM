@@ -24,6 +24,13 @@ Authors@R:
         role = "ctb",
         email = "foc9@miami.edu",
         comment = c(ORCID = "0000-0002-1925-4954")
+      ),
+      person(
+        given = "Kyle",
+        family = "Grealis",
+        role = "ctb",
+        email = "kxg679@miami.edu",
+        comment = c(ORCID = "0000-0002-9223-8854")
       )
     )
 Description: This holds some r markdown templates and a template to create a
@@ -33,7 +40,8 @@ Depends:
 Imports:
     conflicted,
     rlang,
-    tidyverse
+    tidyverse,
+    usethis
 Suggests:
     bookdown,
     knitr,
