@@ -1,3 +1,9 @@
 Binding: make_project
-Title: Research Project Template
-OpenFiles: analysis.Rmd
+Title: rUM Research Project Template
+
+Parameter: type
+Widget: SelectInput
+Label: What type of analysis file?
+Fields: Quarto (analysis.qmd), R Markdown (analysis.Rmd)
+Default: Quarto (analysis.qmd)
+Position: left
