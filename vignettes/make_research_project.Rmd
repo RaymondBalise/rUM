@@ -34,7 +34,7 @@ Future versions will add UM thesis and dissertation templates.
 
 1. First you need to install Quarto from [here](https://quarto.org/docs/get-started/).
 
-2. Then you get `rUM` by either: 
+2. Then add your `rUM` by either: 
 
   * running this in the console of RStudio:
 
