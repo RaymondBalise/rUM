@@ -33,6 +33,9 @@ research_project.dcf file to make the files.
 }
 \examples{
 \dontrun{
-  make_project(path = "~/test_project")
+  make_project(path = "~/test_project", type = "Quarto (analysis.qmd)")
+}
+\dontrun{
+  make_project(path = "~/test_project", type = "R Markdown (analysis.Rmd)")
 }
 }
