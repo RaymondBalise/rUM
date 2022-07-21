@@ -32,9 +32,9 @@ Future versions will add UM thesis and dissertation templates.
 
 ## How about a `quarto`' + '`rUM` (add a "quart o' `rUM`")?
 
-First you need to install Quarto from [here](https://quarto.org/docs/get-started/).
+1. First you need to install Quarto from [here](https://quarto.org/docs/get-started/).
 
-Then you get `rUM` by either: 
+2. Then you get `rUM` by either: 
 
   * running this in the console of RStudio:
 
@@ -43,10 +43,10 @@ if (!requireNamespace("remotes")) install.packages("remotes")
 remotes::install_github("RaymondBalise/rUM")
 ```
 
-  * or navigating [here](https://raymondbalise.github.io/rUM/) or [here](https://github.com/RaymondBalise/rUM). 
+  * going here: <https://raymondbalise.github.io/rUM/>   
+  * or here:    <https://github.com/RaymondBalise/rUM> 
 
-
-Lastly, run this in the console of RStudio:
+3. Lastly, get loaded on `rUM` by running this in the console of RStudio:
 
 ```r
 library(rUM)
