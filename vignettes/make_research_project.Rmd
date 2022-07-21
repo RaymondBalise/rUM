@@ -19,34 +19,43 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
 
+
 ![](package-logo.png){width=25%}
 
 ## Introduction
 This is collection of R things from your friends at UM (the University of Miami).
 
-The `rUM` package will allow you to create powerful research manuscripts by taking the structure guesswork and configuration hassles out of the equation. `rUM` will create a new RStudio project and research boilerplate R Markdown file, complete with a YAML header requiring minimal customization. The R Markdown file also comes preconfigured with start up blocks that load the `tidyverse` and `conflicted` packages, and sections for Introduction, Method, Results, Conclusion, and References. Ensure the highest standards of data integrity by using the enhanced `.gitignore` file.
+The `rUM` package will allow you to create powerful research manuscripts by taking the structure guesswork and configuration hassles out of the equation. `rUM` will create a new RStudio project and research boilerplate Quarto file, complete with a YAML header requiring minimal customization. The Quarto file also comes preconfigured with start up blocks that load the `tidyverse` and `conflicted` packages, and sections for Introduction, Method, Results, Conclusion, and References. Ensure the highest standards of data integrity by using the enhanced `.gitignore` file.
 
-Future versions will add UM thesis and dissertation Markdown templates, and options to create Quarto documents.
+Future versions will add UM thesis and dissertation templates.
 
 
+## How about a `quarto`' + '`rUM` (add a "quart o' `rUM`")?
 
-## Getting `rUM` for your project
-1. <https://raymondbalise.github.io/rUM/>
+First you need to install Quarto from [here](https://quarto.org/docs/get-started/).
 
-1. <https://github.com/RaymondBalise/rUM>
+Then you get `rUM` by either: 
 
-1. or
+  * running this in the console of RStudio:
+
 ```r
-if (!require("remotes")) installed.packages("remotes")
-remotes::install_cran("rUM")
+if (!requireNamespace("remotes")) install.packages("remotes")
+remotes::install_github("RaymondBalise/rUM")
+```
 
+  * or navigating [here](https://raymondbalise.github.io/rUM/) or [here](https://github.com/RaymondBalise/rUM). 
+
+
+Lastly, run this in the console of RStudio:
+
+```r
 library(rUM)
 ```
 
 
 ## Ordering `rUM` from the Menu
 
-We would like to create a research project, so we use the `rUM` package. It creates a new RStudio project that has an analysis R markdown file using the `tidyverse` and `conflicted` packages. For more advanced analysis, we can also create R markdown files which use the `tidymodels` package.
+We would like to create a research project, so we use the `rUM` package. It creates a new RStudio project that has an `analysis.qmd` Quarto file using the `tidyverse` and `conflicted` packages. For more advanced analysis, we can also create Quarto files which use the `tidymodels` package.
 
 1. Navigate to File > New Project > New Directory
 1. Scroll down and then select **Research Project Template**
@@ -55,7 +64,7 @@ We would like to create a research project, so we use the `rUM` package. It crea
 
 1. Specify the location of where your research project will be saved.
 
-    ![](save_project_here.png){width=70%}
+    ![](save_quarto_project_here.png){width=70%}
     
 
 ## Mixing `rUM` into an existing directory
@@ -71,11 +80,8 @@ What if you already have already created a folder containing important files for
 
 ```
 PATH <- "~/Documents/blah"   # change this to where you would like your project to be saved
-make_project(PATH)
+make_project(PATH, type = "Quarto (analysis.qmd)")
 ```
-
-
-Let the `rUM` soak in and ease your worries.
 
 
 
@@ -84,9 +90,9 @@ Let the `rUM` soak in and ease your worries.
 A new project directory has been created and it will be populated with [these files](#fig:created_rUM_files):
 
 * An aggressive `.gitignore` to prevent the unintended sharing of sensitive study information or protected health information (PHI).
-* [`analysis.Rmd`](#fig:analysis_markdown) is a markdown boilerplate for writing your research project. It has a preconfigured YAML header; setup chunk; Introduction, Methods, Results, Conclusion, and Reference sections; and a code chunk to construct your bibliography using `knitr::write_bib()`.
+* [`analysis.qmd`](#fig:analysis_quarto_rUM) is a Quarto boilerplate for writing your research project. It has a preconfigured YAML header; setup chunk; Introduction, Methods, Results, Conclusion, and Reference sections; and a code chunk to construct your bibliography using `knitr::write_bib()`.
 * An empty folder named `data`. This folder is also listed in the `.gitignore` meaning that files stored in this folder are also safe from accidental disclosure.
-* A .Rproj with the same name as your project folder.
+* A `*.Rproj` with the same name as your project folder.
 * `packages.bib` and `references.bib` to be filled as you progress in your research project writing (refer to the Methods and References sections, respectively, within the [`analysis.Rmd`](#fig:analysis_markdown) file for initial examples of how to use).
 * `the-new-england-journal-of-medicine.csl` is the citation style language (CSL) based on the [New England Journal of Medicine](https://catalyst.nejm.org/pb-assets/images/NEJM%20Catalyst%20Reference%20style-1589400257323.pdf) recommendations and best practices. 
  
@@ -97,86 +103,22 @@ Newly created files:
 <p id="fig:created_rUM_files" >
 </p>
 ```    
-![](created_rUM_files.png){width=70%}
+![](analysis_quarto_rUM.png){width=80%}
   
-`analysis.Rmd`:
-
-```{=html}
-<br>
-<p id="fig:analysis_markdown" >
-</p>
-``` 
-![](analysis_markdown.png){width=80%}
-
-
-
-
-
-
-
-## `rUM` infused Markdown headers
-
-1. Navigate to File > New File > RMarkdown
-
-    ![](newfile_markdown.png){width=70%}
-
-1. Select **From Template**
-
-    ![](from_template.png){width=70%}
-
-1. Choose a template:
-
-* html2 with rUM
-* html2 Details with rUM
-* pdf2 showing LaTeX with rUM
-* bookdown_site with rUM
-
-This will create a new subdirectory in your current working directory with the same name as the name of the `.Rmd` file you specified. Within this directory, you will find the analysis RMarkdown file. For example, if you created an RMarkdown file called `wrangle_cytometry_data.Rmd` with the steps above, then your current directory will now have a subdirectory called `wrangle_cytometry_data/` which will contain the file `wrangle_cytometry_data.Rmd` and any subsequent files from the knitting process (such as `.PDF`, `.html`, or `.docx` files created by knitting the RMarkdown document).
-
-
-### What are the headers
-
-#### html2 with rUM
-This is a basic web page
-
-#### html2 Details with rUM
-This is a basic web page with a table of contents
-
-#### pdf2 showing LaTeX with rUM
-PDF report where table and figures don’t float to other pages. Many thanks to <https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc>.
-
-#### bookdown_site with rUM
-A bookdown website with a good table of contents for a book
-
-
-
-
-## Would you rather `quarto` + '`rUM` (add a "quart o' rUM")?
-
-Here's another way to get more `rUM` with [`quarto`](https://quarto.org/). If you already have already created a folder containing important files for your project:
-
-1. Navigate to File > New Project > Existing Directory
-1. Specify the location of where your research project will be saved.
-
-    ![](existing_directory.png){width=70%}
-    
-1. Run the following script in your console:
-
-```
-# choose the current working directory
-
-PATH <- getwd()
-make_quarto_project(PATH)
-```
-
-Instead of `analysis.Rmd` you will now see [`analysis.qmd`](#fig:analysis_quarto_rUM) with all of the other important `rUM` files.
+`analysis.qmd`:
 
 ```{=html}
 <br>
 <p id="fig:analysis_quarto_rUM" >
 </p>
 ``` 
-![](analysis_quarto_rUM.png){width=80%}
+<!-- ![](analysis_quarto.png){width=80%} -->
+
+
+
+### Let the `rUM` soak in and ease your worries!
+ 
+
 
 
 
