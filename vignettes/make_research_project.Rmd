@@ -55,7 +55,7 @@ library(rUM)
 
 ## Ordering `rUM` from the Menu
 
-To create a research project, follow these steps and use the `rUM` package. This will a new RStudio project that has an [`analysis.qmd`](#fig:analysis_quarto_rUM) Quarto file using the `tidyverse` and `conflicted` packages. For more advanced analysis, we can also create Quarto files which use the `tidymodels` package.
+To create a research project, follow these steps and use the `rUM` package. This will initialize a new RStudio project that has an [`analysis.qmd`](#fig:analysis_quarto_rUM) Quarto file using the `tidyverse` and `conflicted` packages. For more advanced analysis, we can also create Quarto files which use the `tidymodels` package.
 
 1. Navigate to File > New Project > New Directory
 1. Scroll down and then select **Research Project Template**
