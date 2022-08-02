@@ -106,7 +106,7 @@ Newly created files:
 <p id="fig:analysis_Rmd_file" >
 </p>
 ``` 
-![](analysis_Rmd_file.png){width=80%}
+![](analysis_Rmd_file.jpg){width=80%}
 
 
 
@@ -120,7 +120,7 @@ Newly created files:
 
 1. Navigate to File > New File > R Markdown
 
-    ![](newfile_markdown.png){width=70%}
+    ![](newfile_markdown.jpg){width=70%}
 
 1. Select **From Template**
 

@@ -1,15 +1,18 @@
 #' Make an Analysis Project
 #' 
 #' @description This function makes an R project that includes an analysis.Rmd 
-#' or analysis.qmd file with conflicted and tidyverse and an aggressive 
-#' .gitignore.  The  .gitignore is designed to help protect against leaking data
-#' (with protected  health information). This function is used by the RStudio
-#' research_project.dcf file to make the files.
-#'
+#' or analysis.qmd file using the conflicted and tidyverse packages.  This 
+#' project automatically includes an aggressive .gitignore which is designed to
+#' help protect against leaking data (with protected  health information). 
+#' 
 #' @param path Path automatically set by research_project.dcf (see
 #'    \code{./rstudio/templates/project/})
 #' @param type Choose between "Quarto (analysis.qmd)") or 
-#'    "R Markdown (analysis.Rmd)"(see \code{./rstudio/templates/project/})
+#'    "R Markdown (analysis.Rmd)"
+#'
+#' @details Behind the scenes, this function used by research_project.dcf when
+#' a user selects New project... > New Directory > rUM Research Project Template
+#' within the RSutdio IDE. See \code{./rstudio/templates/project/}.
 #'
 #' @import tidyverse 
 #' @import conflicted
