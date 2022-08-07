@@ -53,12 +53,12 @@ make_project <- function(
   # Paths to gist files for analysis - these need to update of the gist changes.
   gist_path_rmd <- paste0(
     "https://gist.github.com/RaymondBalise/ef56efda4a9260d8415a2cde94cbad1b/",
-    "raw/a94aef9bd34e31218aeebeea06513db08cdb3ee6/analysis.Rmd"
+    "raw/e4c9d432d37a93cc1da1dbca4a8c6bc7c3786ee4/analysis.Rmd"
   )
   gist_path_qmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "224f0b7b107a6b800c610d46c8b6f236/raw/",
-    "b220bf3004822ac30632fa7cce4ab9acec05a3d2/analysis.qmd"
+    "a19e4afec73c48c34821ff258f051107673f27c9/analysis.qmd"
   )
   
   # Prevent user from overwriting an analysis file
