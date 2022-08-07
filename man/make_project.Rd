@@ -13,8 +13,8 @@ make_project(
 \item{path}{Path automatically set by research_project.dcf (see
 \code{./rstudio/templates/project/})}
 
-\item{type}{Choose between "Quarto (analysis.qmd)") or 
-"R Markdown (analysis.Rmd)"(see \code{./rstudio/templates/project/})}
+\item{type}{Choose between "Quarto (analysis.qmd)" or 
+"R Markdown (analysis.Rmd)"}
 }
 \value{
 Creates a project directory with the following contents: a template
@@ -28,12 +28,15 @@ Creates a project directory with the following contents: a template
 This function makes an R project that includes an analysis.Rmd 
 or analysis.qmd file using the conflicted and tidyverse packages.  This 
 project automatically includes an aggressive .gitignore which is designed to
-help protect against leaking data (with protected  health information).
+help protect against leaking data (with protected  health information), a 
+starter bibliography file called "references" (in standard .bib format), 
+and a stock Citation Style Language (.csl) file for the New England Journal 
+of Medicine.
 }
 \details{
 Behind the scenes, this function used by research_project.dcf when
 a user selects New project... > New Directory > rUM Research Project Template
-within the RSutdio IDE.
+within the RSutdio IDE. See \code{./rstudio/templates/project/}.
 }
 \examples{
 \dontrun{
