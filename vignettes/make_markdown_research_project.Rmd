@@ -24,7 +24,7 @@ rUM's documentation can be found here:
 -   <https://raymondbalise.github.io/rUM/>
 -   <https://github.com/RaymondBalise/rUM>
 
-## How do I get `quarto` and `rUM`? (Add a "quart o' `rUM`"!)
+## How do I get `RMarkdown` and `rUM`? (Add a "quart o' `rUM`"!)
 
 1.  Modern version RStudio (v2022.07 or later) ships with R Markdown integrated into the RStudio IDE.
 
