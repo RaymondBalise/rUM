@@ -17,12 +17,7 @@ make_project(
 "R Markdown (analysis.Rmd)"}
 }
 \value{
-Creates a project directory with the following contents: a template
-   \code{.Rmd} file called "analysis", a subdirectory for data, a template
-   \code{.gitignore} with aggressive protections against publishing potential
-   protected health information, a starter bibliography file called 
-   "references" (in standard \code{.bib} format), and a stock Citation Style
-   Language (\code{.csl}) file for the New England Journal of Medicine.
+Returns nothing.  See description above.
 }
 \description{
 This function makes an R project that includes an analysis.Rmd 
