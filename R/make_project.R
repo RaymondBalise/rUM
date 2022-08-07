@@ -3,29 +3,27 @@
 #' @description This function makes an R project that includes an analysis.Rmd 
 #' or analysis.qmd file using the conflicted and tidyverse packages.  This 
 #' project automatically includes an aggressive .gitignore which is designed to
-#' help protect against leaking data (with protected  health information). 
+#' help protect against leaking data (with protected  health information), a 
+#' starter bibliography file called "references" (in standard .bib format), 
+#' and a stock Citation Style Language (.csl) file for the New England Journal 
+#' of Medicine.
 #' 
 #' @param path Path automatically set by research_project.dcf (see
 #'    \code{./rstudio/templates/project/})
-#' @param type Choose between "Quarto (analysis.qmd)") or 
+#' @param type Choose between "Quarto (analysis.qmd)" or 
 #'    "R Markdown (analysis.Rmd)"
 #'
 #' @details Behind the scenes, this function used by research_project.dcf when
 #' a user selects New project... > New Directory > rUM Research Project Template
 #' within the RSutdio IDE. See \code{./rstudio/templates/project/}.
 #'
-#' @import tidyverse 
-#' @import conflicted
+#' @importFrom tidyverse tidyverse_logo
+#' @importFrom conflicted conflict_prefer
 #' @importFrom rlang abort
 #' @importFrom utils download.file
 #' @importFrom usethis create_project
 #'
-#' @return Creates a project directory with the following contents: a template
-#'    \code{.Rmd} file called "analysis", a subdirectory for data, a template
-#'    \code{.gitignore} with aggressive protections against publishing potential
-#'    protected health information, a starter bibliography file called 
-#'    "references" (in standard \code{.bib} format), and a stock Citation Style
-#'    Language (\code{.csl}) file for the New England Journal of Medicine.
+#' @return Returns nothing.  See description above.
 #'    
 #' @export
 #' 
