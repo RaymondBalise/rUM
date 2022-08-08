@@ -1,0 +1,46 @@
+---
+title: "Create a R Markdown File from a rUM Template"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{3. Create a R Markdown File from rUM a Template}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(rUM)
+```
+
+## Introduction
+
+The `rUM` package installs several R Markdown document templates into the RStudio menus.  These include a YAML header (where you can specify your name and the project name) and chunks to enable the `tidyverse` package (to help with data processing), `tidymodels` package (to help with modeling) and the `conflicted` package^[The `conflicted` package watches to make sure that you are not using a function that is defined twice.  Say you use a package called "insults" which has a function called `mean()`.  If you type `mean(bob)`, it is unclear if you want to calculate an average (using the `mean()` function in the base R package: `base::mean()`) or use a mean insult (with the `mean()` function in the insults package `insults::mean()`). `conflicted` will ask you to specify which function you want to use.]. 
+
+There is also a setup code chunk that set options to: 
+
++ show and hide code, messages and warnings 
++ stop R from printing ## in the output
++ set number rounding to 3 decimal places 
+
+
+## Using Code Templates in RStudio
+
+There are four templates
+
+1. **html2 with rUM** : A basic web page
+1. **html2 Details with rUM**: A web page with more details
+1. **pdf2 showing LaTeX with rUM**: A pdf (with options to control tables' and figures' location and appearance)
+1. **bookdown_site with rUM**: The structure of a book
+
+You access the templates from the File menu by choosing 
+
+1. New File > R Markdown... ![Picture showing File menu with New File > Rmarkdown Selected](template1.png)
+2. Choosing From Template from the windowpane on the left
+3. Scrolling down until you see the rUM templates ![Picture of dialog box with "From Template" selected and "html2 with rUM" highlighted](template2.png)
+4. Click OK
