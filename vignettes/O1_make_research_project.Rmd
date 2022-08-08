@@ -1,8 +1,8 @@
 ---
-title: "Create a Research Project with ![rum](../man/figures/r.png)"
+title: "Create a Research Project with Quarto and ![rum](../man/figures/r.png)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Make a Research Project}
+  %\VignetteIndexEntry{1. Create a Research Project with Quarto and rUM}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,7 +19,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
 ```{css, echo=FALSE}
-.title img {
+body > h1 > img {
 position: relative;
 top: 10px;
 border: 0px solid rgba(0, 0, 0, 0.1);

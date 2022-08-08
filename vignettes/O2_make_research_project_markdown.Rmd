@@ -2,7 +2,7 @@
 title: "Create a Markdown Research Project with ![rum](../man/figures/r.png)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Create a Markdown Research Project with `rUM`}
+  %\VignetteIndexEntry{2. Create a Research Project with R Markdown and rUM}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
