@@ -1,5 +1,5 @@
 ---
-title: "Create a Research Project with Quarto and ![rum](../man/figures/r.png)"
+title: Create a Research Project with Quarto and ![rUM](package-logo.png){width=0.8in}
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{1. Create a Research Project with Quarto and rUM}
@@ -20,10 +20,10 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 
 ```{css, echo=FALSE}
 body > h1 > img {
-position: relative;
-top: 10px;
-border: 0px solid rgba(0, 0, 0, 0.1);
-}
+  position: relative;
+  bottom: -30px;
+  border: 0px solid rgba(0, 0, 0, 0.1);
+ }
 ```
 
 ## Introduction

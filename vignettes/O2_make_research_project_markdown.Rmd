@@ -1,5 +1,5 @@
 ---
-title: "Create a Markdown Research Project with ![rum](../man/figures/r.png)"
+title:  Create a Research Project with ![rUM](package-logo.png){width=0.8in}
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{2. Create a Research Project with R Markdown and rUM}
@@ -12,14 +12,16 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
 ```{css, echo=FALSE}
-.title img {
-position: relative;
-top: 10px;
-border: 0px solid rgba(0, 0, 0, 0.1);
-}
+body > h1 > img {
+  position: relative;
+  bottom: -30px;
+  border: 0px solid rgba(0, 0, 0, 0.1);
+ }
 ```
 
 ## Introduction
