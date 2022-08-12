@@ -19,6 +19,13 @@ Authors@R:
         comment = c(ORCID = "0000-0003-1341-4555")
       ),
       person(
+        given = "Kyle",
+        family = "Grealis",
+        role = "aut",
+        email = "kxg679@miami.edu",
+        comment = c(ORCID = "0000-0002-9223-8854")
+      ),
+      person(
         given = "Francisco",
         family = "Cardozo",
         role = "ctb",
@@ -26,11 +33,11 @@ Authors@R:
         comment = c(ORCID = "0000-0002-1925-4954")
       ),
       person(
-        given = "Kyle",
-        family = "Grealis",
+        given = "Frank",
+        family = "Gutierrez",
         role = "ctb",
-        email = "kxg679@miami.edu",
-        comment = c(ORCID = "0000-0002-9223-8854")
+        email = "fxg266@miami.edu",
+        comment = c(ORCID = "0000-0001-8275-8349")
       )
     )
 Description: This holds some r markdown templates and a template to create a
