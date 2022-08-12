@@ -44,15 +44,15 @@ Description: This holds some r markdown templates and a template to create a
 Depends: 
     R (>= 3.5)
 Imports:
+    bookdown,
     conflicted,
     rlang,
+    rmarkdown,
+    table1,
     tidyverse,
     usethis
 Suggests:
-    bookdown,
     knitr,
-    rmarkdown,
-    table1,
     tidymodels,
     tinytex
 License: MIT + file LICENSE

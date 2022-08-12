@@ -10,6 +10,8 @@
 * Add more options to setup chunks
 * Removed `suppressMessages(conflict_prefer("spec", "yardstick"))` from R Markdown templates.  It is now in `tidymodels_prefer()`.
 * Add quarto to gitignore gist 
+* Add @importFrom bookdown, rmarkdown, table1 cran checks
+
 
 # rUM 0.3.2
 
@@ -51,6 +53,5 @@
 * Added a `NEWS.md` file to track changes to the package
 * Added Website
 
-# rUM (development version)
 
 
