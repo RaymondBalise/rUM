@@ -53,7 +53,7 @@ make_project <- function(
   # Paths to gist files for analysis - these need to update of the gist changes.
   gist_path_rmd <- paste0(
     "https://gist.github.com/RaymondBalise/ef56efda4a9260d8415a2cde94cbad1b/",
-    "raw/e4c9d432d37a93cc1da1dbca4a8c6bc7c3786ee4/analysis.Rmd"
+    "raw/15b7ef931468a2ae2c5af1fc30606449e4ae067a/analysis.Rmd"
   )
   gist_path_qmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
