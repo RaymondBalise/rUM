@@ -1,5 +1,5 @@
 ---
-title:  Create a Research Project with ![rUM](package-logo.png){width=0.8in}
+title:  Create a Research Project with ![rUM](package-logo.jpg){width=0.8in}
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{2. Create a Research Project with R Markdown and rUM}

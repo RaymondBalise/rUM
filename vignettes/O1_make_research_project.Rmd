@@ -1,5 +1,5 @@
 ---
-title: Create a Research Project with Quarto and ![rUM](package-logo.png){width=0.8in}
+title: Create a Research Project with Quarto and ![rUM](package-logo.jpg){width=0.8in}
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{1. Create a Research Project with Quarto and rUM}
