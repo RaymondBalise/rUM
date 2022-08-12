@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 	message = TRUE, # show messages
 	warning = TRUE, # show warnings
 	error = TRUE,   # show errors
-	comment=""      # don't show ## with printed output
+	comment = ""    # don't show ## with printed output
 )
 
 options(digits = 3) # round to three digits
