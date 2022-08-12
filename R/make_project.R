@@ -86,7 +86,7 @@ make_project <- function(
   gist_path_ignore <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "300d99c2b6450feda3ed5a816f396191/raw/",
-    "34298c16ff3827e3b455a5ef9a69ca7b198e1f9e/.gitignore"
+    "b9ab7d1ecf503bad68a3f9cca98db397b7afd2b9/.gitignore"
   )
   download.file(gist_path_ignore, paste0(path, "/.gitignore"))
 
