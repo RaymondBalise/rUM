@@ -3,17 +3,29 @@ This is a collection of R things from your friends at UM (The University of Miam
 
 rUM includes:
 
-+ A research project template.  It creates a new RStudio project that has an analysis R markdown file with tidyverse and conflicted.
-+ R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.
++ A research project template.  It creates a new RStudio project that has your choice of an `analysis.qmd` Quarto file or `analysis.Rmd` R markdown file with tidyverse and conflicted.
++ Quarto and R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.
 
 The plan is to add UM thesis and dissertation Markdown templates.
 
 ## How to I add rUM?
 
+Modern version RStudio (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio [here](https://www.rstudio.com/products/rstudio/download/). If you know what you are doing, you can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
+
+Then you should run this in the console of RStudio:
+
+```r
+if (!requireNamespace("remotes")) install.packages("remotes")
+remotes::install_cran("rUM")
+```
+
+If you would like the (unstable) development version, use the following code instead:
 ```r
 if (!requireNamespace("remotes")) install.packages("remotes")
 remotes::install_github("RaymondBalise/rUM")
 ```
+
+
 
 ## Where can I get rUM?
 https://raymondbalise.github.io/rUM/

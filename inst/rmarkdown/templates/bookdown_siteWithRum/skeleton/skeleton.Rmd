@@ -19,11 +19,16 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = FALSE,
-	message = TRUE,
-	warning = TRUE
+knitr::opts_chunk$set( 
+  # These options can be set to FALSE (capitalization matters).
+	echo = TRUE,    # show code
+	message = TRUE, # show messages
+	warning = TRUE, # show warnings
+	error = TRUE,   # show errors
+	comment = ""    # don't show ## with printed output
 )
+
+options(digits = 3) # round to three digits
 ```
 
 # 
@@ -45,7 +50,6 @@ options(dplyr.summarise.inform=F)
 ```{r tidymodels, include=FALSE}
 suppressPackageStartupMessages(library(tidymodels))
 tidymodels_prefer()
-suppressMessages(conflict_prefer("spec", "yardstick"))
 ```
 
 

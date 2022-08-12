@@ -1,34 +1,38 @@
 #' Make an Analysis Project
 #' 
 #' @description This function makes an R project that includes an analysis.Rmd 
-#' or analysis.qmd file with conflicted and tidyverse and an aggressive 
-#' .gitignore.  The  .gitignore is designed to help protect against leaking data
-#' (with protected  health information). This function is used by the RStudio
-#' research_project.dcf file to make the files.
-#'
+#' or analysis.qmd file using the conflicted and tidyverse packages.  This 
+#' project automatically includes an aggressive .gitignore which is designed to
+#' help protect against leaking data (with protected  health information), a 
+#' starter bibliography file called "references" (in standard .bib format), 
+#' and a stock Citation Style Language (.csl) file for the New England Journal 
+#' of Medicine.
+#' 
 #' @param path Path automatically set by research_project.dcf (see
 #'    \code{./rstudio/templates/project/})
-#' @param type Choose between "Quarto (analysis.qmd)") or 
-#'    "R Markdown (analysis.Rmd)"(see \code{./rstudio/templates/project/})
+#' @param type Choose between "Quarto (analysis.qmd)" or 
+#'    "R Markdown (analysis.Rmd)"
 #'
-#' @import tidyverse 
-#' @import conflicted
+#' @details Behind the scenes, this function used by research_project.dcf when
+#' a user selects New project... > New Directory > rUM Research Project Template
+#' within the RSutdio IDE. See \code{./rstudio/templates/project/}.
+#'
+#' @importFrom tidyverse tidyverse_logo
+#' @importFrom conflicted conflict_prefer
 #' @importFrom rlang abort
 #' @importFrom utils download.file
 #' @importFrom usethis create_project
 #'
-#' @return Creates a project directory with the following contents: a template
-#'    \code{.Rmd} file called "analysis", a subdirectory for data, a template
-#'    \code{.gitignore} with aggressive protections against publishing potential
-#'    protected health information, a starter bibliography file called 
-#'    "references" (in standard \code{.bib} format), and a stock Citation Style
-#'    Language (\code{.csl}) file for the New England Journal of Medicine.
+#' @return Returns nothing.  See description above.
 #'    
 #' @export
 #' 
 #' @examples 
 #' \dontrun{
-#'   make_project(path = "~/test_project")
+#'   make_project(path = "~/test_project", type = "Quarto (analysis.qmd)")
+#' }
+#' \dontrun{
+#'   make_project(path = "~/test_project", type = "R Markdown (analysis.Rmd)")
 #' }
 
 make_project <- function(
@@ -49,12 +53,12 @@ make_project <- function(
   # Paths to gist files for analysis - these need to update of the gist changes.
   gist_path_rmd <- paste0(
     "https://gist.github.com/RaymondBalise/ef56efda4a9260d8415a2cde94cbad1b/",
-    "raw/a94aef9bd34e31218aeebeea06513db08cdb3ee6/analysis.Rmd"
+    "raw/15b7ef931468a2ae2c5af1fc30606449e4ae067a/analysis.Rmd"
   )
   gist_path_qmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "224f0b7b107a6b800c610d46c8b6f236/raw/",
-    "b220bf3004822ac30632fa7cce4ab9acec05a3d2/analysis.qmd"
+    "a19e4afec73c48c34821ff258f051107673f27c9/analysis.qmd"
   )
   
   # Prevent user from overwriting an analysis file
@@ -82,7 +86,7 @@ make_project <- function(
   gist_path_ignore <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "300d99c2b6450feda3ed5a816f396191/raw/",
-    "34298c16ff3827e3b455a5ef9a69ca7b198e1f9e/.gitignore"
+    "b9ab7d1ecf503bad68a3f9cca98db397b7afd2b9/.gitignore"
   )
   download.file(gist_path_ignore, paste0(path, "/.gitignore"))
 

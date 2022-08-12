@@ -1,0 +1,173 @@
+---
+title:  Create a Research Project with ![rUM](package-logo.jpg){width=0.8in}
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{2. Create a Research Project with R Markdown and rUM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+options(rmarkdown.html_vignette.check_title = FALSE)
+```
+
+```{css, echo=FALSE}
+body > h1 > img {
+  position: relative;
+  bottom: -30px;
+  border: 0px solid rgba(0, 0, 0, 0.1);
+ }
+```
+
+## Introduction
+This is a collection of document templates, available through R, from your friends at the University of Miami (UM). $R+UM=rUM$
+
+The `rUM` package will help you create research manuscripts by removing the configuration hassles commonly encountered when learning to write papers using R. `rUM` will initialize a new RStudio project and a Markdown file that includes the outline for a research paper. The Markdown file comes preconfigured with a YAML header (don't worry if you don't know what that means yet) with code chunks to load the `tidyverse` and `conflicted` packages. Manuscript sections have been created for Introduction, Methods, Results, Conclusion, and References. The project also includes a `.gitignore` file which is designed to help protect against accidentally leaking data when using git with websites like [www.GitHub.com](www.GitHub.com).
+
+rUM's documentation can be found here:
+
+-   <https://raymondbalise.github.io/rUM/>
+-   <https://github.com/RaymondBalise/rUM>
+
+## How do I get `RMarkdown` and `rUM`? (Add a "quart o' `rUM`"!)
+
+1.  Modern version RStudio (v2022.07 or later) ships with R Markdown integrated into the RStudio IDE.
+
+2.  Add `rUM` to your computer by:
+
+    -   using RStudio: click on the Packages tab in the bottom right windowpane, click the Install button, type ***rUM***, and click Install.
+    -   downloading rUM from CRAN and installing it by running this code in R console:
+
+    ``` r
+    install.packages("rUM")
+    ```
+
+    -   downloading the latest version of rUM from GitHub by running commands into the R console:
+
+    ``` r
+    if (!requireNamespace("remotes")) install.packages("remotes")
+    remotes::install_github("RaymondBalise/rUM")
+    ```
+
+3.  Use `rUM` by running this in the console of RStudio:
+
+``` r
+library(rUM)
+```
+
+## Ordering `rUM` from the Menu
+
+To create a research project that uses `rUM`, follow these steps. This will initialize a new RStudio project that has an [`analysis.Rmd`](#fig:analysis_Rmd_file) R Markdown file using the `tidyverse` and `conflicted` packages and some other useful files which are described [below](#stuff).
+
+1.  Using the RStudio menus, choose: File \> New Project \> New Directory
+
+2.  Scroll down and then select **`rUM` Research Project Template**
+
+    ![](project_template.png){width=70%}
+
+3.  Specify the location of where your research project will be saved
+
+    ![](save_markdown_project_here.png){width=70%}
+    
+
+## Add `rUM` into an existing folder/directory that does not have an RStudio project.
+
+What if you have already created a folder containing the important files for your project? Create a new project in your existing folder! This will now be your project directory (complete with a `.Rproj` file).
+
+1.  Navigate to File \> New Project \> Existing Directory
+
+2.  Specify the location of where your research project will be saved
+
+    ![](existing_directory.png){width=70%}
+    
+3.  Run the following script in your console:
+
+``` r
+# Change the text inside the quotes on the next line to indicate the path to your folder/directory.
+PATH <- "~/Documents/blah"   
+
+make_project(PATH, type = "R Markdown (analysis.Rmd)")
+```
+
+## After your `rUM` has been served
+
+A new project directory has been created and it will be populated with [these files](#fig:created_rUM_markdown_files):
+
+-   An aggressive `.gitignore` to help prevent the unintended sharing of sensitive study information or protected health information (PHI).
+-   [`analysis.Rmd`](#fig:analysis_Rmd_file) is a Markdown template for writing your research project. It has a preconfigured YAML header; Introduction, Methods, Results, Conclusion, and Reference sections; and a code chunk to construct your bibliography using `knitr::write_bib()`.
+-   An empty folder named `data`. This folder is listed within the `.gitignore`. That means that git should not track these files. This should help prevent data leakage but be sure to talk to a data security expert before sharing any biomedical projects on websites like GitHub.
+-   A `.Rproj` file with the same name as your project folder.
+-   Two text files, `packages.bib` and `references.bib`, which are used to hold details for your paper's bibliography. Refer to the Methods and References sections, respectively, within the [`analysis.Rmd`](#fig:analysis_Rmd_file) file for initial examples of how to add/use references.
+-   [`the-new-england-journal-of-medicine.csl`](https://catalyst.nejm.org/pb-assets/images/NEJM%20Catalyst%20Reference%20style-1589400257323.pdf) is the citation style language (CSL) based on the [New England Journal of Medicine](https://catalyst.nejm.org/pb-assets/images/NEJM%20Catalyst%20Reference%20style-1589400257323.pdf) requirements.
+
+Newly created files:
+
+```{=html}
+<br>
+<p id="fig:created_rUM_markdown_files" >
+</p>
+```    
+![](created_rUM_markdown_files.png){width=70%}
+  
+`analysis.Rmd`:
+
+```{=html}
+<br>
+<p id="fig:analysis_Rmd_file" >
+</p>
+``` 
+![](analysis_Rmd_file.jpg){width=80%}
+
+
+
+
+## `rUM` infused Markdown headers
+
+1. Navigate to File > New File > R Markdown
+
+    ![](newfile_markdown.jpg){width=70%}
+
+1. Select **From Template**
+
+    ![](from_template.png){width=70%}
+
+1. Choose a template:
+
+* html2 with rUM
+* html2 Details with rUM
+* pdf2 showing LaTeX with rUM
+* bookdown_site with rUM
+
+This will create a new subdirectory in your current working directory with the same name as the name of the `.Rmd` file you specified. Within this directory, you will find the `analysis.Rmd` R Markdown file. For example, if you created an R Markdown file called `wrangle_cytometry_data.Rmd` with the steps above, then your current directory will now have a subdirectory called `wrangle_cytometry_data/` which will contain the file `wrangle_cytometry_data.Rmd` and any subsequent files from the knitting process (such as `.PDF`, `.html`, or `.docx` files created by knitting the R Markdown document).
+
+
+### What are the headers
+
+#### html2 with rUM
+This is a basic web page
+
+#### html2 Details with rUM
+This is a basic web page with a table of contents
+
+#### pdf2 showing LaTeX with rUM
+PDF report where table and figures don’t float to other pages. Many thanks to <https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc>.
+
+#### bookdown_site with rUM
+A bookdown website with a good table of contents for a book
+
+
+
+
+### Session
+
+If you are new to R, ignore this.
+
+```{r}
+sessionInfo()
+```
+

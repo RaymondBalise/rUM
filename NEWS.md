@@ -6,6 +6,10 @@
 * Added check to make sure analysis does not exist - Thanks to Francisco Cardozo
 * Updated .gitignore
 * Added citation info to README
+* Added vignettes
+* Add more options to setup chunks
+* Removed `suppressMessages(conflict_prefer("spec", "yardstick"))` from R Markdown templates.  It is now in `tidymodels_prefer()`.
+* Add quarto to gitignore gist 
 
 # rUM 0.3.2
 
