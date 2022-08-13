@@ -1,3 +1,9 @@
+# rUM 1.0.1
+
++ Added https:\\ to github link in vignettes for CRAN
++ Removed `![rUM](package-logo.jpg){width=0.8in}` from vignette titles
++ Added "with R Markdown" to vignette title
+
 # rUM 1.0
 
 * Added quarto options in project creation template/wizard
