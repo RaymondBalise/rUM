@@ -38,10 +38,10 @@ of Medicine.'><meta property="og:image" content="/logo.png"><!-- mathjax --><scr
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/O1_make_research_project.html">Create a Research Project with Quarto and ![rUM](package-logo.jpg){width=0.8in}</a>
+      <a href="../articles/O1_make_research_project.html">Create a Research Project with Quarto and rUM</a>
     </li>
     <li>
-      <a href="../articles/O2_make_research_project_markdown.html">Create a Research Project with ![rUM](package-logo.jpg){width=0.8in}</a>
+      <a href="../articles/O2_make_research_project_markdown.html">Create a Research Project with rUM</a>
     </li>
     <li>
       <a href="../articles/O3_R_Markdown_Templates.html">Create a R Markdown File from a rUM Template</a>
@@ -81,10 +81,10 @@ of Medicine.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">make_project</span><span class="op">(</span>
-  <span class="va">path</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Quarto (analysis.qmd)"</span>, <span class="st">"R Markdown (analysis.Rmd)"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_project</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Quarto (analysis.qmd)"</span>, <span class="st">"R Markdown (analysis.Rmd)"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -114,12 +114,12 @@ within the RSutdio IDE. See <code>./rstudio/templates/project/</code>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">make_project</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"~/test_project"</span>, type <span class="op">=</span> <span class="st">"Quarto (analysis.qmd)"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">make_project</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"~/test_project"</span>, type <span class="op">=</span> <span class="st">"R Markdown (analysis.Rmd)"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">make_project</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"~/test_project"</span>, type <span class="op">=</span> <span class="st">"Quarto (analysis.qmd)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">make_project</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"~/test_project"</span>, type <span class="op">=</span> <span class="st">"R Markdown (analysis.Rmd)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
