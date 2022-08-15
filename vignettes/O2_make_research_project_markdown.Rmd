@@ -27,7 +27,7 @@ body > h1 > img {
 ## Introduction
 This is a collection of document templates, available through R, from your friends at the University of Miami (UM). $R+UM=rUM$
 
-The `rUM` package will help you create research manuscripts by removing the configuration hassles commonly encountered when learning to write papers using R. `rUM` will initialize a new RStudio project and a Markdown file that includes the outline for a research paper. The Markdown file comes preconfigured with a YAML header (don't worry if you don't know what that means yet) with code chunks to load the `tidyverse` and `conflicted` packages. Manuscript sections have been created for Introduction, Methods, Results, Conclusion, and References. The project also includes a `.gitignore` file which is designed to help protect against accidentally leaking data when using git with websites like [www.github.com](https://www.github.com/).
+The `rUM` package will help you create research manuscripts by removing the configuration hassles commonly encountered when learning to write papers using R. `rUM` will initialize a new RStudio project and a Markdown file that includes the outline for a research paper. The Markdown file comes preconfigured with a YAML header (don't worry if you don't know what that means yet) with code chunks to load the `tidyverse` and `conflicted` packages. Manuscript sections have been created for Introduction, Methods, Results, Conclusion, and References. The project also includes a `.gitignore` file which is designed to help protect against accidentally leaking data when using git with websites like [www.github.com](https://github.com/).
 
 rUM's documentation can be found here:
 
