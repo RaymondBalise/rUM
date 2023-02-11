@@ -17,13 +17,13 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set( 
+knitr::opts_chunk$set(
   # These options can be set to FALSE (capitalization matters).
-	echo = TRUE,    # show code
-	message = TRUE, # show messages
-	warning = TRUE, # show warnings
-	error = TRUE,   # show errors
-	comment = ""    # don't show ## with printed output
+  echo = TRUE,    # show code
+  message = TRUE, # show messages
+  warning = TRUE, # show warnings
+  error = TRUE,   # show errors
+  comment = ""    # don't show ## with printed output
 )
 
 options(digits = 3) # round to three digits
@@ -36,7 +36,7 @@ conflict_prefer("lag", "dplyr", quiet = TRUE)
 suppressPackageStartupMessages(library(tidyverse))
 
 # suppress "`summarise()` has grouped output by " messages
-options(dplyr.summarise.inform=F)  
+options(dplyr.summarise.inform = FALSE)
 ```
 
 ```{r tidymodels, include=FALSE}
