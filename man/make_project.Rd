@@ -13,19 +13,19 @@ make_project(
 \item{path}{Path automatically set by research_project.dcf (see
 \code{./rstudio/templates/project/})}
 
-\item{type}{Choose between "Quarto (analysis.qmd)" or 
+\item{type}{Choose between "Quarto (analysis.qmd)" or
 "R Markdown (analysis.Rmd)"}
 }
 \value{
 Returns nothing.  See description above.
 }
 \description{
-This function makes an R project that includes an analysis.Rmd 
-or analysis.qmd file using the conflicted and tidyverse packages.  This 
+This function makes an R project that includes an analysis.Rmd
+or analysis.qmd file using the conflicted and tidyverse packages.  This
 project automatically includes an aggressive .gitignore which is designed to
-help protect against leaking data (with protected  health information), a 
-starter bibliography file called "references" (in standard .bib format), 
-and a stock Citation Style Language (.csl) file for the New England Journal 
+help protect against leaking data (with protected  health information), a
+starter bibliography file called "references" (in standard .bib format),
+and a stock Citation Style Language (.csl) file for the New England Journal
 of Medicine.
 }
 \details{

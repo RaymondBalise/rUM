@@ -1,3 +1,9 @@
+# rUM 1.0.2
+
++ Linted all code
+  + Cleaned up `options(dplyr.summarise.inform=F)` everywhere.
++ Added gists to a inst/gists directory
+
 # rUM 1.0.1
 
 + Added https:\\ to github link in vignettes for CRAN
