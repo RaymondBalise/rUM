@@ -16,7 +16,7 @@ rUM includes:
 
 ## How to I add rUM?
 
-Modern version RStudio (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio [here](https://posit.co/download/rstudio-desktop/). If you know what you are doing, you can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
+Modern versions of the RStudio interface (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio [here](https://posit.co/download/rstudio-desktop/). If you know what you are doing, you can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
 
 Then you should run this in the console of RStudio:
 
