@@ -1,5 +1,5 @@
 ---
-title:  Create a Research Project with R Markdown and rUM
+title:  "2. Create a Research Project with R Markdown and rUM"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{2. Create a Research Project with R Markdown and rUM}
