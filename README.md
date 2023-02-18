@@ -1,3 +1,9 @@
+  <!-- badges: start -->
+  [![CRAN status](https://www.r-pkg.org/badges/version/rUM)](https://CRAN.R-project.org/package=rUM)
+  [![Lifecycle: stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+  [![CRAN downloads](https://cranlogs.r-pkg.org/badges/rUM)](https://www.r-pkg.org/pkg/tidyREDCap)
+  <!-- badges: end -->
+  
 # rUM <a href='https://raymondbalise.github.io/rUM/'><img src='man/figures/logo.png' align="right" width="139" /></a>
 This is a collection of R things from your friends at UM (The University of Miami).
 
@@ -6,7 +12,7 @@ rUM includes:
 + A research project template.  It creates a new RStudio project that has your choice of an `analysis.qmd` Quarto file or `analysis.Rmd` R markdown file with tidyverse and conflicted.
 + Quarto and R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.
 
-The plan is to add UM thesis and dissertation Markdown templates.
+* 💥 NEW in Version 1.0.2 💥 We cleaned (i.e., linted and styled) and fixed a couple small formatting issues of the paper templates.  The automatically produced code should pass check on the [tidyverse style guide](https://style.tidyverse.org/).
 
 ## How to I add rUM?
 
