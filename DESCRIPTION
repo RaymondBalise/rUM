@@ -40,7 +40,7 @@ Authors@R:
       )
     )
 Description: This holds some r markdown templates and a template to create a
-    research project in RStudio.
+    research project in "RStudio".
 Depends: 
     R (>= 3.5)
 Imports:
