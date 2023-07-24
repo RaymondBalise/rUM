@@ -63,7 +63,7 @@ If you want to acknowledge a package that is not used directly in your analysis 
 After you knit/render the analysis file once the packages will appear in the "packages.bib" file in the same directory/folder as your analysis file. If you are using the RStudio **Visual Editor**, put the cursor when you want to add the citation, then use the Insert Menu and choose *@ Citation...* and pick the article.  If you are using the Visual Studio **Source Editor**, open the "packages.bib" file, find the manual reference for the package that you want to add and copy it.  For example, if you needed to add a reference to the `rUM` package you would find this line:
 
 ```
-@Manual{R-rUM
+@Manual{R-rUM}
 ```
 
 and copy the reference name.  Here the name is `R-rUM`. Paste that where you want the citation like this `[@R-rUM]`.
