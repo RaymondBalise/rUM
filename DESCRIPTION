@@ -46,14 +46,17 @@ Depends:
 Imports:
     bookdown,
     conflicted,
+    glue,
+    gtsummary,
+    rio,
     rlang,
     rmarkdown,
     table1,
+    tidymodels,
     tidyverse,
     usethis
 Suggests:
     knitr,
-    tidymodels,
     tinytex
 License: MIT + file LICENSE
 URL: 

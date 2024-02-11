@@ -26,6 +26,10 @@
 #' @importFrom rlang abort
 #' @importFrom utils download.file
 #' @importFrom usethis create_project
+#' @importFrom glue glue
+#' @importFrom gtsummary tbl_summary
+#' @importFrom rio import
+#' @importFrom tidymodels tidymodels_prefer
 #'
 #' @return Returns nothing.  See description above.
 #'
