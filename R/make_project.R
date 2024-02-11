@@ -12,6 +12,7 @@
 #'    \code{./rstudio/templates/project/})
 #' @param type Choose between "Quarto (analysis.qmd)" or
 #'    "R Markdown (analysis.Rmd)"
+#' @param example Will the analysis file include an example table/figure?"
 #'
 #' @details Behind the scenes, this function used by research_project.dcf when
 #' a user selects New project... > New Directory > rUM Research Project Template
@@ -40,7 +41,8 @@
 
 make_project <- function(
     path,
-    type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)")
+    type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)"),
+    example = FALSE
   ) {
 
   type <- match.arg(type)
@@ -65,6 +67,19 @@ make_project <- function(
     "ee3369492aafd001b59d4390177e8b44cd0ea088/analysis.qmd"
   )
 
+  gist_w_ex_path_rmd <- paste0(
+    "https://gist.githubusercontent.com/RaymondBalise/",
+    "c8399e7b3474a6022eeae373d059a042/",
+    "raw/094e854be27554e4e296c48e4323c4f0d1b5ba9c/analysis_with_example.Rmd"
+  )
+  
+  gist_w_ex_path_qmd <- paste0(
+    "https://gist.githubusercontent.com/RaymondBalise/",
+    "40e8e1cc0dec94b225b7cb307f4fa959/raw/",
+    "f365198b41abe5b35ec7d7501d6f286f668a14d7/analysis_with_example.qmd"
+  )
+  
+ 
   # Prevent user from overwriting an analysis file
   if (file.exists(paste0(path, "/analysis.Rmd")) ||
       file.exists(paste0(path, "/analysis.qmd"))
@@ -74,15 +89,30 @@ make_project <- function(
     )
   }
 
-  if (type == "R Markdown (analysis.Rmd)") {
-    download.file(gist_path_rmd, paste0(path, "/analysis.Rmd"))
-  } else if (type == "Quarto (analysis.qmd)") {
-    download.file(gist_path_qmd, paste0(path, "/analysis.qmd"))
-  } else {
-    abort(
-      "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
-    )
+  
+  if (example == FALSE){ # use old templates w/o an example
+    if (type == "R Markdown (analysis.Rmd)") {
+      download.file(gist_path_rmd, paste0(path, "/analysis.Rmd"))
+    } else if (type == "Quarto (analysis.qmd)") {
+      download.file(gist_path_qmd, paste0(path, "/analysis.qmd"))
+    } else {
+      abort(
+        "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
+      )
+    }
+  } else { # use newer templates w an example
+    if (type == "R Markdown (analysis.Rmd)") {
+      download.file(gist_w_ex_path_rmd, paste0(path, "/analysis.Rmd"))
+    } else if (type == "Quarto (analysis.qmd)") {
+      download.file(gist_w_ex_path_qmd, paste0(path, "/analysis.qmd"))
+    } else {
+      abort(
+        "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
+      )
+    }
   }
+  
+
 
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
 

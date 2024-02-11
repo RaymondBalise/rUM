@@ -7,3 +7,9 @@ Label: What type of analysis file?
 Fields: Quarto (analysis.qmd), R Markdown (analysis.Rmd)
 Default: Quarto (analysis.qmd)
 Position: left
+
+Parameter: example
+Widget: CheckboxInput
+Label: Include an Example Table/Figure
+Default: Off
+Position: left
