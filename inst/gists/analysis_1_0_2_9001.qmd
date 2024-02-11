@@ -16,6 +16,8 @@ knitr:
     R.options:    
       digits: 3    # round to three digits
 editor: visual
+bibliography: [references.bib, packages.bib]
+csl: the-new-england-journal-of-medicine.csl
 ---
 
 ```{r tidyverse-tidymodels, echo=FALSE}
@@ -32,7 +34,7 @@ options(dplyr.summarise.inform = FALSE)
 library(glue)  # for glue()
 library(rUM)  # needed for the bibliography
 library(rio)  # for import() 
-# library(table1)  # for table1()
+library(table1)  # for table1()
 
 # gtsummary for tbl_summary(), add_n(), add_p(), modify_header(), bold_labels()
 suppressPackageStartupMessages(library(gtsummary)) 
@@ -55,7 +57,7 @@ analysis <- mtcars |>
 
 # Methods
 
-Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)` with the `tidyverse` (`r packageVersion("tidyverse")`), `rUM` (`r packageVersion("rUM")`), `table1` (`r packageVersion("table1")`) packages used to preprocess and summarize data.[@R-base; @R-tidyverse; @tidyverse2019; @R-rUM; @R-table1]
+Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)` with the `tidyverse` (`r packageVersion("tidyverse")`), `rUM` (`r packageVersion("rUM")`), `gtsummary` (`r packageVersion("gtsummary")`) packages used to preprocess and summarize data. [@R-base; @R-tidyverse; @tidyverse2019; @R-rUM; @R-gtsummary]
 
 # Results
 
