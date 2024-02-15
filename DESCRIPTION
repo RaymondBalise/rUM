@@ -1,6 +1,6 @@
 Package: rUM
 Title: R Templates from the University of Miami
-Version: 1.0.2
+Version: 1.1.0
 Authors@R: 
     c(
       person(
@@ -46,14 +46,17 @@ Depends:
 Imports:
     bookdown,
     conflicted,
+    glue,
+    gtsummary,
+    rio,
     rlang,
     rmarkdown,
     table1,
+    tidymodels,
     tidyverse,
     usethis
 Suggests:
     knitr,
-    tidymodels,
     tinytex
 License: MIT + file LICENSE
 URL: 
@@ -61,5 +64,5 @@ URL:
     https://github.com/RaymondBalise/rUM
 BugReports: https://github.com/RaymondBalise/rUM/issues
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 VignetteBuilder: knitr

@@ -6,7 +6,8 @@
 \usage{
 make_project(
   path,
-  type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)")
+  type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)"),
+  example = FALSE
 )
 }
 \arguments{
@@ -15,6 +16,8 @@ make_project(
 
 \item{type}{Choose between "Quarto (analysis.qmd)" or
 "R Markdown (analysis.Rmd)"}
+
+\item{example}{Will the analysis file include an example table/figure?"}
 }
 \value{
 Returns nothing.  See description above.
