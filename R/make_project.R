@@ -46,37 +46,48 @@
 make_project <- function(
     path,
     type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)"),
-    example = FALSE
+    example = FALSE,
+    vignette = FALSE
   ) {
 
   type <- match.arg(type)
   # ensure path exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
 
-
-  # If the project object does not exist add it.
-  if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
-    usethis::create_project(path = path, open = TRUE, rstudio = TRUE)
+  if (vignette == FALSE){
+    # If the project object does not exist add it.
+    if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
+      usethis::create_project(path = path, open = TRUE, rstudio = TRUE)
+    }
+  } else {
+    if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
+      usethis::create_package(path = path, open = TRUE, rstudio = TRUE)
+    }
   }
 
   # Paths to gist files for analysis - these need to update of the gist changes.
+  
+  # path to analysis.Rmd without example
   gist_path_rmd <- paste0(
     "https://gist.github.com/RaymondBalise/ef56efda4a9260d8415a2cde94cbad1b/",
     "raw/c159912e48a2d93efb4d501d5a1d9d5a288ef38d/analysis.Rmd"
   )
   
+  # path to analysis.qmd without example
   gist_path_qmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "224f0b7b107a6b800c610d46c8b6f236/raw/",
     "51f8e2cde1026fa2b376f99aa06244382c3a1bcb/analysis.qmd"
   )
 
+  # path to analysis.Rmd with example
   gist_w_ex_path_rmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "c8399e7b3474a6022eeae373d059a042/",
     "raw/cf9080a2d2096ddde5f5550abbb6c790126f7d10/analysis_with_example.Rmd"
   )
   
+  # path to analysis.qmd with example
   gist_w_ex_path_qmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "40e8e1cc0dec94b225b7cb307f4fa959/raw/",
@@ -93,12 +104,19 @@ make_project <- function(
     )
   }
 
+  if (vignette == TRUE) {
+    vig_path = "/vignettes"
+    dir.create(paste0(path, "/vignettes"), recursive = TRUE, showWarnings = FALSE)
+  } else {
+    vig_path = NULL
+  }
+  
   
   if (example == FALSE){ # use old templates w/o an example
     if (type == "R Markdown (analysis.Rmd)") {
-      download.file(gist_path_rmd, paste0(path, "/analysis.Rmd"))
+      download.file(gist_path_rmd, paste0(path, vig_path, "/analysis.Rmd"))
     } else if (type == "Quarto (analysis.qmd)") {
-      download.file(gist_path_qmd, paste0(path, "/analysis.qmd"))
+      download.file(gist_path_qmd, paste0(path, vig_path, "/analysis.qmd"))
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
@@ -106,9 +124,9 @@ make_project <- function(
     }
   } else { # use newer templates w an example
     if (type == "R Markdown (analysis.Rmd)") {
-      download.file(gist_w_ex_path_rmd, paste0(path, "/analysis.Rmd"))
+      download.file(gist_w_ex_path_rmd, paste0(path, vig_path, "/analysis.Rmd"))
     } else if (type == "Quarto (analysis.qmd)") {
-      download.file(gist_w_ex_path_qmd, paste0(path, "/analysis.qmd"))
+      download.file(gist_w_ex_path_qmd, paste0(path, vig_path, "/analysis.qmd"))
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
@@ -116,8 +134,6 @@ make_project <- function(
     }
   }
   
-
-
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
 
   # Path to gitignore this must be updated if the gist changes.
@@ -129,19 +145,19 @@ make_project <- function(
   download.file(gist_path_ignore, paste0(path, "/.gitignore"))
 
   # write an empty packages bibliography file - needed to knit the first time
-  writeLines("", con = file.path(path, "packages.bib"))
+  writeLines("", con = file.path(path, vig_path, "packages.bib"))
 
   # write an empty user bibliography file
-  writeLines("", con = file.path(path, "references.bib"))
+  writeLines("", con = file.path(path, vig_path, "references.bib"))
 
   download.file(
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
-    paste0(path, "/the-new-england-journal-of-medicine.csl")
+    paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl")
   )
 
   download.file(
     "https://www.zotero.org/styles/apa",
-    paste0(path, "/apa.csl")
+    paste0(path, vig_path, "/apa.csl")
   )
-  
+
 }
