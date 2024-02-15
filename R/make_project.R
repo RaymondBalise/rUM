@@ -105,4 +105,9 @@ make_project <- function(
     paste0(path, "/the-new-england-journal-of-medicine.csl")
   )
 
+  download.file(
+    "https://www.zotero.org/styles/apa",
+    paste0(path, "/apa.csl")
+  )
+  
 }
