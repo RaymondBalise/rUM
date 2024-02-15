@@ -37,10 +37,10 @@
 #'
 #' @examples
 #' \dontrun{
-#'   make_project(path = "~/test_project", type = "Quarto (analysis.qmd)")
+#'   make_project(path = "~/test_project", type = "Quarto (analysis.qmd)", example = TRUE)
 #' }
 #' \dontrun{
-#'   make_project(path = "~/test_project", type = "R Markdown (analysis.Rmd)")
+#'   make_project(path = "~/test_project", type = "R Markdown (analysis.Rmd), example = TRUE")
 #' }
 
 make_project <- function(
@@ -62,25 +62,25 @@ make_project <- function(
   # Paths to gist files for analysis - these need to update of the gist changes.
   gist_path_rmd <- paste0(
     "https://gist.github.com/RaymondBalise/ef56efda4a9260d8415a2cde94cbad1b/",
-    "raw/b394a5ad7e90e54161e1105ecd770e60e4592456/analysis.Rmd"
+    "raw/c159912e48a2d93efb4d501d5a1d9d5a288ef38d/analysis.Rmd"
   )
   
   gist_path_qmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "224f0b7b107a6b800c610d46c8b6f236/raw/",
-    "ee3369492aafd001b59d4390177e8b44cd0ea088/analysis.qmd"
+    "51f8e2cde1026fa2b376f99aa06244382c3a1bcb/analysis.qmd"
   )
 
   gist_w_ex_path_rmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "c8399e7b3474a6022eeae373d059a042/",
-    "raw/094e854be27554e4e296c48e4323c4f0d1b5ba9c/analysis_with_example.Rmd"
+    "raw/cf9080a2d2096ddde5f5550abbb6c790126f7d10/analysis_with_example.Rmd"
   )
   
   gist_w_ex_path_qmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "40e8e1cc0dec94b225b7cb307f4fa959/raw/",
-    "f365198b41abe5b35ec7d7501d6f286f668a14d7/analysis_with_example.qmd"
+    "d4883d98163f565915e514d96d3e4c9fcdda1405/analysis_with_example.qmd"
   )
   
  
@@ -124,7 +124,7 @@ make_project <- function(
   gist_path_ignore <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "300d99c2b6450feda3ed5a816f396191/raw/",
-    "b9ab7d1ecf503bad68a3f9cca98db397b7afd2b9/.gitignore"
+    "c959571e2618ba6baa14d91972f84de20a08b63f/.gitignore"
   )
   download.file(gist_path_ignore, paste0(path, "/.gitignore"))
 
