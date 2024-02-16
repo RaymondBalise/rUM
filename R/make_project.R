@@ -54,12 +54,12 @@ make_project <- function(
   # ensure path exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
 
-  if (vignette == FALSE){
+  if (vignette == FALSE){ # make paper project w/o package infrastructure
     # If the project object does not exist add it.
     if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
       usethis::create_project(path = path, open = TRUE, rstudio = TRUE)
     }
-  } else {
+  } else { # make paper project with package infrastructure
     if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
       usethis::create_package(path = path, open = TRUE, rstudio = TRUE)
     }
@@ -159,5 +159,27 @@ make_project <- function(
     "https://www.zotero.org/styles/apa",
     paste0(path, vig_path, "/apa.csl")
   )
+  
+   if (vignette == TRUE){ 
+    if (type == "R Markdown (analysis.Rmd)") {
+      file.copy(
+        system.file(
+          "gists/manual_change_rmd_vigette.R", 
+          package = "rUM"
+        ), 
+        paste0(path, "/run_me.R")
+      )
+    } else if (type == "Quarto (analysis.qmd)") {
+      file.copy(
+        system.file(
+          "gists/manual_change_qmd_vigette.R", 
+          package = "rUM"
+        ), 
+        paste0(path, "/run_me.R")
+      )
+    }
+  } 
+  
+  
 
 }
