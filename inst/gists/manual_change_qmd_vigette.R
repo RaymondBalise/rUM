@@ -45,7 +45,7 @@ modified_contentX <-
   str_replace_all(
     file_content, 
     fixed("VignetteBuilder: knitr\n"), 
-    fixed("VignetteBuilder: \n    quarto")
+    fixed("VignetteBuilder: \n    quarto\n")
   )
 readr::write_file(modified_contentX, paste0(here::here(), "/DESCRIPTION"))
 

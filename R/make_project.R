@@ -106,7 +106,7 @@ make_project <- function(
 
   if (vignette == TRUE) {
     vig_path = "/vignettes"
-    dir.create(paste0(path, "/vignettes"), recursive = TRUE, showWarnings = FALSE)
+    dir.create(paste0(path, vig_path), recursive = TRUE, showWarnings = FALSE)
   } else {
     vig_path = NULL
   }
@@ -145,10 +145,10 @@ make_project <- function(
   download.file(gist_path_ignore, paste0(path, "/.gitignore"))
 
   # write an empty packages bibliography file - needed to knit the first time
-  writeLines("", con = file.path(path, vig_path, "packages.bib"))
+  writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
 
   # write an empty user bibliography file
-  writeLines("", con = file.path(path, vig_path, "references.bib"))
+  writeLines("", con = file.path(paste0(path, vig_path, "/references.bib")))
 
   download.file(
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
