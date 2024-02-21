@@ -12,11 +12,11 @@ rUM includes:
 + A research project template.  It creates a new RStudio project that has your choice of an `analysis.qmd` Quarto file or `analysis.Rmd` R markdown file with tidyverse and conflicted.
 + Quarto and R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.
 
-* 💥 NEW in Version 1.0.2 💥 We cleaned (i.e., linted and styled) the code and fixed a couple small formatting issues in the paper templates.  The automatically produced paper code should pass checks based on the [tidyverse style guide](https://style.tidyverse.org/).
+* 💥 NEW in Version 2.0.0 (Overproof Rum) 💥 `rUM` now can make a package project that includes a paper outline as a vignette.  `rUM` can now add an example table and figure to it's paper shell.
 
 ## How to I add rUM?
 
-Modern versions of the RStudio interface (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio [here](https://posit.co/download/rstudio-desktop/). If you know what you are doing, you can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
+Modern versions of the RStudio interface (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio [here](https://posit.co/download/rstudio-desktop/). You can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
 
 Then you should run this in the console of RStudio:
 
@@ -31,7 +31,11 @@ if (!requireNamespace("remotes")) install.packages("remotes")
 remotes::install_github("RaymondBalise/rUM")
 ```
 
+## Can I make a R package that includes my paper as a vignette?  
+Yes!  When you use the `make_project()` function set `vignette = TRUE`.  See the "Make a Package" vignette which ships with rUM. Run this line `vignette("Make a Package", package = "rUM")` to see it now. 
 
+### Can I make a Quarto based vignette?
+Yes!  If you would like to write a Quarto vignette you need have Quarto version 1.4.549 or higher.  You can check your version with `quarto::quarto_version()`.  You can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
 
 ## Where can I get rUM?
 https://raymondbalise.github.io/rUM/
