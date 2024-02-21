@@ -24,7 +24,7 @@ Saving your data and analyses into an R package helps to create reproducible res
 ## How do I make a package project?
 All you need to do is add `vignette = TRUE` when you use the `make_project()` function. Once the project is created, run the **run_me.R** file.  For example type:
 
-1. `make_project("~/Desktop/my_example", "R", example=TRUE, vignette=TRUE)`.  This creates a new project with all the files for a package in the current directory.  The vignette includes an example table and figure and all the R Markdown syntax for adding hyperlinks to the table and figures.
+1. `rUM::make_project("~/Desktop/my.example", "R", example=TRUE, vignette=TRUE)`.  This creates a new project with all the files for a package in the current directory.  The vignette includes an example table and figure and all the R Markdown syntax for adding hyperlinks to the table and figures.
 2. After the new project is open, run the **read_me.R** file. The easiest way to do this is by typing `source(run_me.R)` into the RStudio IDE console and then pressing enter. If you are working in RStudio it will ask you if it can/should close windows for two deleted files.  Say **Yes**. They are a couple temporary files that we used to set options the project.
 
 <center>
