@@ -38,10 +38,16 @@
 #'
 #' @examples
 #' \dontrun{
-#'   make_project(path = "~/test_project", type = "Quarto (analysis.qmd)", example = TRUE)
+#'   make_project(path = "~/test", type = "Quarto (analysis.qmd)", example = TRUE, vignette = TRUE)
 #' }
 #' \dontrun{
-#'   make_project(path = "~/test_project", type = "R Markdown (analysis.Rmd), example = TRUE")
+#'   make_project(path = "~/test_project", "Q", TRUE, TRUE)
+#' }
+#' \dontrun{
+#'   make_project(path = "~/test", type = "R Markdown (analysis.Rmd)", example = TRUE, vignette = TRUE)
+#' }
+#' \dontrun{
+#'   make_project(path = "~/test_project", "R", example = TRUE)
 #' }
 
 make_project <- function(

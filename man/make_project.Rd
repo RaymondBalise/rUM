@@ -7,7 +7,8 @@
 make_project(
   path,
   type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)"),
-  example = FALSE
+  example = FALSE,
+  vignette = FALSE
 )
 }
 \arguments{
@@ -18,6 +19,8 @@ make_project(
 "R Markdown (analysis.Rmd)"}
 
 \item{example}{Will the analysis file include an example table/figure?"}
+
+\item{vignette}{Will the analysis file be saved as a package vignette?"}
 }
 \value{
 Returns nothing.  See description above.
@@ -38,9 +41,15 @@ within the RSutdio IDE. See \code{./rstudio/templates/project/}.
 }
 \examples{
 \dontrun{
-  make_project(path = "~/test_project", type = "Quarto (analysis.qmd)")
+  make_project(path = "~/test", type = "Quarto (analysis.qmd)", example = TRUE, vignette = TRUE)
 }
 \dontrun{
-  make_project(path = "~/test_project", type = "R Markdown (analysis.Rmd)")
+  make_project(path = "~/test_project", "Q", TRUE, TRUE)
+}
+\dontrun{
+  make_project(path = "~/test", type = "R Markdown (analysis.Rmd)", example = TRUE, vignette = TRUE)
+}
+\dontrun{
+  make_project(path = "~/test_project", "R", example = TRUE)
 }
 }
