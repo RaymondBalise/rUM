@@ -13,6 +13,7 @@
 #' @param type Choose between "Quarto (analysis.qmd)" or
 #'    "R Markdown (analysis.Rmd)"
 #' @param example Will the analysis file include an example table/figure?"
+#' @param vignette Will the analysis file be saved as a package vignette?"
 #'
 #' @details Behind the scenes, this function used by research_project.dcf when
 #' a user selects New project... > New Directory > rUM Research Project Template
