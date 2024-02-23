@@ -1,8 +1,8 @@
 ---
-title: "Make a Package"
+title: "4. Make a Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Make a Package}
+  %\VignetteIndexEntry{4. Make a Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -25,13 +25,13 @@ Saving your data and analyses into an R package helps to create reproducible res
 All you need to do is add `vignette = TRUE` when you use the `make_project()` function. Once the project is created, run the **run_me.R** file.  For example type:
 
 1. `rUM::make_project("~/Desktop/my.example", "R", example=TRUE, vignette=TRUE)`.  This creates a new project with all the files for a package in the current directory.  The vignette includes an example table and figure and all the R Markdown syntax for adding hyperlinks to the table and figures.
-2. After the new project is open, run the **read_me.R** file. The easiest way to do this is by typing `source(run_me.R)` into the RStudio IDE console and then pressing enter. If you are working in RStudio it will ask you if it can/should close windows for two deleted files.  Say **Yes**. They are a couple temporary files that we used to set options the project.
+2. After the new project is open, run the **RUN_ME_FIRST.R** file. The easiest way to do this is by typing `source(RUN_ME_FIRST.R)` into the RStudio IDE console and then pressing enter. If you are working in RStudio it will ask you if it can/should close windows for two deleted files.  Say **Yes**. They are a couple temporary files that we used to set options the project.
 
 <center>
 ![](say_yes.png){width="50%"}
 </center>
 
-3. Set the license for your package.  If you are not planning on publicly sharing your data we recommend using a proprietary license.  For example, type `usethis::use_proprietary_license("Your Name Goes Here")`.  To learn more about licences look at the documentation for `use_proprietary_license()` by typing: `?usethis::use_proprietary_license`.
+3. Set the license for your package.  **REMEMBER: Do share sensitive data. Talk to the data privacy officer at your institution/organization before sharing any data.  Ask them for advice on setting a software license.** If you are not planning on publicly sharing your data consider using a proprietary license.  For example, type `usethis::use_proprietary_license("Your Name Goes Here")`.  To learn more about licences look at the documentation for `use_proprietary_license()` by typing: `?usethis::use_proprietary_license`.  You can also learn more at [choosealicense.com](https://choosealicense.com/) or [here](https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633) but talk to the legal counsel at your institution/organization before making a decision.
 
 ## Can I write my vignette with Quarto?
 

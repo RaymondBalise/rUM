@@ -48,6 +48,7 @@ Imports:
     conflicted,
     glue,
     gtsummary,
+    quarto,
     rio,
     rlang,
     rmarkdown,
