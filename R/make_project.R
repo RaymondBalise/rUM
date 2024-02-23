@@ -12,8 +12,8 @@
 #'    \code{./rstudio/templates/project/})
 #' @param type Choose between "Quarto (analysis.qmd)" or
 #'    "R Markdown (analysis.Rmd)"
-#' @param example Will the analysis file include an example table/figure?"
-#' @param vignette Will the analysis file be saved as a package vignette?"
+#' @param example Will the analysis file include an example table/figure?
+#' @param vignette Will the analysis file be saved as a package vignette?
 #'
 #' @details Behind the scenes, this function used by research_project.dcf when
 #' a user selects New project... > New Directory > rUM Research Project Template
@@ -38,15 +38,14 @@
 #'
 #' @examples
 #' \dontrun{
+#'   # This makes a project with an example Quarto paper in the project's folder.
 #'   make_project(path = "~/test", type = "Quarto (analysis.qmd)", example = TRUE, vignette = TRUE)
-#' }
-#' \dontrun{
+#'   # make_project() allows abbreviations on the project type: "Q" for Quarto or "R" for R Markdown
 #'   make_project(path = "~/test_project", "Q", TRUE, TRUE)
-#' }
-#' \dontrun{
+#'   
+#'   # This makes a project with an example R Markdown paper in the project's folder.
 #'   make_project(path = "~/test", type = "R Markdown (analysis.Rmd)", example = TRUE, vignette = TRUE)
-#' }
-#' \dontrun{
+#'   # This makes a project with an example paper in the project's folder.
 #'   make_project(path = "~/test_project", "R", example = TRUE)
 #' }
 
@@ -61,12 +60,27 @@ make_project <- function(
   # ensure path exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
 
+  # get version of Quarto on the machine and save it as a version
+  the_version <- quarto::quarto_version()
+
+  
   if (vignette == FALSE){ # make paper project w/o package infrastructure
     # If the project object does not exist add it.
     if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
       usethis::create_project(path = path, open = TRUE, rstudio = TRUE)
     }
   } else { # make paper project with package infrastructure
+    if (type == "Quarto (analysis.qmd)" & the_version < "2.4.549"){
+      message(
+        paste0(
+          "STOPPING: You need a modern version of Quarto from ", 
+          "https://quarto.org/docs/download/ in order to make the package ",
+          "with a Quarto vignette."
+        )
+      )
+      return(invisible(NULL))
+    }
+    
     if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
       usethis::create_package(path = path, open = TRUE, rstudio = TRUE)
     }
@@ -91,14 +105,14 @@ make_project <- function(
   gist_w_ex_path_rmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "c8399e7b3474a6022eeae373d059a042/",
-    "raw/cf9080a2d2096ddde5f5550abbb6c790126f7d10/analysis_with_example.Rmd"
+    "raw/bea479a3a3bcdef9c45122a5ce7b9dcdaec93815/analysis_with_example.Rmd"
   )
   
   # path to analysis.qmd with example
   gist_w_ex_path_qmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
     "40e8e1cc0dec94b225b7cb307f4fa959/raw/",
-    "d4883d98163f565915e514d96d3e4c9fcdda1405/analysis_with_example.qmd"
+    "91709c686876f65904be12e0bb8be45f347a5bb0/analysis_with_example.qmd"
   )
   
  

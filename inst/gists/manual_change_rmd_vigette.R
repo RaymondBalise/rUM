@@ -16,10 +16,6 @@ usethis::use_package("tidyverse", type = "imports")
 usethis::use_vignette("x","x")
 invisible(file.remove(paste0(here::here(), "/vignettes/x.Rmd")))
 
-##### For in development set a bogus licence
-# cut me later
-usethis::use_proprietary_license("Me")
-
 ##### Fix vignette header
 
 library(stringr)
@@ -40,5 +36,5 @@ readr::write_file(modified_contentX, paste0(here::here(), "/vignettes/analysis.R
 rm(list = c("modified_contentX", "file_content"))
 
 ##### delete this file
-invisible(file.remove(paste0(here::here(), "/run_me.R")))
+invisible(file.remove(paste0(here::here(), "/RUN_ME_FIRST.R")))
 
