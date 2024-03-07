@@ -1,7 +1,8 @@
 # rUM 2.0.0 (Overproof Rum)
 
-+ Add an `example` argument to `make_project()`
-+ Add a `vignette` argument to `make_project()`
++ Added an `example` argument to `make_project()`
++ Added a `vignette` argument to `make_project()`
++ Added knitr chunk options for graphics
 
 # rUM 1.0.2
 
