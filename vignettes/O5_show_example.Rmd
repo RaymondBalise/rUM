@@ -16,10 +16,13 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-If you would like to see an example paper, that has code blocks to produce a summary table and a graphic, include the `example = TRUE` argument when you use the `make_project()` function.  For example, if you type `rUM::make_project("~/Desktop/my.example", "R", example=TRUE)`, in the **Results** section of the paper you will see code like:
+If you would like to see an example paper, that has code blocks to produce a summary table and a graphic, include the `example = TRUE` argument when you use the `make_project()` function.  For example, if you type `rUM::make_project("~/Desktop/my.example", "R", example = TRUE)`, in the **Results** section of the paper you will see code like:
 
 ````r
-#| tbl-cap: "Cross-references to tables use labels for the code chunk starting with tbl-."
+#| tbl-cap: |
+#|   Your real caption belongs here.  Remember that cross references to tables 
+#|   use labels for the code chunk starting with tbl-.
+
 
 # To learn how to use tbl_summary look at https://www.danieldsjoberg.com/gtsummary/
 analysis |> 
@@ -39,7 +42,10 @@ and
 
 ````r
 
-#| fig-cap: "Remember figure labels begin with fig-"
+#| fig-cap: |
+#|   Your real caption belongs here.  Remember that cross references to figures 
+#|   use labels for the code chunk starting with fig-.
+
 # To learn how to use ggplot start here: https://ggplot2.tidyverse.org/#learning-ggplot2
 analysis |> 
   ggplot() +
