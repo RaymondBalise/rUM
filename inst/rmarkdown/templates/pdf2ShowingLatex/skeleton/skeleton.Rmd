@@ -21,11 +21,16 @@ header-includes:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   # These options can be set to FALSE (capitalization matters).
-  echo = TRUE,    # show code
-  message = TRUE, # show messages
-  warning = TRUE, # show warnings
-  error = TRUE,   # show errors
-  comment = ""    # don't show ## with printed output
+                      ########## set global options ############
+    echo = FALSE,     # don't show code
+    collapse = TRUE,  # keep code from blocks together (if shown)
+    message = TRUE,   # show messages
+    warning = TRUE,   # show warnings
+    error = TRUE,     # show error messages
+    comment = "",     # don't show ## with printed output
+    dpi = 100,        # image resolution (typically 300 for publication)
+    fig.width = 6.5,  # figure width
+    fig.height = 4.0  # figure height
 )
 
 options(digits = 3) # round to three digits
