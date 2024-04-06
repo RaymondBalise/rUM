@@ -1,3 +1,9 @@
+# rUM (development version)
+
+## 1.1.0.9002
+
++ change run_me.R to RUN_ME_FIRST.R
+
 # rUM 2.0.0 (Overproof Rum)
 
 + Added an `example` argument to `make_project()`

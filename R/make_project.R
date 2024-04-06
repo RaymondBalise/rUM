@@ -188,7 +188,7 @@ make_project <- function(
           "gists/manual_change_rmd_vigette.R", 
           package = "rUM"
         ), 
-        paste0(path, "/run_me.R")
+        paste0(path, "/RUN_ME_FIRST.R")
       )
     } else if (type == "Quarto (analysis.qmd)") {
       file.copy(
@@ -196,7 +196,7 @@ make_project <- function(
           "gists/manual_change_qmd_vigette.R", 
           package = "rUM"
         ), 
-        paste0(path, "/run_me.R")
+        paste0(path, "/RUN_ME_FIRST.R")
       )
     }
   } 
