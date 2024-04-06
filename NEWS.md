@@ -1,5 +1,10 @@
 # rUM (development version)
 
+
+## 1.1.0.9003
+
++ Add an `overwrite` option to `make_project`
+
 ## 1.1.0.9002
 
 + change run_me.R to RUN_ME_FIRST.R

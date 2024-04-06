@@ -14,6 +14,8 @@
 #'    "R Markdown (analysis.Rmd)"
 #' @param example Will the analysis file include an example table/figure?
 #' @param vignette Will the analysis file be saved as a package vignette?
+#' @param overwrite Will an existing RStudio project be overwritten?  This is 
+#' needed for for Posit.Cloud.  You will be prompted to confirm this option.
 #'
 #' @details Behind the scenes, this function used by research_project.dcf when
 #' a user selects New project... > New Directory > rUM Research Project Template
@@ -53,16 +55,17 @@ make_project <- function(
     path,
     type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)"),
     example = FALSE,
-    vignette = FALSE
-  ) {
-
+    vignette = FALSE,
+    overwrite = FALSE
+) {
+  
   type <- match.arg(type)
   # ensure path exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
-
+  
   # get version of Quarto on the machine and save it as a version
   the_version <- quarto::quarto_version()
-
+  
   
   if (vignette == FALSE){ # make paper project w/o package infrastructure
     # If the project object does not exist add it.
@@ -81,11 +84,27 @@ make_project <- function(
       return(invisible(NULL))
     }
     
-    if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
+    if (length(list.files(path = path, pattern = "\\.Rproj$")) > 0 & 
+        !(overwrite == TRUE)
+      ){
+      message(
+        paste0(
+          "STOPPING: The directory you chose to hold the package already ",
+          "has a project file in it. Set overwrite = TRUE if you want to ",
+          "create a package in an existing project folder."
+        )
+      )
+      return(invisible(NULL))
+    }
+    
+    if (
+      length(list.files(path = path, pattern = "\\.Rproj$")) == 0 | 
+      overwrite == TRUE
+    ) {
       usethis::create_package(path = path, open = TRUE, rstudio = TRUE)
     }
   }
-
+  
   # Paths to gist files for analysis - these need to update of the gist changes.
   
   # path to analysis.Rmd without example
@@ -100,7 +119,7 @@ make_project <- function(
     "224f0b7b107a6b800c610d46c8b6f236/raw/",
     "b417b2fe260af6377a2fb1cbc06b10fd07da29ee/analysis.qmd"
   )
-
+  
   # path to analysis.Rmd with example
   gist_w_ex_path_rmd <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
@@ -115,7 +134,7 @@ make_project <- function(
     "2add2f029b640e31c3d4a755c690f6dd62e84a5e/analysis_with_example.qmd"
   )
   
- 
+  
   # Prevent user from overwriting an analysis file
   if (file.exists(paste0(path, "/analysis.Rmd")) ||
       file.exists(paste0(path, "/analysis.qmd"))
@@ -124,7 +143,7 @@ make_project <- function(
       "The directory you choose already has an analysis file. Stopping."
     )
   }
-
+  
   if (vignette == TRUE) {
     vig_path = "/vignettes"
     dir.create(paste0(path, vig_path), recursive = TRUE, showWarnings = FALSE)
@@ -156,7 +175,7 @@ make_project <- function(
   }
   
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
-
+  
   # Path to gitignore this must be updated if the gist changes.
   gist_path_ignore <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
@@ -164,24 +183,24 @@ make_project <- function(
     "c959571e2618ba6baa14d91972f84de20a08b63f/.gitignore"
   )
   download.file(gist_path_ignore, paste0(path, "/.gitignore"))
-
+  
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
-
+  
   # write an empty user bibliography file
   writeLines("", con = file.path(paste0(path, vig_path, "/references.bib")))
-
+  
   download.file(
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
     paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl")
   )
-
+  
   download.file(
     "https://www.zotero.org/styles/apa",
     paste0(path, vig_path, "/apa.csl")
   )
   
-   if (vignette == TRUE){ 
+  if (vignette == TRUE){ 
     if (type == "R Markdown (analysis.Rmd)") {
       file.copy(
         system.file(
@@ -202,5 +221,5 @@ make_project <- function(
   } 
   
   
-
+  
 }
