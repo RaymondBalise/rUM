@@ -8,7 +8,8 @@ make_project(
   path,
   type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)"),
   example = FALSE,
-  vignette = FALSE
+  vignette = FALSE,
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -21,6 +22,9 @@ make_project(
 \item{example}{Will the analysis file include an example table/figure?}
 
 \item{vignette}{Will the analysis file be saved as a package vignette?}
+
+\item{overwrite}{Will an existing RStudio project be overwritten?  This is 
+needed for for Posit.Cloud.  You will be prompted to confirm this option.}
 }
 \value{
 Returns nothing.  See description above.
