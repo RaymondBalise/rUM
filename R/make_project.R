@@ -65,15 +65,14 @@ make_project <- function(
   
   # get version of Quarto on the machine and save it as a version
   the_version <- quarto::quarto_version()
-  
-  
   if (vignette == FALSE){ # make paper project w/o package infrastructure
     # If the project object does not exist add it.
     if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
       usethis::create_project(path = path, open = TRUE, rstudio = TRUE)
     }
   } else { # make paper project with package infrastructure
-    if (type == "Quarto (analysis.qmd)" & the_version < "2.4.549"){
+    # Quarto version 1.4.549 was the first to allow the building of vignettes
+    if (type == "Quarto (analysis.qmd)" & the_version < "1.4.549"){
       message(
         paste0(
           "STOPPING: You need a modern version of Quarto from ", 
@@ -89,9 +88,11 @@ make_project <- function(
       ){
       message(
         paste0(
-          "STOPPING: The directory you chose to hold the package already ",
-          "has a project file in it. Set overwrite = TRUE if you want to ",
-          "create a package in an existing project folder."
+          "STOPPING: The folder/directory you chose to hold the package ",
+          "already has a RStudio project file (.Rproj) in it. If you want to ",
+          "create a package in a directory/folder that already has an RStudio ",
+          "project in it, add the overwrite = TRUE option when you use ",
+          "make_project()."
         )
       )
       return(invisible(NULL))
