@@ -71,6 +71,7 @@ make_project <- function(
       usethis::create_project(path = path, open = TRUE, rstudio = TRUE)
     }
   } else { # make paper project with package infrastructure
+    # Quarto version 1.4.549 was the first to allow the building of vignettes
     if (type == "Quarto (analysis.qmd)" & the_version < "1.4.549"){
       message(
         paste0(
