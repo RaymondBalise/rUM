@@ -1,7 +1,9 @@
 ##### List packages used in the vignette
 
+usethis::use_package("here", type = "suggests")
 usethis::use_package("knitr", type = "suggests")
 usethis::use_package("rmarkdown", type = "suggests")
+usethis::use_package("roxygen2", type = "suggests")
 
 usethis::use_package("conflicted", type = "suggests")
 usethis::use_package("glue", type = "suggests")
