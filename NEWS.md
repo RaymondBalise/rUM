@@ -1,5 +1,10 @@
 # rUM (development version)
 
+## 1.1.0.9005
++ set package dependencies for vignette to suggest
+
+## 1.1.0.9004
++ add ?rUM page fix quarto check message to be clearer
 
 ## 1.1.0.9003
 
