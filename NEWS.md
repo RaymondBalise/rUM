@@ -1,5 +1,8 @@
 # rUM (development version)
 
+## 1.1.0.9006
++ add dependencies_fix function for passing Windows CRAN checks.
+
 ## 1.1.0.9005
 + set package dependencies for vignette to suggest
 
