@@ -54,6 +54,7 @@ Imports:
     rlang,
     rmarkdown,
     roxygen2,
+    stringr,
     table1,
     tidymodels,
     tidyverse,
