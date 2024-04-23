@@ -61,7 +61,21 @@ make_project <- function(
   
   type <- match.arg(type)
   # ensure path exists
-  dir.create(path, recursive = TRUE, showWarnings = FALSE)
+  
+  # check directory name (for packages only); we don't want to create an empty
+  #   directory if the package name is invalid.
+  # code from: https://github.com/r-lib/usethis/blob/main/R/description.R
+  # The name will be checked only for packages; it's "valid" otherwise
+  if (vignette == TRUE) {
+    dir_name_char <- stringr::word(path, -1, sep = "[\\|\\/]")
+    valid_name_lgl <- .valid_package_name(dir_name_char)
+  } else {
+    valid_name_lgl <- TRUE
+  }
+  if (vignette != TRUE && valid_name_lgl) {
+    dir.create(path, recursive = TRUE, showWarnings = FALSE)
+  }
+  
   
   # get version of Quarto on the machine and save it as a version
   the_version <- quarto::quarto_version()
@@ -224,3 +238,8 @@ make_project <- function(
   
   
 }
+
+.valid_package_name <- function(x) {
+  grepl("^[a-zA-Z][a-zA-Z0-9.]+$", x) && !grepl("\\.$", x)
+}
+

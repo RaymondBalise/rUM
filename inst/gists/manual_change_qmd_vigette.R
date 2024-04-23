@@ -1,4 +1,19 @@
-##### List packages used in the vignette
+# Package Initialization Script
+# rUM Package Authors
+# Initial Date: 2024-04-23
+# Last updated: 2024-04-23
+
+# This script sets options for you to develop a new package which contains a 
+#   manuscript vignette. To run this file, click the "Source" button at the top
+#   right of the RStudio script windowpane. Upon successful completion of the
+#   code in this script, RStudio will prompt you to delete two files: this
+#   script (RUN_ME_FIRST.R) and a vignette placeholder file called "x" (either
+#   a .qmd or .Rmd file). Click "Yes" when prompted to delete both of these
+#   files.
+
+
+
+######  List packages used in the vignette  ###################################
 
 usethis::use_package("here", type = "suggests")
 usethis::use_package("knitr", type = "suggests")
