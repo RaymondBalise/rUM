@@ -42,11 +42,20 @@ file_content <- readr::read_file(paste0(here::here(), "/vignettes/analysis.Rmd")
 
 # Replace the pattern with the new sentence
 modified_contentX <- 
-  str_replace_all(
-    file_content, 
-    fixed("output:\n  bookdown::html_document2:\n    number_sections: false\n"), 
-    fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n")
-  )
+  if (.Platform$OS.type == "windows") {
+    str_replace_all(
+      file_content, 
+      fixed("output:\r\n  bookdown::html_document2:\r\n    number_sections: false\r\n"), 
+      fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{knitr::rmarkdown}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
+    )
+  } else {
+    str_replace_all(
+      file_content, 
+      fixed("output:\n  bookdown::html_document2:\n    number_sections: false\n"), 
+      fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n")
+    )
+  }
+  
 
 readr::write_file(modified_contentX, paste0(here::here(), "/vignettes/analysis.Rmd"))
 

@@ -1,5 +1,12 @@
 # rUM (development version)
 
+## 1.1.0.9008
++ fix carriage return for building vignettes in Windows
+
+## 1.1.0.9007
++ prevent an empty folder from being created if a package name is invalid
++ add header to manual_change_*_vignette.R
+
 ## 1.1.0.9006
 + add dependencies_fix function for passing Windows CRAN checks.
 
