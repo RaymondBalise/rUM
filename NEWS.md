@@ -1,4 +1,8 @@
-# rUM (development version)
+# rUM 2.0.0 (Overproof Rum) 
+
++ Added an `example` argument to `make_project()`
++ Added a `vignette` argument to `make_project()`
++ Added knitr chunk options for graphics
 
 ## 1.1.0.9008
 + fix carriage return for building vignettes in Windows
@@ -24,11 +28,10 @@
 
 + change run_me.R to RUN_ME_FIRST.R
 
-# rUM 2.0.0 (Overproof Rum)
+# rUM 1.1
 
-+ Added an `example` argument to `make_project()`
-+ Added a `vignette` argument to `make_project()`
-+ Added knitr chunk options for graphics
++ Harmonize templates
++ Include example paper option 
 
 # rUM 1.0.2
 
