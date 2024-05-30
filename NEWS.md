@@ -1,5 +1,25 @@
-# rUM (development version)
+# rUM 2.0.0 (Overproof Rum) 
 
++ Added an `example` argument to `make_project()`
++ Added a `vignette` argument to `make_project()`
++ Added knitr chunk options for graphics
++ Fixed a bug that caused duplicate RStudio windows to open if run from menus
+
+## 1.1.0.9008
++ fix carriage return for building vignettes in Windows
+
+## 1.1.0.9007
++ prevent an empty folder from being created if a package name is invalid
++ add header to manual_change_*_vignette.R
+
+## 1.1.0.9006
++ add dependencies_fix function for passing Windows CRAN checks.
+
+## 1.1.0.9005
++ set package dependencies for vignette to suggest
+
+## 1.1.0.9004
++ add ?rUM page fix quarto check message to be clearer
 
 ## 1.1.0.9003
 
@@ -9,11 +29,10 @@
 
 + change run_me.R to RUN_ME_FIRST.R
 
-# rUM 2.0.0 (Overproof Rum)
+# rUM 1.1
 
-+ Added an `example` argument to `make_project()`
-+ Added a `vignette` argument to `make_project()`
-+ Added knitr chunk options for graphics
++ Harmonize templates
++ Include example paper option 
 
 # rUM 1.0.2
 

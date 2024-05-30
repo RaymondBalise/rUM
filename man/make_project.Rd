@@ -9,7 +9,8 @@ make_project(
   type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)"),
   example = FALSE,
   vignette = FALSE,
-  overwrite = FALSE
+  overwrite = FALSE,
+  openInteractive = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,11 @@ make_project(
 
 \item{overwrite}{Will an existing RStudio project be overwritten?  This is 
 needed for for Posit.Cloud.  You will be prompted to confirm this option.}
+
+\item{openInteractive}{Should this new project be opened in a new RStudio
+window? Defaults to \code{TRUE}. NOTE: this option exists to prevent 
+RStudio from opening two duplicate versions of the new project when
+this function is executed from RStudio menus. MODIFY WITH CAUTION.}
 }
 \value{
 Returns nothing.  See description above.

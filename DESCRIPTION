@@ -1,6 +1,6 @@
 Package: rUM
 Title: R Templates from the University of Miami
-Version: 1.1.0.9004
+Version: 2.0.0
 Authors@R: 
     c(
       person(
@@ -48,10 +48,13 @@ Imports:
     conflicted,
     glue,
     gtsummary,
+    here,
     quarto,
     rio,
     rlang,
     rmarkdown,
+    roxygen2,
+    stringr,
     table1,
     tidymodels,
     tidyverse,

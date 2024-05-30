@@ -13,3 +13,9 @@ Widget: CheckboxInput
 Label: Include an Example Table/Figure
 Default: Off
 Position: left
+
+
+Parameter: openInteractive
+Widget: CheckboxInput
+Label: Open Duplicate RStudio Windows? (Leave unchecked!)
+Default: FALSE

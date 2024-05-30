@@ -16,6 +16,10 @@
 #' @param vignette Will the analysis file be saved as a package vignette?
 #' @param overwrite Will an existing RStudio project be overwritten?  This is 
 #' needed for for Posit.Cloud.  You will be prompted to confirm this option.
+#' @param openInteractive Should this new project be opened in a new RStudio
+#'   window? Defaults to \code{TRUE}. NOTE: this option exists to prevent 
+#'   RStudio from opening two duplicate versions of the new project when
+#'   this function is executed from RStudio menus. MODIFY WITH CAUTION.
 #'
 #' @details Behind the scenes, this function used by research_project.dcf when
 #' a user selects New project... > New Directory > rUM Research Project Template
@@ -56,19 +60,41 @@ make_project <- function(
     type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)"),
     example = FALSE,
     vignette = FALSE,
-    overwrite = FALSE
+    overwrite = FALSE,
+    openInteractive = TRUE
 ) {
   
   type <- match.arg(type)
   # ensure path exists
-  dir.create(path, recursive = TRUE, showWarnings = FALSE)
+  
+  # check directory name (for packages only); we don't want to create an empty
+  #   directory if the package name is invalid.
+  # code from: https://github.com/r-lib/usethis/blob/main/R/description.R
+  # The name will be checked only for packages; it's "valid" otherwise
+  if (vignette == TRUE) {
+    dir_name_char <- stringr::word(path, -1, sep = "[\\|\\/]")
+    valid_name_lgl <- .valid_package_name(dir_name_char)
+  } else {
+    valid_name_lgl <- TRUE
+  }
+  if (vignette != TRUE && valid_name_lgl) {
+    dir.create(path, recursive = TRUE, showWarnings = FALSE)
+  }
+  
   
   # get version of Quarto on the machine and save it as a version
   the_version <- quarto::quarto_version()
   if (vignette == FALSE){ # make paper project w/o package infrastructure
     # If the project object does not exist add it.
     if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
-      usethis::create_project(path = path, open = TRUE, rstudio = TRUE)
+      # Prior to version 2.0.0, the option `open` was set to TRUE, which worked
+      #   as intended interactively, but spawned duplicate RStudio project 
+      #   windows when called from RStudio menus via the `research_project.dcf`
+      #   file. This is now TRUE by default for interactive calls to this 
+      #   function, but set to FALSE via the .dcf file for menu-driven calls.
+      usethis::create_project(
+        path = path, open = openInteractive, rstudio = TRUE
+      )
     }
   } else { # make paper project with package infrastructure
     # Quarto version 1.4.549 was the first to allow the building of vignettes
@@ -224,3 +250,8 @@ make_project <- function(
   
   
 }
+
+.valid_package_name <- function(x) {
+  grepl("^[a-zA-Z][a-zA-Z0-9.]+$", x) && !grepl("\\.$", x)
+}
+
