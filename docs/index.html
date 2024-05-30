@@ -12,14 +12,13 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="R Templates from the University of Miami">
-<meta property="og:description" content="This holds some r markdown and quarto templates and a template to 
-    create a research project in posit's &quot;R Studio&quot;.">
+<meta property="og:description" content='This holds some r markdown and quarto templates and a template to create a research project in "R Studio".'>
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -41,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rUM</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -65,6 +64,12 @@
     </li>
     <li>
       <a href="articles/O3_R_Markdown_Templates.html">3. Create a R Markdown File from a rUM Template</a>
+    </li>
+    <li>
+      <a href="articles/O4_make_a_package.html">4. Make a Package</a>
+    </li>
+    <li>
+      <a href="articles/O5_show_example.html">5. Include an example in the analysis paper outline</a>
     </li>
   </ul>
 </li>
@@ -102,12 +107,12 @@
 <ul>
 <li><p>A research project template. It creates a new RStudio project that has your choice of an <code>analysis.qmd</code> Quarto file or <code>analysis.Rmd</code> R markdown file with tidyverse and conflicted.</p></li>
 <li><p>Quarto and R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.</p></li>
-<li><p>💥 NEW in Version 1.0.2 💥 We cleaned (i.e., linted and styled) the code and fixed a couple small formatting issues in the paper templates. The automatically produced paper code should pass checks based on the <a href="https://style.tidyverse.org/" class="external-link">tidyverse style guide</a>.</p></li>
+<li><p>💥 NEW in Version 2.0.0 (Overproof Rum) 💥 <code>rUM</code> now can make a package project that includes a paper outline as a vignette. <code>rUM</code> can now add an example table and figure to it’s paper shell.</p></li>
 </ul>
 <div class="section level2">
 <h2 id="how-to-i-add-rum">How to I add rUM?<a class="anchor" aria-label="anchor" href="#how-to-i-add-rum"></a>
 </h2>
-<p>Modern versions of the RStudio interface (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio <a href="https://posit.co/download/rstudio-desktop/" class="external-link">here</a>. If you know what you are doing, you can install the latest version of Quarto directly from <a href="https://quarto.org/docs/get-started/" class="external-link">here</a>.</p>
+<p>Modern versions of the RStudio interface (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio <a href="https://posit.co/download/rstudio-desktop/" class="external-link">here</a>. You can install the latest version of Quarto directly from <a href="https://quarto.org/docs/get-started/" class="external-link">here</a>.</p>
 <p>Then you should run this in the console of RStudio:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
@@ -116,6 +121,16 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"RaymondBalise/rUM"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="can-i-make-a-r-package-that-includes-my-paper-as-a-vignette">Can I make a R package that includes my paper as a vignette?<a class="anchor" aria-label="anchor" href="#can-i-make-a-r-package-that-includes-my-paper-as-a-vignette"></a>
+</h2>
+<p>Yes! When you use the <code><a href="reference/make_project.html">make_project()</a></code> function set <code>vignette = TRUE</code>. See the “Make a Package” vignette which ships with rUM. Run this line <code>vignette("Make a Package", package = "rUM")</code> to see it now.</p>
+<div class="section level3">
+<h3 id="can-i-make-a-quarto-based-vignette">Can I make a Quarto based vignette?<a class="anchor" aria-label="anchor" href="#can-i-make-a-quarto-based-vignette"></a>
+</h3>
+<p>Yes! If you would like to write a Quarto vignette you need have Quarto version 1.4.549 or higher. You can check your version with <code><a href="https://quarto-dev.github.io/quarto-r/reference/quarto_version.html" class="external-link">quarto::quarto_version()</a></code>. You can install the latest version of Quarto directly from <a href="https://quarto.org/docs/get-started/" class="external-link">here</a>.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="where-can-i-get-rum">Where can I get rUM?<a class="anchor" aria-label="anchor" href="#where-can-i-get-rum"></a>
@@ -247,7 +262,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>

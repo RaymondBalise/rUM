@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3. Create a R Markdown File from a rUM Template • rUM</title>
+<title>4. Make a Package • rUM</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="3. Create a R Markdown File from a rUM Template">
+<script src="../pkgdown.js"></script><meta property="og:title" content="4. Make a Package">
 <meta property="og:description" content="rUM">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -97,12 +97,11 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>3. Create a R Markdown File from a rUM
-Template</h1>
+      <h1 data-toc-skip>4. Make a Package</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RaymondBalise/rUM/blob/HEAD/vignettes/O3_R_Markdown_Templates.Rmd" class="external-link"><code>vignettes/O3_R_Markdown_Templates.Rmd</code></a></small>
-      <div class="hidden name"><code>O3_R_Markdown_Templates.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/RaymondBalise/rUM/blob/HEAD/vignettes/O4_make_a_package.Rmd" class="external-link"><code>vignettes/O4_make_a_package.Rmd</code></a></small>
+      <div class="hidden name"><code>O4_make_a_package.Rmd</code></div>
 
     </div>
 
@@ -111,60 +110,63 @@ Template</h1>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>The <code>rUM</code> package installs several R Markdown document
-templates into the RStudio menus. These include a YAML header (where you
-can specify your name and the project name) and code chunks to enable
-the <code>tidyverse</code> package (to help with data processing), the
-<code>tidymodels</code> package (to help with modeling) and the
-<code>conflicted</code> package<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
-<p>There is also a setup code chunk that sets options to:</p>
-<ul>
-<li>show and hide code, messages and warnings</li>
-<li>stop R from printing ## in the output</li>
-<li>set number rounding to 3 decimal places</li>
-</ul>
+<p>Saving your data and analyses into an R package helps to create
+reproducible research. Someone who wants to reproduce your work can load
+a package to have access to your data and your paper(s).
+<strong><code>rUM</code></strong> can help you by creating a project
+that has all the files/directories needed for an R package including a
+vignette folder that contains the outline of a paper.</p>
 </div>
 <div class="section level2">
-<h2 id="using-code-templates-in-rstudio">Using Code Templates in RStudio<a class="anchor" aria-label="anchor" href="#using-code-templates-in-rstudio"></a>
+<h2 id="how-do-i-make-a-package-project">How do I make a package project?<a class="anchor" aria-label="anchor" href="#how-do-i-make-a-package-project"></a>
 </h2>
-<p>There are four templates:</p>
+<p>All you need to do is add <code>vignette = TRUE</code> when you use
+the <code><a href="../reference/make_project.html">make_project()</a></code> function. Once the project is created,
+run the <strong>run_me.R</strong> file. For example type:</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>html2 with rUM</strong> : A basic web page</li>
-<li>
-<strong>html2 Details with rUM</strong>: A web page with more
-details</li>
-<li>
-<strong>pdf2 showing LaTeX with rUM</strong>: A pdf (with options to
-control tables’ and figures’ locations and appearances)</li>
-<li>
-<strong>bookdown_site with rUM</strong>: The structure of a
-book</li>
+<code>rUM::make_project("~/Desktop/my.example", "R", example = TRUE, vignette = TRUE)</code>.
+This creates a new project with all the files for a package in the
+current directory. The vignette includes an example table and figure and
+all the R Markdown syntax for adding hyperlinks to the table and
+figures.</li>
+<li>After the new project is open, run the
+<strong>RUN_ME_FIRST.R</strong> file. The easiest way to do this is by
+typing <code>source("RUN_ME_FIRST.R")</code> into the RStudio IDE
+console and then pressing enter. If you are working in RStudio it will
+ask you if it can/should close windows for two deleted files. Say
+<strong>Yes</strong>. They are a couple temporary files that we used to
+set options the project.</li>
 </ol>
-<p>You access the templates from the File menu by choosing</p>
-<ol style="list-style-type: decimal">
-<li>New File &gt; R Markdown… <img src="template1.png" alt="Picture showing File menu with New File &gt; Rmarkdown Selected">
-</li>
-<li>Choosing <strong>From Template</strong> from the windowpane on the
-left</li>
-<li>Scrolling down until you see the rUM templates <img src="template2.png" alt="Picture of dialog box with “From Template” selected and “html2 with rUM” highlighted">
-</li>
-<li>Click OK</li>
+<center>
+<img src="say_yes.png" style="width:50.0%">
+</center>
+<ol start="3" style="list-style-type: decimal">
+<li>Set the license for your package. <strong>REMEMBER: Do share
+sensitive data. Talk to the data privacy officer at your
+institution/organization before sharing any data. Ask them for advice on
+setting a software license.</strong> If you are not planning on publicly
+sharing your data consider using a proprietary license. For example,
+type
+<code>usethis::use_proprietary_license("Your Name Goes Here")</code>. To
+learn more about licences look at the documentation for
+<code>use_proprietary_license()</code> by typing:
+<code><a href="https://usethis.r-lib.org/reference/licenses.html" class="external-link">?usethis::use_proprietary_license</a></code>. You can also learn more
+at <a href="https://choosealicense.com/" class="external-link">choosealicense.com</a> or <a href="https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633" class="external-link">here</a>
+but talk to the legal counsel at your institution/organization before
+making a decision.</li>
 </ol>
 </div>
-<div class="footnotes footnotes-end-of-document">
-<hr>
-<ol>
-<li id="fn1"><p>The <code>conflicted</code> package watches to make sure
-that you are not using a function that is defined twice. For example,
-the stats package, which ships with R has a function called
-<code><a href="https://rdrr.io/r/stats/lag.html" class="external-link">lag()</a></code> and if you load the <code>dplyr</code> package, which
-also contains a function called <code><a href="https://rdrr.io/r/stats/lag.html" class="external-link">lag()</a></code> it is not immediately
-obvious which version of the <code><a href="https://rdrr.io/r/stats/lag.html" class="external-link">lag()</a></code> function you will be
-using. <code>conflicted</code> will keep R from running the
-<code><a href="https://rdrr.io/r/stats/lag.html" class="external-link">lag()</a></code> function until you say which version you want to
-use.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
+<div class="section level2">
+<h2 id="can-i-write-my-vignette-with-quarto">Can I write my vignette with Quarto?<a class="anchor" aria-label="anchor" href="#can-i-write-my-vignette-with-quarto"></a>
+</h2>
+<p>Yes! When you install <strong><code>rUM</code></strong> we make sure
+you have a modern version of the R <code>quarto</code> package but we do
+not install the most modern copy of the Quarto language itself (which
+lives outside of R). You can make sure that your version of Quarto is
+modern enough by running <code><a href="https://quarto-dev.github.io/quarto-r/reference/quarto_version.html" class="external-link">quarto::quarto_version()</a></code>. If your
+version is not 1.4.549 or higher, install the latest version of Quarto
+directly from <a href="https://quarto.org/docs/get-started/" class="external-link">here</a>.</p>
 </div>
   </div>
 
