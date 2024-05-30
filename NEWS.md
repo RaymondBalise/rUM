@@ -3,6 +3,7 @@
 + Added an `example` argument to `make_project()`
 + Added a `vignette` argument to `make_project()`
 + Added knitr chunk options for graphics
++ Fixed a bug that caused duplicate RStudio windows to open if run from menus
 
 ## 1.1.0.9008
 + fix carriage return for building vignettes in Windows
