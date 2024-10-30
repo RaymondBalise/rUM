@@ -299,7 +299,8 @@ make_project <- function(
     }
   } 
   
-  
+  ### EXPERIMENTAL ###
+  # source(paste0(path, "/RUN_ME_FIRST.R"))
   
 }
 
