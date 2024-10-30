@@ -32,7 +32,7 @@
 #' @importFrom table1 t1kable
 #' @importFrom rlang abort
 #' @importFrom utils download.file
-#' @importFrom usethis create_project
+#' @importFrom usethis create_project ui_done
 #' @importFrom glue glue
 #' @importFrom gtsummary tbl_summary
 #' @importFrom rio import
@@ -186,12 +186,16 @@ make_project <- function(
         # silence console output: "trying URL..., Content type..., downloaded..."
         quiet = TRUE
       )
+      # Adding console feedback
+      ui_done("analysis.Rmd has been created.")
     } else if (type == "Quarto (analysis.qmd)") {
       download.file(
         gist_path_qmd, paste0(path, vig_path, "/analysis.qmd"),
         # silence console output: "trying URL..., Content type..., downloaded..."
         quiet = TRUE
       )
+      # Adding console feedback
+      ui_done("analysis.qmd has been created.")
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
@@ -204,12 +208,16 @@ make_project <- function(
         # silence console output: "trying URL..., Content type..., downloaded..."
         quiet = TRUE
       )
+      # Adding console feedback
+      ui_done("analysis.Rmd has been created.")
     } else if (type == "Quarto (analysis.qmd)") {
       download.file(
         gist_w_ex_path_qmd, paste0(path, vig_path, "/analysis.qmd"),
         # silence console output: "trying URL..., Content type..., downloaded..."
         quiet = TRUE
       )
+      # Adding console feedback
+      ui_done("analysis.Rmd has been created.")
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
@@ -231,6 +239,8 @@ make_project <- function(
     # silence console output: "trying URL..., Content type..., downloaded..."
     quiet = TRUE
   )
+  # Adding console feedback
+  ui_done("An enhanced .gitignore has been created.")
 
   ############################################################################
   # Add a README template from gist. 
@@ -246,6 +256,8 @@ make_project <- function(
     # silence console output: "trying URL..., Content type..., downloaded..."
     quiet = TRUE
   )
+  # Adding console feedback
+  ui_done("A README.md template has been created.")
   
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
