@@ -231,6 +231,21 @@ make_project <- function(
     # silence console output: "trying URL..., Content type..., downloaded..."
     quiet = TRUE
   )
+
+  ############################################################################
+  # Add a README template from gist. 
+  # NOTE: Update as gist changes
+  gist_path_readme <- paste0(
+    "https://gist.githubusercontent.com/RaymondBalise/",
+    "643f9cb72f18ca1ff3f20ea6e51c00df/raw/",
+    "bbcbd733f154200cadddb4990c006c74f0e08ac0/README.md"
+  )
+  download.file(
+    gist_path_readme,
+    paste0(path, "/README.md"),
+    # silence console output: "trying URL..., Content type..., downloaded..."
+    quiet = TRUE
+  )
   
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
