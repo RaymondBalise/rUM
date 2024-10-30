@@ -254,21 +254,21 @@ make_project <- function(
   
   if (vignette == TRUE){ 
     if (type == "R Markdown (analysis.Rmd)") {
-      file.copy(
+      invisible(file.copy(
         system.file(
           "gists/manual_change_rmd_vigette.R", 
           package = "rUM"
         ), 
         paste0(path, "/RUN_ME_FIRST.R")
-      )
+      ))
     } else if (type == "Quarto (analysis.qmd)") {
-      file.copy(
+      invisible(file.copy(
         system.file(
           "gists/manual_change_qmd_vigette.R", 
           package = "rUM"
         ), 
         paste0(path, "/RUN_ME_FIRST.R")
-      )
+      ))
     }
   } 
   
