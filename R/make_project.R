@@ -181,9 +181,17 @@ make_project <- function(
   
   if (example == FALSE){ # use old templates w/o an example
     if (type == "R Markdown (analysis.Rmd)") {
-      download.file(gist_path_rmd, paste0(path, vig_path, "/analysis.Rmd"))
+      download.file(
+        gist_path_rmd, paste0(path, vig_path, "/analysis.Rmd"),
+        # silence console output: "trying URL..., Content type..., downloaded..."
+        quiet = TRUE
+      )
     } else if (type == "Quarto (analysis.qmd)") {
-      download.file(gist_path_qmd, paste0(path, vig_path, "/analysis.qmd"))
+      download.file(
+        gist_path_qmd, paste0(path, vig_path, "/analysis.qmd"),
+        # silence console output: "trying URL..., Content type..., downloaded..."
+        quiet = TRUE
+      )
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
@@ -191,9 +199,17 @@ make_project <- function(
     }
   } else { # use newer templates w an example
     if (type == "R Markdown (analysis.Rmd)") {
-      download.file(gist_w_ex_path_rmd, paste0(path, vig_path, "/analysis.Rmd"))
+      download.file(
+        gist_w_ex_path_rmd, paste0(path, vig_path, "/analysis.Rmd"),
+        # silence console output: "trying URL..., Content type..., downloaded..."
+        quiet = TRUE
+      )
     } else if (type == "Quarto (analysis.qmd)") {
-      download.file(gist_w_ex_path_qmd, paste0(path, vig_path, "/analysis.qmd"))
+      download.file(
+        gist_w_ex_path_qmd, paste0(path, vig_path, "/analysis.qmd"),
+        # silence console output: "trying URL..., Content type..., downloaded..."
+        quiet = TRUE
+      )
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
@@ -209,7 +225,12 @@ make_project <- function(
     "1978fb42fc520ca57f670908e111585e/raw/",
     "e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore"
   )
-  download.file(gist_path_ignore, paste0(path, "/.gitignore"))
+  download.file(
+    gist_path_ignore, 
+    paste0(path, "/.gitignore"),
+    # silence console output: "trying URL..., Content type..., downloaded..."
+    quiet = TRUE
+  )
   
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
@@ -219,12 +240,16 @@ make_project <- function(
   
   download.file(
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
-    paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl")
+    paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl"),
+    # silence console output: "trying URL..., Content type..., downloaded..."
+    quiet = TRUE
   )
   
   download.file(
     "https://www.zotero.org/styles/apa",
-    paste0(path, vig_path, "/apa.csl")
+    paste0(path, vig_path, "/apa.csl"),
+    # silence console output: "trying URL..., Content type..., downloaded..."
+    quiet = TRUE
   )
   
   if (vignette == TRUE){ 
