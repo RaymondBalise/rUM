@@ -25,19 +25,6 @@
 #' a user selects New project... > New Directory > rUM Research Project Template
 #' within the RSutdio IDE. See \code{./rstudio/templates/project/}.
 #'
-#' @importFrom tidyverse tidyverse_logo
-#' @importFrom conflicted conflict_prefer
-#' @importFrom bookdown html_document2
-#' @importFrom rmarkdown html_document
-#' @importFrom table1 t1kable
-#' @importFrom rlang abort
-#' @importFrom utils download.file
-#' @importFrom usethis create_project ui_done
-#' @importFrom glue glue
-#' @importFrom gtsummary tbl_summary
-#' @importFrom rio import
-#' @importFrom tidymodels tidymodels_prefer
-#'
 #' @return Returns nothing.  See description above.
 #'
 #' @export
@@ -258,6 +245,9 @@ make_project <- function(
   )
   # Adding console feedback
   ui_done("A README.md template has been created.")
+
+  # Add custom.scss to project
+  write_scss(name = "custom", path = path)
   
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
