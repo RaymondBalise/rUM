@@ -206,8 +206,8 @@ make_project <- function(
   # Path to gitignore this must be updated if the gist changes.
   gist_path_ignore <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
-    "300d99c2b6450feda3ed5a816f396191/raw/",
-    "c959571e2618ba6baa14d91972f84de20a08b63f/.gitignore"
+    "1978fb42fc520ca57f670908e111585e/raw/",
+    "e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore"
   )
   download.file(gist_path_ignore, paste0(path, "/.gitignore"))
   
