@@ -46,9 +46,9 @@ write_scss <- function(name = 'custom', path = getwd()) {
   // $code-block-bg: #f8f9fa;
   
   // Fonts
-  // $font-family-sans-serif: "Roboto", -apple-system, sans-serif;
-  // $font-family-monospace: "Fira Code", monospace;
-  // $headings-font-weight: 500;
+  // $font-family-sans-serif: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  // $font-family-monospace: "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  // $headings-font-weight: 600;
   
   // Layout
   // $grid-breakpoint-lg: 1000px;
