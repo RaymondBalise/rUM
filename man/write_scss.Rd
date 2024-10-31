@@ -7,7 +7,8 @@
 write_scss(name = "custom", path = getwd())
 }
 \arguments{
-\item{name}{The name of the scss file without extension.}
+\item{name}{The name of the scss file without extension. Default \code{name} is 
+"custom".}
 
 \item{path}{The path to the main project level. Defaults to the current
 working directory}
