@@ -241,21 +241,31 @@ make_project <- function(
   ui_done("An enhanced .gitignore has been created.")
 
   ############################################################################
-  # Add a README template from gist. 
-  # NOTE: Update as gist changes
-  gist_path_readme <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/",
-    "643f9cb72f18ca1ff3f20ea6e51c00df/raw/",
-    "bbcbd733f154200cadddb4990c006c74f0e08ac0/README.md"
-  )
-  download.file(
-    gist_path_readme,
-    paste0(path, "/README.md"),
-    # silence console output: "trying URL..., Content type..., downloaded..."
-    quiet = TRUE
-  )
+  # Add a README template from inst/gists 
+  invisible(file.copy(
+    from = 'inst/gists/README.md', 
+    to = paste0(path, "/README.md")
+  ))
   # Adding console feedback
   ui_done("A README.md template has been created.")
+
+  # Add DATED_PROGRESS_NOTES.md template
+  writeLines(
+    paste0(
+      "# Add project updates here\n", 
+      format(Sys.Date(), "%b %d, %Y"),
+      ": project started"
+    ),
+    con = file.path(paste0(path, "/DATED_PROGRESS_NOTES.md"))
+  )
+  cat(
+    "DATED_PROGRESS_NOTES.md", 
+    file = file.path(paste0(path, "/.Rbuildignore")),
+    append = TRUE # add, don't overwrite current file
+  )
+  # Adding console feedback
+  ui_done("A DATED_PROGRESS_NOTES.md template has been created.")
+  ui_done("DATED_PROGRESS_NOTES.md has been added to the .Rbuildignore.")
 
   # Add custom.scss to project
   write_scss(name = "custom", path = path)
