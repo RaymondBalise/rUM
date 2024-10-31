@@ -148,6 +148,9 @@ make_project <- function(
     "2add2f029b640e31c3d4a755c690f6dd62e84a5e/analysis_with_example.qmd"
   )
   
+  #############################################################################
+  # This section creates the project directory and adds the appropriate files #
+  #############################################################################
   
   # Prevent user from overwriting an analysis file
   if (file.exists(paste0(path, "/analysis.Rmd")) ||
@@ -158,6 +161,7 @@ make_project <- function(
     )
   }
   
+  # Create vignette folder
   if (vignette == TRUE) {
     vig_path = "/vignettes"
     dir.create(paste0(path, vig_path), recursive = TRUE, showWarnings = FALSE)
@@ -165,22 +169,25 @@ make_project <- function(
     vig_path = NULL
   }
   
-  
-  if (example == FALSE){ # use old templates w/o an example
+  #############################################################################
+  #          Write appropriate Quarto or Rmarkdown analysis file              #
+  #############################################################################
+  # use old templates w/o an example
+  if (example == FALSE){
     if (type == "R Markdown (analysis.Rmd)") {
-      download.file(
-        gist_path_rmd, paste0(path, vig_path, "/analysis.Rmd"),
-        # silence console output: "trying URL..., Content type..., downloaded..."
-        quiet = TRUE
-      )
+      invisible(file.copy(
+        from = 'inst/gists/analysis_rmd_wo_example.Rmd', 
+        to = paste0(path, vig_path, "/analysis.Rmd")
+      ))
       # Adding console feedback
       ui_done("analysis.Rmd has been created.")
+
+
     } else if (type == "Quarto (analysis.qmd)") {
-      download.file(
-        gist_path_qmd, paste0(path, vig_path, "/analysis.qmd"),
-        # silence console output: "trying URL..., Content type..., downloaded..."
-        quiet = TRUE
-      )
+      invisible(file.copy(
+        from = 'inst/gists/analysis_qmd_wo_example.qmd', 
+        to = paste0(path, vig_path, "/analysis.qmd")
+      ))
       # Adding console feedback
       ui_done("analysis.qmd has been created.")
     } else {
@@ -188,23 +195,27 @@ make_project <- function(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
       )
     }
-  } else { # use newer templates w an example
+
+  # use newer templates w an example
+  } else { 
     if (type == "R Markdown (analysis.Rmd)") {
-      download.file(
-        gist_w_ex_path_rmd, paste0(path, vig_path, "/analysis.Rmd"),
-        # silence console output: "trying URL..., Content type..., downloaded..."
-        quiet = TRUE
-      )
+      invisible(file.copy(
+        from = 'inst/gists/analysis_rmd_with_example.Rmd', 
+        to = paste0(path, vig_path, "/analysis.Rmd")
+      ))
       # Adding console feedback
       ui_done("analysis.Rmd has been created.")
+
+
     } else if (type == "Quarto (analysis.qmd)") {
-      download.file(
-        gist_w_ex_path_qmd, paste0(path, vig_path, "/analysis.qmd"),
-        # silence console output: "trying URL..., Content type..., downloaded..."
-        quiet = TRUE
-      )
+      invisible(file.copy(
+        from = 'inst/gists/analysis_qmd_with_example.qmd', 
+        to = paste0(path, vig_path, "/analysis.qmd")
+      ))
       # Adding console feedback
-      ui_done("analysis.Rmd has been created.")
+      ui_done("analysis.qmd has been created.")
+
+    # User did not provide correct argument type:  
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
