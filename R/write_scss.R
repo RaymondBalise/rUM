@@ -10,7 +10,8 @@
 #' \url{https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss} will provide
 #' you with over 1500 lines of SCSS variables!
 #' 
-#' @param name The name of the scss file without extension.
+#' @param name The name of the scss file without extension. Default \code{name} is 
+#' "custom".
 #' @param path The path to the main project level. Defaults to the current
 #' working directory
 #' @return A \code{.scss} file to customize Quarto styling.
