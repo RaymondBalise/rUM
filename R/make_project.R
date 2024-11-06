@@ -119,35 +119,6 @@ make_project <- function(
     }
   }
   
-  # Paths to gist files for analysis - these need to update of the gist changes.
-  
-  # path to analysis.Rmd without example
-  gist_path_rmd <- paste0(
-    "https://gist.github.com/RaymondBalise/ef56efda4a9260d8415a2cde94cbad1b/",
-    "raw/83194521c2475033458f2ea6b45b20f6f292a0d0/analysis.Rmd"
-  )
-  
-  # path to analysis.qmd without example
-  gist_path_qmd <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/",
-    "224f0b7b107a6b800c610d46c8b6f236/raw/",
-    "b417b2fe260af6377a2fb1cbc06b10fd07da29ee/analysis.qmd"
-  )
-  
-  # path to analysis.Rmd with example
-  gist_w_ex_path_rmd <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/",
-    "c8399e7b3474a6022eeae373d059a042/",
-    "raw/54059a3c9109efe79bf31010f32d4e99cf6469ea/analysis_with_example.Rmd"
-  )
-  
-  # path to analysis.qmd with example
-  gist_w_ex_path_qmd <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/",
-    "40e8e1cc0dec94b225b7cb307f4fa959/raw/",
-    "2add2f029b640e31c3d4a755c690f6dd62e84a5e/analysis_with_example.qmd"
-  )
-  
   #############################################################################
   # This section creates the project directory and adds the appropriate files #
   #############################################################################
@@ -175,19 +146,29 @@ make_project <- function(
   # use old templates w/o an example
   if (example == FALSE){
     if (type == "R Markdown (analysis.Rmd)") {
+      template_path <- system.file("gists/analysis_rmd_wo_example.Rmd", package = "rUM")
+      if (template_path == "") {
+        stop("Could not find RMarkdown template (without example) in package installation")
+      }
       invisible(file.copy(
-        from = 'inst/gists/analysis_rmd_wo_example.Rmd', 
+        from = template_path,
         to = paste0(path, vig_path, "/analysis.Rmd")
       ))
+
       # Adding console feedback
       ui_done("analysis.Rmd has been created.")
 
 
     } else if (type == "Quarto (analysis.qmd)") {
+      template_path <- system.file("gists/analysis_qmd_wo_example.qmd", package = "rUM")
+      if (template_path == "") {
+        stop("Could not find Quarto template (without example) in package installation")
+      }
       invisible(file.copy(
-        from = 'inst/gists/analysis_qmd_wo_example.qmd', 
+        from = template_path,
         to = paste0(path, vig_path, "/analysis.qmd")
       ))
+
       # Adding console feedback
       ui_done("analysis.qmd has been created.")
     } else {
@@ -199,19 +180,29 @@ make_project <- function(
   # use newer templates w an example
   } else { 
     if (type == "R Markdown (analysis.Rmd)") {
+      template_path <- system.file("gists/analysis_rmd_with_example.Rmd", package = "rUM")
+      if (template_path == "") {
+        stop("Could not find RMarkdown template (with example) in package installation")
+      }
       invisible(file.copy(
-        from = 'inst/gists/analysis_rmd_with_example.Rmd', 
+        from = template_path,
         to = paste0(path, vig_path, "/analysis.Rmd")
       ))
+
       # Adding console feedback
       ui_done("analysis.Rmd has been created.")
 
 
     } else if (type == "Quarto (analysis.qmd)") {
+      template_path <- system.file("gists/analysis_qmd_with_example.qmd", package = "rUM")
+      if (template_path == "") {
+        stop("Could not find Quarto template (with example) in package installation")
+      }
       invisible(file.copy(
-        from = 'inst/gists/analysis_qmd_with_example.qmd', 
+        from = template_path,
         to = paste0(path, vig_path, "/analysis.qmd")
       ))
+
       # Adding console feedback
       ui_done("analysis.qmd has been created.")
 
@@ -242,10 +233,15 @@ make_project <- function(
 
   ############################################################################
   # Add a README template from inst/gists 
+  readme_path <- system.file("gists/README.md", package = "rUM")
+  if (readme_path == "") {
+    stop("Could not find README template in package installation")
+  }
   invisible(file.copy(
-    from = 'inst/gists/README.md', 
+    from = readme_path,
     to = paste0(path, "/README.md")
   ))
+
   # Adding console feedback
   ui_done("A README.md template has been created.")
 
