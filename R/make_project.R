@@ -351,7 +351,7 @@ run_me_first <- function(path) {
   
   usethis::use_package("conflicted", type = "suggests")
   usethis::use_package("glue", type = "suggests")
-  usethis::use_package("gtsummary", type = "suggests", min_versin = "2.0.3")
+  usethis::use_package("gtsummary", type = "suggests", min_version = "2.0.3")
   usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
   usethis::use_package("rUM", type = "suggests")
   usethis::use_package("rio", type = "suggests")
