@@ -6,7 +6,7 @@
 
 **Description**: Follow the name with a *brief* description of what the project does.  Say the source of the data. If the data is public add reference here.
 
-**Notes**: The progress notes are here [DATED_PROGRESS_NOTES.md](dated_progress_notes.md).
+**Notes**: The progress notes are here [dated_progress_notes.md](dated_progress_notes.md).
 
 ## Run Me First
 
