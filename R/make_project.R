@@ -255,13 +255,22 @@ make_project <- function(
     ),
     con = file.path(paste0(path, "/DATED_PROGRESS_NOTES.md"))
   )
+  # Adding console feedback
+  ui_done("A DATED_PROGRESS_NOTES.md template has been created.")
+  if (vignette == TRUE) {
+    cat(
+      "DATED_PROGRESS_NOTES.md", 
+      file = file.path(paste0(path, "/.Rbuildignore")),
+      append = TRUE # add, don't overwrite current file
+    )
+    # Adding console feedback
+    ui_done("DATED_PROGRESS_NOTES.md has been added to the .Rbuildignore.")  
+  }
   cat(
     "DATED_PROGRESS_NOTES.md", 
     file = file.path(paste0(path, "/.Rbuildignore")),
     append = TRUE # add, don't overwrite current file
   )
-  # Adding console feedback
-  ui_done("A DATED_PROGRESS_NOTES.md template has been created.")
   ui_done("DATED_PROGRESS_NOTES.md has been added to the .Rbuildignore.")
 
   # Add custom.scss to project
