@@ -355,7 +355,7 @@ make_project <- function(
 
     # Append "inst/doc" to main .gitignore
     cat(
-      "\n# Vignettes\ninst/doc", 
+      "\n\n# Vignettes\ninst/doc\n", 
       file = file.path(".gitignore"),
       append = TRUE # add, don't overwrite current file
     )
@@ -363,7 +363,7 @@ make_project <- function(
     # Create vignettes/.gitignore & write "*.html" & "*.R"
     writeLines(
       "\n*.html\n*.R",
-      con = file.path(vig_path, "/.gitignore")
+      con = file.path(vig_path, ".gitignore")
     )
 
 
