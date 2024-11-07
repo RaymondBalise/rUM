@@ -340,7 +340,7 @@ run_me_first <- function(path, type) {
   # Move to new project location
   setwd(path)
   # Add timing delay so project populates
-  Sys.sleep(2)
+  # Sys.sleep(2)
 
   #####################################################################
   ######  List packages used in the vignette  #########################
