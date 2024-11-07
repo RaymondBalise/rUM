@@ -13,7 +13,6 @@
 #' @importFrom glue glue
 #' @importFrom gtsummary tbl_summary
 #' @importFrom rio import
-#' @importFrom stringr str_replace_all
 #' @importFrom tidymodels tidymodels_prefer
 ## usethis namespace: end
 NULL
