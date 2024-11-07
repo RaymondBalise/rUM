@@ -272,12 +272,6 @@ make_project <- function(
     # Adding console feedback
     ui_done("dated_progress_notes.md has been added to the .Rbuildignore.")  
   }
-  cat(
-    "dated_progress_notes.md", 
-    file = file.path(paste0(path, "/.Rbuildignore")),
-    append = TRUE # add, don't overwrite current file
-  )
-  ui_done("dated_progress_notes.md has been added to the .Rbuildignore.")
 
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
