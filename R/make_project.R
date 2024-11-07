@@ -322,51 +322,7 @@ make_project <- function(
   
   ### EXPERIMENTAL ###
   if (vignette == TRUE) {
-    # Move to new project location
-    setwd(path)
-    # Add timing delay so project populates
-    Sys.sleep(2)
-    # source("RUN_ME_FIRST.R")
-
-    # This all comes from or adapted from RUN_ME_FIRST.R
-    ######  List packages used in the vignette  ###################################
-
-    usethis::use_package("here", type = "suggests")
-    usethis::use_package("knitr", type = "suggests")
-    usethis::use_package("rmarkdown", type = "suggests")
-    usethis::use_package("roxygen2", type = "suggests")
-
-    usethis::use_package("conflicted", type = "suggests")
-    usethis::use_package("glue", type = "suggests")
-    usethis::use_package("gtsummary", type = "suggests")
-    usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
-    usethis::use_package("rUM", type = "suggests")
-    usethis::use_package("rio", type = "suggests")
-    usethis::use_package("table1", type = "suggests")
-    usethis::use_package("tidymodels", type = "suggests")
-    usethis::use_package("tidyverse", type = "suggests")
-
-    # Append Vignette builder to DESCRIPTION file & modify YAML content
-    if (type == 'Q') { # Quarto project
-      # something
-    } else { # Rmd project
-      # something else
-    }
-
-    # Append "inst/doc" to main .gitignore
-    cat(
-      "\n\n# Vignettes\ninst/doc\n", 
-      file = file.path(".gitignore"),
-      append = TRUE # add, don't overwrite current file
-    )
-
-    # Create vignettes/.gitignore & write "*.html" & "*.R"
-    writeLines("*.html\n*.R", con = "vignettes/.gitignore")
-
-
-
-    # Return to original location where rUM::make_project() was executed
-    setwd('..')
+    run_me_first()
   }
   
 }
@@ -375,3 +331,81 @@ make_project <- function(
   grepl("^[a-zA-Z][a-zA-Z0-9.]+$", x) && !grepl("\\.$", x)
 }
 
+run_me_first <- function() {
+
+  # This all comes from or adapted from RUN_ME_FIRST.R so it is automated and
+  #   the user can just focus on writing content.
+
+
+  # Move to new project location
+  setwd(path)
+  # Add timing delay so project populates
+  Sys.sleep(2)
+
+  #####################################################################
+  ######  List packages used in the vignette  #########################
+  usethis::use_package("here", type = "suggests")
+  usethis::use_package("knitr", type = "suggests")
+  usethis::use_package("rmarkdown", type = "suggests")
+  usethis::use_package("roxygen2", type = "suggests")
+  
+  usethis::use_package("conflicted", type = "suggests")
+  usethis::use_package("glue", type = "suggests")
+  usethis::use_package("gtsummary", type = "suggests", min_versin = "2.0.3")
+  usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+  usethis::use_package("rUM", type = "suggests")
+  usethis::use_package("rio", type = "suggests")
+  usethis::use_package("table1", type = "suggests")
+  usethis::use_package("tidymodels", type = "suggests")
+  usethis::use_package("tidyverse", type = "suggests")
+  #####################################################################
+
+  # Append Vignette builder to DESCRIPTION file & modify YAML content
+  if (type == 'Q') { # Quarto project
+
+    # Add Vignette builder to DESCRIPTION:
+    cat(
+      "\nVignetteBuilder: quarto\n", 
+      file = file.path("DESCRIPTION"),
+      append = TRUE # add, don't overwrite current file
+    )
+    
+    # Replace the YAML pattern with the new structure for Quarto vignette:
+    readr::write_file(
+      content = if (.Platform$OS.type == "windows") {
+        str_replace_all(
+          readr::read_file(paste0(here::here(), "/vignettes/analysis.qmd")), 
+          fixed("format:\r\n  html:\r\n    self-contained: true\r\n"), 
+          fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
+        )
+      } else {
+        str_replace_all(
+          readr::read_file(paste0(here::here(), "/vignettes/analysis.qmd")), 
+          fixed("format:\n  html:\n    self-contained: true\n"), 
+          fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
+        )
+      }, 
+      file = paste0(here::here(), "/vignettes/analysis.qmd")
+    )
+
+
+
+
+  } else { # Rmd project
+    # something else
+  }
+
+  # Append "inst/doc" to main .gitignore
+  cat(
+    "\n\n# Vignettes\ninst/doc\n", 
+    file = file.path(".gitignore"),
+    append = TRUE # add, don't overwrite current file
+  )
+
+  # Create vignettes/.gitignore & write "*.html" & "*.R"
+  writeLines("*.html\n*.R", con = "vignettes/.gitignore")
+
+  # Return to original location where rUM::make_project() was executed
+  setwd('..')
+
+}
