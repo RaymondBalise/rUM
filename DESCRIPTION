@@ -47,7 +47,7 @@ Imports:
     bookdown,
     conflicted,
     glue,
-    gtsummary,
+    gtsummary (>= 2.0.3),
     here,
     quarto,
     rio,
