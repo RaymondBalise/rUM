@@ -340,7 +340,7 @@ make_project <- function(
     usethis::use_package("tidyverse", type = "suggests")
 
     # Append Vignette builder to DESCRIPTION file & modify YAML content
-    if (type = 'Q') { # Quarto project
+    if (type == 'Q') { # Quarto project
       # something
     } else { # Rmd project
       # something else
