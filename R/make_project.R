@@ -322,7 +322,7 @@ make_project <- function(
   
   ### EXPERIMENTAL ###
   if (vignette == TRUE) {
-    run_me_first(path)
+    run_me_first(path, type)
   }
   
 }
@@ -331,7 +331,7 @@ make_project <- function(
   grepl("^[a-zA-Z][a-zA-Z0-9.]+$", x) && !grepl("\\.$", x)
 }
 
-run_me_first <- function(path) {
+run_me_first <- function(path, type) {
 
   # This all comes from or adapted from RUN_ME_FIRST.R so it is automated and
   #   the user can just focus on writing content.
