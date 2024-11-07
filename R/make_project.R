@@ -315,9 +315,55 @@ make_project <- function(
   
   ### EXPERIMENTAL ###
   if (vignette == TRUE) {
+    # Move to new project location
     setwd(path)
+    # Add timing delay so project populates
     Sys.sleep(2)
-    source("RUN_ME_FIRST.R")
+    # source("RUN_ME_FIRST.R")
+
+    # This all comes from or adapted from RUN_ME_FIRST.R
+    ######  List packages used in the vignette  ###################################
+
+    usethis::use_package("here", type = "suggests")
+    usethis::use_package("knitr", type = "suggests")
+    usethis::use_package("rmarkdown", type = "suggests")
+    usethis::use_package("roxygen2", type = "suggests")
+
+    usethis::use_package("conflicted", type = "suggests")
+    usethis::use_package("glue", type = "suggests")
+    usethis::use_package("gtsummary", type = "suggests")
+    usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+    usethis::use_package("rUM", type = "suggests")
+    usethis::use_package("rio", type = "suggests")
+    usethis::use_package("table1", type = "suggests")
+    usethis::use_package("tidymodels", type = "suggests")
+    usethis::use_package("tidyverse", type = "suggests")
+
+    # Append Vignette builder to DESCRIPTION file & modify YAML content
+    if (type = 'Q') { # Quarto project
+      # something
+    } else { # Rmd project
+      # something else
+    }
+
+    # Append "inst/doc" to main .gitignore
+    cat(
+      "\n# Vignettes\ninst/doc", 
+      file = file.path(paste0(path, "/.gitignore")),
+      append = TRUE # add, don't overwrite current file
+    )
+
+    # Create vignettes/.gitignore & write "*.html" & "*.R"
+    dir.create(paste0(path, "vignettes"))
+    cat(
+      "\n*.html\n*.R", 
+      file = file.path(paste0(path, "/.gitignore")),
+      append = FALSE # this .gitignore is being created here
+    )
+
+
+
+    # Return to original location where rUM::make_project() was executed
     setwd('..')
   }
   
