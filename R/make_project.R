@@ -354,7 +354,7 @@ make_project <- function(
     )
 
     # Create vignettes/.gitignore & write "*.html" & "*.R"
-    dir.create(paste0(path, "vignettes"))
+    # dir.create(paste0(path, "vignettes"))
     cat(
       "\n*.html\n*.R", 
       file = file.path(paste0(path, "/.gitignore")),
