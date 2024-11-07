@@ -172,6 +172,9 @@ make_project <- function(
       # Adding console feedback
       ui_done("analysis.qmd has been created.")
 
+      # Add custom.scss to project
+      write_scss(name = "custom", path = path)
+
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
@@ -206,6 +209,9 @@ make_project <- function(
 
       # Adding console feedback
       ui_done("analysis.qmd has been created.")
+
+      # Add custom.scss to project
+      write_scss(name = "custom", path = path)
 
     # User did not provide correct argument type:  
     } else {
@@ -273,9 +279,6 @@ make_project <- function(
   )
   ui_done("dated_progress_notes.md has been added to the .Rbuildignore.")
 
-  # Add custom.scss to project
-  write_scss(name = "custom", path = path)
-  
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
   
