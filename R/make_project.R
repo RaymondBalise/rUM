@@ -365,7 +365,7 @@ run_me_first <- function(path, type) {
 
     # Add Vignette builder to DESCRIPTION:
     cat(
-      "\nVignetteBuilder: quarto\n", 
+      "VignetteBuilder: quarto", 
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
