@@ -317,7 +317,7 @@ make_project <- function(
   if (vignette == TRUE) {
     setwd(path)
     Sys.sleep(5)
-    source(paste0(path, "/RUN_ME_FIRST.R"))
+    source("RUN_ME_FIRST.R")
   }
   
 }
