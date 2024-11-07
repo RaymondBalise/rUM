@@ -363,6 +363,8 @@ run_me_first <- function(path, type) {
   # Append Vignette builder to DESCRIPTION file & modify YAML content
   if (type == 'Q') { # Quarto project
 
+    message('Type Q found')
+
     # Add Vignette builder to DESCRIPTION:
     cat(
       "VignetteBuilder: quarto", 
