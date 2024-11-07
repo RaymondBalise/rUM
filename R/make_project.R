@@ -152,7 +152,7 @@ make_project <- function(
           "gists/analysis_rmd_wo_example.Rmd", 
           package = "rUM"
         ),
-        to = paste0(path, "/analysis.Rmd")
+        to = paste0(path, vig_path, "/analysis.Rmd")
       ))
 
       # Adding console feedback
@@ -166,7 +166,7 @@ make_project <- function(
           "gists/analysis_qmd_wo_example.qmd", 
           package = "rUM"
         ),
-        to = paste0(path, "/analysis.qmd")
+        to = paste0(path, vig_path, "/analysis.qmd")
       ))
 
       # Adding console feedback
@@ -187,7 +187,7 @@ make_project <- function(
           "gists/analysis_rmd_with_example.Rmd", 
           package = "rUM"
         ),
-        to = paste0(path, "/analysis.Rmd")
+        to = paste0(path, vig_path, "/analysis.Rmd")
       ))
 
       # Adding console feedback
@@ -201,7 +201,7 @@ make_project <- function(
           "gists/analysis_qmd_with_example.qmd", 
           package = "rUM"
         ),
-        to = paste0(path, "/analysis.qmd")
+        to = paste0(path, vig_path, "/analysis.qmd")
       ))
 
       # Adding console feedback
