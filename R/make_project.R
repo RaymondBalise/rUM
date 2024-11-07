@@ -146,13 +146,13 @@ make_project <- function(
   # use old templates w/o an example
   if (example == FALSE){
     if (type == "R Markdown (analysis.Rmd)") {
-      template_path <- system.file("gists/analysis_rmd_wo_example.Rmd", package = "rUM")
-      if (template_path == "") {
-        stop("Could not find RMarkdown template (without example) in package installation")
-      }
+
       invisible(file.copy(
-        from = template_path,
-        to = paste0(path, vig_path, "/analysis.Rmd")
+        from = system.file(
+          "gists/analysis_rmd_wo_example.Rmd", 
+          package = "rUM"
+        ),
+        to = paste0(path, "/analysis.Rmd")
       ))
 
       # Adding console feedback
@@ -160,17 +160,18 @@ make_project <- function(
 
 
     } else if (type == "Quarto (analysis.qmd)") {
-      template_path <- system.file("gists/analysis_qmd_wo_example.qmd", package = "rUM")
-      if (template_path == "") {
-        stop("Could not find Quarto template (without example) in package installation")
-      }
+
       invisible(file.copy(
-        from = template_path,
-        to = paste0(path, vig_path, "/analysis.qmd")
+        from = system.file(
+          "gists/analysis_qmd_wo_example.qmd", 
+          package = "rUM"
+        ),
+        to = paste0(path, "/analysis.qmd")
       ))
 
       # Adding console feedback
       ui_done("analysis.qmd has been created.")
+
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
@@ -180,13 +181,13 @@ make_project <- function(
   # use newer templates w an example
   } else { 
     if (type == "R Markdown (analysis.Rmd)") {
-      template_path <- system.file("gists/analysis_rmd_with_example.Rmd", package = "rUM")
-      if (template_path == "") {
-        stop("Could not find RMarkdown template (with example) in package installation")
-      }
+      
       invisible(file.copy(
-        from = template_path,
-        to = paste0(path, vig_path, "/analysis.Rmd")
+        from = system.file(
+          "gists/analysis_rmd_with_example.Rmd", 
+          package = "rUM"
+        ),
+        to = paste0(path, "/analysis.Rmd")
       ))
 
       # Adding console feedback
@@ -194,13 +195,13 @@ make_project <- function(
 
 
     } else if (type == "Quarto (analysis.qmd)") {
-      template_path <- system.file("gists/analysis_qmd_with_example.qmd", package = "rUM")
-      if (template_path == "") {
-        stop("Could not find Quarto template (with example) in package installation")
-      }
+      
       invisible(file.copy(
-        from = template_path,
-        to = paste0(path, vig_path, "/analysis.qmd")
+        from = system.file(
+          "gists/analysis_qmd_with_example.qmd", 
+          package = "rUM"
+        ),
+        to = paste0(path, "/analysis.qmd")
       ))
 
       # Adding console feedback
