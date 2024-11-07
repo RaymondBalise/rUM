@@ -315,6 +315,7 @@ make_project <- function(
   
   ### EXPERIMENTAL ###
   if (vignette == TRUE) {
+    Sys.sleep(5) # wait 5 seconds for the project to populate then...
     source(paste0(path, "/RUN_ME_FIRST.R"))
   }
   
