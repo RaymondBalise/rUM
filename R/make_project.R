@@ -242,37 +242,37 @@ make_project <- function(
   # )
   tryCatch(
     {
-      # Check package installation path
-      pkg_path <- system.file(package = "rUM")
-      message("Package installation path: ", pkg_path)
+      # Check current working directory
+      message("Current working directory: ", getwd())
       
-      # Check development directory
-      dev_path <- here::here()
-      message("Development directory: ", dev_path)
+      # Check if inst/gists exists relative to current directory
+      message("\nDoes inst/gists exist? ", dir.exists("inst/gists"))
       
-      # List files in inst/gists
-      message("\nFiles in inst/gists:")
-      print(list.files(path = here::here("inst", "gists"), all.files = TRUE))
+      # Try to find the full path
+      possible_paths <- c(
+        here::here("inst", "gists"),
+        file.path(getwd(), "inst", "gists"),
+        file.path(dirname(getwd()), "inst", "gists")
+      )
       
-      # Try the original file copy
-      gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
-      message("\nSystem file path: ", gitign_path)
-      
-      # Check if destination directory exists
-      message("\nDestination path exists? ", dir.exists(path))
-      message("Destination path: ", path)
-      
-      if (gitign_path == "") {
-        stop("Could not find aggressive_gitignore.txt in package installation")
+      message("\nChecking possible paths:")
+      for(p in possible_paths) {
+        message(p, ": ", dir.exists(p))
+        if(dir.exists(p)) {
+          message("Files in ", p, ":")
+          print(list.files(p, all.files = TRUE))
+        }
       }
       
-      copy_success <- file.copy(
-        from = gitign_path,
-        to = paste0(path, "/gitignore.R")
-      )
+      # Try to locate the specific file
+      for(p in possible_paths) {
+        test_path <- file.path(p, "aggressive_gitignore.txt")
+        message("\nChecking for file at: ", test_path)
+        message("File exists? ", file.exists(test_path))
+      }
     },
     error = function(e) {
-      message("\nError: ", e$message)
+      message("\nError during diagnostics: ", e$message)
       return(FALSE)
     }
   )
