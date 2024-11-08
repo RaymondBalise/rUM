@@ -283,6 +283,7 @@ make_project <- function(
       return(FALSE)
     }
   )
+  
   # Adding console feedback
   # ui_done("An enhanced .gitignore has been created.")
 
