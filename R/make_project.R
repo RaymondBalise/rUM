@@ -172,14 +172,14 @@ make_project <- function(
       # Adding console feedback
       ui_done("analysis.qmd has been created.")
 
-      # Add custom.scss to package project only. "The minimal default format is
-      #  a deliberte limitation of the current implementaton of the vignette
-      #  engine. It ensures that the HTML vignettes produced are reasonable
-      #  size and can be published on CRAN without problems".
-      # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
-      if (vignette == FALSE) {
-        write_scss(path) 
-      }
+      # # Add custom.scss to package project only. "The minimal default format is
+      # #  a deliberte limitation of the current implementaton of the vignette
+      # #  engine. It ensures that the HTML vignettes produced are reasonable
+      # #  size and can be published on CRAN without problems".
+      # # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
+      # if (vignette == FALSE) {
+      #   write_scss(path) 
+      # }
       
 
     } else {
@@ -310,7 +310,15 @@ make_project <- function(
     #   YAML header with content appropriate to build the respective vignette
     #   using the correct engine.
     .run_me_first(path, type)
-  } 
+  } else {
+    
+    # Add custom.scss to package project only. "The minimal default format is
+    #  a deliberte limitation of the current implementaton of the vignette
+    #  engine. It ensures that the HTML vignettes produced are reasonable
+    #  size and can be published on CRAN without problems".
+    # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
+    write_scss(path) 
+  }
   
 }
 
