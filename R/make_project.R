@@ -322,7 +322,7 @@ make_project <- function(
   
   ### EXPERIMENTAL ###
   if (vignette == TRUE) {
-    run_me_first(path, type)
+    .run_me_first(path, type)
   }
   
 }
@@ -331,69 +331,28 @@ make_project <- function(
   grepl("^[a-zA-Z][a-zA-Z0-9.]+$", x) && !grepl("\\.$", x)
 }
 
-run_me_first <- function(path, type) {
-
+.run_me_first <- function(path, type) {
   # This all comes from or adapted from RUN_ME_FIRST.R so it is automated and
   #   the user can just focus on writing content.
 
-
   # Move to new project location
   setwd(path)
-  # Add timing delay so project populates
-  # Sys.sleep(2)
 
-  #####################################################################
-  ######  List packages used in the vignette  #########################
-  # suppressMessages({
-    usethis::use_package("here", type = "suggests")
-    usethis::use_package("knitr", type = "suggests")
-    usethis::use_package("rmarkdown", type = "suggests")
-    usethis::use_package("roxygen2", type = "suggests")
-    
-    usethis::use_package("conflicted", type = "suggests")
-    usethis::use_package("glue", type = "suggests")
-    usethis::use_package("gtsummary", type = "suggests", min_version = "2.0.3")
-    # usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
-    usethis::use_package("rUM", type = "suggests")
-    usethis::use_package("rio", type = "suggests")
-    usethis::use_package("table1", type = "suggests")
-    usethis::use_package("tidymodels", type = "suggests")
-    usethis::use_package("tidyverse", type = "suggests")
-  # })
-  #####################################################################
-
-  # Append Vignette builder to DESCRIPTION file & modify YAML content
-  if (type == "Quarto (analysis.qmd)") { # Quarto project
-
-    usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
-    
-    # Add Vignette builder to DESCRIPTION:
-    cat(
-      "VignetteBuilder: quarto", 
-      file = file.path("DESCRIPTION"),
-      append = TRUE # add, don't overwrite current file
-    )
-    
-    # Replace the YAML pattern with the new structure for Quarto vignette:
-    # First read
-    file_content <- readr::read_file("vignettes/analysis.qmd")
-
-    # Then modify with OS-specific patterns
-    modified_content <- stringr::str_replace(
-        file_content,
-        "format:\n  html:\n    self-contained: true",
-        "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}"
-      )
-
-    # Finally write
-    readr::write_file(modified_content, "vignettes/analysis.qmd")
-
-
-
-
-  } else { # Rmd project
-    # something else
-  }
+  # Add to DESCRIPTION:
+  usethis::use_package("here", type = "suggests")
+  usethis::use_package("knitr", type = "suggests")
+  usethis::use_package("rmarkdown", type = "suggests")
+  usethis::use_package("roxygen2", type = "suggests")
+  
+  usethis::use_package("conflicted", type = "suggests")
+  usethis::use_package("glue", type = "suggests")
+  usethis::use_package("gtsummary", type = "suggests", min_version = "2.0.3")
+  # usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+  usethis::use_package("rUM", type = "suggests")
+  usethis::use_package("rio", type = "suggests")
+  usethis::use_package("table1", type = "suggests")
+  usethis::use_package("tidymodels", type = "suggests")
+  usethis::use_package("tidyverse", type = "suggests")
 
   # Append "inst/doc" to main .gitignore
   cat(
@@ -404,6 +363,34 @@ run_me_first <- function(path, type) {
 
   # Create vignettes/.gitignore & write "*.html" & "*.R"
   writeLines("*.html\n*.R", con = "vignettes/.gitignore")
+
+
+  # Append Vignette builder to DESCRIPTION file & modify YAML content
+  if (type == "Quarto (analysis.qmd)") { # Quarto project
+
+    # Add to DESCRIPTION for Quarto:
+    usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+
+    # Add Vignette builder to DESCRIPTION:
+    cat(
+      "VignetteBuilder: quarto", 
+      file = file.path("DESCRIPTION"),
+      append = TRUE # add, don't overwrite current file
+    )
+    
+    # Replace the YAML pattern with the new structure for Quarto vignette:
+    readr::write_file(
+      x = stringr::str_replace(
+        readr::read_file("vignettes/analysis.qmd"),
+          "format:\n  html:\n    self-contained: true",
+          "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}"
+        ), 
+      file = "vignettes/analysis.qmd"
+    )
+
+  } else { # Rmd project
+    # something else
+  }
 
   # Return to original location where rUM::make_project() was executed
   setwd('..')
