@@ -242,37 +242,44 @@ make_project <- function(
   # )
   tryCatch(
     {
-      # Check current working directory
-      message("Current working directory: ", getwd())
+      # First try installed package path
+      gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
       
-      # Check if inst/gists exists relative to current directory
-      message("\nDoes inst/gists exist? ", dir.exists("inst/gists"))
-      
-      # Try to find the full path
-      possible_paths <- c(
-        here::here("inst", "gists"),
-        file.path(getwd(), "inst", "gists"),
-        file.path(dirname(getwd()), "inst", "gists")
-      )
-      
-      message("\nChecking possible paths:")
-      for(p in possible_paths) {
-        message(p, ": ", dir.exists(p))
-        if(dir.exists(p)) {
-          message("Files in ", p, ":")
-          print(list.files(p, all.files = TRUE))
+      # If that's empty, try development path
+      if (gitign_path == "") {
+        # Check if we're in the package directory
+        if (basename(getwd()) == "rUM") {
+          gitign_path <- file.path("inst", "gists", "aggressive_gitignore.txt")
+        } else {
+          # Check one level up for the package directory
+          potential_pkg_path <- file.path(dirname(getwd()), "rUM", "inst", "gists", "aggressive_gitignore.txt")
+          if (file.exists(potential_pkg_path)) {
+            gitign_path <- potential_pkg_path
+          } else {
+            # Last resort - try using here() to find it
+            gitign_path <- here::here("rUM", "inst", "gists", "aggressive_gitignore.txt")
+          }
         }
       }
       
-      # Try to locate the specific file
-      for(p in possible_paths) {
-        test_path <- file.path(p, "aggressive_gitignore.txt")
-        message("\nChecking for file at: ", test_path)
-        message("File exists? ", file.exists(test_path))
+      if (!file.exists(gitign_path)) {
+        stop("Could not locate aggressive_gitignore.txt in either installed package or development directories")
       }
+      
+      copy_success <- file.copy(
+        from = gitign_path,
+        to = paste0(path, "/gitignore.R")
+      )
+      
+      if (!copy_success) {
+        stop("File copy failed")
+      }
+      
+      ui_done("An enhanced .gitignore has been created.")
     },
     error = function(e) {
-      message("\nError during diagnostics: ", e$message)
+      message("Error: ", e$message, "\n")
+      message("Working directory: ", getwd(), "\n")
       return(FALSE)
     }
   )
