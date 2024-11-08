@@ -373,23 +373,26 @@ run_me_first <- function(path, type) {
     )
     
     # Replace the YAML pattern with the new structure for Quarto vignette:
-    readr::write_file(
-      # content = (this line isn't needed but for debugging)
-      if (.Platform$OS.type == "windows") {
-        stringr::str_replace_all(
-          readr::read_file("vignettes/analysis.qmd"), 
-          stringr::fixed("format:\r\n  html:\r\n    self-contained: true\r\n"), 
-          stringr::fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
-        )
-      } else {
-        stringr::str_replace_all(
-          readr::read_file("vignettes/analysis.qmd"), 
-          stringr::fixed("format:\n  html:\n    self-contained: true\n"), 
-          stringr::fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
-        )
-      }, 
-      file = "vignettes/analysis.qmd"
-    )
+    # First read
+    file_content <- readr::read_file("vignettes/analysis.qmd")
+
+    # Then modify
+    modified_content <- if (.Platform$OS.type == "windows") {
+      stringr::str_replace_all(
+        file_content,
+        stringr::fixed("format:\r\n  html:\r\n    self-contained: true\r\n"),
+        stringr::fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
+      )
+    } else {
+      stringr::str_replace_all(
+        file_content,
+        stringr::fixed("format:\n  html:\n    self-contained: true\n"),
+        stringr::fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
+      )
+    }
+
+    # Finally write
+    readr::write_file(modified_content, "vignettes/analysis.qmd")
 
 
 
