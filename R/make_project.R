@@ -268,7 +268,7 @@ make_project <- function(
       
       copy_success <- file.copy(
         from = gitign_path,
-        to = paste0(path, "/gitignore.R")
+        to = paste0(path, "/.gitignore")
       )
       
       if (!copy_success) {
@@ -283,7 +283,7 @@ make_project <- function(
       return(FALSE)
     }
   )
-  
+
   # Adding console feedback
   # ui_done("An enhanced .gitignore has been created.")
 
