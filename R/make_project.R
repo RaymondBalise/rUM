@@ -373,28 +373,24 @@ run_me_first <- function(path, type) {
     )
     
     # Replace the YAML pattern with the new structure for Quarto vignette:
-    # First read and check content
+    # Read the file content
     file_content <- readr::read_file("vignettes/analysis.qmd")
-    # Add this debug section to print just the YAML part
-    yaml_pattern <- 
-      stringr::str_extract(file_content, "format:.*?self-contained: true.*?\n")
-    cat("YAML pattern found:\n")
-    cat(yaml_pattern)
 
-    # Then modify and check modification
-    modified_content <- if (.Platform$OS.type == "windows") {
-      stringr::str_replace_all(
-        file_content,
-        stringr::fixed("format:\r\n  html:\r\n    self-contained: true\r\n"), 
-        stringr::fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
-      )
-    } else {
-      stringr::str_replace_all(
-        file_content,
-        stringr::fixed("format:\n  html:\n    self-contained: true\n"), 
-        stringr::fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
-      )
-    }
+    # Replace the pattern with the new sentence
+    modified_content <- 
+      if (.Platform$OS.type == "windows") {
+        str_replace_all(
+          file_content, 
+          fixed("format:\r\n  html:\r\n    self-contained: true\r\n"), 
+          fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
+        )
+      } else {
+        str_replace_all(
+          file_content, 
+          fixed("format:\n  html:\n    self-contained: true\n"), 
+          fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
+        )
+      }
 
     # Finally write and verify
     readr::write_file(modified_content, "vignettes/analysis.qmd")
