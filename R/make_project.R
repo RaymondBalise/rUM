@@ -235,14 +235,11 @@ make_project <- function(
     # silence console output: "trying URL..., Content type..., downloaded..."
     quiet = TRUE
   )
-  # invisible(file.copy(
-  #   system.file(
-  #     "gists/aggressive_gitignore.txt", 
-  #     package = "rUM",
-  #     mustWork = TRUE # help identify if the file isn't found
-  #   ), 
-  #   paste0(path, "/.gitignore")
-  # ))
+  # Try using `writeLines`
+  # writeLines(
+  #   readr::read_file("inst/gists/aggressive_gitignore.txt"), 
+  #   con = file.path(paste0(path, "/.gitignore"))
+  # )
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
@@ -320,6 +317,9 @@ make_project <- function(
 .run_me_first <- function(path, type) {
   # This all comes from or adapted from RUN_ME_FIRST.R so it is automated and
   #   the user can just focus on writing content.
+
+  # Capture current directory and return to it at the end of this function
+  current_wd <- getwd()
 
   # Move to new project location
   setwd(path)
@@ -400,6 +400,7 @@ make_project <- function(
   }
 
   # Return to original location where rUM::make_project() was executed
-  setwd('..')
+  # setwd('..')
+  setwd(current_wd)
 
 }
