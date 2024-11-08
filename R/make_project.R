@@ -242,13 +242,11 @@ make_project <- function(
   # )
   invisible({
     file.remove(paste0(path, '/.gitignore'))
-  })
-  try(
     file.copy(
       from = here::here("inst", "gists", "aggressive_gitignore.txt"),
-      to = paste0(path, "/.gitignore")
+      to = paste0(path, "/gitignore")
     )
-  )
+  })
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
@@ -409,7 +407,6 @@ make_project <- function(
   }
 
   # Return to original location where rUM::make_project() was executed
-  # setwd('..')
   setwd(current_wd)
 
 }
