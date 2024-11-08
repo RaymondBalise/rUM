@@ -242,71 +242,42 @@ make_project <- function(
   # )
   tryCatch(
     {
-      gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
+      # Check package installation path
+      pkg_path <- system.file(package = "rUM")
+      message("Package installation path: ", pkg_path)
       
-      # Check if source file exists
+      # Check development directory
+      dev_path <- here::here()
+      message("Development directory: ", dev_path)
+      
+      # List files in inst/gists
+      message("\nFiles in inst/gists:")
+      print(list.files(path = here::here("inst", "gists"), all.files = TRUE))
+      
+      # Try the original file copy
+      gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
+      message("\nSystem file path: ", gitign_path)
+      
+      # Check if destination directory exists
+      message("\nDestination path exists? ", dir.exists(path))
+      message("Destination path: ", path)
+      
       if (gitign_path == "") {
         stop("Could not find aggressive_gitignore.txt in package installation")
       }
       
-      # Try the copy operation
       copy_success <- file.copy(
         from = gitign_path,
         to = paste0(path, "/gitignore.R")
       )
-      
-      # Verify copy was successful
-      if (!copy_success) {
-        stop("File copy operation failed")
-      }
-      
-      # If we get here, it worked
-      ui_done("An enhanced .gitignore has been created.")
     },
     error = function(e) {
-      # Handle specific error cases
-      message("\nError creating .gitignore: ", e$message)
-      message("Attempting fallback method...")
-      
-      # Fallback to using here::here() during development
-      tryCatch(
-        {
-          # Check package installation path
-          pkg_path <- system.file(package = "rUM")
-          message("Package installation path: ", pkg_path)
-          
-          # Check development directory
-          dev_path <- here::here()
-          message("Development directory: ", dev_path)
-          
-          # List files in inst/gists
-          message("\nFiles in inst/gists:")
-          print(list.files(path = here::here("inst", "gists"), all.files = TRUE))
-          
-          # Try the original file copy
-          gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
-          message("\nSystem file path: ", gitign_path)
-          
-          # Check if destination directory exists
-          message("\nDestination path exists? ", dir.exists(path))
-          message("Destination path: ", path)
-          
-          if (gitign_path == "") {
-            stop("Could not find aggressive_gitignore.txt in package installation")
-          }
-          
-          copy_success <- file.copy(
-            from = gitign_path,
-            to = paste0(path, "/gitignore.R")
-          )
-        },
-        error = function(e) {
-          message("\nError: ", e$message)
-          return(FALSE)
-        }
-      )
+      message("\nError: ", e$message)
+      return(FALSE)
+    }
+  )
   # Adding console feedback
-  ui_done("An enhanced .gitignore has been created.")
+  # ui_done("An enhanced .gitignore has been created.")
 
   ############################################################################
   # Add a README template from inst/gists 
