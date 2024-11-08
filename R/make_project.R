@@ -237,7 +237,10 @@ make_project <- function(
   # )
   # Try using `writeLines` -- this works but inserts empty lines on Windows
   writeLines(
-    readLines("inst/gists/aggressive_gitignore.txt", warn = FALSE), 
+    readLines(
+      here::here("inst", "gists", "aggressive_gitignore.txt"),
+      warn = FALSE
+    ), 
     con = file.path(paste0(path, "/.gitignore"))
   )
   
