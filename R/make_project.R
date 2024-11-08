@@ -236,18 +236,8 @@ make_project <- function(
   #   quiet = TRUE
   # )
   # Try using `writeLines` -- this works but inserts empty lines on Windows
-  gitign_path <- if (identical(Sys.getenv("DEVTOOLS_LOAD"), "true")) {
-    # We're in development using load_all()
-    here::here("inst", "gists", "aggressive_gitignore.txt")
-  } else {
-    # We're in installed package context
-    system.file("gists/aggressive_gitignore.txt", package = "rUM")
-  }
-  
-  print(gitign_path)
-  
   writeLines(
-    readLines(gitign_path, warn = FALSE),
+    readr::read_file("inst/gists/aggressive_gitignore.txt"), 
     con = file.path(paste0(path, "/.gitignore"))
   )
   
