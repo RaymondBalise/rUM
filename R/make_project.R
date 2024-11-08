@@ -375,8 +375,11 @@ run_me_first <- function(path, type) {
     # Replace the YAML pattern with the new structure for Quarto vignette:
     # First read and check content
     file_content <- readr::read_file("vignettes/analysis.qmd")
-    cat("Original content:\n")
-    cat(file_content)  # See what we're starting with
+    # Add this debug section to print just the YAML part
+    yaml_pattern <- 
+      stringr::str_extract(file_content, "format:.*?self-contained: true.*?\n")
+    cat("YAML pattern found:\n")
+    cat(yaml_pattern)
 
     # Then modify and check modification
     modified_content <- if (.Platform$OS.type == "windows") {
@@ -392,11 +395,6 @@ run_me_first <- function(path, type) {
         stringr::fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
       )
     }
-    cat("\nModified content:\n")
-    cat(modified_content)  # See what the modification did
-
-    # Check if content actually changed
-    cat("\nDid content change?", file_content != modified_content)
 
     # Finally write and verify
     readr::write_file(modified_content, "vignettes/analysis.qmd")
