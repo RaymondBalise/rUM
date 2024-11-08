@@ -271,28 +271,40 @@ make_project <- function(
       # Fallback to using here::here() during development
       tryCatch(
         {
-          dev_path <- here::here("inst", "gists", "aggressive_gitignore.txt")
-          if (!file.exists(dev_path)) {
-            stop("Could not find file in development directory either")
+          # Check package installation path
+          pkg_path <- system.file(package = "rUM")
+          message("Package installation path: ", pkg_path)
+          
+          # Check development directory
+          dev_path <- here::here()
+          message("Development directory: ", dev_path)
+          
+          # List files in inst/gists
+          message("\nFiles in inst/gists:")
+          print(list.files(path = here::here("inst", "gists"), all.files = TRUE))
+          
+          # Try the original file copy
+          gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
+          message("\nSystem file path: ", gitign_path)
+          
+          # Check if destination directory exists
+          message("\nDestination path exists? ", dir.exists(path))
+          message("Destination path: ", path)
+          
+          if (gitign_path == "") {
+            stop("Could not find aggressive_gitignore.txt in package installation")
           }
-          if (!file.copy(from = dev_path, to = paste0(path, "/gitignore.R"))) {
-            stop("Fallback copy operation failed")
-          }
-          ui_done("An enhanced .gitignore has been created (using development path).")
+          
+          copy_success <- file.copy(
+            from = gitign_path,
+            to = paste0(path, "/gitignore.R")
+          )
         },
-        error = function(e2) {
-          message("Fallback also failed: ", e2$message)
+        error = function(e) {
+          message("\nError: ", e$message)
           return(FALSE)
         }
       )
-    },
-    warning = function(w) {
-      message("Warning during .gitignore creation: ", w$message)
-    },
-    finally = {
-      # You could add cleanup code
-    }
-  )
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
