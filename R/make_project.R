@@ -300,30 +300,15 @@ make_project <- function(
     quiet = TRUE
   )
   
-  if (vignette == TRUE){ 
-    if (type == "R Markdown (analysis.Rmd)") {
-      invisible(file.copy(
-        system.file(
-          "gists/manual_change_rmd_vigette.R", 
-          package = "rUM"
-        ), 
-        paste0(path, "/RUN_ME_FIRST.R")
-      ))
-    } else if (type == "Quarto (analysis.qmd)") {
-      invisible(file.copy(
-        system.file(
-          "gists/manual_change_qmd_vigette.R", 
-          package = "rUM"
-        ), 
-        paste0(path, "/RUN_ME_FIRST.R")
-      ))
-    }
-  } 
-  
-  ### EXPERIMENTAL ###
-  if (vignette == TRUE) {
+  if (vignette == TRUE){
+    
+    # This function adds to DESCRIPTION file, .gitignore (package & vignettes),
+    #   adds the specific VignetteBuilder, and modifies the vignettes/analysis.*
+    #   YAML header with content appropriate to build the respective vignette
+    #   using the correct engine.
     .run_me_first(path, type)
-  }
+
+  } 
   
 }
 
@@ -348,7 +333,6 @@ make_project <- function(
     usethis::use_package("conflicted", type = "suggests")
     usethis::use_package("glue", type = "suggests")
     usethis::use_package("gtsummary", type = "suggests", min_version = "2.0.3")
-    # usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
     usethis::use_package("rUM", type = "suggests")
     usethis::use_package("rio", type = "suggests")
     usethis::use_package("table1", type = "suggests")
