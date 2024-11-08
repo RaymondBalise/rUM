@@ -230,7 +230,7 @@ make_project <- function(
       from = rmd_css_path,
       to = paste0(path, "/custom.css")
     ))
-    ui_done('\ncustom.css has been created.\n\n')
+    ui_done('\ncustom.css has been created.\n')
   }
   
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
@@ -393,7 +393,7 @@ make_project <- function(
     readr::write_file(
       x = stringr::str_replace(
         readr::read_file("vignettes/analysis.Rmd"),
-          "output:\n  bookdown::html_document2:\n    number_sections: false\n",
+          "output:\n  bookdown::html_document2:\n    number_sections: false\n    css: custom.css\n",
           "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n"
         ), 
       file = "vignettes/analysis.Rmd"
