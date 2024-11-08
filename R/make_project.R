@@ -215,13 +215,22 @@ make_project <- function(
     }
   }
 
-  # Add custom.scss to package project only. "The minimal default format is
-  #  a deliberte limitation of the current implementaton of the vignette
-  #  engine. It ensures that the HTML vignettes produced are reasonable
-  #  size and can be published on CRAN without problems".
+  # Add custom.scss to Quarto non-package projects only. 
+  #  "The minimal default format is a deliberate limitation of the current 
+  #  implementaton of the vignette engine. It ensures that the HTML vignettes
+  #  produced are reasonable size and can be published on CRAN without problems".
   # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
   if (vignette == FALSE & type == "Quarto (analysis.qmd)") {
     write_scss(name = "custom", path = path) 
+  }
+  # Add custom.css to Rmd non-package projects only.
+  if (vignette == FALSE & type == "R Markdown (analysis.Rmd)") {
+    rmd_css_path <- system.file("gists/Rmd_css.md")
+    invisible(file.copy(
+      from = rmd_css_path,
+      to = paste0(path, "/custom.css")
+    ))
+    ui_done('\ncustom.css has been created.\n\n')
   }
   
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
