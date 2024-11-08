@@ -177,7 +177,7 @@ make_project <- function(
       #  engine. It ensures that the HTML vignettes produced are reasonable
       #  size and can be published on CRAN without problems".
       # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
-      if (!vignette) write_scss(path)
+      if (!vignette) { write_scss(path) }
       
 
     } else {
