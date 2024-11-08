@@ -240,14 +240,59 @@ make_project <- function(
   #   readr::read_file("inst/gists/aggressive_gitignore.txt"), 
   #   con = file.path(paste0(path, "/.gitignore"))
   # )
-  # invisible({
-    # file.remove(paste0(path, '/.gitignore'))
-  gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
-    file.copy(
-      from = gitign_path,
-      to = paste0(path, "/gitignore.R")
-    )
-  # })
+  tryCatch(
+    {
+      gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
+      
+      # Check if source file exists
+      if (gitign_path == "") {
+        stop("Could not find aggressive_gitignore.txt in package installation")
+      }
+      
+      # Try the copy operation
+      copy_success <- file.copy(
+        from = gitign_path,
+        to = paste0(path, "/gitignore.R")
+      )
+      
+      # Verify copy was successful
+      if (!copy_success) {
+        stop("File copy operation failed")
+      }
+      
+      # If we get here, it worked
+      ui_done("An enhanced .gitignore has been created.")
+    },
+    error = function(e) {
+      # Handle specific error cases
+      message("\nError creating .gitignore: ", e$message)
+      message("Attempting fallback method...")
+      
+      # Fallback to using here::here() during development
+      tryCatch(
+        {
+          dev_path <- here::here("inst", "gists", "aggressive_gitignore.txt")
+          if (!file.exists(dev_path)) {
+            stop("Could not find file in development directory either")
+          }
+          if (!file.copy(from = dev_path, to = paste0(path, "/gitignore.R"))) {
+            stop("Fallback copy operation failed")
+          }
+          ui_done("An enhanced .gitignore has been created (using development path).")
+        },
+        error = function(e2) {
+          message("Fallback also failed: ", e2$message)
+          return(FALSE)
+        }
+      )
+    },
+    warning = function(w) {
+      message("Warning during .gitignore creation: ", w$message)
+    },
+    finally = {
+      # You could add cleanup code
+    }
+  )
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
