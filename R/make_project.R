@@ -377,25 +377,11 @@ run_me_first <- function(path, type) {
     file_content <- readr::read_file("vignettes/analysis.qmd")
 
     # Then modify with OS-specific patterns
-    modified_content <- if (.Platform$OS.type == "windows") {
-      stringr::str_replace(
-        file_content,
-        "format:\r\n  html:\r\n    self-contained: true",
-        "output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}"
-      )
-    } else {
-      stringr::str_replace(
+    modified_content <- stringr::str_replace(
         file_content,
         "format:\n  html:\n    self-contained: true",
         "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}"
       )
-    }
-
-    # Debug what we're finding/replacing
-    cat("Original format section:\n")
-    cat(stringr::str_extract(file_content, "format:.*?self-contained: true"))
-    cat("\n\nModified content:\n")
-    cat(modified_content)
 
     # Finally write
     readr::write_file(modified_content, "vignettes/analysis.qmd")
