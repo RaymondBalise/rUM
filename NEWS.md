@@ -1,5 +1,15 @@
 # rUM (development version)
 
++ Moved external GitHub gists to `inst/gists` directory
++ Added custom.scss to non-package Quarto projects
++ removed `RUN_ME_FIRST.R` file
++ Automated `make_project(vignette = TRUE)` development tools during project build:
+  + Write project packages to `DESCRIPTION` file
+  + Adding `VignetteBuilder` (quarto or knitr) to project `DESCRIPTION` file
+  + Adding items to `.Rbuildignore` & `vignettes/.gitignore`
+  + Restructure `analysis.qmd` & `analysis.Rmd` YAML for vignette engine
++ Added `README.md` and `dated_progress_notes.md` templates to new projects
+
 # rUM 2.0.0 (Overproof Rum) 
 
 + Added an `example` argument to `make_project()`
