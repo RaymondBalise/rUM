@@ -240,52 +240,17 @@ make_project <- function(
   #   readr::read_file("inst/gists/aggressive_gitignore.txt"), 
   #   con = file.path(paste0(path, "/.gitignore"))
   # )
-  tryCatch(
-    {
-      # First try installed package path
-      gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
-      
-      # If that's empty, try development path
-      if (gitign_path == "") {
-        # Check if we're in the package directory
-        if (basename(getwd()) == "rUM") {
-          gitign_path <- file.path("inst", "gists", "aggressive_gitignore.txt")
-        } else {
-          # Check one level up for the package directory
-          potential_pkg_path <- file.path(dirname(getwd()), "rUM", "inst", "gists", "aggressive_gitignore.txt")
-          if (file.exists(potential_pkg_path)) {
-            gitign_path <- potential_pkg_path
-          } else {
-            # Last resort - try using here() to find it
-            gitign_path <- here::here("rUM", "inst", "gists", "aggressive_gitignore.txt")
-          }
-        }
-      }
-      
-      if (!file.exists(gitign_path)) {
-        stop("Could not locate aggressive_gitignore.txt in either installed package or development directories")
-      }
-      
-      copy_success <- file.copy(
-        from = gitign_path,
-        to = paste0(path, "/.gitignore")
-      )
-      
-      if (!copy_success) {
-        stop("File copy failed")
-      }
-      
-      ui_done("An enhanced .gitignore has been created.")
-    },
-    error = function(e) {
-      message("Error: ", e$message, "\n")
-      message("Working directory: ", getwd(), "\n")
-      return(FALSE)
-    }
-  )
-
+  # invisible({
+    file.remove(paste0(path, '/.gitignore'))
+  gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
+    file.copy(
+      from = gitign_path,
+      to = paste0(path, "/gitignore.R")
+    )
+  file.rename(paste0(path, "/gitignore.R"), paste0(path, "/.gitignore"))
+  # })
   # Adding console feedback
-  # ui_done("An enhanced .gitignore has been created.")
+  ui_done("An enhanced .gitignore has been created.")
 
   ############################################################################
   # Add a README template from inst/gists 
