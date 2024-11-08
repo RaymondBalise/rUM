@@ -247,7 +247,7 @@ make_project <- function(
       from = gitign_path,
       to = paste0(path, "/gitignore.R")
     )
-  file.rename(paste0(path, "/gitignore.R"), paste0(path, "/.gitignore"))
+  # file.rename(paste0(path, "/gitignore.R"), paste0(path, "/.gitignore"))
   # })
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
