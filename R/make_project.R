@@ -224,22 +224,26 @@ make_project <- function(
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
   
   # Path to gitignore this must be updated if the gist changes.
-  gist_path_ignore <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/",
-    "1978fb42fc520ca57f670908e111585e/raw/",
-    "e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore"
-  )
-  download.file(
-    gist_path_ignore, 
-    paste0(path, "/.gitignore"),
-    # silence console output: "trying URL..., Content type..., downloaded..."
-    quiet = TRUE
-  )
-  # Try using `writeLines`
+  # gist_path_ignore <- paste0(
+  #   "https://gist.githubusercontent.com/RaymondBalise/",
+  #   "1978fb42fc520ca57f670908e111585e/raw/",
+  #   "e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore"
+  # )
+  # download.file(
+  #   gist_path_ignore, 
+  #   paste0(path, "/.gitignore"),
+  #   # silence console output: "trying URL..., Content type..., downloaded..."
+  #   quiet = TRUE
+  # )
+  # Try using `writeLines` -- this works but inserts empty lines on Windows
   # writeLines(
   #   readr::read_file("inst/gists/aggressive_gitignore.txt"), 
   #   con = file.path(paste0(path, "/.gitignore"))
   # )
+  invisible(file.copy(
+    from = here::here("inst", "gists", "aggressive_gitignore.txt"),
+    to = paste0(path, "/.gitignore")
+  ))
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
