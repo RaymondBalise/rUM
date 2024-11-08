@@ -229,20 +229,20 @@ make_project <- function(
     "1978fb42fc520ca57f670908e111585e/raw/",
     "e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore"
   )
-  # download.file(
-  #   gist_path_ignore, 
-  #   paste0(path, "/.gitignore"),
-  #   # silence console output: "trying URL..., Content type..., downloaded..."
-  #   quiet = TRUE
-  # )
-  invisible(file.copy(
-    pkgload::system.file(
-      "gists/aggressive_gitignore.txt", 
-      package = "rUM",
-      mustWork = TRUE # help identify if the file isn't found
-    ), 
-    paste0(path, "/.gitignore")
-  ))
+  download.file(
+    gist_path_ignore, 
+    paste0(path, "/.gitignore"),
+    # silence console output: "trying URL..., Content type..., downloaded..."
+    quiet = TRUE
+  )
+  # invisible(file.copy(
+  #   system.file(
+  #     "gists/aggressive_gitignore.txt", 
+  #     package = "rUM",
+  #     mustWork = TRUE # help identify if the file isn't found
+  #   ), 
+  #   paste0(path, "/.gitignore")
+  # ))
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
