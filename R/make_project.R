@@ -236,19 +236,11 @@ make_project <- function(
   #   quiet = TRUE
   # )
   # Try using `writeLines` -- this works but inserts empty lines on Windows
-  # writeLines(
-  #   readr::read_file("inst/gists/aggressive_gitignore.txt"), 
-  #   con = file.path(paste0(path, "/.gitignore"))
-  # )
-  # invisible({
-    file.remove(paste0(path, '/.gitignore'))
-  gitign_path <- system.file("gists/aggressive_gitignore.txt", package = "rUM")
-    file.copy(
-      from = gitign_path,
-      to = paste0(path, "/gitignore.R")
-    )
-  # file.rename(paste0(path, "/gitignore.R"), paste0(path, "/.gitignore"))
-  # })
+  writeLines(
+    readLines("inst/gists/aggressive_gitignore.txt", warn = FALSE), 
+    con = file.path(paste0(path, "/.gitignore"))
+  )
+  
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
