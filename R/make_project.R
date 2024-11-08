@@ -353,7 +353,7 @@ make_project <- function(
 
     # Add Vignette builder to DESCRIPTION:
     cat(
-      "VignetteBuilder: quarto", 
+      "VignetteBuilder: quarto\n", 
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
@@ -372,7 +372,7 @@ make_project <- function(
     
     # Add Vignette builder to DESCRIPTION:
     cat(
-      "VignetteBuilder: knitr", 
+      "VignetteBuilder: knitr\n", 
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
