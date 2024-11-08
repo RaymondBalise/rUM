@@ -235,12 +235,17 @@ make_project <- function(
   #   # silence console output: "trying URL..., Content type..., downloaded..."
   #   quiet = TRUE
   # )
-  # Try using `writeLines` -- this works but inserts empty lines on Windows
-  writeLines(
-    readr::read_file("inst/gists/aggressive_gitignore.txt"), 
-    con = file.path(paste0(path, "/.gitignore"))
+
+  ign_path <- system.file("gists/aggressive_gitignore.md", package = "rUM")
+  if (ign_path == "") {
+    stop("Could not find .gitignore in package installation")
+  }
+  file.remove(paste0(path, "/.gitignore"))
+  file.copy(
+    from = ign_path,
+    to = paste0(path, "/.gitignore")
   )
-  
+
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
