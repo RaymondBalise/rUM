@@ -344,7 +344,7 @@ run_me_first <- function(path, type) {
 
   #####################################################################
   ######  List packages used in the vignette  #########################
-  suppressMessages({
+  # suppressMessages({
     usethis::use_package("here", type = "suggests")
     usethis::use_package("knitr", type = "suggests")
     usethis::use_package("rmarkdown", type = "suggests")
@@ -353,18 +353,20 @@ run_me_first <- function(path, type) {
     usethis::use_package("conflicted", type = "suggests")
     usethis::use_package("glue", type = "suggests")
     usethis::use_package("gtsummary", type = "suggests", min_version = "2.0.3")
-    usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+    # usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
     usethis::use_package("rUM", type = "suggests")
     usethis::use_package("rio", type = "suggests")
     usethis::use_package("table1", type = "suggests")
     usethis::use_package("tidymodels", type = "suggests")
     usethis::use_package("tidyverse", type = "suggests")
-  })
+  # })
   #####################################################################
 
   # Append Vignette builder to DESCRIPTION file & modify YAML content
   if (type == "Quarto (analysis.qmd)") { # Quarto project
 
+    usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+    
     # Add Vignette builder to DESCRIPTION:
     cat(
       "VignetteBuilder: quarto", 
