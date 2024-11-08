@@ -238,7 +238,8 @@ make_project <- function(
   invisible(file.copy(
     system.file(
       "gists/aggressive_gitignore.txt", 
-      package = "rUM"
+      package = "rUM",
+      mustWork = TRUE # help identify if the file isn't found
     ), 
     paste0(path, "/.gitignore")
   ))
