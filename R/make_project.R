@@ -215,6 +215,9 @@ make_project <- function(
     }
   }
 
+  #############################################################################
+  #            Add project directories and supplemental files                 #
+  #############################################################################
   # Add custom.scss to Quarto non-package projects only. 
   #  "The minimal default format is a deliberate limitation of the current 
   #  implementaton of the vignette engine. It ensures that the HTML vignettes
@@ -224,9 +227,7 @@ make_project <- function(
     write_scss(name = "custom", path = path) 
   }
   
-  
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
-  
 
   # Add enhanced .gitignore from inst/gists
   ign_path <- system.file("gists/aggressive_gitignore.md", package = "rUM")
@@ -245,7 +246,6 @@ make_project <- function(
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
-
   # Add a README template from inst/gists 
   readme_path <- system.file("gists/README.md", package = "rUM")
   if (readme_path == "") {
@@ -257,7 +257,6 @@ make_project <- function(
   ))
   # Adding console feedback
   ui_done("A README.md template has been created.")
-
 
   # Add dated_progress_notes.md template
   writeLines(
@@ -281,7 +280,6 @@ make_project <- function(
     ui_done("dated_progress_notes.md has been added to the .Rbuildignore.")  
   }
 
-
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
   
@@ -294,13 +292,15 @@ make_project <- function(
     paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl"),
     quiet = TRUE
   )
-  
   download.file(
     "https://www.zotero.org/styles/apa",
     paste0(path, vig_path, "/apa.csl"),
     quiet = TRUE
   )
-  
+
+  #############################################################################
+  #               Automate package building functionality                     #
+  #############################################################################
   if (vignette == TRUE){
     # This function adds to DESCRIPTION file, .gitignore (package & vignettes),
     #   adds the specific VignetteBuilder, and modifies the vignettes/analysis.*
@@ -311,6 +311,11 @@ make_project <- function(
   
 }
 
+
+
+#############################################################################
+#                   make_project() helper functions                         #
+#############################################################################
 .valid_package_name <- function(x) {
   grepl("^[a-zA-Z][a-zA-Z0-9.]+$", x) && !grepl("\\.$", x)
 }
@@ -342,10 +347,8 @@ make_project <- function(
     usethis::use_package("tidyverse", type = "suggests")
   })
 
-
   # Create vignettes/.gitignore & write "*.html" & "*.R"
   writeLines("*.html\n*.R", con = "vignettes/.gitignore")
-
 
   # Append Vignette builder to DESCRIPTION file & modify YAML content
   if (type == "Quarto (analysis.qmd)") { # Quarto project
