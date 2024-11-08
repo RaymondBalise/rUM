@@ -379,16 +379,16 @@ run_me_first <- function(path, type) {
     # Replace the pattern with the new sentence
     modified_content <- 
       if (.Platform$OS.type == "windows") {
-        str_replace_all(
+        stringr::str_replace_all(
           file_content, 
-          fixed("format:\r\n  html:\r\n    self-contained: true\r\n"), 
-          fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
+          stringr::fixed("format:\r\n  html:\r\n    self-contained: true\r\n"), 
+          stringr::fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
         )
       } else {
-        str_replace_all(
+        stringr::str_replace_all(
           file_content, 
-          fixed("format:\n  html:\n    self-contained: true\n"), 
-          fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
+          stringr::fixed("format:\n  html:\n    self-contained: true\n"), 
+          stringr::fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
         )
       }
 
