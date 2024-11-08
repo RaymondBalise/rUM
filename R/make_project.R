@@ -236,7 +236,7 @@ make_project <- function(
   #   quiet = TRUE
   # )
   invisible(file.copy(
-    system.file(
+    pkgload::system.file(
       "gists/aggressive_gitignore.txt", 
       package = "rUM",
       mustWork = TRUE # help identify if the file isn't found
