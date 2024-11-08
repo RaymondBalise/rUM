@@ -240,10 +240,13 @@ make_project <- function(
   #   readr::read_file("inst/gists/aggressive_gitignore.txt"), 
   #   con = file.path(paste0(path, "/.gitignore"))
   # )
-  invisible(file.copy(
-    from = here::here("inst", "gists", "aggressive_gitignore.txt"),
-    to = paste0(path, "/.gitignore")
-  ))
+  invisible({
+    file.remove(paste0(path, '/.gitignore'))
+    file.copy(
+      from = here::here("inst", "gists", "aggressive_gitignore.txt"),
+      to = paste0(path, "/.gitignore")
+    )
+  })
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
