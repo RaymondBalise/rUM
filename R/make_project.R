@@ -225,7 +225,7 @@ make_project <- function(
   }
   # Add custom.css to Rmd non-package projects only.
   if (vignette == FALSE & type == "R Markdown (analysis.Rmd)") {
-    rmd_css_path <- system.file("gists/Rmd_css.md")
+    rmd_css_path <- system.file("gists/Rmd_css.md", package = "rUM")
     invisible(file.copy(
       from = rmd_css_path,
       to = paste0(path, "/custom.css")
