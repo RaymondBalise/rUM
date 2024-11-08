@@ -221,7 +221,7 @@ make_project <- function(
   #  size and can be published on CRAN without problems".
   # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
   if (vignette == FALSE & type == "Quarto (analysis.qmd)") {
-    write_scss(path) 
+    write_scss(name = "custom", path = path) 
   }
   
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
@@ -365,7 +365,7 @@ make_project <- function(
     readr::write_file(
       x = stringr::str_replace(
         readr::read_file("vignettes/analysis.qmd"),
-          "format:\n  html:\n    self-contained: true",
+          "format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss",
           "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}"
         ), 
       file = "vignettes/analysis.qmd"

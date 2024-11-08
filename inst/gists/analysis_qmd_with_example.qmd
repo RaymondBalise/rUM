@@ -4,7 +4,10 @@ author: "your_name_goes_here"
 date: last-modified
 format:
   html:
-    self-contained: true
+    embed-resources: true
+    theme:
+      - default
+      - custom.scss
 knitr:
   opts_chunk:        ############ set global options ############
     collapse: true   # keep code from blocks together (if shown)
