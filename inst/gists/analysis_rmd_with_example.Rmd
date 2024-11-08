@@ -5,6 +5,7 @@ date: "`r Sys.Date()`"
 output:
   bookdown::html_document2:
     number_sections: false
+    css: custom.css
 bibliography: [references.bib, packages.bib]
 csl: the-new-england-journal-of-medicine.csl
 ---
