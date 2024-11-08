@@ -243,8 +243,8 @@ make_project <- function(
   invisible({
     file.remove(paste0(path, '/.gitignore'))
     file.copy(
-      from = here::here("inst", "gists", "aggressive_gitignore.txt"),
-      to = paste0(path, "/gitignore")
+      from = system.file("gists/aggressive_gitignore.txt", package = "rUM"),
+      to = paste0(path, "/gitignore.R")
     )
   })
   # Adding console feedback
