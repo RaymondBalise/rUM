@@ -12,6 +12,7 @@
 #' @importFrom usethis create_project ui_done ui_info ui_nope ui_oops
 #' @importFrom glue glue
 #' @importFrom gtsummary tbl_summary
+#' @importFrom readr read_file write_file
 #' @importFrom rio import
 #' @importFrom tidymodels tidymodels_prefer
 ## usethis namespace: end
