@@ -242,6 +242,8 @@ make_project <- function(
     system.file("gists/aggressive_gitignore.txt", package = "rUM")
   }
   
+  print(gitign_path) # Let's see what path we're actually getting
+  
   writeLines(
     readLines(gitign_path, warn = FALSE),
     con = file.path(paste0(path, "/.gitignore"))
