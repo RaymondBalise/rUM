@@ -223,33 +223,25 @@ make_project <- function(
   
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
   
-  # Path to gitignore this must be updated if the gist changes.
-  # gist_path_ignore <- paste0(
-  #   "https://gist.githubusercontent.com/RaymondBalise/",
-  #   "1978fb42fc520ca57f670908e111585e/raw/",
-  #   "e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore"
-  # )
-  # download.file(
-  #   gist_path_ignore, 
-  #   paste0(path, "/.gitignore"),
-  #   # silence console output: "trying URL..., Content type..., downloaded..."
-  #   quiet = TRUE
-  # )
 
+  # Add enhanced .gitignore from inst/gists
   ign_path <- system.file("gists/aggressive_gitignore.md", package = "rUM")
   if (ign_path == "") {
     stop("Could not find .gitignore in package installation")
   }
-  file.remove(paste0(path, "/.gitignore"))
-  file.copy(
-    from = ign_path,
-    to = paste0(path, "/.gitignore")
-  )
-
+  invisible({
+    # Remove default .gitingore
+    file.remove(paste0(path, "/.gitignore"))
+    # Replace .gitignore
+    file.copy(
+      from = ign_path,
+      to = paste0(path, "/.gitignore")
+    )
+  })
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
-  ############################################################################
+
   # Add a README template from inst/gists 
   readme_path <- system.file("gists/README.md", package = "rUM")
   if (readme_path == "") {
@@ -259,9 +251,9 @@ make_project <- function(
     from = readme_path,
     to = paste0(path, "/README.md")
   ))
-
   # Adding console feedback
   ui_done("A README.md template has been created.")
+
 
   # Add dated_progress_notes.md template
   writeLines(
@@ -274,6 +266,7 @@ make_project <- function(
   )
   # Adding console feedback
   ui_done("A dated_progress_notes.md template has been created.")
+  # Add dated_progress_notes.md to .Rbuildignore for packages
   if (vignette == TRUE) {
     cat(
       "dated_progress_notes.md", 
@@ -284,34 +277,32 @@ make_project <- function(
     ui_done("dated_progress_notes.md has been added to the .Rbuildignore.")  
   }
 
+
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
   
   # write an empty user bibliography file
   writeLines("", con = file.path(paste0(path, vig_path, "/references.bib")))
   
+  # Add .csl files
   download.file(
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
     paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl"),
-    # silence console output: "trying URL..., Content type..., downloaded..."
     quiet = TRUE
   )
   
   download.file(
     "https://www.zotero.org/styles/apa",
     paste0(path, vig_path, "/apa.csl"),
-    # silence console output: "trying URL..., Content type..., downloaded..."
     quiet = TRUE
   )
   
   if (vignette == TRUE){
-    
     # This function adds to DESCRIPTION file, .gitignore (package & vignettes),
     #   adds the specific VignetteBuilder, and modifies the vignettes/analysis.*
     #   YAML header with content appropriate to build the respective vignette
     #   using the correct engine.
     .run_me_first(path, type)
-
   } 
   
 }
@@ -347,13 +338,6 @@ make_project <- function(
     usethis::use_package("tidyverse", type = "suggests")
   })
 
-
-  # Append "inst/doc" to main .gitignore
-  cat(
-    "\n\n# Vignettes\ninst/doc\n", 
-    file = file.path(".gitignore"),
-    append = TRUE # add, don't overwrite current file
-  )
 
   # Create vignettes/.gitignore & write "*.html" & "*.R"
   writeLines("*.html\n*.R", con = "vignettes/.gitignore")
