@@ -338,21 +338,24 @@ make_project <- function(
   # Move to new project location
   setwd(path)
 
-  # Add to DESCRIPTION:
-  usethis::use_package("here", type = "suggests")
-  usethis::use_package("knitr", type = "suggests")
-  usethis::use_package("rmarkdown", type = "suggests")
-  usethis::use_package("roxygen2", type = "suggests")
-  
-  usethis::use_package("conflicted", type = "suggests")
-  usethis::use_package("glue", type = "suggests")
-  usethis::use_package("gtsummary", type = "suggests", min_version = "2.0.3")
-  # usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
-  usethis::use_package("rUM", type = "suggests")
-  usethis::use_package("rio", type = "suggests")
-  usethis::use_package("table1", type = "suggests")
-  usethis::use_package("tidymodels", type = "suggests")
-  usethis::use_package("tidyverse", type = "suggests")
+  # Add quietly to DESCRIPTION:
+  suppressMessages({
+    usethis::use_package("here", type = "suggests")
+    usethis::use_package("knitr", type = "suggests")
+    usethis::use_package("rmarkdown", type = "suggests")
+    usethis::use_package("roxygen2", type = "suggests")
+    
+    usethis::use_package("conflicted", type = "suggests")
+    usethis::use_package("glue", type = "suggests")
+    usethis::use_package("gtsummary", type = "suggests", min_version = "2.0.3")
+    # usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+    usethis::use_package("rUM", type = "suggests")
+    usethis::use_package("rio", type = "suggests")
+    usethis::use_package("table1", type = "suggests")
+    usethis::use_package("tidymodels", type = "suggests")
+    usethis::use_package("tidyverse", type = "suggests")
+  })
+
 
   # Append "inst/doc" to main .gitignore
   cat(
@@ -368,8 +371,10 @@ make_project <- function(
   # Append Vignette builder to DESCRIPTION file & modify YAML content
   if (type == "Quarto (analysis.qmd)") { # Quarto project
 
-    # Add to DESCRIPTION for Quarto:
-    usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+    # Add quietly to DESCRIPTION for Quarto:
+    suppressMessages({
+      usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+    })
 
     # Add Vignette builder to DESCRIPTION:
     cat(
@@ -389,7 +394,24 @@ make_project <- function(
     )
 
   } else { # Rmd project
-    # something else
+    
+    # Add Vignette builder to DESCRIPTION:
+    cat(
+      "VignetteBuilder: knitr", 
+      file = file.path("DESCRIPTION"),
+      append = TRUE # add, don't overwrite current file
+    )
+
+    # Replace the YAML pattern with the new structure for Rmd vignette:
+    readr::write_file(
+      x = stringr::str_replace(
+        readr::read_file("vignettes/analysis.Rmd"),
+          "output:\n  bookdown::html_document2:\n    number_sections: false\n",
+          "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n"
+        ), 
+      file = "vignettes/analysis.Rmd"
+    )
+
   }
 
   # Return to original location where rUM::make_project() was executed
