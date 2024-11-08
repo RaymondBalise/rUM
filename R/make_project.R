@@ -172,8 +172,13 @@ make_project <- function(
       # Adding console feedback
       ui_done("analysis.qmd has been created.")
 
-      # Add custom.scss to project
-      write_scss(name = "custom", path = path)
+      # Add custom.scss to package project only. "The minimal default format is
+      #  a deliberte limitation of the current implementaton of the vignette
+      #  engine. It ensures that the HTML vignettes produced are reasonable
+      #  size and can be published on CRAN without problems".
+      # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
+      if (!vignette) write_scss(path)
+      
 
     } else {
       abort(
