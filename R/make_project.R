@@ -246,21 +246,30 @@ make_project <- function(
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
-  # Add a README template from inst/gists 
+  # Add a README template from inst/gists
+  readme_path <- system.file("gists/README.md", package = "rUM")
+  if (readme_path == "") {
+    stop("Could not find README template in package installation")
+  }
+
   if (file.exists(file.path(path, 'README.md'))) {
     ui_info('**CAUTION!!**')
     if (ui_yeah('README.md found in project level directory! Overwrite?')) {
-      readme_path <- system.file("gists/README.md", package = "rUM")
-      if (readme_path == "") {
-        stop("Could not find README template in package installation")
-      }
       invisible(file.copy(
         from = readme_path,
-        to = paste0(path, "/README.md")
+        to = file.path(path, "README.md"),
+        overwrite = TRUE
       ))
-      # Adding console feedback
-      ui_done("A README.md template has been created.")
+      ui_done("README.md has been overwritten with the template.")
+    } else {
+      ui_info("Keeping existing README.md")
     }
+  } else {
+    invisible(file.copy(
+      from = readme_path,
+      to = file.path(path, "README.md")
+    ))
+    ui_done("A README.md template has been created.")
   }
 
   # Add dated_progress_notes.md template
@@ -326,8 +335,6 @@ make_project <- function(
 }
 
 .run_me_first <- function(path, type) {
-  # This all comes from or adapted from RUN_ME_FIRST.R so it is automated and
-  #   the user can just focus on writing content.
   # Capture current directory and return to it at the end of this function
   current_wd <- getwd()
   # Move to new project location
@@ -383,6 +390,7 @@ make_project <- function(
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
+
     # Replace the YAML pattern with the new structure for Rmd vignette:
     readr::write_file(
       x = stringr::str_replace(
