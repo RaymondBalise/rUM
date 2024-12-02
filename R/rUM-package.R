@@ -14,6 +14,7 @@
 #' @importFrom gtsummary tbl_summary
 #' @importFrom readr read_file write_file
 #' @importFrom rio import
+#' @importFrom stringr fixed str_replace_all
 #' @importFrom tidymodels tidymodels_prefer
 ## usethis namespace: end
 NULL
