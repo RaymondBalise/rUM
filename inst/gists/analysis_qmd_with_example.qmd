@@ -26,7 +26,9 @@ bibliography: [references.bib, packages.bib]
 csl: the-new-england-journal-of-medicine.csl
 ---
 
-```{r tidyverse-tidymodels, echo=FALSE}
+```{r}
+#| label: tidyverse-tidymodels
+#| echo: false
 library(conflicted)
 suppressPackageStartupMessages(library(tidymodels))
 tidymodels_prefer()
@@ -36,7 +38,8 @@ suppressPackageStartupMessages(library(tidyverse))
 options(dplyr.summarise.inform = FALSE)
 ```
 
-```{r other-packages}
+```{r}
+#| label: other-packages
 library(glue)  # for glue()
 library(rUM)  # needed for the bibliography
 library(rio)  # for import() 
@@ -45,7 +48,8 @@ library(rio)  # for import()
 suppressPackageStartupMessages(library(gtsummary)) 
 ```
 
-```{r load-data}
+```{r}
+#| label: load-data
 # If you want to import a dataset which is not an R file, put its name inside 
 # the "" below.  For example:
 # raw_data <- import("the_excel.xlsx")
@@ -54,7 +58,8 @@ suppressPackageStartupMessages(library(gtsummary))
 # raw_data <- import("data/the_excel.xlsx")
 ```
 
-```{r make-analysis}
+```{r}
+#| label: make-analysis
 # preprocess your data and ultimately make a dataset called analysis
 analysis <- mtcars |> 
   mutate(auto_man = if_else(am == 0, "Automatic", "Manual")) |> 
@@ -71,7 +76,8 @@ Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)`
 
 # Results
 
-```{r tbl-table1}
+```{r}
+#| label: tbl-table1
 #| tbl-cap: |
 #|   Your real caption belongs here.  Remember that cross references to tables 
 #|   use labels for the code chunk starting with tbl-.
@@ -92,7 +98,8 @@ analysis |>
 
 As can be seen in @tbl-table1 ....
 
-```{r fig-figure-1}
+```{r}
+#| label: fig-figure-1
 #| fig-cap: |
 #|   Your real caption belongs here.  Remember that cross references to figures 
 #|   use labels for the code chunk starting with fig-.
