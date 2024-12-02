@@ -247,42 +247,8 @@ make_project <- function(
   ui_done("An enhanced .gitignore has been created.")
 
   # Add a README template from inst/gists
-  readme_path <- system.file("gists/README.md", package = "rUM")
-  if (readme_path == "") {
-    stop("Could not find README template in package installation")
-  }
+  rUM::write_readme(path = path)
 
-  if (file.exists(file.path(path, 'README.md'))) {
-    ui_info('**CAUTION!!**')
-    if (ui_yeah('README.md found in project level directory! Overwrite?')) {
-      invisible(file.copy(
-        from = readme_path,
-        to = file.path(path, "README.md"),
-        overwrite = TRUE
-      ))
-      ui_done("README.md has been overwritten with the template.")
-    } else {
-      ui_info("Keeping existing README.md")
-    }
-  } else {
-    invisible(file.copy(
-      from = readme_path,
-      to = file.path(path, "README.md")
-    ))
-    ui_done("A README.md template has been created.")
-  }
-
-  # Add dated_progress_notes.md template
-  writeLines(
-    paste0(
-      "# Add project updates here\n", 
-      format(Sys.Date(), "%b %d, %Y"),
-      ": project started"
-    ),
-    con = file.path(paste0(path, "/dated_progress_notes.md"))
-  )
-  # Adding console feedback
-  ui_done("A dated_progress_notes.md template has been created.")
   # Add dated_progress_notes.md to .Rbuildignore for packages
   if (vignette == TRUE) {
     cat(
