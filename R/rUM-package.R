@@ -9,7 +9,7 @@
 #' @importFrom table1 t1kable
 #' @importFrom rlang abort
 #' @importFrom utils download.file
-#' @importFrom usethis create_project ui_done ui_info ui_nope ui_oops
+#' @importFrom usethis create_project ui_done ui_info ui_nope ui_oops ui_yeah
 #' @importFrom glue glue
 #' @importFrom gtsummary tbl_summary
 #' @importFrom readr read_file write_file
