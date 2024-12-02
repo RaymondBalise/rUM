@@ -247,16 +247,21 @@ make_project <- function(
   ui_done("An enhanced .gitignore has been created.")
 
   # Add a README template from inst/gists 
-  readme_path <- system.file("gists/README.md", package = "rUM")
-  if (readme_path == "") {
-    stop("Could not find README template in package installation")
+  if (file.exists(file.path(path, 'README.md'))) {
+    ui_info('**CAUTION!!**')
+    if (ui_yeah('README.md found in project level directory! Overwrite?')) {
+      readme_path <- system.file("gists/README.md", package = "rUM")
+      if (readme_path == "") {
+        stop("Could not find README template in package installation")
+      }
+      invisible(file.copy(
+        from = readme_path,
+        to = paste0(path, "/README.md")
+      ))
+      # Adding console feedback
+      ui_done("A README.md template has been created.")
+    }
   }
-  invisible(file.copy(
-    from = readme_path,
-    to = paste0(path, "/README.md")
-  ))
-  # Adding console feedback
-  ui_done("A README.md template has been created.")
 
   # Add dated_progress_notes.md template
   writeLines(
