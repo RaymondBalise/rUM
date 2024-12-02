@@ -111,7 +111,7 @@ write_scss <- function(name = 'custom', path = getwd()) {
   if (!abort) {
     write(content, file = the_scss_file)
     ui_done(paste0('\n', name, '.scss has been created.\n\n'))
-    links <- glue::glue(
+    message(
       '-------------------------------------------------------------
         Please refer to these links for more SCSS styling options:
       - https://quarto.org/docs/output-formats/html-themes.html#customizing-themes
@@ -119,7 +119,6 @@ write_scss <- function(name = 'custom', path = getwd()) {
       - https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss
       --------------------------------------------------------------'
     )
-    ui_info(links)
     message('\n')
   } else {
     ui_oops('\nThe .scss file was not changed.\n\n')
