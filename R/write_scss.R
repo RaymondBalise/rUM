@@ -110,7 +110,7 @@ write_scss <- function(name = 'custom', path = getwd()) {
  
   if (!abort) {
     write(content, file = the_scss_file)
-    ui_done(paste0('\n', name, '.scss has been created.\n\n'))
+    ui_done(paste0('\n', name, '.scss has been created.\n'))
     message('
 -----------------------------------------------------------------------------
 Please refer to these links for more SCSS styling options:
@@ -121,7 +121,7 @@ Please refer to these links for more SCSS styling options:
 '
     )
   } else {
-    ui_oops('\nThe .scss file was not changed.\n\n')
+    ui_oops('\nThe .scss file was not changed.\n')
   }
  }
  NULL
