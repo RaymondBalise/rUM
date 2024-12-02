@@ -111,15 +111,15 @@ write_scss <- function(name = 'custom', path = getwd()) {
   if (!abort) {
     write(content, file = the_scss_file)
     ui_done(paste0('\n', name, '.scss has been created.\n\n'))
-    message(
-      '-------------------------------------------------------------
-        Please refer to these links for more SCSS styling options:
-      - https://quarto.org/docs/output-formats/html-themes.html#customizing-themes
-      - https://quarto.org/docs/output-formats/html-themes-more.html
-      - https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss
-      --------------------------------------------------------------'
+    message('
+-----------------------------------------------------------------------------
+Please refer to these links for more SCSS styling options:
+- https://quarto.org/docs/output-formats/html-themes.html#customizing-themes
+- https://quarto.org/docs/output-formats/html-themes-more.html
+- https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss
+-----------------------------------------------------------------------------
+'
     )
-    message('\n')
   } else {
     ui_oops('\nThe .scss file was not changed.\n\n')
   }
