@@ -33,61 +33,6 @@ write_scss <- function(name = 'custom', path = getwd()) {
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
 
-  the_scss_file <- file.path(path, paste0(name, '.scss'))
-  abort <- FALSE
- 
-  content <- glue::glue(
-  '/*-- scss:defaults --*/
-  // Colors
-  // $primary: #2c365e;  
-  // $body-bg: #fefefe;
-  // $link-color: $primary;
-  // $code-block-bg: #f8f9fa;
-  
-  // Fonts
-  // $font-family-sans-serif: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  // $font-family-monospace: "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
-  // $headings-font-weight: 600;
-  
-  // Layout
-  // $grid-breakpoint-lg: 1000px;
-  // $container-max-width: 1200px;
-  // $navbar-height: 60px;
-  
-  /*-- scss:mixins --*/
-  // @mixin card-shadow {{
-  //   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  //   transition: box-shadow 0.3s ease;
-  //   &:hover {{
-  //     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  //   }}
-  // }}
-  
-  // @mixin responsive-font($min-size, $max-size) {{
-  //   font-size: clamp($min-size, 2vw, $max-size);
-  // }}
-  
-  /*-- scss:rules --*/
-  // Custom theme rules
-  // .title-block {{
-  //   margin-bottom: 2rem;
-  //   border-bottom: 3px solid $primary;
-  // }}
-  
-  // .callout {{
-  //   @include card-shadow;
-  //   padding: 1.25rem;
-  //   margin: 1rem 0;
-  //   border-left: 4px solid $primary;
-  // }}
-  
-  // code {{
-  //   color: darken($primary, 10%);
-  //   padding: 0.2em 0.4em;
-  //   border-radius: 3px;
-  // }}'
-  )
- 
   # Warn user if a .scss file is found in project
   listed_files <- list.files(
     path = path, 
@@ -107,21 +52,49 @@ write_scss <- function(name = 'custom', path = getwd()) {
       abort <- ui_nope('Proceed with creating another SCSS file?')
     }
   }
- 
-  if (!abort) {
-    write(content, file = the_scss_file)
-    ui_done(paste0('\n', name, '.scss has been created.\n'))
-    message('
------------------------------------------------------------------------------
-Please refer to these links for more SCSS styling options:
-- https://quarto.org/docs/output-formats/html-themes.html#customizing-themes
-- https://quarto.org/docs/output-formats/html-themes-more.html
-- https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss
------------------------------------------------------------------------------
-'
-    )
-  } else {
-    ui_oops('\nThe .scss file was not changed.\n')
-  }
+
+  # Define SCSS content
+  content <- glue::glue(
+'/*-- scss:defaults --*/
+// Colors
+// $primary: #2c365e;  
+// $body-bg: #fefefe;
+// $link-color: $primary;
+
+// Fonts
+// $font-family-sans-serif: "Open Sans", sans-serif;
+// $font-family-monospace: "Source Code Pro", monospace;
+
+/*-- scss:mixins --*/
+
+/*-- scss:rules --*/
+// Custom theme rules
+// .title-block {{
+//   margin-bottom: 2rem;
+//   border-bottom: 3px solid $primary;
+// }}
+
+// code {{
+//   color: darken($primary, 10%);
+//   padding: 0.2em 0.4em;
+//   border-radius: 3px;
+// }}'
+  )
+
+  # Write SCSS file
+  the_scss_file <- file.path(path, paste0(name, '.scss'))
+  writeLines(content, the_scss_file)
+  ui_done(paste0('Created ', name, '.scss'))
+
+  # Display reference links
+  links <- glue::glue(
+    'For more SCSS styling options, visit:
+    - https://quarto.org/docs/output-formats/html-themes.html#customizing-themes
+    - https://quarto.org/docs/output-formats/html-themes-more.html
+    - https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss'
+  )
+  ui_info(links)
+
+  return(invisible(NULL))
+
  }
- NULL
