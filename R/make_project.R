@@ -328,13 +328,10 @@ make_project <- function(
 .run_me_first <- function(path, type) {
   # This all comes from or adapted from RUN_ME_FIRST.R so it is automated and
   #   the user can just focus on writing content.
-
   # Capture current directory and return to it at the end of this function
   current_wd <- getwd()
-
   # Move to new project location
   setwd(path)
-
   # Add quietly to DESCRIPTION:
   suppressMessages({
     usethis::use_package("here", type = "suggests")
@@ -357,41 +354,27 @@ make_project <- function(
 
   # Append Vignette builder to DESCRIPTION file & modify YAML content
   if (type == "Quarto (analysis.qmd)") { # Quarto project
-
+  
     # Add quietly to DESCRIPTION for Quarto:
     suppressMessages({
       usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
     })
-
     # Add Vignette builder to DESCRIPTION:
     cat(
       "VignetteBuilder: quarto\n", 
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
-
-    # Replace the pattern with the new sentence
-    modified_content <- 
-      if (.Platform$OS.type == "windows") {
-        str_replace_all(
-          readr::read_file("vignettes/analysis.qmd"), 
-          fixed("format:\r\n  html:\r\n    embed-resources: true\r\n    theme:\r\n      - default\r\n      - custom.scss"), 
-          fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
-        )
-      } else {
-        str_replace_all(
-          readr::read_file("vignettes/analysis.qmd"), 
-          fixed("format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss"), 
-          fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
-        )
-      }
     
     # Replace the YAML pattern with the new structure for Quarto vignette:
     readr::write_file(
-      x = modified_content, 
+      x = stringr::str_replace(
+        readr::read_file("vignettes/analysis.qmd"),
+          "format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss",
+          "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}"
+        ), 
       file = "vignettes/analysis.qmd"
     )
-
   } else { # Rmd project
     
     # Add Vignette builder to DESCRIPTION:
@@ -400,32 +383,17 @@ make_project <- function(
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
-
-    # Replace the pattern with the new sentence
-    modified_content <- 
-      if (.Platform$OS.type == "windows") {
-        str_replace_all(
-          readr::read_file("vignettes/analysis.Rmd"), 
-          fixed("output:\r\n  bookdown::html_document2:\r\n    number_sections: false\r\n"), 
-          fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{knitr::rmarkdown}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
-        )
-      } else {
-        str_replace_all(
-          readr::read_file("vignettes/analysis.Rmd"), 
-          fixed("output:\n  bookdown::html_document2:\n    number_sections: false\n"), 
-          fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n")
-        )
-      }
-    
     # Replace the YAML pattern with the new structure for Rmd vignette:
     readr::write_file(
-      x = modified_content, 
+      x = stringr::str_replace(
+        readr::read_file("vignettes/analysis.Rmd"),
+          "output:\n  bookdown::html_document2:\n    number_sections: false\n",
+          "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n"
+        ), 
       file = "vignettes/analysis.Rmd"
     )
-
   }
 
   # Return to original location where rUM::make_project() was executed
   setwd(current_wd)
-
 }
