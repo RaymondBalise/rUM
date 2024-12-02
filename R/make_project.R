@@ -224,7 +224,7 @@ make_project <- function(
   #  produced are reasonable size and can be published on CRAN without problems".
   # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
   if (vignette == FALSE & type == "Quarto (analysis.qmd)") {
-    write_scss(name = "custom", path = path) 
+    rUM::write_scss(name = "custom", path = path) 
   }
   
   dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
