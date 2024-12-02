@@ -49,10 +49,12 @@ vignettes/*.pdf
 Thumbs.db
 
 # Directories
+/doc/
 docs/
 data/
 development/
 macros/
+/Meta/
 output/
 sasdata/
 libs/
