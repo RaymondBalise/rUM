@@ -369,14 +369,26 @@ make_project <- function(
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
+
+    # Replace the pattern with the new sentence
+    modified_content <- 
+      if (.Platform$OS.type == "windows") {
+        str_replace_all(
+          readr::read_file("vignettes/analysis.qmd"), 
+          fixed("format:\r\n  html:\r\n    embed-resources: true\r\n    theme:\r\n      - default\r\n      - custom.scss"), 
+          fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{quarto::html}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
+        )
+      } else {
+        str_replace_all(
+          readr::read_file("vignettes/analysis.qmd"), 
+          fixed("format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss"), 
+          fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}\n")
+        )
+      }
     
     # Replace the YAML pattern with the new structure for Quarto vignette:
     readr::write_file(
-      x = stringr::str_replace(
-        readr::read_file("vignettes/analysis.qmd"),
-          fixed("format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss"),
-          fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}")
-        ), 
+      x = modified_content, 
       file = "vignettes/analysis.qmd"
     )
 
@@ -389,13 +401,25 @@ make_project <- function(
       append = TRUE # add, don't overwrite current file
     )
 
+    # Replace the pattern with the new sentence
+    modified_content <- 
+      if (.Platform$OS.type == "windows") {
+        str_replace_all(
+          readr::read_file("vignettes/analysis.Rmd"), 
+          fixed("output:\r\n  bookdown::html_document2:\r\n    number_sections: false\r\n"), 
+          fixed("output: rmarkdown::html_vignette\r\nvignette: >\r\n  %\\VignetteIndexEntry{your_title_goes_here}\r\n  %\\VignetteEngine{knitr::rmarkdown}\r\n  %\\VignetteEncoding{UTF-8}\r\n")
+        )
+      } else {
+        str_replace_all(
+          readr::read_file("vignettes/analysis.Rmd"), 
+          fixed("output:\n  bookdown::html_document2:\n    number_sections: false\n"), 
+          fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n")
+        )
+      }
+    
     # Replace the YAML pattern with the new structure for Rmd vignette:
     readr::write_file(
-      x = stringr::str_replace(
-        readr::read_file("vignettes/analysis.Rmd"),
-          fixed("output:\n  bookdown::html_document2:\n    number_sections: false\n"),
-          fixed("output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n")
-        ), 
+      x = modified_content, 
       file = "vignettes/analysis.Rmd"
     )
 
