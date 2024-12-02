@@ -26,8 +26,7 @@ bibliography: [references.bib, packages.bib]
 csl: the-new-england-journal-of-medicine.csl
 ---
 
-```{r}
-#| label: tidyverse-tidymodels
+```{r, tidyverse-tidymodels}
 #| echo: false
 library(conflicted)
 suppressPackageStartupMessages(library(tidymodels))
@@ -38,8 +37,7 @@ suppressPackageStartupMessages(library(tidyverse))
 options(dplyr.summarise.inform = FALSE)
 ```
 
-```{r}
-#| label: other-packages
+```{r, other-packages}
 library(glue)  # for glue()
 library(rUM)  # needed for the bibliography
 library(rio)  # for import() 
@@ -49,13 +47,11 @@ library(table1)  # for table1()
 suppressPackageStartupMessages(library(gtsummary)) 
 ```
 
-```{r}
-#| label: load-data
+```{r, load-data}
 # raw_data <- import("")  # your data file goes inside the ""
 ```
 
-```{r}
-#| label: make-analysis
+```{r, make-analysis}
 # preprocess your data and ultimately make a dataset called analysis
 
 ```
@@ -70,8 +66,7 @@ Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)`
 
 # Results
 
-```{r}
-#| label: tbl-table1
+```{r, tbl-table1}
 #| tbl-cap: "Cross references to tables use labels for the code chunk starting with tbl-."
 
 
@@ -79,8 +74,7 @@ Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)`
 
 As can be seen in @tbl-table1 ....
 
-```{r}
-#| label: fig-figure-1
+```{r, fig-figure-1}
 #| fig-cap: "Remember figure labels begin with fig-"
 
 
