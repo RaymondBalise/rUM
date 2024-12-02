@@ -371,7 +371,7 @@ make_project <- function(
       x = stringr::str_replace(
         readr::read_file("vignettes/analysis.qmd"),
           "format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss",
-          "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{quarto::html}\n  %\\VignetteEncoding{UTF-8}"
+          "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{quarto::html}\n  %\\\\VignetteEncoding{UTF-8}"
         ), 
       file = "vignettes/analysis.qmd"
     )
@@ -388,7 +388,7 @@ make_project <- function(
       x = stringr::str_replace(
         readr::read_file("vignettes/analysis.Rmd"),
           "output:\n  bookdown::html_document2:\n    number_sections: false\n",
-          "output: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{your_title_goes_here}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n"
+          "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{knitr::rmarkdown}\n  %\\\\VignetteEncoding{UTF-8}\n"
         ), 
       file = "vignettes/analysis.Rmd"
     )
