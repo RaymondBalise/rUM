@@ -58,17 +58,17 @@ write_scss <- function(name = 'custom', path = getwd()) {
       proceed <- ui_yeah('Would you like to create another SCSS file?')
       if (proceed) {
         ui_info(glue::glue(
-          'Be sure to update your listed SCSS files in the YAML like this:
-          
-          format:
-            html:
-              embed-resources: true
-              theme:
-                - default
-                - custom.scss
-                - {name}.scss
-                \n
-          '
+'Be sure to update your listed SCSS files in the YAML like this:
+
+format:
+  html:
+    embed-resources: true
+    theme:
+      - default
+      - custom.scss
+      - {name}.scss       # Add this line
+      \n
+'
         ))
       }
     }
