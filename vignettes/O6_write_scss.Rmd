@@ -1,0 +1,118 @@
+---
+title: "6. Customizing Quarto Documents with SCSS"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Customizing Quarto Documents with SCSS}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+Customizing the appearance of your Quarto documents doesn't have to be complicated. The `write_scss()` function simplifies the process of creating and managing SCSS style sheets, making it easier to achieve the exact look you want for your documents.
+
+## Getting Started
+
+When you create a new Quarto project with `rUM::make_project()`, your YAML header typically looks like this:
+
+````yaml
+format:
+  html:
+    embed-resources: true
+    theme:
+      - default
+      - custom.scss
+````
+
+The default `custom.scss` provides a foundation for styling, but you might want to add additional style sheets for different purposes. Let's explore how to do this effectively.
+
+## Creating Additional Style Sheets
+
+Let's say you want to create a new style sheet called "styles.scss". This is as simple as:
+
+````r
+rUM::write_scss("styles")
+````
+
+After running this command, your YAML will automatically update to:
+
+````yaml
+format:
+  html:
+    embed-resources: true
+    theme:
+      - default
+      - custom.scss
+      - styles.scss
+````
+
+## Customizing Styles
+
+Now that we have our new style sheet, let's modify it to change the background color to a light gray. Open `styles.scss` and modify the background color variable by removing the SCSS comment (`//`) and altering the hex code value for `$body-bg`:
+
+````
+/*-- scss:defaults --*/
+// Colors
+$body-bg: #f5f5f5;    // Light gray background
+````
+
+You can keep adding style sheets as needed. For example, let's add another one for additional customizations:
+
+````r
+rUM::write_scss("more_styles")
+````
+
+Your YAML will now include all three styles sheets:
+
+````yaml
+format:
+  html:
+    embed-resources: true
+    theme:
+      - default
+      - custom.scss
+      - styles.scss
+      - more_styles.scss
+````
+
+## Handling Different YAML Structures
+
+Sometimes you might encounter or create a Quarto document with a different YAML structure. In these cases, `write_scss()` provides helpful guidance. For example, if the function doesn't find the expected YAML structure, you'll see this console message:
+
+````
+Be sure to update your listed SCSS files in the YAML manually:
+format:
+  html:
+    embed-resources: true
+    theme:
+      - default
+      - custom.scss
+      - your_new_style.scss       # Add this line
+````
+
+This ensures you can still proceed with your customization, even if your YAML structure differs from the default.
+
+## Why Use Multiple Style Sheets?
+
+Using multiple SCSS files can be advantageous when:
+
+- Organizing different aspects of your styling (typography, colors, layout)
+
+- Maintaining separate themes for different purposes
+
+- Collaborating with others who need to modify specific style elements
+
+- Testing different style combinations without modifying your base styles
+
+## Conclusion
+
+The `write_scss()` function makes it straightforward to expand your Quarto document's styling capabilities while maintaining a clean, organized structure. Whether you're making simple color changes or developing complex themes, this tool helps you focus on creativity rather than file management.
+
+For more advanced SCSS customization options, visit the [Quarto documentation on HTML themes](https://quarto.org/docs/output-formats/html-themes.html#customizing-themes).
