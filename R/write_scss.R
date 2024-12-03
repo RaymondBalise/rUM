@@ -53,6 +53,20 @@ write_scss <- function(name = 'custom', path = getwd()) {
     if (any(basename(listed_files) == paste0(name, '.scss'))) {
       ui_info(paste0('A file named "', name, '.scss" already exists!'))
       proceed <- ui_yeah('Do you want to overwrite this specific file?')
+      if (proceed) {
+        ui_info(glue::glue(
+          'Be sure to update your listed SCSS files in the YAML like this:
+          
+          format:
+            html:
+              embed-resources: true
+              theme:
+                - default
+                - custom.scss
+                - [your new SCSS file].scss
+          '
+        ))
+      }
     } else {
       ui_info(paste0('Other .scss files exist but none named "', name, '.scss"'))
       proceed <- ui_yeah('Would you like to create another SCSS file?')
