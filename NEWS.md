@@ -12,6 +12,7 @@
 
 ## Other Updates
 + removed `RUN_ME_FIRST.R` file and instead automate those processes as described above
++ Empty `ggplot()` object included in manuscript & vignette templates
 + Moved external GitHub gists to `inst/gists` directory
 
 ## Bug Fixes
