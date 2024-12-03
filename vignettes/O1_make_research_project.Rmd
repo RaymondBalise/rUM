@@ -103,8 +103,8 @@ A new project directory is created and it will be populated with [these files](#
 -   An aggressive `.gitignore` to help prevent the unintended sharing of sensitive study information or protected health information (PHI).
 -   [`analysis.qmd`](#fig:analysis_quarto_file) is a Quarto template for writing your research project. It has a preconfigured YAML header; Introduction, Methods, Results, Conclusion, and Reference sections; and a code chunk to construct your bibliography using `knitr::write_bib()`.
 -   `custom.scss` provides styling customization options for your Quarto document. Additional style sheets can be added using `write_scss()`.
--   A README.md template containing structured sections for comprehensive project documentation, including study details, setup instructions, and file descriptions.
--   A dated_progress_notes.md file that automatically tracks project milestones, starting with the project creation date.
+-   A `README.md` template containing structured sections for comprehensive project documentation, including study details, setup instructions, and file descriptions.
+-   A `dated_progress_notes.md` file that automatically tracks project milestones, starting with the project creation date.
 -   An empty folder named `data`. This folder is listed within the `.gitignore`. That means that git should not track these files. This should help prevent data leakage but be sure to talk to a data security expert before sharing any biomedical projects on websites like GitHub.
 -   A `.Rproj` file with the same name as your project folder.
 -   Two text files, `packages.bib` and `references.bib`, which are used to hold details for your paper's bibliography. Refer to the Methods and References sections, respectively, within the [`analysis.qmd`](#fig:analysis_quarto_file) file for initial examples of how to add/use references.
