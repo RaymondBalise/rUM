@@ -1,28 +1,41 @@
 #' Create a project README file
-#' 
-#' This function is designed to first check for the existence of a README file. If none
-#' is detected or the user chooses to overwrite the current README, a README template
-#' is loaded from \code{rUM/inst/gists/README.md} and written to the project level.
-#' 
+#'
+#' This function streamlines project documentation by creating and managing both README.md
+#' and dated_progress_notes.md files. It provides interactive prompts for existing files
+#' and maintains consistent project documentation structure.
+#'
 #' @param path The path to the main project level. Defaults to the current
 #' working directory.
-#' @return A README.md template. Contains sections for project description (study
-#' name, principle investigator, & author), project setup steps for ease of portability,
-#' project file descriptions, project directory descriptions, and miscellaneous. 
-#' 
-#' @details This function handles the creation and/or overwriting of both README.md
-#' and dated_progress_notes.md files. For each file, if it already exists, the user
-#' will be prompted whether to overwrite it. The dated_progress_notes.md file will
-#' be initialized with the current date and a "project started" message.
-#' 
-#' NOTE: Some documentation remains to provide the user with example descriptions for 
-#' files & directories. It is highly recommended to keep these sections. This is a 
-#' modifiable template and should be tailor-fit for your exact purpose. 
-#' 
+#' @return Creates or updates two files:
+#' \itemize{
+#'   \item README.md: A comprehensive template for project documentation
+#'   \item dated_progress_notes.md: A chronological project progress tracker
+#' }
+#'
+#' @details
+#' The README.md template includes structured sections for:
+#' \itemize{
+#'   \item Project description (study name, principal investigator, author)
+#'   \item Project setup steps for reproducibility
+#'   \item File and directory descriptions
+#'   \item Miscellaneous project notes
+#' }
+#'
+#' The dated_progress_notes.md file is initialized with the current date and is designed
+#' to help track project milestones chronologically.
+#'
+#' For both files, if they already exist, the user will be prompted before any
+#' overwriting occurs. The templates include example documentation that can be
+#' modified to suit your specific project needs.
+#'
 #' @export
 #' @examples
 #' \dontrun{
+#' # Create new documentation files
 #' write_readme(path = "path/to/project")
+#'
+#' # Update existing documentation (will prompt for confirmation)
+#' write_readme()  # uses current working directory
 #' }
  
 write_readme <- function(path = getwd()) {

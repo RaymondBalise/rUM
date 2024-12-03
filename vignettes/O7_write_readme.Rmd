@@ -1,0 +1,94 @@
+---
+title: "7. Project Documentation with write_readme()"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Project Documentation with write_readme}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+Consistent project documentation is crucial for reproducibility and collaboration. The `write_readme()` function simplifies this process by creating and managing two essential documentation files: README.md and dated_progress_notes.md.
+
+## Getting Started
+
+Creating project documentation is as simple as:
+
+````r
+rUM::write_readme()
+````
+
+This creates two files in your project directory:
+
+1. README.md: A comprehensive project documentation template
+1. dated_progress_notes.md: A chronological progress tracker
+
+## The README Template
+
+The generated README.md includes structured sections for:
+
+````
+# Project Name
+
+## Description
+- Study Name: 
+- Principal Investigator: 
+- Author: 
+
+## Project Setup
+[Steps for project reproduction]
+
+## File Descriptions
+[Details about key project files]
+
+## Directory Structure
+[Overview of project organization]
+
+## Miscellaneous
+[Additional project notes]
+````
+
+## Progress Tracking
+
+The dated_progress_notes.md file automatically starts with:
+
+````
+# Add project updates here
+Dec 3, 2024: project started
+````
+
+This file serves as a chronological log of project developments and milestones.
+
+## Handling Existing Files
+
+If either file already exists, `write_readme()` will provide interactive prompts:
+
+````r
+> rUM::write_readme()
+#> ℹ **CAUTION!!**
+#> README.md found in project level directory! Overwrite?
+#> ℹ **CAUTION!!**
+#> dated_progress_notes.md found in project level directory! Overwrite?
+````
+
+This ensures you won't accidentally overwrite existing documentation.
+
+## Best Practices
+
+1. Update the README.md immediately after project creation
+1. Keep the dated_progress_notes.md current with significant changes
+1. Use consistent formatting in your documentation
+1. Include enough detail for others to understand and reproduce your work
+
+## Conclusion
+The `write_readme()` function provides a foundation for thorough project documentation. By starting with well-structured templates and maintaining regular updates, you can ensure your projects remain accessible and reproducible.
+
+Whether you're working solo or collaborating with a team, good documentation practices make your research more valuable and easier to build upon.
