@@ -116,25 +116,25 @@ write_scss <- function(name = 'custom', path = getwd()) {
     ui_info("No analysis.qmd file found in the current directory.")
     return(invisible(NULL))
   }
-
+  
   # Read the file content
   qmd_content <- readr::read_file("analysis.qmd")
-
-  # Only proceed if we find custom.scss and this new file isn't custom.scss
+  
+  # Check for custom.scss in the YAML and ensure we're not processing custom.scss
   if (grepl("custom\\.scss", qmd_content) && name != "custom") {
-
-    # Update the YAML
-    new_content <- stringr::str_replace(
-      qmd_content,
-      "custom.scss",
-      glue::glue("custom.scss{sep}      - {name}.scss", sep = "\n")
+    # Update the YAML with the new scss file
+    readr::write_file(
+      x = stringr::str_replace(
+        qmd_content,
+        "(- custom\\.scss)",
+        glue::glue("- custom.scss\n      - {name}.scss")
+      ),
+      file = "analysis.qmd"
     )
-    
-    # Write the updated content
-    readr::write_file(new_content, "analysis.qmd")
     ui_done('The YAML in analysis.qmd has been updated.')
-
+    
   } else if (!grepl("custom\\.scss", qmd_content)) {
+    # Provide manual instructions if custom.scss isn't found
     ui_info(glue::glue(
       'Be sure to update your listed SCSS files in the YAML manually:\n',
       'format:\n',
@@ -146,5 +146,4 @@ write_scss <- function(name = 'custom', path = getwd()) {
       '      - {name}.scss       # Add this line\n'
     ))
   }
-
 }
