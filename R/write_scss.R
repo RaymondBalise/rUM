@@ -56,26 +56,12 @@ write_scss <- function(name = 'custom', path = getwd()) {
     } else {
       ui_info(paste0('Other .scss files exist but none named "', name, '.scss"'))
       proceed <- ui_yeah('Would you like to create another SCSS file?')
-      if (proceed) {
-        message(glue::glue(
-          'Be sure to update your listed SCSS files in the YAML like this:
-
-          format:
-            html:
-              embed-resources: true
-              theme:
-                - default
-                - custom.scss
-                - {name}.scss       # Add this line
-                \n
-          '
-        ))
-      }
     }
   }
   
   # Only proceed if user confirmed
   if (proceed) {
+
     # Define SCSS content
     content <- glue::glue(
       '/*-- scss:defaults --*/
@@ -85,8 +71,8 @@ write_scss <- function(name = 'custom', path = getwd()) {
       // $link-color: $primary;
       // Fonts
       // $font-family-sans-serif: "Open Sans", sans-serif;
-      // $font-family-monospace: "Source Code Pro", monospace;
-      /*-- scss:mixins --*/
+      // $font-family-monospace: "Source Code Pro", monospace;\n\n
+      /*-- scss:mixins --*/\n\n
       /*-- scss:rules --*/
       // Custom theme rules
       // .title-block {{
@@ -103,6 +89,9 @@ write_scss <- function(name = 'custom', path = getwd()) {
     # Write SCSS file
     writeLines(content, the_scss_file)
     ui_done(paste0('Created ', name, '.scss'))
+
+    # Update YAML after successful file creation
+    .update_yaml(name)
     
     # Display reference links
     links <- glue::glue(
@@ -117,4 +106,45 @@ write_scss <- function(name = 'custom', path = getwd()) {
   }
   
   return(invisible(NULL))
+}
+
+
+.update_yaml <- function(name) {
+
+  # Check if analysis.qmd exists
+  if (!file.exists("analysis.qmd")) {
+    ui_info("No analysis.qmd file found in the current directory.")
+    return(invisible(NULL))
+  }
+
+  # Read the file content
+  qmd_content <- readr::read_file("analysis.qmd")
+
+  # Check if the YAML contains custom.scss
+  if (grepl("custom\\.scss", qmd_content)) {
+    
+    # Update the YAML
+    new_content <- stringr::str_replace(
+      qmd_content,
+      "(custom\\.scss)",
+      glue::glue("\\1\n      - {name}.scss")
+    )
+    
+    # Write the updated content
+    readr::write_file(new_content, "analysis.qmd")
+    ui_done('The YAML in analysis.qmd has been updated.')
+
+  } else {
+    ui_info(glue::glue(
+      'Be sure to update your listed SCSS files in the YAML manually:\n',
+      'format:\n',
+      '  html:\n',
+      '    embed-resources: true\n',
+      '    theme:\n',
+      '      - default\n',
+      '      - custom.scss\n',
+      '      - {name}.scss       # Add this line\n'
+    ))
+  }
+
 }
