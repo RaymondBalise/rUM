@@ -66,8 +66,8 @@ write_scss <- function(name = 'custom', path = getwd()) {
               theme:
                 - default
                 - custom.scss
-                - [your new SCSS file].scss
-                
+                - {name}.scss
+                \n
           '
         ))
       }
