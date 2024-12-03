@@ -1,24 +1,41 @@
 #' Create a Quarto SCSS file
-#' 
-#' This function creates the \code{.scss} file so that any Quarto project can be easily 
-#' customized with SCSS styling variables, mixins, and rules.
-#' 
+#'
+#' This function creates the \code{.scss} file so that any Quarto project can be easily
+#' customized with SCSS styling variables, mixins, and rules. When creating additional
+#' SCSS files beyond the default \code{custom.scss}, the function will automatically
+#' update the YAML of your Quarto document while preserving any existing SCSS
+#' configurations.
+#'
+#' @details
+#' The function includes a robust YAML handling mechanism that:
+#' \itemize{
+#'   \item Preserves existing YAML structure and indentation
+#'   \item Safely adds new SCSS files without disrupting existing ones
+#'   \item Provides manual instructions if the YAML structure differs from expected
+#' }
+#'
 #' For more information on customizing Quarto documents with SCSS, please refer to
 #' \url{https://quarto.org/docs/output-formats/html-themes.html#customizing-themes},
-#' \url{https://quarto.org/docs/output-formats/html-themes-more.html}, and 
+#' \url{https://quarto.org/docs/output-formats/html-themes-more.html}, and
 #' \url{https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss} will provide
 #' you with over 1500 lines of SCSS variables.
-#' 
-#' @param name The name of the scss file without extension. Default \code{name} is 
+#'
+#' @param name The name of the scss file without extension. Default \code{name} is
 #' "custom".
 #' @param path The path to the main project level. Defaults to the current
 #' working directory
-#' @return A \code{.scss} file to customize Quarto styling.
-#' 
+#' @return A \code{.scss} file to customize Quarto styling. If \code{name} is not
+#' "custom", the function will also attempt to update the Quarto document's YAML to
+#' include the new SCSS file while preserving any existing SCSS configurations.
+#'
 #' @export
 #' @examples
 #' \dontrun{
+#' # Create the default custom.scss
 #' write_scss(name = "custom", path = "path/to/project")
+#'
+#' # Add another SCSS file and update YAML
+#' write_scss(name = "special_theme", path = "path/to/project")
 #' }
 
 write_scss <- function(name = 'custom', path = getwd()) {
@@ -108,7 +125,7 @@ write_scss <- function(name = 'custom', path = getwd()) {
   return(invisible(NULL))
 }
 
-
+# Helper function
 .update_yaml <- function(name) {
 
   # Check if analysis.qmd exists
@@ -119,21 +136,49 @@ write_scss <- function(name = 'custom', path = getwd()) {
   
   # Read the file content
   qmd_content <- readr::read_file("analysis.qmd")
+
+  # Set up original & new YAML content
+  original_yaml <- glue::glue(
+'
+format:
+  html:
+    embed-resources: true
+    theme:
+      - default
+      - custom.scss'
+  )
+
+  new_yaml <- glue::glue(
+'
+format:
+  html:
+    embed-resources: true
+    theme:
+      - default
+      - custom.scss
+      - {name}.scss'
+  )
   
-  # Check for custom.scss in the YAML and ensure we're not processing custom.scss
-  if (grepl("custom\\.scss", qmd_content) && name != "custom") {
-    # Update the YAML with the new scss file
-    new_content <- stringr::str_replace(
+  # Check for custom.scss and ensure we're not processing custom.scss
+  if (grepl(original_yaml, qmd_content) && name != "custom") {
+    
+    # Replace and insert new SCSS file with proper indentation
+    updated_content <- stringr::str_replace(
       qmd_content,
-      "custom.scss",
-      glue::glue("custom.scss\n    - {name}.scss")
+      original_yaml,
+      new_yaml
     )
-    # Write the updated content
-    readr::write_file(new_content, "analysis.qmd")
+
+    # Update the YAML
+    readr::write_file(
+      updated_content,
+      file = "analysis.qmd"
+    )
     ui_done('The YAML in analysis.qmd has been updated.')
 
-  } else if (!grepl("custom\\.scss", qmd_content)) {
-    # Provide manual instructions if custom.scss isn't found
+  } else if (!grepl(original_yaml, qmd_content)) {
+
+    # Provide console feedback
     ui_info(glue::glue(
       'Be sure to update your listed SCSS files in the YAML manually:\n',
       'format:\n',

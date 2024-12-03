@@ -7,28 +7,44 @@
 write_scss(name = "custom", path = getwd())
 }
 \arguments{
-\item{name}{The name of the scss file without extension. Default \code{name} is 
+\item{name}{The name of the scss file without extension. Default \code{name} is
 "custom".}
 
 \item{path}{The path to the main project level. Defaults to the current
 working directory}
 }
 \value{
-A \code{.scss} file to customize Quarto styling.
+A \code{.scss} file to customize Quarto styling. If \code{name} is not
+"custom", the function will also attempt to update the Quarto document's YAML to
+include the new SCSS file while preserving any existing SCSS configurations.
 }
 \description{
-This function creates the \code{.scss} file so that any Quarto project can be easily 
-customized with SCSS styling variables, mixins, and rules.
+This function creates the \code{.scss} file so that any Quarto project can be easily
+customized with SCSS styling variables, mixins, and rules. When creating additional
+SCSS files beyond the default \code{custom.scss}, the function will automatically
+update the YAML of your Quarto document while preserving any existing SCSS
+configurations.
 }
 \details{
+The function includes a robust YAML handling mechanism that:
+\itemize{
+  \item Preserves existing YAML structure and indentation
+  \item Safely adds new SCSS files without disrupting existing ones
+  \item Provides manual instructions if the YAML structure differs from expected
+}
+
 For more information on customizing Quarto documents with SCSS, please refer to
 \url{https://quarto.org/docs/output-formats/html-themes.html#customizing-themes},
-\url{https://quarto.org/docs/output-formats/html-themes-more.html}, and 
+\url{https://quarto.org/docs/output-formats/html-themes-more.html}, and
 \url{https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss} will provide
 you with over 1500 lines of SCSS variables.
 }
 \examples{
 \dontrun{
+# Create the default custom.scss
 write_scss(name = "custom", path = "path/to/project")
+
+# Add another SCSS file and update YAML
+write_scss(name = "special_theme", path = "path/to/project")
 }
 }
