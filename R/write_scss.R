@@ -180,14 +180,15 @@ format:
 
     # Provide console feedback
     message(glue::glue(
-      'Be sure to update your listed SCSS files in the YAML manually:\n',
+      '\nBe sure to update your listed SCSS files in the YAML manually:\n',
       'format:\n',
       '  html:\n',
       '    embed-resources: true\n',
       '    theme:\n',
       '      - default\n',
       '      - custom.scss\n',
-      '      - {name}.scss       # Add this line\n'
+      '      - {name}.scss       # Add this line\n',
+      '\n'
     ))
   }
 }
