@@ -127,7 +127,7 @@ write_scss <- function(name = 'custom', path = getwd()) {
     new_content <- stringr::str_replace(
       qmd_content,
       "custom.scss",
-      glue::glue("custom.scss\n      - {name}.scss")
+      glue::glue("custom.scss{sep}      - {name}.scss", sep = "\n")
     )
     
     # Write the updated content
