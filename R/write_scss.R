@@ -179,7 +179,7 @@ format:
   } else if (!grepl(original_yaml, qmd_content)) {
 
     # Provide console feedback
-    ui_info(glue::glue(
+    message(glue::glue(
       'Be sure to update your listed SCSS files in the YAML manually:\n',
       'format:\n',
       '  html:\n',
