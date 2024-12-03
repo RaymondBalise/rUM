@@ -16,6 +16,8 @@
 #' @param vignette Will the analysis file be saved as a package vignette?
 #' @param overwrite Will an existing RStudio project be overwritten?  This is 
 #' needed for for Posit.Cloud.  You will be prompted to confirm this option.
+#' @param editor Choose either "source" (default) or "visual" for Quarto editor mode.
+#'    Only affects Quarto documents; R Markdown files are unaffected.
 #' @param openInteractive Should this new project be opened in a new RStudio
 #'   window? Defaults to \code{TRUE}. NOTE: this option exists to prevent 
 #'   RStudio from opening two duplicate versions of the new project when
@@ -32,12 +34,19 @@
 #' @examples
 #' \dontrun{
 #'   # This makes a project with an example Quarto paper in the project's folder.
-#'   make_project(path = "~/test", type = "Quarto (analysis.qmd)", example = TRUE, vignette = TRUE)
+#'   make_project(path = "~/test", type = "Quarto (analysis.qmd)", 
+#'               example = TRUE, vignette = TRUE)
+#'   
 #'   # make_project() allows abbreviations on the project type: "Q" for Quarto or "R" for R Markdown
 #'   make_project(path = "~/test_project", "Q", TRUE, TRUE)
 #'   
+#'   # Create a Quarto project with visual editor mode
+#'   make_project(path = "~/test_visual", "Q", editor = "visual")
+#'  
 #'   # This makes a project with an example R Markdown paper in the project's folder.
-#'   make_project(path = "~/test", type = "R Markdown (analysis.Rmd)", example = TRUE, vignette = TRUE)
+#'   make_project(path = "~/test", type = "R Markdown (analysis.Rmd)", 
+#'               example = TRUE, vignette = TRUE)
+#'               
 #'   # This makes a project with an example paper in the project's folder.
 #'   make_project(path = "~/test_project", "R", example = TRUE)
 #' }
@@ -48,6 +57,7 @@ make_project <- function(
     example = FALSE,
     vignette = FALSE,
     overwrite = FALSE,
+    editor = "source",
     openInteractive = TRUE
 ) {
   
@@ -169,6 +179,20 @@ make_project <- function(
         to = paste0(path, vig_path, "/analysis.qmd")
       ))
 
+      # Update editor preference
+      if (editor == "source") {
+        qmd_content <- readr::read_file(paste0(path, vig_path, "/analysis.qmd"))
+        updated_content <- stringr::str_replace(
+          qmd_content,
+          "editor: visual",
+          "editor: source"
+        )
+        readr::write_file(
+          updated_content,
+          file = paste0(path, vig_path, "/analysis.qmd")
+        )
+      }
+
       # Adding console feedback
       ui_done("analysis.qmd has been created.")
 
@@ -286,7 +310,7 @@ make_project <- function(
     #   adds the specific VignetteBuilder, and modifies the vignettes/analysis.*
     #   YAML header with content appropriate to build the respective vignette
     #   using the correct engine.
-    .run_me_first(path, type)
+    .run_me_first(path, type, editor)
   }
   
 }
@@ -300,7 +324,7 @@ make_project <- function(
   grepl("^[a-zA-Z][a-zA-Z0-9.]+$", x) && !grepl("\\.$", x)
 }
 
-.run_me_first <- function(path, type) {
+.run_me_first <- function(path, type, editor = "source") {
   # Capture current directory and return to it at the end of this function
   current_wd <- getwd()
   # Move to new project location
@@ -348,6 +372,21 @@ make_project <- function(
         ), 
       file = "vignettes/analysis.qmd"
     )
+
+    # Update editor preference
+    if (editor == "source") {
+      qmd_content <- readr::read_file("vignettes/analysis.qmd")
+      updated_content <- stringr::str_replace(
+        qmd_content,
+        "editor: visual",
+        "editor: source"
+      )
+      readr::write_file(
+        updated_content,
+        file = "vignettes/analysis.qmd"
+      )
+    }
+
   } else { # Rmd project
     
     # Add Vignette builder to DESCRIPTION:
