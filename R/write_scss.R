@@ -126,13 +126,13 @@ write_scss <- function(name = 'custom', path = getwd()) {
     readr::write_file(
       x = stringr::str_replace(
         qmd_content,
-        "(- custom\\.scss)",
+        "- custom.scss",
         glue::glue("- custom.scss\n      - {name}.scss")
       ),
       file = "analysis.qmd"
     )
     ui_done('The YAML in analysis.qmd has been updated.')
-    
+
   } else if (!grepl("custom\\.scss", qmd_content)) {
     # Provide manual instructions if custom.scss isn't found
     ui_info(glue::glue(
