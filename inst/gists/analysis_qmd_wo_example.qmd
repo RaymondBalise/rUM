@@ -77,7 +77,7 @@ As can be seen in @tbl-table1 ....
 ```{r, fig-figure-1}
 #| fig-cap: "Remember figure labels begin with fig-"
 
-
+ggplot()
 ```
 
 As can be seen in @fig-figure-1 ...
