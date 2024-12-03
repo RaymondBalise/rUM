@@ -123,14 +123,13 @@ write_scss <- function(name = 'custom', path = getwd()) {
   # Check for custom.scss in the YAML and ensure we're not processing custom.scss
   if (grepl("custom\\.scss", qmd_content) && name != "custom") {
     # Update the YAML with the new scss file
-    readr::write_file(
-      x = stringr::str_replace(
-        qmd_content,
-        "- custom.scss",
-        glue::glue("- custom.scss\n      - {name}.scss")
-      ),
-      file = "analysis.qmd"
+    new_content <- stringr::str_replace(
+      qmd_content,
+      "custom.scss",
+      glue::glue("custom.scss\n    - {name}.scss")
     )
+    # Write the updated content
+    readr::write_file(new_content, "analysis.qmd")
     ui_done('The YAML in analysis.qmd has been updated.')
 
   } else if (!grepl("custom\\.scss", qmd_content)) {
