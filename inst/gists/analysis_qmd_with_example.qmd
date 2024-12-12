@@ -21,7 +21,7 @@ knitr:
     fig-height: 4.0  # figure height
     R.options:    
       digits: 3    # round to three digits
-editor: visual
+editor: source
 bibliography: [references.bib, packages.bib]
 csl: the-new-england-journal-of-medicine.csl
 ---
