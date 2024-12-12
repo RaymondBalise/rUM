@@ -25,19 +25,6 @@
 #' a user selects New project... > New Directory > rUM Research Project Template
 #' within the RSutdio IDE. See \code{./rstudio/templates/project/}.
 #'
-#' @importFrom tidyverse tidyverse_logo
-#' @importFrom conflicted conflict_prefer
-#' @importFrom bookdown html_document2
-#' @importFrom rmarkdown html_document
-#' @importFrom table1 t1kable
-#' @importFrom rlang abort
-#' @importFrom utils download.file
-#' @importFrom usethis create_project
-#' @importFrom glue glue
-#' @importFrom gtsummary tbl_summary
-#' @importFrom rio import
-#' @importFrom tidymodels tidymodels_prefer
-#'
 #' @return Returns nothing.  See description above.
 #'
 #' @export
@@ -132,35 +119,9 @@ make_project <- function(
     }
   }
   
-  # Paths to gist files for analysis - these need to update of the gist changes.
-  
-  # path to analysis.Rmd without example
-  gist_path_rmd <- paste0(
-    "https://gist.github.com/RaymondBalise/ef56efda4a9260d8415a2cde94cbad1b/",
-    "raw/83194521c2475033458f2ea6b45b20f6f292a0d0/analysis.Rmd"
-  )
-  
-  # path to analysis.qmd without example
-  gist_path_qmd <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/",
-    "224f0b7b107a6b800c610d46c8b6f236/raw/",
-    "b417b2fe260af6377a2fb1cbc06b10fd07da29ee/analysis.qmd"
-  )
-  
-  # path to analysis.Rmd with example
-  gist_w_ex_path_rmd <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/",
-    "c8399e7b3474a6022eeae373d059a042/",
-    "raw/54059a3c9109efe79bf31010f32d4e99cf6469ea/analysis_with_example.Rmd"
-  )
-  
-  # path to analysis.qmd with example
-  gist_w_ex_path_qmd <- paste0(
-    "https://gist.githubusercontent.com/RaymondBalise/",
-    "40e8e1cc0dec94b225b7cb307f4fa959/raw/",
-    "2add2f029b640e31c3d4a755c690f6dd62e84a5e/analysis_with_example.qmd"
-  )
-  
+  #############################################################################
+  # This section creates the project directory and adds the appropriate files #
+  #############################################################################
   
   # Prevent user from overwriting an analysis file
   if (file.exists(paste0(path, "/analysis.Rmd")) ||
@@ -171,6 +132,7 @@ make_project <- function(
     )
   }
   
+  # Create vignette folder
   if (vignette == TRUE) {
     vig_path = "/vignettes"
     dir.create(paste0(path, vig_path), recursive = TRUE, showWarnings = FALSE)
@@ -178,22 +140,80 @@ make_project <- function(
     vig_path = NULL
   }
   
-  
-  if (example == FALSE){ # use old templates w/o an example
+  #############################################################################
+  #          Write appropriate Quarto or Rmarkdown analysis file              #
+  #############################################################################
+  # use old templates w/o an example
+  if (example == FALSE){
     if (type == "R Markdown (analysis.Rmd)") {
-      download.file(gist_path_rmd, paste0(path, vig_path, "/analysis.Rmd"))
+
+      invisible(file.copy(
+        from = system.file(
+          "gists/analysis_rmd_wo_example.Rmd", 
+          package = "rUM"
+        ),
+        to = paste0(path, vig_path, "/analysis.Rmd")
+      ))
+
+      # Adding console feedback
+      ui_done("analysis.Rmd has been created.")
+
+
     } else if (type == "Quarto (analysis.qmd)") {
-      download.file(gist_path_qmd, paste0(path, vig_path, "/analysis.qmd"))
+
+      invisible(file.copy(
+        from = system.file(
+          "gists/analysis_qmd_wo_example.qmd", 
+          package = "rUM"
+        ),
+        to = paste0(path, vig_path, "/analysis.qmd")
+      ))
+
+      # Adding console feedback
+      ui_done("analysis.qmd has been created.")
+
+      # Add custom.scss to project
+      write_scss(name = "custom", path = path)
+
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
       )
     }
-  } else { # use newer templates w an example
+
+  # use newer templates w an example
+  } else { 
     if (type == "R Markdown (analysis.Rmd)") {
-      download.file(gist_w_ex_path_rmd, paste0(path, vig_path, "/analysis.Rmd"))
+      
+      invisible(file.copy(
+        from = system.file(
+          "gists/analysis_rmd_with_example.Rmd", 
+          package = "rUM"
+        ),
+        to = paste0(path, vig_path, "/analysis.Rmd")
+      ))
+
+      # Adding console feedback
+      ui_done("analysis.Rmd has been created.")
+
+
     } else if (type == "Quarto (analysis.qmd)") {
-      download.file(gist_w_ex_path_qmd, paste0(path, vig_path, "/analysis.qmd"))
+      
+      invisible(file.copy(
+        from = system.file(
+          "gists/analysis_qmd_with_example.qmd", 
+          package = "rUM"
+        ),
+        to = paste0(path, vig_path, "/analysis.qmd")
+      ))
+
+      # Adding console feedback
+      ui_done("analysis.qmd has been created.")
+
+      # Add custom.scss to project
+      write_scss(name = "custom", path = path)
+
+    # User did not provide correct argument type:  
     } else {
       abort(
         "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
@@ -206,11 +226,53 @@ make_project <- function(
   # Path to gitignore this must be updated if the gist changes.
   gist_path_ignore <- paste0(
     "https://gist.githubusercontent.com/RaymondBalise/",
-    "300d99c2b6450feda3ed5a816f396191/raw/",
-    "c959571e2618ba6baa14d91972f84de20a08b63f/.gitignore"
+    "1978fb42fc520ca57f670908e111585e/raw/",
+    "e0b0ac8c7726f488fcc52b3b8269e449cbf33c15/.gitignore"
   )
-  download.file(gist_path_ignore, paste0(path, "/.gitignore"))
-  
+  download.file(
+    gist_path_ignore, 
+    paste0(path, "/.gitignore"),
+    # silence console output: "trying URL..., Content type..., downloaded..."
+    quiet = TRUE
+  )
+  # Adding console feedback
+  ui_done("An enhanced .gitignore has been created.")
+
+  ############################################################################
+  # Add a README template from inst/gists 
+  readme_path <- system.file("gists/README.md", package = "rUM")
+  if (readme_path == "") {
+    stop("Could not find README template in package installation")
+  }
+  invisible(file.copy(
+    from = readme_path,
+    to = paste0(path, "/README.md")
+  ))
+
+  # Adding console feedback
+  ui_done("A README.md template has been created.")
+
+  # Add dated_progress_notes.md template
+  writeLines(
+    paste0(
+      "# Add project updates here\n", 
+      format(Sys.Date(), "%b %d, %Y"),
+      ": project started"
+    ),
+    con = file.path(paste0(path, "/dated_progress_notes.md"))
+  )
+  # Adding console feedback
+  ui_done("A dated_progress_notes.md template has been created.")
+  if (vignette == TRUE) {
+    cat(
+      "dated_progress_notes.md", 
+      file = file.path(paste0(path, "/.Rbuildignore")),
+      append = TRUE # add, don't overwrite current file
+    )
+    # Adding console feedback
+    ui_done("dated_progress_notes.md has been added to the .Rbuildignore.")  
+  }
+
   # write an empty packages bibliography file - needed to knit the first time
   writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
   
@@ -219,35 +281,42 @@ make_project <- function(
   
   download.file(
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
-    paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl")
+    paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl"),
+    # silence console output: "trying URL..., Content type..., downloaded..."
+    quiet = TRUE
   )
   
   download.file(
     "https://www.zotero.org/styles/apa",
-    paste0(path, vig_path, "/apa.csl")
+    paste0(path, vig_path, "/apa.csl"),
+    # silence console output: "trying URL..., Content type..., downloaded..."
+    quiet = TRUE
   )
   
   if (vignette == TRUE){ 
     if (type == "R Markdown (analysis.Rmd)") {
-      file.copy(
+      invisible(file.copy(
         system.file(
           "gists/manual_change_rmd_vigette.R", 
           package = "rUM"
         ), 
         paste0(path, "/RUN_ME_FIRST.R")
-      )
+      ))
     } else if (type == "Quarto (analysis.qmd)") {
-      file.copy(
+      invisible(file.copy(
         system.file(
           "gists/manual_change_qmd_vigette.R", 
           package = "rUM"
         ), 
         paste0(path, "/RUN_ME_FIRST.R")
-      )
+      ))
     }
   } 
   
-  
+  ### EXPERIMENTAL ###
+  # if (vignette == TRUE) {
+  #   source(paste0(path, "/RUN_ME_FIRST.R"))
+  # }
   
 }
 

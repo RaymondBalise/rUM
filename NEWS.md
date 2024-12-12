@@ -1,3 +1,21 @@
+# rUM (development version)
+## Breaking changes
+  + None
+
+## New features
+
++ added write_scss() function
++ added README.md template for projects
+
+## Minor improvements and fixes
+
++ updated gist path for .gitignore
++ silenced console output for downloading files and returning "[1] TRUE" when creating projects
++ moved @importFrom to R/rUM-package.R to centralize dependencies
++ added write_scss() inside make_project() to add during project creation
++ moved paper templates from GitHub gists into the project inst/gists folder
++ moved old paper templates to inst/old
+
 # rUM 2.0.0 (Overproof Rum) 
 
 + Added an `example` argument to `make_project()`
