@@ -282,14 +282,9 @@ make_project <- function(
     quiet = TRUE
   )
 
-  #############################################################################
-  #               Automate package building functionality                     #
-  #############################################################################
+  
   if (vignette == TRUE){
-    # This function adds to DESCRIPTION file, .gitignore (package & vignettes),
-    #   adds the specific VignetteBuilder, and modifies the vignettes/analysis.*
-    #   YAML header with content appropriate to build the respective vignette
-    #   using the correct engine.
+    
     .run_me_first(path, type)
   }
   
@@ -304,6 +299,14 @@ make_project <- function(
   grepl("^[a-zA-Z][a-zA-Z0-9.]+$", x) && !grepl("\\.$", x)
 }
 
+#############################################################################
+#               Automate package building functionality                     #
+#############################################################################
+# This function adds to DESCRIPTION file, .gitignore (package & vignettes),
+#   adds the specific VignetteBuilder, and modifies the vignettes/analysis.*
+#   YAML header with content appropriate to build the respective vignette
+#   using the correct engine.
+#############################################################################
 .run_me_first <- function(path, type) {
   # Capture current directory and return to it at the end of this function
   current_wd <- getwd()
