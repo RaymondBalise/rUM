@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-Customizing the appearance of your Quarto documents doesn't have to be complicated. The `write_scss()` function simplifies the process of creating and managing SCSS style sheets, making it easier to achieve the exact look you want for your documents.
+Customizing the appearance of your Quarto documents doesn't have to be complicated. The `write_scss()` function simplifies the process of creating a SCSS template file and managing SCSS style sheets, making it easier to achieve the exact look you want for your documents.
 
 ## Getting Started
 
-When you create a new Quarto project with `rUM::make_project()`, your YAML header typically looks like this:
+When you create a new Quarto project with `rUM::make_project()`, it creates a file called `analysis.qmd`. At the top, you will see YAML code like this:
 
 ````yaml
 format:
@@ -31,31 +31,46 @@ format:
       - custom.scss
 ````
 
-The default `custom.scss` provides a foundation for styling, but you might want to add additional style sheets for different purposes. Let's explore how to do this effectively.
+The lines with `theme`, `default`, and `custom.scs` control the appearance of the document. The default `custom.scss` provides a foundation for styling to change the appearance of the document. You can change colors, fonts, and spacing. Let's explore how to do this.
 
-## Creating Additional Style Sheets
+## What Does `custom.scss` Contain?
 
-Let's say you want to create a new style sheet called "styles.scss". This is as simple as:
+It is a text file that has 3 sections: SCSS defaults, mixins, and rules. The defaults controls the appearance of named parts of your document. For example, the font color of the page is set by the `$primary:` option. That variable contains a hex color code or a quoted color name. To learn more about hex colors, look [here](https://www.w3schools.com/css/css_colors_hex.asp). You can also set fonts. To learn more about setting fonts, look [here](https://www.w3schools.com/css/css_font.asp). To learn more about all of this, watch this [YouTube video](https://youtu.be/qw1OqIhr8EU?si=UPms-SDynvgalpSL).
 
-````r
-rUM::write_scss("styles")
-````
+It is important to note that SCSS uses double forward slashes (`//`) to indicate comments like R would use `#`. If you want to set an option, remove the two slashes.
 
-After running this command, your YAML will automatically update to:
+```css
+/*-- scss:defaults --*/
+// Colors
+// $primary: #2c365e;  
+// $body-bg: #fefefe;
+// $link-color: $primary;
+// Fonts
+// $font-family-sans-serif: "Open Sans", sans-serif;
+// $font-family-monospace: "Source Code Pro", monospace;
 
-````yaml
-format:
-  html:
-    embed-resources: true
-    theme:
-      - default
-      - custom.scss
-      - styles.scss
-````
+
+/*-- scss:mixins --*/
+// This is empty by default -- add your mixins here
+
+
+/*-- scss:rules --*/
+// Custom theme rules
+// .title-block {{
+//   margin-bottom: 2rem;
+//   border-bottom: 3px solid $primary;
+// }}
+//
+// code {{
+//   color: darken($primary, 10%);
+//   padding: 0.2em 0.4em;
+//   border-radius: 3px;
+// }}
+```
 
 ## Customizing Styles
 
-Now that we have our new style sheet, let's modify it to change the background color to a light gray. Open `styles.scss` and modify the background color variable by removing the SCSS comment (`//`) and altering the hex code value for `$body-bg`:
+Let's modify the styles sheet to change the background color to a light gray. Open `styles.scss` and modify the background color variable by removing the SCSS comment (`//`) and altering the hex code value for `$body-bg`:
 
 ````
 /*-- scss:defaults --*/
@@ -63,13 +78,15 @@ Now that we have our new style sheet, let's modify it to change the background c
 $body-bg: #f5f5f5;    // Light gray background
 ````
 
-You can keep adding style sheets as needed. For example, let's add another one for additional customizations:
+## Creating Additional Style Sheets
+
+Usually, you will only need to use one styles sheet. However, if you want to add a new style sheet called "styles.scss". Run this code in the console:
 
 ````r
-rUM::write_scss("more_styles")
+rUM::write_scss("styles")
 ````
 
-Your YAML will now include all three styles sheets:
+After running this command, `rUM` will try to automatically update your YAML to be:
 
 ````yaml
 format:
@@ -79,12 +96,11 @@ format:
       - default
       - custom.scss
       - styles.scss
-      - more_styles.scss
 ````
 
 ## Handling Different YAML Structures
 
-Sometimes you might encounter or create a Quarto document with a different YAML structure. In these cases, `write_scss()` provides helpful guidance. For example, if the function doesn't find the expected YAML structure, you'll see this console message:
+Sometimes you might encounter or create a Quarto document with a different YAML structure than we provide with `rUM`. This can happen if your company or organization has its own style sheet. In these cases, `write_scss()` provides helpful guidance. For example, if the function doesn't find the expected YAML structure, you'll see this console message:
 
 ````
 Be sure to update your listed SCSS files in the YAML manually:
@@ -94,7 +110,7 @@ format:
     theme:
       - default
       - custom.scss
-      - your_new_style.scss       # Add this line
+      - your_organizations_style.scss       # Add this line
 ````
 
 This ensures you can still proceed with your customization, even if your YAML structure differs from the default.
@@ -103,7 +119,7 @@ This ensures you can still proceed with your customization, even if your YAML st
 
 Using multiple SCSS files can be advantageous when:
 
-- Organizing different aspects of your styling (typography, colors, layout)
+- Organizing different aspects of your styling (font, colors, layout)
 
 - Maintaining separate themes for different purposes
 
