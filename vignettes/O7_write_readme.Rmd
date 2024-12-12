@@ -69,14 +69,12 @@ This file serves as a chronological log of project developments and milestones.
 
 ## Handling Existing Files
 
-If either file already exists, `write_readme()` will provide interactive prompts:
+If a README file already exists, `write_readme()` will provide an interactive prompt:
 
 ````r
 > rUM::write_readme()
 #> ℹ **CAUTION!!**
 #> README.md found in project level directory! Overwrite?
-#> ℹ **CAUTION!!**
-#> dated_progress_notes.md found in project level directory! Overwrite?
 ````
 
 This ensures you won't accidentally overwrite existing documentation.

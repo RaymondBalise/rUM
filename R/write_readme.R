@@ -73,26 +73,6 @@ write_readme <- function(path = getwd()) {
       ))
       ui_done("README.md has been overwritten with the template.")
 
-      # Now check if the progress notes exists & ask to overwrite that too
-      if (file.exists(file.path(path, 'dated_progress_notes.md'))) {
-        ui_info('**CAUTION!!**')
-        if (ui_yeah('dated_progress_notes.md found in project level directory! Overwrite?')) {
-          writeLines(
-            progress_notes_content,
-            con = file.path(path, "dated_progress_notes.md")
-          )
-          ui_done("dated_progress_notes.md has been overwritten with the template.")
-        } else {
-          ui_info("Keeping existing dated_progress_notes.md")
-        }
-      } else {
-        writeLines(
-          progress_notes_content,
-          con = file.path(path, "dated_progress_notes.md")
-        )
-        ui_done("A dated_progress_notes.md template has been created.")
-      }
-
     } else {
       ui_info("Keeping existing README.md")
     }
@@ -103,11 +83,14 @@ write_readme <- function(path = getwd()) {
     ))
     ui_done("A README.md template has been created.")
 
-    writeLines(
-      progress_notes_content,
-      con = file.path(path, "dated_progress_notes.md")
-    )
-    ui_done("dated_progress_notes.md has been created.")
+    # Now check if the progress notes exists & ask to overwrite that too
+    if (!file.exists(file.path(path, 'dated_progress_notes.md'))) {
+      writeLines(
+        progress_notes_content,
+        con = file.path(path, "dated_progress_notes.md")
+      )
+      ui_done("A dated_progress_notes.md template has been created.")
+    }
   }
   
   return(invisible(NULL))
