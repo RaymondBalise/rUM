@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-Consistent project documentation is crucial for reproducibility and collaboration. The `write_readme()` function simplifies this process by creating and managing two essential documentation files: README.md and dated_progress_notes.md.
+Consistent project documentation is crucial for reproducibility and collaboration. `rUM` automatically creates a README file and a dated progress notes file. The README file has information that someone would read first to learn about a project. The dated progress notes holds a template for keeping track of changes. `rUM` also includes a `write_readme()` function which can be used to add these files to an existing project.
 
 ## Getting Started
 
-Creating project documentation is as simple as:
+To add documentation to an existing project, type:
 
 ````r
 rUM::write_readme()
@@ -29,7 +29,7 @@ rUM::write_readme()
 This creates two files in your project directory:
 
 1. README.md: A comprehensive project documentation template
-1. dated_progress_notes.md: A chronological progress tracker
+1. dated_progress_notes.md: A progress tracker
 
 ## The README Template
 
