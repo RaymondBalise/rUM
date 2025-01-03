@@ -250,8 +250,9 @@ make_project <- function(
   # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
-  # Add a README template from inst/gists
+  # Add a README & progress notes templates from inst/gists
   rUM::write_readme(path = path)
+  rUM::write_notes(path = path)
 
   # Add dated_progress_notes.md to .Rbuildignore for packages
   if (vignette == TRUE) {

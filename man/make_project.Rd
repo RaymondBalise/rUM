@@ -10,7 +10,6 @@ make_project(
   example = FALSE,
   vignette = FALSE,
   overwrite = FALSE,
-  editor = "source",
   openInteractive = TRUE
 )
 }
@@ -27,9 +26,6 @@ make_project(
 
 \item{overwrite}{Will an existing RStudio project be overwritten?  This is 
 needed for for Posit.Cloud.  You will be prompted to confirm this option.}
-
-\item{editor}{Choose either "source" (default) or "visual" for Quarto editor mode.
-Only affects Quarto documents; R Markdown files are unaffected.}
 
 \item{openInteractive}{Should this new project be opened in a new RStudio
 window? Defaults to \code{TRUE}. NOTE: this option exists to prevent 
@@ -62,9 +58,6 @@ within the RSutdio IDE. See \code{./rstudio/templates/project/}.
   # make_project() allows abbreviations on the project type: "Q" for Quarto or "R" for R Markdown
   make_project(path = "~/test_project", "Q", TRUE, TRUE)
   
-  # Create a Quarto project with visual editor mode
-  make_project(path = "~/test_visual", "Q", editor = "visual")
- 
   # This makes a project with an example R Markdown paper in the project's folder.
   make_project(path = "~/test", type = "R Markdown (analysis.Rmd)", 
               example = TRUE, vignette = TRUE)
