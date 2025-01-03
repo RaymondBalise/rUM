@@ -4,23 +4,18 @@
 \alias{write_readme}
 \title{Create a project README file}
 \usage{
-write_readme(path = getwd())
+write_readme(path = NULL)
 }
 \arguments{
-\item{path}{The path to the main project level. Defaults to the current
-working directory.}
+\item{path}{The destination directory for the README file.}
 }
 \value{
-Creates or updates two files:
-\itemize{
-  \item README.md: A comprehensive template for project documentation
-  \item dated_progress_notes.md: A chronological project progress tracker
-}
+Creates a comprehensive README template for project documentation.
 }
 \description{
-This function streamlines project documentation by creating and managing both README.md
-and dated_progress_notes.md files. It provides interactive prompts for existing files
-and maintains consistent project documentation structure.
+This function streamlines project documentation by creating and managing a README.md
+file. It provides interactive prompts for existing files and maintains consistent 
+project documentation structure.
 }
 \details{
 The README.md template includes structured sections for:
@@ -31,19 +26,11 @@ The README.md template includes structured sections for:
   \item Miscellaneous project notes
 }
 
-The dated_progress_notes.md file is initialized with the current date and is designed
-to help track project milestones chronologically.
-
-For both files, if they already exist, the user will be prompted before any
-overwriting occurs. The templates include example documentation that can be
-modified to suit your specific project needs.
+If the README file already exists, the function will stop and warn the user. The 
+templates include example documentation that can be modified to suit project needs.
 }
 \examples{
-\dontrun{
-# Create new documentation files
-write_readme(path = "path/to/project")
-
-# Update existing documentation (will prompt for confirmation)
-write_readme()  # uses current working directory
-}
+# Create new README in temporary directory
+tmp <- tempdir()
+write_readme(path = tmp)
 }

@@ -1,16 +1,11 @@
 #' Create a project README file
 #'
-#' This function streamlines project documentation by creating and managing both README.md
-#' and dated_progress_notes.md files. It provides interactive prompts for existing files
-#' and maintains consistent project documentation structure.
+#' This function streamlines project documentation by creating and managing a README.md
+#' file. It provides interactive prompts for existing files and maintains consistent 
+#' project documentation structure.
 #'
-#' @param path The path to the main project level. Defaults to the current
-#' working directory.
-#' @return Creates or updates two files:
-#' \itemize{
-#'   \item README.md: A comprehensive template for project documentation
-#'   \item dated_progress_notes.md: A chronological project progress tracker
-#' }
+#' @param path The destination directory for the README file.
+#' @return Creates a comprehensive README template for project documentation.
 #'
 #' @details
 #' The README.md template includes structured sections for:
@@ -21,27 +16,20 @@
 #'   \item Miscellaneous project notes
 #' }
 #'
-#' The dated_progress_notes.md file is initialized with the current date and is designed
-#' to help track project milestones chronologically.
-#'
-#' For both files, if they already exist, the user will be prompted before any
-#' overwriting occurs. The templates include example documentation that can be
-#' modified to suit your specific project needs.
+#' If the README file already exists, the function will stop and warn the user. The 
+#' templates include example documentation that can be modified to suit project needs.
 #'
 #' @export
 #' @examples
-#' \dontrun{
-#' # Create new documentation files
-#' write_readme(path = "path/to/project")
-#'
-#' # Update existing documentation (will prompt for confirmation)
-#' write_readme()  # uses current working directory
-#' }
+#' # Create new README in temporary directory
+#' tmp <- tempdir()
+#' write_readme(path = tmp)
  
-write_readme <- function(path = getwd()) {
-  # Check if directory exists
-  if (!dir.exists(path)) {
-    stop("Directory does not exist")
+write_readme <- function(path = NULL) {
+  
+  # Validate path
+  if (is.null(path) || !dir.exists(path)) {
+    stop("Invalid `path`. Please enter a valid project directory.")
   }
   
   # Normalize the path for consistency
@@ -52,46 +40,21 @@ write_readme <- function(path = getwd()) {
   if (readme_path == "") {
     stop("Could not find README template in package installation")
   }
-
-  # Handle dated_progress_notes.md creation/overwrite
-  progress_notes_content <- paste0(
-    "# Add project updates here\n",
-    format(Sys.Date(), "%b %d, %Y"),
-    ": project started"
-  )
   
   # Handle README creation/overwrite
   if (file.exists(file.path(path, 'README.md'))) {
-    ui_info('**CAUTION!!**')
-    if (ui_yeah('README.md found in project level directory! Overwrite?')) {
-
-      # Yes, overwrite existing README
-      invisible(file.copy(
-        from = readme_path,
-        to = file.path(path, "README.md"),
-        overwrite = TRUE
-      ))
-      ui_done("README.md has been overwritten with the template.")
-
-    } else {
-      ui_info("Keeping existing README.md")
-    }
-  } else {
-    invisible(file.copy(
-      from = readme_path,
-      to = file.path(path, "README.md")
-    ))
-    ui_done("A README.md template has been created.")
-
-    # Now check if the progress notes exists & ask to overwrite that too
-    if (!file.exists(file.path(path, 'dated_progress_notes.md'))) {
-      writeLines(
-        progress_notes_content,
-        con = file.path(path, "dated_progress_notes.md")
-      )
-      ui_done("A dated_progress_notes.md template has been created.")
-    }
+    stop(
+      'A README.md has been found in the specified directory! If you would like to ',
+      'proceed, remove the existing README and rerun this function.'
+    )
   }
+
+  invisible(file.copy(
+    from = readme_path,
+    to = file.path(path, "README.md"),
+    overwrite = TRUE
+  ))
+  ui_done("A README.md template has been created.")
   
   return(invisible(NULL))
 }
