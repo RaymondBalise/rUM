@@ -4,14 +4,15 @@
 \alias{write_scss}
 \title{Create a Quarto SCSS file}
 \usage{
-write_scss(name = "custom", path = getwd())
+write_scss(name = "custom", path = NULL, add_to_yaml = FALSE)
 }
 \arguments{
 \item{name}{The name of the scss file without extension. Default \code{name} is
 "custom".}
 
-\item{path}{The path to the main project level. Defaults to the current
-working directory}
+\item{path}{The destination directory for the SCSS file.}
+
+\item{add_to_yaml}{Boolean. Add the new SCSS filename to YAML structure.}
 }
 \value{
 A \code{.scss} file to customize Quarto styling. If \code{name} is not
@@ -21,7 +22,7 @@ include the new SCSS file while preserving any existing SCSS configurations.
 \description{
 This function creates the \code{.scss} file so that any Quarto project can be easily
 customized with SCSS styling variables, mixins, and rules. When creating additional
-SCSS files beyond the default \code{custom.scss}, the function will automatically
+SCSS files beyond the default \code{custom.scss}, the function will attempt to
 update the YAML of your Quarto document while preserving any existing SCSS
 configurations.
 }
@@ -40,11 +41,10 @@ For more information on customizing Quarto documents with SCSS, please refer to
 you with over 1500 lines of SCSS variables.
 }
 \examples{
-\dontrun{
-# Create the default custom.scss
-write_scss(name = "custom", path = "path/to/project")
+# Create the default custom.scss in a temporary directory
+tmp <- tempdir()
+write_scss(name = "custom", path = tmp)
 
-# Add another SCSS file and update YAML
-write_scss(name = "special_theme", path = "path/to/project")
-}
+# Add another SCSS file and update YAML in the temporary directory
+write_scss(name = "special_theme", path = tmp)
 }
