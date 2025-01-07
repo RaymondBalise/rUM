@@ -2,6 +2,7 @@
 
 export(make_project)
 export(write_notes)
+export(write_quarto)
 export(write_readme)
 export(write_scss)
 importFrom(bookdown,html_document2)
