@@ -23,7 +23,7 @@ write_quarto <- function(filename = NULL, path = here::here()) {
   }
 
   # Remove .qmd if accidentally typed
-  filename <- str_replace(filename, '.qmd$', '')
+  filename <- str_replace_all(filename, '.qmd$', '')
 
   # Validate filename
   if (!is.character(filename)) stop('Invalid filename: must be character.')
