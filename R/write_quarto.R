@@ -34,15 +34,15 @@ write_quarto <- function(filename = NULL, path = here::here()) {
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
 
-  # Set up full file path
-  the_quarto_file <- file.path(path, paste0(filename, '.qmd'))
-
-  if (!file.access(the_quarto_file, mode = 2) == 0) {
+  if (file.access(path, mode = 2) != 0) {
     stop(sprintf(
       'You do not have permission to write to the path location: %s\nTry `rUM::write_quarto(filename = "", path = "")`', 
       path
     ))
   }
+
+  # Set up full file path
+  the_quarto_file <- file.path(path, paste0(filename, '.qmd'))
 
   # Check for existing Quarto doc
   if (file.exists(the_quarto_file)) {
