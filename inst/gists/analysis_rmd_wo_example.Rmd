@@ -67,7 +67,6 @@ Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)`
 
 ```{r table-1}
 
-
 ```
 
 As can be seen in Table \@ref(tab:table-1) or [Table 1](#tab:table-1)

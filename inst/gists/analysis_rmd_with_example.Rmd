@@ -72,7 +72,6 @@ Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)`
 # Results
 
 ```{r table-1}
-
 # To learn how to use tbl_summary look https://www.danieldsjoberg.com/gtsummary/
 analysis |> 
   tbl_summary(

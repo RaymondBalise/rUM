@@ -25,6 +25,7 @@ editor: source
 
 ```{r, tidyverse-tidymodels}
 #| echo: false
+
 library(conflicted)
 suppressPackageStartupMessages(library(tidymodels))
 tidymodels_prefer()
@@ -36,13 +37,14 @@ options(dplyr.summarise.inform = FALSE)
 
 ```{r, other-packages}
 #| echo: false
+
 library(rio)
 # library()  # type a package name inside the parentheses
 ```
 
 ```{r, load-data}
 #| echo: false
-# raw_data <- import("")  # your data file goes inside the ""
 
+# raw_data <- import("")  # your data file goes inside the ""
 ```
 
