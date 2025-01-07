@@ -10,7 +10,7 @@
 #' @return Opens file after creating the Quarto document.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Create a new Quarto document
 #' write_quarto(filename = "data_cleaning", path = tempdir())
 #' }
@@ -36,6 +36,13 @@ write_quarto <- function(filename = NULL, path = here::here()) {
 
   # Set up full file path
   the_quarto_file <- file.path(path, paste0(filename, '.qmd'))
+
+  if (!file.access(the_quarto_file, mode = 2) == 0) {
+    stop(sprintf(
+      'You do not have permission to write to the path location: %s\nTry `rUM::write_quarto(filename = "", path = "")`', 
+      path
+    ))
+  }
 
   # Check for existing Quarto doc
   if (file.exists(the_quarto_file)) {

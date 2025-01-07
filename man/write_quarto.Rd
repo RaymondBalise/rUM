@@ -20,7 +20,7 @@ Opens file after creating the Quarto document.
 This function creates a new Quarto document (.qmd file) complete with a useful header.
 }
 \examples{
-\donttest{
+\dontrun{
 # Create a new Quarto document
 write_quarto(filename = "data_cleaning", path = tempdir())
 }
