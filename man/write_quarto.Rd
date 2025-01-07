@@ -14,7 +14,7 @@ Only letters, numbers, hyphens, and underscores are allowed.}
 the current project's base directory.}
 }
 \value{
-Invisibly returns NULL after creating the Quarto document.
+Opens file after creating the Quarto document.
 }
 \description{
 This function creates a new Quarto document (.qmd file) complete with a useful header.

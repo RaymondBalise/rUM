@@ -7,7 +7,7 @@
 #' @param path Character string. Directory where the file will be created. Defaults to
 #'   the current project's base directory.
 #'
-#' @return Invisibly returns NULL after creating the Quarto document.
+#' @return Opens file after creating the Quarto document.
 #'
 #' @examples
 #' \donttest{
@@ -21,6 +21,9 @@ write_quarto <- function(filename = NULL, path = here::here()) {
   if (is.null(path) || !dir.exists(path)) {
     stop("Invalid `path`. Please enter a valid project directory.")
   }
+
+  # Remove .qmd if accidentally typed
+  filename <- str_replace(filename, '.qmd$', '')
 
   # Validate filename
   if (!is.character(filename)) stop('Invalid filename: must be character.')
@@ -47,7 +50,13 @@ write_quarto <- function(filename = NULL, path = here::here()) {
   }
 
   file.copy(from = template_path, to = the_quarto_file, overwrite = FALSE)
-  # ui_done(sprintf("Created %s.qmd", filename))
+
+  # Open the new template upon successful copy
+  if (file.exists(the_quarto_file)) {
+    usethis::edit_file(the_quarto_file)
+  } else {
+    stop("The file does not exist.")
+  }
 
   invisible(NULL)
 }
