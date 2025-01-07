@@ -11,17 +11,12 @@
 #'
 #' @examples
 #' \donttest{
-#' # Create a new Quarto document with custom YAML
-#' write_quarto(filename = "frog_analysis", path = tempdir())
-#'
-#' # Create a basic Quarto document with standard YAML
-#' write_quarto(filename = "frog_analysis_basic", path = tempdir(), custom_yaml = FALSE)
+#' # Create a new Quarto document
+#' write_quarto(filename = "data_cleaning", path = tempdir())
 #' }
 #' @export
-write_quarto <- function(
-  filename = NULL, 
-  path = NULL
-) {
+#' 
+write_quarto <- function(filename = NULL, path = here::here()) {
   # Validate path
   if (is.null(path) || !dir.exists(path)) {
     stop("Invalid `path`. Please enter a valid project directory.")
@@ -52,7 +47,7 @@ write_quarto <- function(
   }
 
   file.copy(from = template_path, to = the_quarto_file, overwrite = FALSE)
-  ui_done(sprintf("Created %s.qmd %s", filename))
+  # ui_done(sprintf("Created %s.qmd", filename))
 
   invisible(NULL)
 }
