@@ -356,7 +356,7 @@ make_project <- function(
     usethis::use_package("tidyverse", type = "suggests")
   })
 
-  browser()
+  # browser()
 
   # Create vignettes/.gitignore & write "*.html" & "*.R"
   writeLines("*.html\n*.R", con = "vignettes/.gitignore")
