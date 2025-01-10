@@ -262,7 +262,9 @@ make_project <- function(
   invisible({
     # Remove default .gitingore
     # file.remove(paste0(path, "/.gitignore"))
-    file.remove(file.path(path, ".gitignore"))
+    if (file.exists(file.path(path, ".gitignore"))) {
+      file.remove(file.path(path, ".gitignore"))
+    }
     # Replace .gitignore
     file.copy(
       from = ign_path,
