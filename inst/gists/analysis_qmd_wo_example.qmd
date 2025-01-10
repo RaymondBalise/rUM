@@ -86,7 +86,7 @@ As can be seen in @fig-figure-1 ...
 
 # References {.unnumbered}
 
-```{r}
+```{r, make-references}
 #| include: false
 
 # automatically create a bib database for loaded R packages & rUM

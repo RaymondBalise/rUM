@@ -84,7 +84,7 @@ See Figure \@ref(fig:figure1) or [Figure 1](#fig:figure1)
 
 # References {-}
 
-```{r include=FALSE}
+```{r, make-references, include=FALSE}
 # automatically create a bib database for loaded R packages & rUM
 knitr::write_bib(
   c(
