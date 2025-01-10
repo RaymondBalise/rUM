@@ -356,12 +356,40 @@ make_project <- function(
     usethis::use_package("tidyverse", type = "suggests")
   })
 
+  browser()
+
   # Create vignettes/.gitignore & write "*.html" & "*.R"
   writeLines("*.html\n*.R", con = "vignettes/.gitignore")
 
+  # Setup OS-specific string parsing--------------------------------------------------
+  # Unix-based OS's use a end of liine return like "\n"
+  # Windows uses a carriage return and line break like "\r\n"
+  # This section will adjust the YAML pattern to be read and replaced by inserting
+  # the appropriate line return items if on Windows:
+
+
+  # Original YAML content to be replaced
+  qmd_pattern <- "format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss"
+
+  rmd_pattern <- "output:\n  bookdown::html_document2:\n    number_sections: false\n"
+
+  # rUM will replace the pattern with this to be able write & create package vignettes
+  qmd_replacement <- "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{quarto::html}\n  %\\\\VignetteEncoding{UTF-8}"
+
+  rmd_replacement <- "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{knitr::rmarkdown}\n  %\\\\VignetteEncoding{UTF-8}\n"
+
+  # Apply the OS-conditional change
+  if (.Platform$OS.type == 'windows') {
+    qmd_pattern <- stringr::str_replace_all(qmd_pattern, '\n', '\r\n')
+    qmd_replacement <- stringr::str_replace_all(qmd_replacement, '\n', '\r\n')
+    
+    rmd_pattern <- stringr::str_replace_all(rmd_pattern, '\n', '\r\n')
+    rmd_replacement <- stringr::str_replace_all(rmd_replacement, '\n', '\r\n')
+  }
+  #-----------------------------------------------------------------------------------
+
   # Append Vignette builder to DESCRIPTION file & modify YAML content
   if (type == "Quarto (analysis.qmd)") { # Quarto project
-  
     # Add quietly to DESCRIPTION for Quarto:
     suppressMessages({
       usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
@@ -372,32 +400,29 @@ make_project <- function(
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
-    
     # Replace the YAML pattern with the new structure for Quarto vignette:
     readr::write_file(
       x = stringr::str_replace(
-        readr::read_file("vignettes/analysis.qmd"),
-          "format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss",
-          "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{quarto::html}\n  %\\\\VignetteEncoding{UTF-8}"
-        ), 
+        string = readr::read_file("vignettes/analysis.qmd"),
+        pattern = qmd_pattern,
+        replacement = qmd_replacement
+      ), 
       file = "vignettes/analysis.qmd"
     )
 
   } else { # Rmd project
-    
     # Add Vignette builder to DESCRIPTION:
     cat(
       "VignetteBuilder: knitr\n", 
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
-
     # Replace the YAML pattern with the new structure for Rmd vignette:
     readr::write_file(
       x = stringr::str_replace(
-        readr::read_file("vignettes/analysis.Rmd"),
-          "output:\n  bookdown::html_document2:\n    number_sections: false\n",
-          "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{knitr::rmarkdown}\n  %\\\\VignetteEncoding{UTF-8}\n"
+        string = readr::read_file("vignettes/analysis.Rmd"),
+        pattern = rmd_pattern,
+        replacement = rmd_replacement
         ), 
       file = "vignettes/analysis.Rmd"
     )
