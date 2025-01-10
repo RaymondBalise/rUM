@@ -55,13 +55,21 @@ make_project <- function(
     openInteractive = TRUE
 ) {
   
-  type <- match.arg(type)
-  # ensure path exists
+  # Input validation:--------------------------------------------------------------
   
-  # check directory name (for packages only); we don't want to create an empty
-  #   directory if the package name is invalid.
-  # code from: https://github.com/r-lib/usethis/blob/main/R/description.R
-  # The name will be checked only for packages; it's "valid" otherwise
+  # 1) Type matches available options
+  type <- match.arg(type)
+  # 2) Check logical inputs
+  if (!is.logical(example))   stop('Parameter `example` must be TRUE or FALSE')
+  if (!is.logical(vignette))  stop('Parameter `vignette` must be TRUE or FALSE')
+  if (!is.logical(overwrite)) stop('Parameter `overwrite` must be TRUE or FALSE')
+  if (!is.logical(openInteractive)) {
+    stop('Parameter `openInteractive` must be TRUE or FALSE')
+  }
+  # 3) Check directory name (for packages only); we don't want to create an empty
+  #    directory if the package name is invalid.
+  #    code from: https://github.com/r-lib/usethis/blob/main/R/description.R
+  #    The name will be checked only for packages; it's "valid" otherwise
   if (vignette == TRUE) {
     dir_name_char <- stringr::word(path, -1, sep = "[\\|\\/]")
     valid_name_lgl <- .valid_package_name(dir_name_char)
@@ -99,10 +107,12 @@ make_project <- function(
       )
       return(invisible(NULL))
     }
+
+    # browser()
     
-    if (length(list.files(path = path, pattern = "\\.Rproj$")) > 0 & 
-        !(overwrite == TRUE)
-      ){
+    
+    has_rproj <- length(list.files(path = path, pattern = "\\.Rproj$")) > 0
+    if (has_rproj & !overwrite){
       message(
         paste0(
           "STOPPING: The folder/directory you chose to hold the package ",
@@ -115,33 +125,40 @@ make_project <- function(
       return(invisible(NULL))
     }
     
-    if (
-      length(list.files(path = path, pattern = "\\.Rproj$")) == 0 | 
-      overwrite == TRUE
-    ) {
-      usethis::create_package(path = path, open = TRUE, rstudio = TRUE)
+    if (!has_rproj | overwrite) {
+      usethis::create_package(path = path, open = openInteractive, rstudio = TRUE)
     }
   }
+
+  # Now that the project directory has been successfully created, normalize the
+  # path to work across OS and prevent path issues ahead.
+  path <- normalizePath(path, mustWork = TRUE)
   
   #############################################################################
   # This section creates the project directory and adds the appropriate files #
   #############################################################################
   
   # Prevent user from overwriting an analysis file
-  if (file.exists(paste0(path, "/analysis.Rmd")) ||
-      file.exists(paste0(path, "/analysis.qmd"))
+  if (file.exists(file.path(path, "analysis.Rmd")) ||
+      file.exists(file.path(path, "analysis.qmd"))
   ) {
     abort(
       "The directory you choose already has an analysis file. Stopping."
     )
   }
   
-  # Create vignette folder
+  
+  # Create vignette folder. If the project will NOT be using vignettes (ie., making
+  # a R package), the `vig_path` created below will resolve correctly.
+  # Packages require that the "analysis.*md" file is located in the vignettes directory.
+  # However, non-packages can store all files in the main project root.
+  # When `vignette == TRUE` the `vig_path` will look like: path/vignettes
+  # When `vignette == FALSE` the `vig_path` will be equal to path
   if (vignette == TRUE) {
-    vig_path = "/vignettes"
-    dir.create(paste0(path, vig_path), recursive = TRUE, showWarnings = FALSE)
+    vig_path <- file.path(path, "vignettes")
+    dir.create(vig_path, recursive = TRUE, showWarnings = FALSE)
   } else {
-    vig_path = NULL
+    vig_path <- path
   }
   
   #############################################################################
@@ -156,7 +173,8 @@ make_project <- function(
           "gists/analysis_rmd_wo_example.Rmd", 
           package = "rUM"
         ),
-        to = paste0(path, vig_path, "/analysis.Rmd")
+        # to = paste0(path, vig_path, "/analysis.Rmd")
+        to = file.path(vig_path, "analysis.Rmd")
       ))
 
       # Adding console feedback
@@ -170,7 +188,8 @@ make_project <- function(
           "gists/analysis_qmd_wo_example.qmd", 
           package = "rUM"
         ),
-        to = paste0(path, vig_path, "/analysis.qmd")
+        # to = paste0(path, vig_path, "/analysis.qmd")
+        to = file.path(vig_path, "analysis.qmd")
       ))
 
       # Adding console feedback
@@ -191,7 +210,8 @@ make_project <- function(
           "gists/analysis_rmd_with_example.Rmd", 
           package = "rUM"
         ),
-        to = paste0(path, vig_path, "/analysis.Rmd")
+        # to = paste0(path, vig_path, "/analysis.Rmd")
+        to = file.path(vig_path, "analysis.Rmd")
       ))
 
       # Adding console feedback
@@ -205,7 +225,8 @@ make_project <- function(
           "gists/analysis_qmd_with_example.qmd", 
           package = "rUM"
         ),
-        to = paste0(path, vig_path, "/analysis.qmd")
+        # to = paste0(path, vig_path, "/analysis.qmd")
+        to = file.path(vig_path, "analysis.qmd")
       ))
 
       # Adding console feedback
@@ -231,7 +252,7 @@ make_project <- function(
     rUM::write_scss(name = "custom", path = path) 
   }
   
-  dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
+  dir.create(file.path(path, "data"), recursive = TRUE, showWarnings = FALSE)
 
   # Add enhanced .gitignore from inst/gists
   ign_path <- system.file("gists/aggressive_gitignore.md", package = "rUM")
@@ -240,11 +261,13 @@ make_project <- function(
   }
   invisible({
     # Remove default .gitingore
-    file.remove(paste0(path, "/.gitignore"))
+    # file.remove(paste0(path, "/.gitignore"))
+    file.remove(file.path(path, ".gitignore"))
     # Replace .gitignore
     file.copy(
       from = ign_path,
-      to = paste0(path, "/.gitignore")
+      # to = paste0(path, "/.gitignore")
+      to = file.path(path, ".gitignore")
     )
   })
   # Adding console feedback
@@ -258,7 +281,8 @@ make_project <- function(
   if (vignette == TRUE) {
     cat(
       "dated_progress_notes.md", 
-      file = file.path(paste0(path, "/.Rbuildignore")),
+      # file = file.path(paste0(path, "/.Rbuildignore")),
+      file = file.path(path, ".Rbuildignore"),
       append = TRUE # add, don't overwrite current file
     )
     # Adding console feedback
@@ -266,29 +290,28 @@ make_project <- function(
   }
 
   # write an empty packages bibliography file - needed to knit the first time
-  writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
+  # writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
+  writeLines("", con = file.path(vig_path, "packages.bib"))
   
   # write an empty user bibliography file
-  writeLines("", con = file.path(paste0(path, vig_path, "/references.bib")))
+  # writeLines("", con = file.path(paste0(path, vig_path, "/references.bib")))
+  writeLines("", con = file.path(vig_path, "references.bib"))
   
   # Add .csl files
   download.file(
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
-    paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl"),
+    # paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl"),
+    file.path(vig_path, "the-new-england-journal-of-medicine.csl"),
     quiet = TRUE
   )
   download.file(
     "https://www.zotero.org/styles/apa",
-    paste0(path, vig_path, "/apa.csl"),
+    # paste0(path, vig_path, "/apa.csl"),
+    file.path(vig_path, "apa.csl"),
     quiet = TRUE
   )
-
   
-  if (vignette == TRUE){
-    
-    .run_me_first(path, type)
-  }
-  
+  if (vignette) .run_me_first(path, type)
 }
 
 
@@ -309,6 +332,7 @@ make_project <- function(
 #   using the correct engine.
 #############################################################################
 .run_me_first <- function(path, type) {
+  # browser()
   # Capture current directory and return to it at the end of this function
   current_wd <- getwd()
   # Move to new project location
