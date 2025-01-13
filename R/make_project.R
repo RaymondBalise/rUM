@@ -55,29 +55,44 @@ make_project <- function(
     openInteractive = TRUE
 ) {
   
-  type <- match.arg(type)
-  # ensure path exists
+  # Input validation:--------------------------------------------------------------
   
-  # check directory name (for packages only); we don't want to create an empty
-  #   directory if the package name is invalid.
-  # code from: https://github.com/r-lib/usethis/blob/main/R/description.R
-  # The name will be checked only for packages; it's "valid" otherwise
-  if (vignette == TRUE) {
+  # 1) Type matches available options
+  type <- match.arg(type)
+  is_quarto_project <- type == "Quarto (analysis.qmd)"
+  is_markdown_project <- type == "R Markdown (analysis.Rmd)"
+
+  # 2) Check logical inputs
+  if (!is.logical(example))   stop('Parameter `example` must be TRUE or FALSE')
+  if (!is.logical(vignette))  stop('Parameter `vignette` must be TRUE or FALSE')
+  if (!is.logical(overwrite)) stop('Parameter `overwrite` must be TRUE or FALSE')
+  if (!is.logical(openInteractive)) {
+    stop('Parameter `openInteractive` must be TRUE or FALSE')
+  }
+
+  # 3) Check directory name (for packages only); we don't want to create an empty
+  #    directory if the package name is invalid.
+  #    code from: https://github.com/r-lib/usethis/blob/main/R/description.R
+  #    The name will be checked only for packages; it's "valid" otherwise
+  if (vignette) {
     dir_name_char <- stringr::word(path, -1, sep = "[\\|\\/]")
     valid_name_lgl <- .valid_package_name(dir_name_char)
   } else {
     valid_name_lgl <- TRUE
   }
-  if (vignette != TRUE && valid_name_lgl) {
+  if (!vignette && valid_name_lgl) {
     dir.create(path, recursive = TRUE, showWarnings = FALSE)
   }
   
   
   # get version of Quarto on the machine and save it as a version
   the_version <- quarto::quarto_version()
-  if (vignette == FALSE){ # make paper project w/o package infrastructure
+  # Is there a .Rproj in the provided path?
+  has_rproj <- length(list.files(path = path, pattern = "\\.Rproj$")) > 0
+
+  if (!vignette){ # make paper project w/o package infrastructure
     # If the project object does not exist add it.
-    if (length(list.files(path = path, pattern = "\\.Rproj$")) == 0) {
+    if (!has_rproj) {
       # Prior to version 2.0.0, the option `open` was set to TRUE, which worked
       #   as intended interactively, but spawned duplicate RStudio project 
       #   windows when called from RStudio menus via the `research_project.dcf`
@@ -89,7 +104,7 @@ make_project <- function(
     }
   } else { # make paper project with package infrastructure
     # Quarto version 1.4.549 was the first to allow the building of vignettes
-    if (type == "Quarto (analysis.qmd)" & the_version < "1.4.549"){
+    if (is_quarto_project & the_version < "1.4.549"){
       message(
         paste0(
           "STOPPING: You need a modern version of Quarto from ", 
@@ -99,10 +114,9 @@ make_project <- function(
       )
       return(invisible(NULL))
     }
-    
-    if (length(list.files(path = path, pattern = "\\.Rproj$")) > 0 & 
-        !(overwrite == TRUE)
-      ){
+
+    # browser()
+    if (has_rproj & !overwrite){
       message(
         paste0(
           "STOPPING: The folder/directory you chose to hold the package ",
@@ -115,33 +129,38 @@ make_project <- function(
       return(invisible(NULL))
     }
     
-    if (
-      length(list.files(path = path, pattern = "\\.Rproj$")) == 0 | 
-      overwrite == TRUE
-    ) {
-      usethis::create_package(path = path, open = TRUE, rstudio = TRUE)
+    if (!has_rproj | overwrite) {
+      usethis::create_package(path = path, open = openInteractive, rstudio = TRUE)
     }
   }
+
+  # Now that the project directory has been successfully created, normalize the
+  # path to work across OS and prevent path issues ahead.
+  path <- normalizePath(path, mustWork = TRUE)
   
   #############################################################################
   # This section creates the project directory and adds the appropriate files #
   #############################################################################
   
   # Prevent user from overwriting an analysis file
-  if (file.exists(paste0(path, "/analysis.Rmd")) ||
-      file.exists(paste0(path, "/analysis.qmd"))
+  if (file.exists(file.path(path, "analysis.Rmd")) ||
+      file.exists(file.path(path, "analysis.qmd"))
   ) {
-    abort(
-      "The directory you choose already has an analysis file. Stopping."
-    )
+    abort("The directory you choose already has an analysis file. Stopping.")
   }
   
-  # Create vignette folder
-  if (vignette == TRUE) {
-    vig_path = "/vignettes"
-    dir.create(paste0(path, vig_path), recursive = TRUE, showWarnings = FALSE)
+  
+  # Create vignette folder. If the project will NOT be using vignettes (ie., making
+  # a R package), the `vig_path` created below will resolve correctly.
+  # Packages require that the "analysis.*md" file is located in the vignettes directory.
+  # However, non-packages can store all files in the main project root.
+  # When `vignette == TRUE` the `vig_path` will look like: path/vignettes
+  # When `vignette == FALSE` the `vig_path` will be equal to path
+  if (vignette) {
+    vig_path <- file.path(path, "vignettes")
+    dir.create(vig_path, recursive = TRUE, showWarnings = FALSE)
   } else {
-    vig_path = NULL
+    vig_path <- path
   }
   
   #############################################################################
@@ -149,73 +168,45 @@ make_project <- function(
   #############################################################################
   # use old templates w/o an example
   if (example == FALSE){
-    if (type == "R Markdown (analysis.Rmd)") {
-
+    if (is_markdown_project) {
       invisible(file.copy(
-        from = system.file(
-          "gists/analysis_rmd_wo_example.Rmd", 
-          package = "rUM"
-        ),
-        to = paste0(path, vig_path, "/analysis.Rmd")
+        from = system.file("gists/analysis_rmd_wo_example.Rmd", package = "rUM"),
+        to = file.path(vig_path, "analysis.Rmd")
       ))
-
-      # Adding console feedback
       ui_done("analysis.Rmd has been created.")
 
 
-    } else if (type == "Quarto (analysis.qmd)") {
-
+    } else if (is_quarto_project) {
       invisible(file.copy(
-        from = system.file(
-          "gists/analysis_qmd_wo_example.qmd", 
-          package = "rUM"
-        ),
-        to = paste0(path, vig_path, "/analysis.qmd")
+        from = system.file("gists/analysis_qmd_wo_example.qmd", package = "rUM"),
+        to = file.path(vig_path, "analysis.qmd")
       ))
-
-      # Adding console feedback
       ui_done("analysis.qmd has been created.")
 
     } else {
-      abort(
-        "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
-      )
+      abort("The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'")
     }
 
   # use newer templates w an example
   } else { 
-    if (type == "R Markdown (analysis.Rmd)") {
-      
+    if (is_markdown_project) {
       invisible(file.copy(
-        from = system.file(
-          "gists/analysis_rmd_with_example.Rmd", 
-          package = "rUM"
-        ),
-        to = paste0(path, vig_path, "/analysis.Rmd")
+        from = system.file("gists/analysis_rmd_with_example.Rmd", package = "rUM"),
+        to = file.path(vig_path, "analysis.Rmd")
       ))
-
-      # Adding console feedback
       ui_done("analysis.Rmd has been created.")
 
 
-    } else if (type == "Quarto (analysis.qmd)") {
-      
+    } else if (is_quarto_project) {
       invisible(file.copy(
-        from = system.file(
-          "gists/analysis_qmd_with_example.qmd", 
-          package = "rUM"
-        ),
-        to = paste0(path, vig_path, "/analysis.qmd")
+        from = system.file("gists/analysis_qmd_with_example.qmd", package = "rUM"),
+        to = file.path(vig_path, "analysis.qmd")
       ))
-
-      # Adding console feedback
       ui_done("analysis.qmd has been created.")
 
     # User did not provide correct argument type:  
     } else {
-      abort(
-        "The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'"
-      )
+      abort("The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'")
     }
   }
 
@@ -227,68 +218,60 @@ make_project <- function(
   #  implementaton of the vignette engine. It ensures that the HTML vignettes
   #  produced are reasonable size and can be published on CRAN without problems".
   # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
-  if (vignette == FALSE & type == "Quarto (analysis.qmd)") {
-    rUM::write_scss(name = "custom", path = path) 
-  }
   
-  dir.create(paste0(path, "/data"), recursive = TRUE, showWarnings = FALSE)
+  # 1. Create the data directory in the project's root
+  dir.create(file.path(path, "data"), recursive = TRUE, showWarnings = FALSE)
+  
+  # 2. Create custom.scss
+  if (is_quarto_project && !vignette) rUM::write_scss(name = "custom", path = path) 
 
-  # Add enhanced .gitignore from inst/gists
+  # 3. Add enhanced .gitignore from inst/gists
   ign_path <- system.file("gists/aggressive_gitignore.md", package = "rUM")
-  if (ign_path == "") {
-    stop("Could not find .gitignore in package installation")
-  }
+  if (ign_path == "") stop("Could not find .gitignore in package installation")
+  
+  the_gitignore_path <- file.path(path, ".gitignore")
   invisible({
-    # Remove default .gitingore
-    file.remove(paste0(path, "/.gitignore"))
+    # Remove default .gitingore provided by `usethis::create_package()`
+    if (file.exists(the_gitignore_path)) file.remove(the_gitignore_path)
     # Replace .gitignore
-    file.copy(
-      from = ign_path,
-      to = paste0(path, "/.gitignore")
-    )
+    file.copy(from = ign_path, to = the_gitignore_path)
   })
-  # Adding console feedback
   ui_done("An enhanced .gitignore has been created.")
 
-  # Add a README & progress notes templates from inst/gists
+  # 4. Add project documentation files: README & progress notes templates
   rUM::write_readme(path = path)
   rUM::write_notes(path = path)
 
-  # Add dated_progress_notes.md to .Rbuildignore for packages
-  if (vignette == TRUE) {
+  # 5. Add dated_progress_notes.md to .Rbuildignore for packages
+  if (vignette) {
     cat(
       "dated_progress_notes.md", 
-      file = file.path(paste0(path, "/.Rbuildignore")),
+      file = file.path(path, ".Rbuildignore"),
       append = TRUE # add, don't overwrite current file
     )
-    # Adding console feedback
     ui_done("dated_progress_notes.md has been added to the .Rbuildignore.")  
   }
 
-  # write an empty packages bibliography file - needed to knit the first time
-  writeLines("", con = file.path(paste0(path, vig_path, "/packages.bib")))
+  # 6. Write an empty packages bibliography file - needed to knit the first time
+  writeLines("", con = file.path(vig_path, "packages.bib"))
   
-  # write an empty user bibliography file
-  writeLines("", con = file.path(paste0(path, vig_path, "/references.bib")))
+  # 7. Write an empty user bibliography file
+  writeLines("", con = file.path(vig_path, "references.bib"))
   
-  # Add .csl files
+  # 8. Add .csl files
   download.file(
     "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
-    paste0(path, vig_path, "/the-new-england-journal-of-medicine.csl"),
+    file.path(vig_path, "the-new-england-journal-of-medicine.csl"),
     quiet = TRUE
   )
   download.file(
     "https://www.zotero.org/styles/apa",
-    paste0(path, vig_path, "/apa.csl"),
+    file.path(vig_path, "apa.csl"),
     quiet = TRUE
   )
-
   
-  if (vignette == TRUE){
-    
-    .run_me_first(path, type)
-  }
-  
+  # Modify DESCRIPTION, main vignette template, and other package files
+  if (vignette) .run_me_first(path, type)
 }
 
 
@@ -309,6 +292,7 @@ make_project <- function(
 #   using the correct engine.
 #############################################################################
 .run_me_first <- function(path, type) {
+  # browser()
   # Capture current directory and return to it at the end of this function
   current_wd <- getwd()
   # Move to new project location
@@ -333,9 +317,37 @@ make_project <- function(
   # Create vignettes/.gitignore & write "*.html" & "*.R"
   writeLines("*.html\n*.R", con = "vignettes/.gitignore")
 
-  # Append Vignette builder to DESCRIPTION file & modify YAML content
-  if (type == "Quarto (analysis.qmd)") { # Quarto project
+
+  # Setup OS-specific string parsing--------------------------------------------------
+  # Unix-based OS's use a end of liine return like "\n"
+  # Windows uses a carriage return and line break like "\r\n"
+  # This section will adjust the YAML pattern to be read and replaced by inserting
+  # the appropriate line return items if on Windows:
+
+
+  # Original YAML content to be replaced
+  qmd_pattern <- "format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss"
+
+  rmd_pattern <- "output:\n  bookdown::html_document2:\n    number_sections: false\n"
+
+  # rUM will replace the pattern with this to be able write & create package vignettes
+  qmd_replacement <- "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{quarto::html}\n  %\\\\VignetteEncoding{UTF-8}"
+
+  rmd_replacement <- "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{knitr::rmarkdown}\n  %\\\\VignetteEncoding{UTF-8}\n"
+
+  # Apply the OS-conditional change
+  if (.Platform$OS.type == 'windows') {
+    qmd_pattern <- stringr::str_replace_all(qmd_pattern, '\n', '\r\n')
+    qmd_replacement <- stringr::str_replace_all(qmd_replacement, '\n', '\r\n')
+    
+    rmd_pattern <- stringr::str_replace_all(rmd_pattern, '\n', '\r\n')
+    rmd_replacement <- stringr::str_replace_all(rmd_replacement, '\n', '\r\n')
+  }
+  #-----------------------------------------------------------------------------------
+
   
+  # Append Vignette builder to DESCRIPTION file & modify YAML content
+  if (is_quarto_project) { # Quarto project
     # Add quietly to DESCRIPTION for Quarto:
     suppressMessages({
       usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
@@ -346,32 +358,29 @@ make_project <- function(
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
-    
     # Replace the YAML pattern with the new structure for Quarto vignette:
     readr::write_file(
       x = stringr::str_replace(
-        readr::read_file("vignettes/analysis.qmd"),
-          "format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss",
-          "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{quarto::html}\n  %\\\\VignetteEncoding{UTF-8}"
-        ), 
+        string = readr::read_file("vignettes/analysis.qmd"),
+        pattern = qmd_pattern,
+        replacement = qmd_replacement
+      ), 
       file = "vignettes/analysis.qmd"
     )
 
   } else { # Rmd project
-    
     # Add Vignette builder to DESCRIPTION:
     cat(
       "VignetteBuilder: knitr\n", 
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
     )
-
     # Replace the YAML pattern with the new structure for Rmd vignette:
     readr::write_file(
       x = stringr::str_replace(
-        readr::read_file("vignettes/analysis.Rmd"),
-          "output:\n  bookdown::html_document2:\n    number_sections: false\n",
-          "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{knitr::rmarkdown}\n  %\\\\VignetteEncoding{UTF-8}\n"
+        string = readr::read_file("vignettes/analysis.Rmd"),
+        pattern = rmd_pattern,
+        replacement = rmd_replacement
         ), 
       file = "vignettes/analysis.Rmd"
     )
