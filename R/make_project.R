@@ -271,7 +271,7 @@ make_project <- function(
   )
   
   # Modify DESCRIPTION, main vignette template, and other package files
-  if (vignette) .run_me_first(path, type)
+  if (vignette) .run_me_first(path, is_quarto_project)
 }
 
 
@@ -291,8 +291,8 @@ make_project <- function(
 #   YAML header with content appropriate to build the respective vignette
 #   using the correct engine.
 #############################################################################
-.run_me_first <- function(path, type) {
-  # browser()
+.run_me_first <- function(path, is_quarto_project) {
+  browser()
   # Capture current directory and return to it at the end of this function
   current_wd <- getwd()
   # Move to new project location
