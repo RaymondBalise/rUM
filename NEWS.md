@@ -9,6 +9,7 @@
 + Provides `README.md` and `dated_progress_notes.md` templates to new projects. It will ask if you'd like to overwrite an existing README if one exists in the current project.
 + Added `rUM::write_scss()` function that will write a SCSS template for Quarto projects. This function is available for use outside of `rUM` projects when a SCSS template is desired (perhaps, a Quarto blog or Shiny app). 
 + Added custom.scss to non-package Quarto projects with `rUM::write_scss()` during project creation.
++ Added a vignette for using Posit.Cloud
 
 ## Other Updates
 + removed `RUN_ME_FIRST.R` file and instead automate those processes as described above
