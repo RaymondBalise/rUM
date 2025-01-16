@@ -292,7 +292,7 @@ make_project <- function(
 #   using the correct engine.
 #############################################################################
 .run_me_first <- function(path, is_quarto_project) {
-  browser()
+  # browser()
   # Capture current directory and return to it at the end of this function
   current_wd <- getwd()
   # Move to new project location
