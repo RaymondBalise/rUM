@@ -16,7 +16,7 @@ navbar:
   components:
     news:
       text: Changelog
-      href: new/index.html
+      href: news/index.html
 
 articles:
   - title: Get Started
