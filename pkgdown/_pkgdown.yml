@@ -1,7 +1,7 @@
 url: https://raymondbalise.github.io/rUM/
 template:
   bootstrap: 5
-  light-switch: true
+  # light-switch: true
   bslib:
     font-size-sm: 0.9rem
     primary: "#0054AD"
