@@ -1,6 +1,6 @@
 Package: rUM
 Title: R Templates from the University of Miami
-Version: 2.0.0.9001
+Version: 2.1.0
 Authors@R: 
     c(
       person(

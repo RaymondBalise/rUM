@@ -1,4 +1,4 @@
-# rUM (development version)
+# rUM 2.1.0
 
 ## New Features
 + Automated `make_project(vignette = TRUE)` development tools during project build to:
