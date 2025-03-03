@@ -22,7 +22,8 @@
 #'
 #' @param name The name of the scss file without extension. Default \code{name} is
 #' "custom".
-#' @param path The destination directory for the SCSS file.
+#' @param path The destination directory for the SCSS file. Defaults to \code{
+#' here::here()}.
 #' @param add_to_yaml Boolean. Add the new SCSS filename to YAML structure.
 #' 
 #' @return A \code{.scss} file to customize Quarto styling. If \code{name} is not
@@ -38,7 +39,7 @@
 #' # Add another SCSS file and update YAML in the temporary directory
 #' write_scss(name = "special_theme", path = tmp)
 
-write_scss <- function(name = "custom", path = NULL, add_to_yaml = FALSE) {
+write_scss <- function(name = "custom", path = here::here(), add_to_yaml = FALSE) {
   
   # Validate path
   if (is.null(path) || !dir.exists(path)) {

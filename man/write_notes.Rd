@@ -4,10 +4,11 @@
 \alias{write_notes}
 \title{Create a project README file}
 \usage{
-write_notes(path = NULL)
+write_notes(path = here::here())
 }
 \arguments{
-\item{path}{The destination directory for the progress notes file.}
+\item{path}{The destination directory for the progress notes file. Defaults to \code{
+here::here()}.}
 }
 \value{
 Creates a chronological project progress notes tracker

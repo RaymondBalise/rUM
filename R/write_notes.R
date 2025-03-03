@@ -4,7 +4,8 @@
 #' and dated_progress_notes.md files. It provides interactive prompts for existing files
 #' and maintains consistent project documentation structure.
 #'
-#' @param path The destination directory for the progress notes file.
+#' @param path The destination directory for the progress notes file. Defaults to \code{
+#' here::here()}.
 #' @return Creates a chronological project progress notes tracker
 #'
 #' @details
@@ -18,7 +19,7 @@
 #' tmp <- tempdir()
 #' write_notes(path = tmp)
  
-write_notes <- function(path = NULL) {
+write_notes <- function(path = here::here()) {
   
   # Validate path
   if (is.null(path) || !dir.exists(path)) {

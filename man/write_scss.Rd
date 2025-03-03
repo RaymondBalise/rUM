@@ -4,13 +4,14 @@
 \alias{write_scss}
 \title{Create a Quarto SCSS file}
 \usage{
-write_scss(name = "custom", path = NULL, add_to_yaml = FALSE)
+write_scss(name = "custom", path = here::here(), add_to_yaml = FALSE)
 }
 \arguments{
 \item{name}{The name of the scss file without extension. Default \code{name} is
 "custom".}
 
-\item{path}{The destination directory for the SCSS file.}
+\item{path}{The destination directory for the SCSS file. Defaults to \code{
+here::here()}.}
 
 \item{add_to_yaml}{Boolean. Add the new SCSS filename to YAML structure.}
 }

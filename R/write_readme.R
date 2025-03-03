@@ -4,7 +4,8 @@
 #' file. It provides interactive prompts for existing files and maintains consistent 
 #' project documentation structure.
 #'
-#' @param path The destination directory for the README file.
+#' @param path The destination directory for the README file. Defaults to \code{
+#' here::here()}.
 #' @return Creates a comprehensive README template for project documentation.
 #'
 #' @details
@@ -25,7 +26,7 @@
 #' tmp <- tempdir()
 #' write_readme(path = tmp)
  
-write_readme <- function(path = NULL) {
+write_readme <- function(path = here::here()) {
   
   # Validate path
   if (is.null(path) || !dir.exists(path)) {
