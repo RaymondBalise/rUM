@@ -23,7 +23,6 @@
 + (none)
 
 
-
 # rUM 2.0.0 (Overproof Rum) 
 
 + Added an `example` argument to `make_project()`
