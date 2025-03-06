@@ -6,6 +6,7 @@
   + Write user's `rUM` project packages to `DESCRIPTION` file
   + Adding `VignetteBuilder` (quarto or knitr) to project `DESCRIPTION` file
   + Adding items to `.Rbuildignore` & `vignettes/.gitignore`
++ Added `rUM::write_quarto()` function that will add a quarto html document with many useful options.
 + Provides `README.md` and `dated_progress_notes.md` templates to new projects. It will ask if you'd like to overwrite an existing README if one exists in the current project.
 + Added custom.scss to non-package Quarto projects with `rUM::write_scss()` during project creation.
 + Added `rUM::write_scss()` function that will write a SCSS template for Quarto projects. This function is available for use outside of `rUM` projects when a SCSS template is desired (perhaps, a Quarto blog or Shiny app). 
