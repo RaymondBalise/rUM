@@ -1,0 +1,57 @@
+---
+title: "0. Using rUM on Posit.Cloud or with Positron"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{0. Using rUM on Posit.Cloud or with Positron}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6,
+  fig.height = 4
+)
+
+options(rmarkdown.html_vignette.check_title = FALSE)
+```
+
+```{css, echo=FALSE}
+body > h1 > img {
+  position: relative;
+  bottom: -30px;
+  border: 0px solid rgba(0, 0, 0, 0.1);
+ }
+```
+
+## Introduction
+
+rUM has many tools to help you write papers and reports efficiently.  They _**will**_ work if you are not working in the RStudio Integrated Development Environment (IDE) on a Mac or Windows but some of the menu options that we show in the other vignettes will not be available.  So you will need to type a line or two into the R console instead of clicking on menu options.  
+
+Here we explain how to use rUM on Posit.Cloud (or other IDEs like Positron). 
+
+## rUM on Posit.Cloud
+
+The other vignettes for `rUM` show you that it integrates with the RStudio IDE menus.  Unfortunately, on Posit.Cloud the **New Project** button does not know about `rUM`. So you will need to type a command to create a new `rUM` based project. Because Posit.Cloud treats each project as its own walled-off environment, you need to tell `rUM` to only work in the current folder/directory.  Most of rUM's functions will do that automatically.  However, `rUM`'s primary function `make_project()` needs you to do this by specifying the location for the project to be `"./"`  (that is UNIX code shorthand that means "in this folder/directory").  Because Posit.Cloud projects have a **project.Rproj** file, you will also need to add the `overwrite = TRUE` option to tell rUM to overwrite the default Posit.Cloud project file.  Here is an example:
+
+```
+rUM::make_project("./", overwrite = TRUE)
+```
+
+If you want to make a new project that will be a package with a vignette written with Quarto, use code like this:
+
+```
+rUM::make_project('./', 'Q', example = F, vignette = T, overwrite = TRUE) 
+```
+
+After typing that in the console and pushing return/enter on your keyboard, you will need to confirm that you really want to make a new project.  Choose the option that means **Yes** when RStudio asks you to confirm that you want to overwrite the existing project and namespace files. Say **Yes** when it asks you if you want to quit and **Switch Projects**.  
+
+### Session
+
+If you are new to R, ignore this.
+
+```{r}
+sessionInfo()
+```

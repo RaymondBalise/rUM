@@ -52,12 +52,16 @@ within the RSutdio IDE. See \code{./rstudio/templates/project/}.
 \examples{
 \dontrun{
   # This makes a project with an example Quarto paper in the project's folder.
-  make_project(path = "~/test", type = "Quarto (analysis.qmd)", example = TRUE, vignette = TRUE)
+  make_project(path = "~/test", type = "Quarto (analysis.qmd)", 
+              example = TRUE, vignette = TRUE)
+  
   # make_project() allows abbreviations on the project type: "Q" for Quarto or "R" for R Markdown
   make_project(path = "~/test_project", "Q", TRUE, TRUE)
   
   # This makes a project with an example R Markdown paper in the project's folder.
-  make_project(path = "~/test", type = "R Markdown (analysis.Rmd)", example = TRUE, vignette = TRUE)
+  make_project(path = "~/test", type = "R Markdown (analysis.Rmd)", 
+              example = TRUE, vignette = TRUE)
+              
   # This makes a project with an example paper in the project's folder.
   make_project(path = "~/test_project", "R", example = TRUE)
 }

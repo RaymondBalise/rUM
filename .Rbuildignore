@@ -5,3 +5,5 @@
 ^pkgdown$
 ^libs$
 ^.*\.DS_Store$
+^doc$
+^Meta$

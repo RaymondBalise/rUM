@@ -67,7 +67,6 @@ Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)`
 
 ```{r table-1}
 
-
 ```
 
 As can be seen in Table \@ref(tab:table-1) or [Table 1](#tab:table-1)
@@ -85,7 +84,7 @@ See Figure \@ref(fig:figure1) or [Figure 1](#fig:figure1)
 
 # References {-}
 
-```{r include=FALSE}
+```{r, make-references, include=FALSE}
 # automatically create a bib database for loaded R packages & rUM
 knitr::write_bib(
   c(
