@@ -1,7 +1,8 @@
   <!-- badges: start -->
   [![CRAN status](https://www.r-pkg.org/badges/version/rUM)](https://CRAN.R-project.org/package=rUM)
   [![Lifecycle: stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-  [![CRAN downloads](https://cranlogs.r-pkg.org/badges/rUM)](https://www.r-pkg.org/pkg/rUM)
+  [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/rUM)](https://www.r-pkg.org/pkg/rUM)
+  [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rUM)](https://cran.r-project.org/package=rUM)
   <!-- badges: end -->
   
 # rUM <a href='https://raymondbalise.github.io/rUM/'><img src='man/figures/logo.png' align="right" width="139" /></a>
