@@ -1,8 +1,8 @@
 ---
-title: "7. Project Documentation with write_readme()"
+title: "Project Documentation with write_readme()"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Project Documentation with write_readme}
+  %\VignetteIndexEntry{Project Documentation with write_readme()}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

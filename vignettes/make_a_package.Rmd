@@ -1,8 +1,8 @@
 ---
-title: "4. Make a Package"
+title: "Make a Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{4. Make a Package}
+  %\VignetteIndexEntry{Make a Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
