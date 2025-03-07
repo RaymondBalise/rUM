@@ -1,8 +1,8 @@
 ---
-title: "0. Using rUM on Posit.Cloud or with Positron"
+title: "Using rUM on Posit.Cloud or with Positron"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{0. Using rUM on Posit.Cloud or with Positron}
+  %\VignetteIndexEntry{Using rUM on Posit.Cloud or with Positron}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

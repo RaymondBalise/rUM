@@ -1,5 +1,5 @@
 ---
-title: "6. Customizing Quarto Documents with SCSS"
+title: "Customizing Quarto Documents with SCSS"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Customizing Quarto Documents with SCSS}

@@ -1,8 +1,8 @@
 ---
-title:  "2. Create a Research Project with R Markdown and rUM"
+title:  "Create a Research Project with R Markdown and rUM"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{2. Create a Research Project with R Markdown and rUM}
+  %\VignetteIndexEntry{Create a Research Project with R Markdown and rUM}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -68,11 +68,11 @@ To create a research project that uses `rUM`, follow these steps. This will init
 
 2.  Scroll down and then select **`rUM` Research Project Template**
 
-    ![](project_template.png){width=70%}
+    ![](project_template.png){width=70% alt='New Project Wizard template'}
 
 3.  Specify the location of where your research project will be saved
 
-    ![](save_markdown_project_here.png){width=70%}
+    ![](save_markdown_project_here.png){width=70% alt='RMarkdown save location prompt'}
     
 
 ## Add `rUM` into an existing folder/directory that does not have an RStudio project.
@@ -83,7 +83,7 @@ What if you have already created a folder containing the important files for you
 
 2.  Specify the location of where your research project will be saved
 
-    ![](existing_directory.png){width=70%}
+    ![](existing_directory.png){width=70% alt='Location of where to save new research project'}
     
 3.  Run the following script in your console:
 
@@ -112,7 +112,7 @@ Newly created files:
 <p id="fig:created_rUM_markdown_files" >
 </p>
 ```    
-![](created_rUM_markdown_files.png){width=70%}
+![](created_rUM_markdown_files.png){width=70% alt='List of newly-created project files'}
   
 `analysis.Rmd`:
 
@@ -121,7 +121,7 @@ Newly created files:
 <p id="fig:analysis_Rmd_file" >
 </p>
 ``` 
-![](analysis_Rmd_file.jpg){width=80%}
+![](analysis_Rmd_file.jpg){width=80% alt='analysis.Rmd template display'}
 
 
 
@@ -130,11 +130,11 @@ Newly created files:
 
 1. Navigate to File > New File > R Markdown
 
-    ![](newfile_markdown.jpg){width=70%}
+    ![](newfile_markdown.jpg){width=70% alt='How to use rUM markdown headers in RStudio'}
 
 1. Select **From Template**
 
-    ![](from_template.png){width=70%}
+    ![](from_template.png){width=70% alt='Select "html2 with rUM" template from dropdown'}
 
 1. Choose a template:
 
