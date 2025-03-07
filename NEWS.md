@@ -1,4 +1,4 @@
-# rUM (development version)
+# rUM 2.1.0
 
 ## New Features
 + Automated `make_project(vignette = TRUE)` development tools during project build to:
@@ -6,9 +6,12 @@
   + Write user's `rUM` project packages to `DESCRIPTION` file
   + Adding `VignetteBuilder` (quarto or knitr) to project `DESCRIPTION` file
   + Adding items to `.Rbuildignore` & `vignettes/.gitignore`
++ Added `rUM::write_quarto()` function that will add a quarto html document with many useful options.
 + Provides `README.md` and `dated_progress_notes.md` templates to new projects. It will ask if you'd like to overwrite an existing README if one exists in the current project.
-+ Added `rUM::write_scss()` function that will write a SCSS template for Quarto projects. This function is available for use outside of `rUM` projects when a SCSS template is desired (perhaps, a Quarto blog or Shiny app). 
 + Added custom.scss to non-package Quarto projects with `rUM::write_scss()` during project creation.
++ Added `rUM::write_scss()` function that will write a SCSS template for Quarto projects. This function is available for use outside of `rUM` projects when a SCSS template is desired (perhaps, a Quarto blog or Shiny app). 
++ Added `rUM::write_notes()` function to add the progress notes template to users' projects when one doesn't currently exist. This can be used in rUM & non-rUM projects alike.
++ Added `rUM::write_readme()` function to insert a structured README file to users' projects when one doesn't currently exist. This may also be used in rUM & non-rUM projects.
 + Added a vignette for using Posit.Cloud
 
 ## Other Updates
@@ -18,7 +21,6 @@
 
 ## Bug Fixes
 + (none)
-
 
 
 # rUM 2.0.0 (Overproof Rum) 

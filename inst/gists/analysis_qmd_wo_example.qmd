@@ -1,7 +1,7 @@
 ---
 title: "your_title_goes_here"
 author: "your_name_goes_here"
-date: "`r Sys.Date()`"
+date: last-modified
 format:
   html:
     embed-resources: true
@@ -26,7 +26,7 @@ bibliography: [references.bib, packages.bib]
 csl: the-new-england-journal-of-medicine.csl
 ---
 
-```{r, tidyverse-tidymodels}
+```{r, load-tidyverse-tidymodels}
 #| echo: false
 
 library(conflicted)
@@ -38,7 +38,7 @@ suppressPackageStartupMessages(library(tidyverse))
 options(dplyr.summarise.inform = FALSE)
 ```
 
-```{r, other-packages}
+```{r, load-other-packages}
 library(glue)  # for glue()
 library(rUM)  # needed for the bibliography
 library(rio)  # for import() 

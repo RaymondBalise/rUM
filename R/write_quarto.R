@@ -22,10 +22,13 @@ write_quarto <- function(filename = NULL, path = here::here()) {
     stop("Invalid `path`. Please enter a valid project directory.")
   }
 
+  # Validate filename: part 1
+  if (is.null(filename)) stop('Invalid filename. Please input a value.')
+
   # Remove .qmd if accidentally typed
   filename <- str_replace_all(filename, '.qmd$', '')
 
-  # Validate filename
+  # Validate filename: part 2
   if (!is.character(filename)) stop('Invalid filename: must be character.')
   if (!grepl('^[a-zA-Z0-9_-]+$', filename)) {
     stop('Invalid filename. Use only letters, numbers, hyphens, and underscores.')
