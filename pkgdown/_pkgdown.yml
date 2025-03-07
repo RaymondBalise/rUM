@@ -1,0 +1,44 @@
+url: https://raymondbalise.github.io/rUM/
+template:
+  bootstrap: 5
+  # light-switch: true
+  bslib:
+    font-size-sm: 0.9rem
+    primary: "#0054AD"
+    border-radius: 0.5rem
+    btn-border-radius: 0.25rem
+    danger: "#A6081A"
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    news:
+      text: Changelog
+      href: news/index.html
+
+articles:
+  - title: Get Started
+    navbar: ~
+    contents:
+      - using_posit_cloud
+      - make_research_project
+      - make_research_project_markdown
+      - R_Markdown_Templates
+      - make_a_package
+      - show_example
+      - write_scss
+      - write_readme
+
+reference:
+  - title: "Project Setup"
+    desc: "Function for creating a Quarto or RMarkdown project"
+    contents:
+      - make_project
+      - write_quarto
+  - title: "Project Enhancements"
+    contents:
+      - write_readme
+      - write_notes
+      - write_scss
