@@ -36,7 +36,7 @@ Authors@R:
         family = "Gutierrez",
         role = "ctb",
         email = "fxg266@miami.edu",
-        comment = c(ORCID = "0000-0001-8275-8349")
+        comment = c(ORCID = "0009-0005-9742-6992")
       )
     )
 Description: This holds some r markdown and quarto templates and a template to 
