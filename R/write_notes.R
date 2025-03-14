@@ -31,7 +31,7 @@ write_notes <- function(path = here::here()) {
   
   # Handle dated_progress_notes.md creation/overwrite
   progress_notes_content <- paste0(
-    "# Add project updates here\n",
+    "# Project updates\n\n",
     format(Sys.Date(), "%b %d, %Y"),
     ": project started"
   )
