@@ -36,9 +36,11 @@ reference:
     desc: "Function for creating a Quarto or RMarkdown project"
     contents:
       - make_project
+      # - make_package
       - write_quarto
   - title: "Project Enhancements"
     contents:
       - write_readme
       - write_notes
       - write_scss
+
