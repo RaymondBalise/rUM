@@ -13,7 +13,6 @@
 #' @param type Choose between "Quarto (analysis.qmd)" or
 #'    "R Markdown (analysis.Rmd)"
 #' @param example Will the analysis file include an example table/figure?
-#' @param vignette Will the analysis file be saved as a package vignette?
 #' @param overwrite Will an existing RStudio project be overwritten?  This is 
 #' needed for for Posit.Cloud.  You will be prompted to confirm this option.
 #' @param openInteractive Should this new project be opened in a new RStudio

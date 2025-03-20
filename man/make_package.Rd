@@ -28,8 +28,6 @@ needed for for Posit.Cloud.  You will be prompted to confirm this option.}
 window? Defaults to \code{TRUE}. NOTE: this option exists to prevent 
 RStudio from opening two duplicate versions of the new project when
 this function is executed from RStudio menus. MODIFY WITH CAUTION.}
-
-\item{vignette}{Will the analysis file be saved as a package vignette?}
 }
 \value{
 Returns nothing.  See description above.
