@@ -31,7 +31,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Frank Gutierrez \email{fxg266@miami.edu} (\href{https://orcid.org/0000-0001-8275-8349}{ORCID}) [contributor]
+  \item Frank Gutierrez \email{frank14898@outlook.com} (\href{https://orcid.org/0009-0005-9742-6992}{ORCID}) [contributor]
 }
 
 }
