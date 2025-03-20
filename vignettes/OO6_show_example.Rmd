@@ -1,8 +1,8 @@
 ---
-title: "5. Include an example in the analysis paper outline"
+title: "6. Include an example in the analysis paper outline"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{5. Include an example in the analysis paper outline}
+  %\VignetteIndexEntry{6. Include an example in the analysis paper outline}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
