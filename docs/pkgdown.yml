@@ -1,11 +1,16 @@
-pandoc: 3.1.11
-pkgdown: 2.0.9
+pandoc: '3.2'
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  O1_make_research_project: O1_make_research_project.html
-  O2_make_research_project_markdown: O2_make_research_project_markdown.html
-  O3_R_Markdown_Templates: O3_R_Markdown_Templates.html
-  O4_make_a_package: O4_make_a_package.html
-  O5_show_example: O5_show_example.html
-last_built: 2024-05-30T15:47Z
-
+  OO1_using_posit_cloud: OO1_using_posit_cloud.html
+  OO2_make_research_project: OO2_make_research_project.html
+  OO3_make_research_project_markdown: OO3_make_research_project_markdown.html
+  OO4_R_Markdown_Templates: OO4_R_Markdown_Templates.html
+  OO5_make_a_package: OO5_make_a_package.html
+  OO6_show_example: OO6_show_example.html
+  OO7_write_scss: OO7_write_scss.html
+  OO8_write_readme: OO8_write_readme.html
+last_built: 2025-03-20T16:17Z
+urls:
+  reference: https://raymondbalise.github.io/rUM/reference
+  article: https://raymondbalise.github.io/rUM/articles
