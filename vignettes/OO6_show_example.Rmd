@@ -1,8 +1,8 @@
 ---
-title: "5. Include an example in the analysis paper outline"
+title: "6. Include an example in the analysis paper outline"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{5. Include an example in the analysis paper outline}
+  %\VignetteIndexEntry{6. Include an example in the analysis paper outline}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -31,10 +31,10 @@ analysis |>
     # change auto_man to the name of your column variable or delete by = auto_man
     by = auto_man, # split table by group
     missing = "no" # don't list missing data separately
-  ) %>%
-  # add_n() %>% # add column with total number of non-missing observations
-  # add_p() %>% # test for a difference between groups
-  modify_header(label = "") %>% # update the column header to be blank
+  ) |>
+  # add_n() |> # add column with total number of non-missing observations
+  # add_p() |> # test for a difference between groups
+  modify_header(label = "") |> # update the column header to be blank
   bold_labels()
 ````
 

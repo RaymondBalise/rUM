@@ -1,8 +1,8 @@
 ---
-title:  "2. Create a Research Project with R Markdown and rUM"
+title:  "3. Create a Research Project with R Markdown and rUM"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{2. Create a Research Project with R Markdown and rUM}
+  %\VignetteIndexEntry{3. Create a Research Project with R Markdown and rUM}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

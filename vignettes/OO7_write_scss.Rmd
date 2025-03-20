@@ -1,8 +1,8 @@
 ---
-title: "6. Customizing Quarto Documents with SCSS"
+title: "7. Customizing Quarto Documents with SCSS"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Customizing Quarto Documents with SCSS}
+  %\VignetteIndexEntry{7. Customizing Quarto Documents with SCSS}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

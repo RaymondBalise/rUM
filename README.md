@@ -1,8 +1,9 @@
-  <!-- badges: start -->
+   <!-- badges: start -->
+   <!-- [![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen)](https://github.com/RaymondBalise/rUM) -->
   [![CRAN status](https://www.r-pkg.org/badges/version/rUM)](https://CRAN.R-project.org/package=rUM)
   [![Lifecycle: stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
   [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/rUM)](https://www.r-pkg.org/pkg/rUM)
-  [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rUM)](https://cran.r-project.org/package=rUM)
+  <!-- [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rUM)](https://cran.r-project.org/package=rUM) -->
   <!-- badges: end -->
   
 # rUM <a href='https://raymondbalise.github.io/rUM/'><img src='man/figures/logo.png' align="right" width="139" /></a>
@@ -10,10 +11,15 @@ This is a collection of R things from your friends at UM (The University of Miam
 
 rUM includes:
 
-+ A research project template.  It creates a new RStudio project that has your choice of an `analysis.qmd` Quarto file or `analysis.Rmd` R markdown file with tidyverse and conflicted.
-+ Quarto and R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.
+* A research project template.  It creates a new RStudio project that has your choice of an `analysis.qmd` Quarto file or `analysis.Rmd` R markdown file with tidyverse and conflicted.
 
-* 💥 NEW in Version 2.0.0 (Overproof Rum) 💥 `rUM` now can make a package project that includes a paper outline as a vignette.  `rUM` can now add an example table and figure to it's paper shell.
+* Quarto and R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.
+
+* `rUM` can make a package project that includes a paper outline as a vignette.  
+
+* `rUM` can add an example table and figure to it's paper shell.
+
+* 💥 NEW in Version 2.1.0 (Rum & Coke) 💥 `rUM` streamlines creating a package. We added new functions to create Quarto documents (`write_quarto()`), project documentation files (`write_readme()` & `write_notes()`), and Quarto styling files (`write_scss()`).
 
 ## How to I add rUM?
 
