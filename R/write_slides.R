@@ -56,7 +56,6 @@ write_slides <- function(filename, path = here::here(), example = FALSE){
     template_path <- system.file('gists/quarto_slides_example.qmd', package = 'rUM')
   }
   
-
   if (template_path == "") {
     stop("Could not find Quarto template in package installation")
   }
