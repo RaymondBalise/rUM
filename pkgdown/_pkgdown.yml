@@ -22,14 +22,14 @@ articles:
   - title: Get Started
     navbar: ~
     contents:
-      - using_posit_cloud
-      - make_research_project
-      - make_research_project_markdown
-      - R_Markdown_Templates
-      - make_a_package
-      - show_example
-      - write_scss
-      - write_readme
+      - OO1_using_posit_cloud
+      - OO2_make_research_project
+      - OO3_make_research_project_markdown
+      - OO4_R_Markdown_Templates
+      - OO5_make_a_package
+      - OO6_show_example
+      - OO7_write_scss
+      - OO8_write_readme
 
 reference:
   - title: "Project Setup"

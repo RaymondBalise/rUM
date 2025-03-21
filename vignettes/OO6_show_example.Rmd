@@ -1,0 +1,79 @@
+---
+title: "6. Include an example in the analysis paper outline"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{6. Include an example in the analysis paper outline}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+If you would like to see an example paper, that has code blocks to produce a summary table and a graphic, include the `example = TRUE` argument when you use the `make_project()` function.  For example, if you type `rUM::make_project("~/Desktop/my.example", "R", example = TRUE)`, in the **Results** section of the paper you will see code like:
+
+````r
+#| tbl-cap: |
+#|   Your real caption belongs here.  Remember that cross references to tables 
+#|   use labels for the code chunk starting with tbl-.
+
+
+# To learn how to use tbl_summary look at https://www.danieldsjoberg.com/gtsummary/
+analysis |> 
+  tbl_summary(
+    include = c(everything()), # choose your variables here
+    # change auto_man to the name of your column variable or delete by = auto_man
+    by = auto_man, # split table by group
+    missing = "no" # don't list missing data separately
+  ) |>
+  # add_n() |> # add column with total number of non-missing observations
+  # add_p() |> # test for a difference between groups
+  modify_header(label = "") |> # update the column header to be blank
+  bold_labels()
+````
+
+and 
+
+````r
+
+#| fig-cap: |
+#|   Your real caption belongs here.  Remember that cross references to figures 
+#|   use labels for the code chunk starting with fig-.
+
+# To learn how to use ggplot start here: https://ggplot2.tidyverse.org/#learning-ggplot2
+analysis |> 
+  ggplot() +
+	  labs(
+	    title = "Your short title goes here.",
+	    caption = "Your data sources/citation goes here."
+    ) +
+    geom_blank()
+    # remove geom_blank() and add details here
+````
+
+You will also notice that there are sentences, which begin with 
+"As can be seen in" that contain cross-reference hyperlinks to the tables and figures.
+
+### Simpler Tables
+The example table is created using a package called `gtsummary`. It makes completely customizable, beautiful, summary tables which support hyperlinks/cross-references in the sentences you write in your paper.  
+
+A simpler option is to use the `table1()` function from the `table1` package.  It makes excellent tables with nearly no typing.  If you would like to try it, paste the code below into the `tbl-table1` code chunk.  Unfortunately `table1` does not have good support for hyperlinks/cross-references from your writing/prose.  
+
+
+````r
+library(table1)
+
+analysis |> 
+  select(everything()) |> # choose your variables here
+  table1(
+    # change auto_man to the name of your column variable or delete | auto_man
+    ~ . | auto_man, 
+    data = _
+) 
+````
