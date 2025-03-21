@@ -1,4 +1,6 @@
-# rUM 2.1.0
+# rUM 2.1.0 (Rum & Coke) 
+
+CRAN release: 2025-03-21
 
 ## New Features
 + Automated `make_project(vignette = TRUE)` development tools during project build to:
