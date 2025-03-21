@@ -4,6 +4,7 @@
 #' Add more details later...
 #' 
 #' @inheritParams write_quarto
+#' @param example Will the slide deck include an example slides?
 #' 
 #' @return Opened Quarto template for reveal.js slides
 #' 
@@ -12,7 +13,7 @@
 #' write_slides(filename = "reveal_project", path = tmp)
 #' 
 #' @export
-write_slides <- function(filename, path = here::here()){
+write_slides <- function(filename, path = here::here(), example = FALSE){
   # Validate path
   if (is.null(path) || !dir.exists(path)) {
     stop("Invalid `path`. Please enter a valid project directory.")
@@ -49,7 +50,12 @@ write_slides <- function(filename, path = here::here()){
   }
 
   # Write the Quarto file based on template
-  template_path <- system.file('gists/quarto_slides.qmd', package = 'rUM')
+  if (example) {
+    template_path <- system.file('gists/quarto_slides.qmd', package = 'rUM')
+  } else {
+    template_path <- system.file('gists/quarto_slides_example.qmd', package = 'rUM')
+  }
+  
 
   if (template_path == "") {
     stop("Could not find Quarto template in package installation")
