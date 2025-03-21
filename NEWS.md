@@ -1,3 +1,9 @@
+# rUM 2.1.0.9999
++ add `write_slides()` function....
+
+
+
+
 # rUM 2.1.0 (Rum & Coke) 
 
 CRAN release: 2025-03-21
