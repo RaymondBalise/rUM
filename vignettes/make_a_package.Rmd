@@ -1,0 +1,33 @@
+---
+title: "Make a Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Make a Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE}
+library(rUM)
+```
+
+## Introduction
+Saving your data and analyses into an R package helps to create reproducible research.  Someone who wants to reproduce your work can load a package to have access to your data and your paper(s).  **`rUM`** can help you by creating a project that has all the files/directories needed for an R package including a vignette folder that contains the outline of a paper.
+
+## How do I make a package project?
+All you need to do is add `vignette = TRUE` when you use the `make_project()` function. We've automated necessary changes to facilitate the R package structure, such as modifying the `analysis.qmd` (or `analysis.Rmd`) YAML structure to create a vignette, including a `.Rbuildignore` file, and including the `DESCRIPTION` & `NAMESPACE` package files. To get started, type:
+
+1. `rUM::make_project("~/Desktop/my.example", "R", example = TRUE, vignette = TRUE)`.  This creates a new project with all the files for a package in the current directory.  The vignette includes an example table and figure and all the R Markdown syntax for adding hyperlinks to the table and figures.
+
+2. Set the license for your package.  **REMEMBER: Do share NOT sensitive data. Talk to the data privacy officer at your institution/organization before sharing any data.  Ask them for advice on setting a software license.** If you are not planning on publicly sharing your data consider using a proprietary license.  For example, type `usethis::use_proprietary_license("Your Name Goes Here")`.  To learn more about licences look at the documentation for `use_proprietary_license()` by typing: `?usethis::use_proprietary_license`.  You can also learn more at [choosealicense.com](https://choosealicense.com/) or [here](https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633) but talk to the legal counsel at your institution/organization before making a decision. The information presented is not legal advice, is not to be acted on as such, may not be current and is subject to change without notice.
+
+## Can I write my vignette with Quarto?
+
+Yes!  When you install **`rUM`** we make sure you have a modern version of the R `quarto` package but we do not install the most modern copy of the Quarto language itself (which lives outside of R).  You can make sure that your version of Quarto is modern enough by running `quarto::quarto_version()`.  If your version is not 1.4.549 or higher, install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
