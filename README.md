@@ -21,7 +21,7 @@ rUM includes:
 
 * 💥 NEW in Version 2.1.0 (Rum & Coke) 💥 `rUM` streamlines creating a package. We added new functions to create Quarto documents (`write_quarto()`), project documentation files (`write_readme()` & `write_notes()`), and Quarto styling files (`write_scss()`).
 
-## How to I add rUM?
+## How do I add rUM?
 
 Modern versions of the RStudio interface (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio [here](https://posit.co/download/rstudio-desktop/). You can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
 
