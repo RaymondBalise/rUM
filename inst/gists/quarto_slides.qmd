@@ -4,7 +4,7 @@ subtitle: "Quarto slide template for your project"
 author:
   - name: "you"
     affiliation:
-      - "where you work"
+      - "Institution, <br>Department, <br>Division"
 date: last-modified
 date-format: "MMMM D, YYYY"
 format:

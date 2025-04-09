@@ -4,7 +4,12 @@
 \alias{write_slides}
 \title{Add 'Quarto' slides template}
 \usage{
-write_slides(filename, path = here::here())
+write_slides(
+  filename,
+  path = here::here(),
+  example = FALSE,
+  format = "revealjs"
+)
 }
 \arguments{
 \item{filename}{Character string. The name of the file without the '.qmd' extension.
@@ -12,6 +17,10 @@ Only letters, numbers, hyphens, and underscores are allowed.}
 
 \item{path}{Character string. Directory where the file will be created. Defaults to
 the current project's base directory.}
+
+\item{example}{Will the slide deck include an example slides?}
+
+\item{format}{What Quarto slide format to use}
 }
 \value{
 Opened Quarto template for reveal.js slides
@@ -21,6 +30,6 @@ Add more details later...
 }
 \examples{
 tmp <- tempdir()
-write_slides(filename = "reveal_project", path = tmp)
+write_slides(filename = "reveal_project", path = tmp, format = 'revealjs')
 
 }

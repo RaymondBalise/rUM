@@ -5,15 +5,21 @@
 #' 
 #' @inheritParams write_quarto
 #' @param example Will the slide deck include an example slides?
+#' @param format What Quarto slide format to use
 #' 
 #' @return Opened Quarto template for reveal.js slides
 #' 
 #' @examples
 #' tmp <- tempdir()
-#' write_slides(filename = "reveal_project", path = tmp)
+#' write_slides(filename = "reveal_project", path = tmp, format = 'revealjs')
 #' 
 #' @export
-write_slides <- function(filename, path = here::here(), example = FALSE){
+write_slides <- function(
+  filename, 
+  path = here::here(), 
+  example = FALSE, 
+  format = 'revealjs'
+){
   # Validate path
   if (is.null(path) || !dir.exists(path)) {
     stop("Invalid `path`. Please enter a valid project directory.")
