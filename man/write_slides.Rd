@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_slides.R
 \name{write_slides}
 \alias{write_slides}
-\title{Add 'Quarto' slides template}
+\title{Create a Quarto slide deck template}
 \usage{
 write_slides(
   filename,
@@ -18,18 +18,36 @@ Only letters, numbers, hyphens, and underscores are allowed.}
 \item{path}{Character string. Directory where the file will be created. Defaults to
 the current project's base directory.}
 
-\item{example}{Will the slide deck include an example slides?}
+\item{example}{Logical. Whether to include example slides with demonstrations
+of common slide layouts and formatting (default: FALSE)}
 
-\item{format}{What Quarto slide format to use}
+\item{format}{Character string. Slide format to use. Currently supports 'revealjs',
+with planned support for PowerPoint and Beamer in future releases.}
 }
 \value{
-Opened Quarto template for reveal.js slides
+Invisibly returns NULL. The created .qmd file is automatically opened
+  in the RStudio editor upon successful creation.
 }
 \description{
-Add more details later...
+Creates a pre-formatted .qmd file for presentation slides along with necessary 
+supporting files (SCSS styling and RStudio theme). The generated template 
+includes optimized YAML configuration and slide structure to quickly start 
+building academic & professional presentations.
+}
+\details{
+The function creates three files:
+* A .qmd file with the specified filename containing the slide template
+* A slides.scss file for custom styling 
+* An RStudio theme file for consistent code highlighting
+
+All filenames must contain only letters, numbers, hyphens, and underscores.
 }
 \examples{
+# Create basic slides template in current directory
+write_slides(filename = "my_presentation")
+
+# Create slides with example content in a specific directory
 tmp <- tempdir()
-write_slides(filename = "reveal_project", path = tmp, format = 'revealjs')
+write_slides(filename = "tutorial_slides", path = tmp, example = TRUE)
 
 }
