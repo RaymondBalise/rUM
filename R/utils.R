@@ -297,6 +297,10 @@
   # Create vignettes/.gitignore & write "*.html" & "*.R"
   writeLines("*.html\n*.R", con = "vignettes/.gitignore")
 
+  # Add inst folder & .gitkeep file
+  dir.create("inst", recursive = TRUE)
+  writeLines("# Do not edit by hand", con = "inst/.gitkeep")
+
   # Alter document template YAML for vignette builder
   .rUM_modify_for_vignette(is_quarto_project = is_quarto_project)
 
