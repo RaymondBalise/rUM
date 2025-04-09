@@ -1,8 +1,8 @@
 ---
-title: "reveal.js slides with rUM"
+title: "Your Title Goes Here"
 subtitle: "Quarto slide template for your project"
 author:
-  - name: "you"
+  - name: "You"
     affiliation:
       - "where you work"
 date: last-modified
@@ -12,6 +12,10 @@ format:
     theme: 
       - default
       - slides.scss
+    title-slide-attributes:
+      data-background-image: "rmed_background.png"
+      data-background-size: cover
+      data-background-opacity: "50"
     fontsize: 2em
     html-math-method: mathjax
     slide-number: c
@@ -33,7 +37,7 @@ editor_options:
 editor: source
 highlight-style: rstudio_default-light.theme
 ---
- 
+
 # Introduction
  
 ```{r, echo=FALSE}
