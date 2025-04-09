@@ -5,21 +5,38 @@
 \title{Create a Quarto slide deck template}
 \usage{
 write_slides(
-  filename,
+  filenames,
   path = here::here(),
-  example = FALSE,
+  new_folder = "slides",
+  example = "FALSE",
   format = "revealjs"
 )
 }
 \arguments{
-\item{filename}{Character string. The name of the file without the '.qmd' extension.
-Only letters, numbers, hyphens, and underscores are allowed.}
+\item{filenames}{Character vector with minimal length of 1. This allows for the ability
+to batch create multiple slide decks in one function call.}
 
 \item{path}{Character string. Directory where the file will be created. Defaults to
 the current project's base directory.}
 
-\item{example}{Logical. Whether to include example slides with demonstrations
-of common slide layouts and formatting (default: FALSE)}
+\item{new_folder}{Character. Default folder is \code{"slides"}. Options are:
+
+  * \code{"none"}: No folder is created. All files (.qmd & other) are created 
+  in the working directory (path of \code{here::here()}).
+
+  * \code{"all"}: One folder is created for each value in the length of 
+  \code{filenames}.  
+
+  * \code{"slide_"}: One folder is created by appending "slides_" to the first file
+  in \code{filenames} argument. If \code{filenames = "day_1"}, then the folder will
+  be named \code{"slides_day_1"}.  
+
+  * A character value.}
+
+\item{example}{Whether to include example slides with demonstrations
+  of common slide layouts and formatting (default: FALSE)
+
+  * optional: \code{"rmed2025"} for a R/Med 2025 theme.}
 
 \item{format}{Character string. Slide format to use. Currently supports 'revealjs',
 with planned support for PowerPoint and Beamer in future releases.}
@@ -36,18 +53,18 @@ building academic & professional presentations.
 }
 \details{
 The function creates three files:
-* A .qmd file with the specified filename containing the slide template
-* A slides.scss file for custom styling 
-* An RStudio theme file for consistent code highlighting
+  * A .qmd file with the specified filename containing the slide template
+  * A slides.scss file for custom styling 
+  * An RStudio theme file for consistent code highlighting
 
 All filenames must contain only letters, numbers, hyphens, and underscores.
 }
 \examples{
 # Create basic slides template in current directory
-write_slides(filename = "my_presentation")
+write_slides(filenames = "my_presentation")
 
 # Create slides with example content in a specific directory
 tmp <- tempdir()
-write_slides(filename = "tutorial_slides", path = tmp, example = TRUE)
+write_slides(filenames = "tutorial_slides", path = tmp, example = TRUE)
 
 }
