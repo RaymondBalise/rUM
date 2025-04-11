@@ -141,11 +141,28 @@ write_slides <- function(
     
     # Add SCSS file for slides
     if (example == 'rmed2025') {
-      # For R/Med 2025
+      # For R/Med 2025:
+      # SCSS file
       rum_scss_path <- system.file('gists/slides_example_rmed.scss', package = 'rUM')
+      # Add background:
       file.copy(
-        from = system.file("img/rmed_background.png", package = 'rUM'),
+        from = system.file("img/rmed_background.png", package = "rUM"),
         to = file.path(path, "rmed_background.png")
+      )
+      # Add header strip
+      file.copy(
+        from = system.file("img/rmed_narrow.png", package = "rUM"),
+        to = file.path(path, "rmed_narrow.png")
+      )
+      # Add logo/icon:
+      file.copy(
+        from = system.file("img/rmed.png", package = "rUM"),
+        to = file.path(path, "rmed.png")
+      )
+      # Add JavaScript HTML file that cleans up title page and adds slide content:
+      file.copy(
+        from = system.file("gists/clean_title_page.html", package = "rUM"),
+        to = file.path(path, "clean_title_page.html")
       )
     } else {
       # Normal styling
