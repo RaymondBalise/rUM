@@ -22,7 +22,7 @@ format:
     show-slide-number: all
     highlight-style: rstudio_default-light.theme
     logo: "rmed.png"
-    footer: "[Slides are here](https://)"
+    footer: "[Slides are here](https://){target='_blank'}"  # complete the URL
     include-after-body: "clean_title_page.html"
 embed-resources: true
 knitr:
