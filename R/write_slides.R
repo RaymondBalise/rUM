@@ -154,10 +154,15 @@ write_slides <- function(
         from = system.file("img/rmed_narrow.png", package = "rUM"),
         to = file.path(path, "rmed_narrow.png")
       )
-      # Add logo/icon:
+      # Add logo:
       file.copy(
         from = system.file("img/rmed.png", package = "rUM"),
         to = file.path(path, "rmed.png")
+      )
+      # Add favicon:
+      file.copy(
+        from = system.file("img/rmed.ico", package = "rUM"),
+        to = file.path(path, "rmed.ico")
       )
       # Add JavaScript HTML file that cleans up title page and adds slide content:
       file.copy(

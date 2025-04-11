@@ -24,6 +24,9 @@ format:
     logo: "rmed.png"
     footer: "[Slides are here](https://){target='_blank'}"  # complete the URL
     include-after-body: "clean_title_page.html"
+include-in-header:
+  text: |
+    <link rel="shortcut icon" href="rmed.ico"/>
 embed-resources: true
 knitr:
   opts_chunk:      ########## set global options ############
