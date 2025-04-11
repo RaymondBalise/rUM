@@ -18,9 +18,12 @@ format:
       data-background-opacity: "50"
     fontsize: 2em
     html-math-method: mathjax
-    slide-number: c
+    slide-number: c/t
     show-slide-number: all
     highlight-style: rstudio_default-light.theme
+    logo: "rmed.png"
+    footer: "[Slides are here](https://)"
+    include-after-body: "clean_title_page.html"
 embed-resources: true
 knitr:
   opts_chunk:      ########## set global options ############
@@ -37,6 +40,7 @@ editor_options:
 editor: source
 highlight-style: rstudio_default-light.theme
 ---
+
 
 # Introduction
  
