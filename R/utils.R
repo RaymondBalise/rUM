@@ -301,7 +301,7 @@
   dir.create("inst", recursive = TRUE)
   writeLines("# Do not edit by hand", con = "inst/.gitkeep")
   # Needed to prevent devtools::check() warning:
-  cat("inst/.gitkeep\n", file.path(path, ".Rbuildignore"), append = TRUE)
+  cat("inst/.gitkeep\n", file = ".Rbuildignore", append = TRUE)
 
   # Alter document template YAML for vignette builder
   .rUM_modify_for_vignette(is_quarto_project = is_quarto_project)
