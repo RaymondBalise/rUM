@@ -105,7 +105,7 @@
 #' @noRd
 .add_notes_to_Rbuildignore <- function(path) {
   cat(
-    "dated_progress_notes.md", 
+    "dated_progress_notes.md\n", 
     file = file.path(path, ".Rbuildignore"),
     append = TRUE # add, don't overwrite current file
   )
@@ -301,7 +301,7 @@
   dir.create("inst", recursive = TRUE)
   writeLines("# Do not edit by hand", con = "inst/.gitkeep")
   # Needed to prevent devtools::check() warning:
-  cat("\ninst/.gitkeep", file = ".Rbuildignore", append = TRUE)
+  cat("inst/.gitkeep\n", file.path(path, ".Rbuildignore"), append = TRUE)
 
   # Alter document template YAML for vignette builder
   .rUM_modify_for_vignette(is_quarto_project = is_quarto_project)
