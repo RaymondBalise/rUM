@@ -1,4 +1,9 @@
-# rUM 2.1.0
+# rUM 2.2.0 (rUM Runner)
+
+## New Features
++ Added `rum::write_man()` function that make a Roxygen file for a manual page
+
+# rUM 2.1.0 (rUM and Coke)
 
 ## New Features
 + Automated `make_project(vignette = TRUE)` development tools during project build to:
