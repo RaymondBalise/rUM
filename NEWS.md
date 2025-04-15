@@ -1,10 +1,11 @@
-# rUM 2.1.0.9999
-+ add `write_slides()` function....
+# rUM 2.2.0 (rUM Runner)
+
+## New Features
++ Added `rum::write_man()` function that make a Roxygen file for a manual page
++ Add `write_slides()` function....
 
 
-
-
-# rUM 2.1.0 (Rum & Coke) 
+# rUM 2.1.0 (rUM and Coke)
 
 CRAN release: 2025-03-21
 

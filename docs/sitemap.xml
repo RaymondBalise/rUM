@@ -1,12 +1,9 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://raymondbalise.github.io/rUM/404.html</loc></url>
-<url><loc>https://raymondbalise.github.io/rUM/LICENSE-text.html</loc></url>
-<url><loc>https://raymondbalise.github.io/rUM/LICENSE.html</loc></url>
-<url><loc>https://raymondbalise.github.io/rUM/articles/O1_make_research_project.html</loc></url>
-<url><loc>https://raymondbalise.github.io/rUM/articles/O2_make_research_project_markdown.html</loc></url>
-<url><loc>https://raymondbalise.github.io/rUM/articles/O3_R_Markdown_Templates.html</loc></url>
-<url><loc>https://raymondbalise.github.io/rUM/articles/O4_make_a_package.html</loc></url>
-<url><loc>https://raymondbalise.github.io/rUM/articles/O5_show_example.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/index.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/make_a_package.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/make_research_project.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/make_research_project_markdown.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/articles/OO1_using_posit_cloud.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/articles/OO2_make_research_project.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/articles/OO3_make_research_project_markdown.html</loc></url>

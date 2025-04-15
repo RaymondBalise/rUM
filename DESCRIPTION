@@ -1,6 +1,6 @@
 Package: rUM
 Title: R Templates from the University of Miami
-Version: 2.1.0.9999
+Version: 2.1.0.9001
 Authors@R: 
     c(
       person(
@@ -49,6 +49,7 @@ Imports:
     glue,
     gtsummary (>= 2.0.3),
     here,
+    labelled,
     quarto,
     readr,
     rio,

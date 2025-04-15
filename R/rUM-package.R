@@ -6,6 +6,7 @@
 #' @importFrom conflicted conflict_prefer
 #' @importFrom glue glue
 #' @importFrom gtsummary tbl_summary
+#' @importFrom labelled var_label
 #' @importFrom readr read_file write_file
 #' @importFrom rio import
 #' @importFrom rlang abort
