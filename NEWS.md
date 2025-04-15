@@ -2,8 +2,12 @@
 
 ## New Features
 + Added `rum::write_man()` function that make a Roxygen file for a manual page
++ Add `write_slides()` function....
+
 
 # rUM 2.1.0 (rUM and Coke)
+
+CRAN release: 2025-03-21
 
 ## New Features
 + Automated `make_project(vignette = TRUE)` development tools during project build to:

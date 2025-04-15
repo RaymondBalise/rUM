@@ -8,3 +8,5 @@ inst/doc
 /Meta/
 
 /.quarto/
+
+!inst/gists/clean_title_page.html
