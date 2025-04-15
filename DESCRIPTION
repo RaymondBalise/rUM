@@ -46,6 +46,8 @@ Depends:
 Imports:
     bookdown,
     conflicted,
+    dplyr,
+    fs,
     glue,
     gtsummary (>= 2.0.3),
     here,
@@ -63,6 +65,7 @@ Imports:
     usethis
 Suggests:
     knitr,
+    rUM,
     tinytex
 License: MIT + file LICENSE
 URL: 
