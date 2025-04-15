@@ -60,11 +60,13 @@ The function creates three files:
 All filenames must contain only letters, numbers, hyphens, and underscores.
 }
 \examples{
-# Create basic slides template in current directory
-write_slides(filenames = "my_presentation")
+if (interactive()) {
+  # Create basic slides template in current directory
+  write_slides(filenames = "my_presentation")
 
-# Create slides with example content in a specific directory
-tmp <- tempdir()
-write_slides(filenames = "tutorial_slides", path = tmp, example = TRUE)
+  # Create slides with example content in a specific directory
+  tmp <- tempdir()
+  write_slides(filenames = "tutorial_slides", path = tmp, example = TRUE)
+}
 
 }
