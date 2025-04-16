@@ -9,7 +9,7 @@
 #' @importFrom glue glue
 #' @importFrom gtsummary tbl_summary
 #' @importFrom labelled var_label
-#' @importFrom quarto quarto_preview
+#' @import quarto
 #' @importFrom readr read_file write_file
 #' @importFrom rio import
 #' @importFrom rlang abort
