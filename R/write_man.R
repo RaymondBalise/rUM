@@ -1,18 +1,22 @@
-# function needed to clean labels for manual var descriptions
-# remove {text} typically used for {other}
-remove_braces <- function(text) {
-  gsub("\\{[^\\}]*\\}", "", text)
-}
-
-# function needed to clean labels for manual var descriptions
-replace_brackets_with_backticks <- function(text) {
-  gsub("\\[(.*?)\\]", "`\\1`", text)
-}
-
-# rUM needs labelled dependencies for labelled::var_label
-
-# write a manual page
+#' Write a manual page for package dataset documentation
+#' 
+#' @description
+#' This function will parse through a dataset and create a manual page. The dataset
+#' documentation will output a Markdown-style table with the type, factor levels (if 
+#' appropriate), the range of numeric values, and a generic description section. 
+#' TODO: ADD MORE CONTENT!
+#' 
+#' @param the_dataset Dataset object
+#' 
+#' @return A \code{.Rd} file in the \code{man} package directory corresponding to the 
+#' supplied dataset.
+#' 
+#' @export
+#' 
+#' @examples
+#' if (interactive()) write_man(mtcars)
 write_man <- function(the_dataset) {
+  # rUM needs labelled dependencies for labelled::var_label
   # Check if the dataset exists in the global environment
   if (!exists(the_dataset, envir = .GlobalEnv)) {
     stop("Dataset '", the_dataset, "' not found in the global environment")
@@ -72,8 +76,8 @@ write_man <- function(the_dataset) {
     description <- if(!is.null(labelled::var_label(dataset_obj[[var_name]]))){
       the_label <-
         labelled::var_label(dataset_obj[[var_name]]) |>
-        remove_braces() |>
-        replace_brackets_with_backticks()
+        .remove_braces() |>
+        .replace_brackets_with_backticks()
       
       paste0(
         "#' | *Description:* | ",

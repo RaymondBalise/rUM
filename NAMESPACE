@@ -2,6 +2,7 @@
 
 export(make_package)
 export(make_project)
+export(write_man)
 export(write_notes)
 export(write_quarto)
 export(write_readme)
