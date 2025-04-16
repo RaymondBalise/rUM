@@ -24,8 +24,11 @@
 #' 
 #'   * A character value.  
 #' 
-#' @param example Whether to include example slides with demonstrations
-#'   of common slide layouts and formatting (default: FALSE)
+#' @param example Logical. Whether to include example slides with demonstrations of 
+#'   including content.
+#' 
+#' @param template Character. Whether to include a slide template for common slide 
+#'   layouts and formatting (default: "none")
 #' 
 #'   * optional: \code{"rmed2025"} for a R/Med 2025 theme.
 #' 
@@ -58,8 +61,9 @@ write_slides <- function(
   filenames, 
   path = here::here(), 
   new_folder = "slides",
-  example = "FALSE", 
-  format = 'revealjs'
+  example = FALSE, 
+  template = "none",
+  format = "revealjs"
 ) {
   # Validate path
   if (is.null(path) || !dir.exists(path)) {
@@ -125,7 +129,7 @@ write_slides <- function(
     }
 
     # Write the Quarto file based on template
-    if (example != "rmed2025") {
+    if (template != "rmed2025") {
       template_path <- system.file('gists/quarto_slides.qmd', package = 'rUM')
     } else {
       template_path <- system.file('gists/quarto_slides_rmed2025.qmd', package = 'rUM')
@@ -142,10 +146,10 @@ write_slides <- function(
   if (!file.exists(file.path(path, "slides.scss"))) {
     
     # Add SCSS file for slides
-    if (example == 'rmed2025') {
+    if (template == "rmed2025") {
       # For R/Med 2025:
       # SCSS file
-      rum_scss_path <- system.file('gists/slides_example_rmed.scss', package = 'rUM')
+      rum_scss_path <- system.file("gists/slides_example_rmed.scss", package = "rUM")
       # Add background:
       file.copy(
         from = system.file("img/rmed_background.png", package = "rUM"),
