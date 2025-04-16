@@ -2,6 +2,7 @@ pandoc: '3.2'
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
+  O10_write_man: O10_write_man.html
   OO1_using_posit_cloud: OO1_using_posit_cloud.html
   OO2_make_research_project: OO2_make_research_project.html
   OO3_make_research_project_markdown: OO3_make_research_project_markdown.html
@@ -9,8 +10,9 @@ articles:
   OO5_make_a_package: OO5_make_a_package.html
   OO6_show_example: OO6_show_example.html
   OO7_write_scss: OO7_write_scss.html
-  OO8_write_readme: OO8_write_readme.html
-last_built: 2025-03-21T11:46Z
+  OO8_write_slides: OO8_write_slides.html
+  OO9_find_show_slides: OO9_find_show_slides.html
+last_built: 2025-04-16T19:51Z
 urls:
   reference: https://raymondbalise.github.io/rUM/reference
   article: https://raymondbalise.github.io/rUM/articles

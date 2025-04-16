@@ -1,0 +1,24 @@
+---
+title: "9. Find and Show Slides in a Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{9. Find and Show Slides in a Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+With write_slides you can save a deck into a package. How can you check to see if a package contains slides?  If there is one or more deck how can you see the slides?
+
+## Getting Started
+
+
+## Conclusion

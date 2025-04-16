@@ -1,0 +1,70 @@
+---
+title: "what is rUM"
+subtitle: "Quarto slide template for your project"
+author:
+  - name: "you"
+    affiliation:
+      - "Institution, <br>Department, <br>Division"
+date: last-modified
+date-format: "MMMM D, YYYY"
+format:
+  revealjs:
+    theme: 
+      - default
+      - slides.scss
+    fontsize: 2em
+    html-math-method: mathjax
+    slide-number: c
+    show-slide-number: all
+    highlight-style: rstudio_default-light.theme
+embed-resources: true
+knitr:
+  opts_chunk:      ########## set global options ############
+    collapse: true # keep code from blocks together (if shown)
+    echo: false    # don't show code
+    message: true  # show messages
+    warning: true  # show warnings
+    error: true    # show error messages
+    comment: ""    # don't show ## with printed output
+    R.options:   
+      digits: 3    # round to three digits
+editor_options:
+  chunk_output_type: console
+editor: source
+highlight-style: rstudio_default-light.theme
+---
+ 
+# Defintion of rum
+ 
+```{r, echo=FALSE}
+# Helper packages - need dplyr and ggplot
+library(conflicted)
+suppressPackageStartupMessages(library(tidymodels))
+tidymodels_prefer()
+ 
+suppressPackageStartupMessages(library(tidyverse))
+
+library(knitr)
+# library(kableExtra)
+```
+
+https://www.merriam-webster.com/dictionary/rum
+
+Noun
+1: an alcoholic beverage distilled from a fermented cane product (such as molasses)
+2: alcoholic liquor
+the demon rum
+rum
+
+adjective
+rummer; rummest
+British, informal + somewhat old-fashioned : strange, odd
+
+Now writing is rum trade and eyes are rum things, and what is all right one day is all wrong the next.
+—Angela Thirkell
+2
+British, informal + somewhat old-fashioned : difficult, dangerous
+
+## rUM
+
+A package from you friends at the University of Miami
