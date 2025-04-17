@@ -3,6 +3,8 @@
 ## New Features
 + Added `rum::write_man()` function that make a Roxygen file for a manual page
 + Add `write_slides()` function....
++ Add `find_slides()`
++ Add `show_slides()`
 
 
 # rUM 2.1.0 (rUM and Coke)

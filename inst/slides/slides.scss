@@ -1,0 +1,48 @@
+/*-- scss:defaults --*/
+// Colors
+// $primary: #2c365e;
+// $body-bg: #fefefe;
+// $link-color: $primary;
+// Fonts
+// $font-family-sans-serif: "Open Sans", sans-serif;
+// $font-family-monospace: "Source Code Pro", monospace;
+
+
+/*-- scss:mixins --*/
+
+
+/*-- scss:rules --*/
+
+#title-slide .title {
+  font-size: 2em;
+  color: black;
+}
+
+.reveal a {
+  text-decoration: underline;
+}
+
+.red {
+  color: #da2c43
+}
+
+.max-lines {
+  max-height: 400px; /* Adjust height as needed */
+  overflow: scroll; /* Enable scrolling if content exceeds height */
+}
+
+.scrolling {
+  overflow: scroll;
+  height: 400px;
+}
+
+.reveal ol {
+    margin: 0 0 0 1.5em;
+}
+
+.reveal code {
+  background-color: #F1F3F5;
+  color: blue;
+  padding: 0.1em 0.2em;
+  border-radius: 3px;     
+}

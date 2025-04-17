@@ -4,9 +4,13 @@
 ## usethis namespace: start
 #' @importFrom bookdown html_document2
 #' @importFrom conflicted conflict_prefer
+#' @import dplyr
+#' @importFrom fs path_ext_remove
 #' @importFrom glue glue
 #' @importFrom gtsummary tbl_summary
 #' @importFrom labelled var_label
+#' @importFrom lifecycle deprecate_warn
+#' @import quarto
 #' @importFrom readr read_file write_file
 #' @importFrom rio import
 #' @importFrom rlang abort
