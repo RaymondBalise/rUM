@@ -1,7 +1,7 @@
 #' Write a manual page for package dataset documentation
 #' 
 #' @description
-#' This function produces a {roxygen2} R manual (man) page for a dataset that will 
+#' This function produces a \code{roxygen2} R manual (man) page for a dataset that will 
 #' be included in an R package. To be documented, the dataset needs to be in the global 
 #' environment. The new documentation template will be named to match the datasets and
 #' will be saved in the R folder (i.e., using an \code{analysis} dataset will produce the 
@@ -9,10 +9,10 @@
 #' or tibble along with the number of rows and columns. For each variable documentation
 #' will indicate the variables a type, factor level information (if appropriate), and a 
 #' generic description section. If the variable is labelled (using the labelled package 
-#' or packages which use labelled, like {tidyREDCap}) the variable label will be 
+#' or packages which use labelled, like \code{tidyREDCap}) the variable label will be 
 #' used as the default description.
 #' 
-#' @param the_dataset Dataset object
+#' @param the_dataset Dataset object (unquoted)
 #' 
 #' @return A \code{.Rd} file in the \code{man} package directory corresponding to the 
 #' name of the supplied dataset.
@@ -22,18 +22,25 @@
 #' @examples
 #' if (interactive()) write_man(mtcars)
 write_man <- function(the_dataset) {
+
+  # Get the string name of the dataset from the unevaluated expression
+  # This allows us to use unquoted dataset names like: 
+  # write_man(mtcars) instead of write_man("mtcars")
+  the_dataset_name <- deparse(substitute(the_dataset))
+
   # rUM needs labelled dependencies for labelled::var_label
-  # Check if the dataset exists in the global environment
-  if (!exists(the_dataset, envir = .GlobalEnv)) {
-    stop("Dataset '", the_dataset, "' not found in the global environment")
+  # Check if the dataset exists in the global environment: use the quoted name
+  if (!exists(the_dataset_name, envir = .GlobalEnv)) {
+    stop("Dataset '", the_dataset_name, "' not found in the global environment")
   }
   
-  # Get the dataset object
-  dataset_obj <- get(the_dataset, envir = .GlobalEnv)
+  # EDIT: We already have the dataset object in the_dataset parameter, so this section
+  # is being removed.
+  # dataset_obj <- get(the_dataset, envir = .GlobalEnv)
   
   # Check if the object is a data.frame or tibble
-  if (!inherits(dataset_obj, "data.frame")) {
-    stop("Object '", the_dataset, "' is not a data.frame or tibble")
+  if (!inherits(the_dataset, "data.frame")) {
+    stop("Object '", the_dataset_name, "' is not a data.frame or tibble")
   }
   
   # Check if R folder exists
@@ -42,7 +49,8 @@ write_man <- function(the_dataset) {
   }
   
   # Construct the potential file path for the R documentation file
-  r_file_path <- file.path("R", paste0(the_dataset, ".R"))
+  # Use the string name of the dataset for the file name
+  r_file_path <- file.path("R", paste0(the_dataset_name, ".R"))
   
   # Check if the file already exists
   if (file.exists(r_file_path)) {
@@ -50,10 +58,10 @@ write_man <- function(the_dataset) {
   }
   
   # Determine if it's specifically a tibble
-  is_tibble <- inherits(dataset_obj, "tbl_df")
+  is_tibble <- inherits(the_dataset, "tbl_df")
   
-  n_rows <- nrow(dataset_obj)
-  n_cols <- ncol(dataset_obj)
+  n_rows <- nrow(the_dataset)
+  n_cols <- ncol(the_dataset)
   
   n_rows_formatted <-
     format(n_rows, big.mark = ",", scientific = FALSE, trim = TRUE)
@@ -66,22 +74,22 @@ write_man <- function(the_dataset) {
   # Create the file and open a connection to it
   file_conn <- file(r_file_path, "w")
   
-  # Write the documentation content to the file using the_dataset value
-  cat(paste0("#' ", the_dataset, " dataset\n"), file = file_conn)
+  # Write the documentation content to the file using the string value (the_dataset_name)
+  cat(paste0("#' ", the_dataset_name, " dataset\n"), file = file_conn)
   cat("#'\n", file = file_conn)
-  cat(paste0("#' @description Description of the ", the_dataset, " dataset goes here\n"), file = file_conn)
+  cat(paste0("#' @description Description of the ", the_dataset_name, " dataset goes here\n"), file = file_conn)
   cat("#'\n", file = file_conn)
   cat(paste0("#' @format A ", data_structure, " with ", n_rows_formatted, " rows and ", n_cols_formatted, " variables:\n"), file = file_conn)
   cat("#' \\describe{\n", file = file_conn)
   
   # Loop through each variable in the dataset
-  for (var_name in names(dataset_obj)) {
+  for (var_name in names(the_dataset)) {
     
     cat(paste0("#'   \\item{", var_name, "}{\n"), file = file_conn)
     
-    description <- if(!is.null(labelled::var_label(dataset_obj[[var_name]]))){
+    description <- if(!is.null(labelled::var_label(the_dataset[[var_name]]))){
       the_label <-
-        labelled::var_label(dataset_obj[[var_name]]) |>
+        labelled::var_label(the_dataset[[var_name]]) |>
         .remove_braces() |>
         .replace_brackets_with_backticks()
       
@@ -94,17 +102,17 @@ write_man <- function(the_dataset) {
       paste0(
         "#' | *Description:* | Description for ",
         var_name,
-        " goes here |\n"
+        " goes here              |\n"
       )
     }
     
     # see if a variable has a label
-    var_type <- if(!is.null(labelled::var_label(dataset_obj[[var_name]]))){
+    var_type <- if(!is.null(labelled::var_label(the_dataset[[var_name]]))){
       # Get primary class which will be after labelled
-      class(dataset_obj[[var_name]])[2]
+      class(the_dataset[[var_name]])[2]
     } else {
       # Get primary class
-      class(dataset_obj[[var_name]])[1]
+      class(the_dataset[[var_name]])[1]
     }
     
     # Create markdown table based on variable type
@@ -118,10 +126,10 @@ write_man <- function(the_dataset) {
     } else if (var_type == "factor") {
       # For factor variables, include levels information
       cat("#'\n", file = file_conn)
-      first_level <- levels(dataset_obj[[var_name]])[1]
-      all_levels <- paste(levels(dataset_obj[[var_name]]), collapse = ", ")
+      first_level <- levels(the_dataset[[var_name]])[1]
+      all_levels <- paste(levels(the_dataset[[var_name]]), collapse = ", ")
       
-      cat(paste0("#' | *Type:* | factor (First/Reference level = `", first_level, "`) |\n"), file = file_conn)
+      cat(paste0("#' | *Type:*        | factor (First/Reference level = `", first_level, "`) |\n"), file = file_conn)
       cat("#' | -------------- | ---------------------------------------------------- |\n", file = file_conn)
       cat("#' |                |                                                      |\n", file = file_conn)
       cat(description, file = file_conn)
@@ -131,9 +139,9 @@ write_man <- function(the_dataset) {
     } else {
       # Generic description for other types
       cat("#'\n", file = file_conn)
-      cat(paste0("#' | *Type:* | ", var_type, " |\n"), file = file_conn)
-      cat("#' | ------- | ------------- |\n", file = file_conn)
-      cat("#' |         |               |\n", file = file_conn)
+      cat(paste0("#' | *Type:*        | ", var_type, "       |\n"), file = file_conn)
+      cat("#' | -------------- | ------------- |\n", file = file_conn)
+      cat("#' |                |               |\n", file = file_conn)
       cat(description, file = file_conn)
       cat("#'\n", file = file_conn)
     }
@@ -143,7 +151,7 @@ write_man <- function(the_dataset) {
   
   cat("#' }\n", file = file_conn)
   cat("#' @source Where the data came from\n", file = file_conn)
-  cat(paste0("\"", the_dataset, "\""), file = file_conn)
+  cat(paste0("\"", the_dataset_name, "\""), file = file_conn)
   
   # Close the connection
   close(file_conn)
