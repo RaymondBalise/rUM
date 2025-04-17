@@ -1,15 +1,21 @@
 #' Write a manual page for package dataset documentation
 #' 
 #' @description
-#' This function will parse through a dataset and create a manual page. The dataset
-#' documentation will output a Markdown-style table with the type, factor levels (if 
-#' appropriate), the range of numeric values, and a generic description section. 
-#' TODO: ADD MORE CONTENT!
+#' This function produces a {roxygen2} R manual (man) page for a dataset that will 
+#' be included in an R package. To be documented, the dataset needs to be in the global 
+#' environment. The new documentation template will be named to match the datasets and
+#' will be saved in the R folder (i.e., using an \code{analysis} dataset will produce the 
+#' \code{R/analysis.Rd} file). The page will indicate if the dataset is a data frame
+#' or tibble along with the number of rows and columns. For each variable documentation
+#' will indicate the variables a type, factor level information (if appropriate), and a 
+#' generic description section. If the variable is labelled (using the labelled package 
+#' or packages which use labelled, like {tidyREDCap}) the variable label will be 
+#' used as the default description.
 #' 
 #' @param the_dataset Dataset object
 #' 
 #' @return A \code{.Rd} file in the \code{man} package directory corresponding to the 
-#' supplied dataset.
+#' name of the supplied dataset.
 #' 
 #' @export
 #' 
@@ -104,9 +110,9 @@ write_man <- function(the_dataset) {
     # Create markdown table based on variable type
     if (var_type == "integer") {
       cat("#'\n", file = file_conn)
-      cat("#' | *Type:* | integer |\n", file = file_conn)
+      cat("#' | *Type:*        | integer       |\n", file = file_conn)
       cat("#' | -------------- | ------------- |\n", file = file_conn)
-      cat("#' | | |\n", file = file_conn)
+      cat("#' |                |               |\n", file = file_conn)
       cat(description, file = file_conn)
       cat("#'\n", file = file_conn)
     } else if (var_type == "factor") {
@@ -116,18 +122,18 @@ write_man <- function(the_dataset) {
       all_levels <- paste(levels(dataset_obj[[var_name]]), collapse = ", ")
       
       cat(paste0("#' | *Type:* | factor (First/Reference level = `", first_level, "`) |\n"), file = file_conn)
-      cat("#' | -------------- | ------------- |\n", file = file_conn)
-      cat("#' | | |\n", file = file_conn)
+      cat("#' | -------------- | ---------------------------------------------------- |\n", file = file_conn)
+      cat("#' |                |                                                      |\n", file = file_conn)
       cat(description, file = file_conn)
-      cat("#' | | |\n", file = file_conn)
-      cat(paste0("#' | *Levels:* | `", all_levels, "` |\n"), file = file_conn)
+      cat("#' |                |                                                      |\n", file = file_conn)
+      cat(paste0("#' | *Levels:*      | `", all_levels, "`           |\n"), file = file_conn)
       cat("#'\n", file = file_conn)
     } else {
       # Generic description for other types
       cat("#'\n", file = file_conn)
       cat(paste0("#' | *Type:* | ", var_type, " |\n"), file = file_conn)
-      cat("#' | -------------- | ------------- |\n", file = file_conn)
-      cat("#' | | |\n", file = file_conn)
+      cat("#' | ------- | ------------- |\n", file = file_conn)
+      cat("#' |         |               |\n", file = file_conn)
       cat(description, file = file_conn)
       cat("#'\n", file = file_conn)
     }
