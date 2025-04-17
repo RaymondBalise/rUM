@@ -30,6 +30,8 @@ articles:
       - OO6_show_example
       - OO7_write_scss
       - OO8_write_readme
+      - OO9_find_show_slides
+      - O10_write_man
 
 reference:
   - title: "Project Setup"
@@ -38,10 +40,16 @@ reference:
       - make_project
       - make_package
       - write_quarto
+      - write_slides
   - title: "Project Enhancements"
     contents:
       - write_readme
       - write_notes
       - write_scss
       - write_man
+      # - make_man
+  - title: "Slideshows"
+    contents:
+      - find_slides
+      - show_slides
 

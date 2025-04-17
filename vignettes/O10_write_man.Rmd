@@ -1,0 +1,23 @@
+---
+title: "10. Make Datasets Documentation with write_man()"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{10. Make Datasets Documentation with write_man()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+
+## Getting Started
+
+
+## Conclusion

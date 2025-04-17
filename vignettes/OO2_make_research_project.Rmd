@@ -71,11 +71,11 @@ To create a research project that uses `rUM`, follow these steps. This will init
 
 2.  Scroll down and then select **`rUM` Research Project Template**
 
-    ![](project_template.png){width="70%"}
+    ![rUM Research Project Template](project_template.png){width="70%"}
 
 3.  Specify the location of where your research project will be saved
 
-    ![](save_quarto_project_here.png){width="70%"}
+    ![Choose location to save your rUM project in RStudio](save_quarto_project_here.png){width="70%"}
 
 ## Add `rUM` into an existing folder/directory that does not have an RStudio project.
 
@@ -85,7 +85,7 @@ What if you have already created a folder containing the important files for you
 
 2.  Specify the location of where your research project will be saved
 
-    ![](existing_directory.png){width="70%"}
+    ![Existing project working directory window in RStudio](existing_directory.png){width="70"}
 
 3.  Run the following script in your console:
 
@@ -118,7 +118,7 @@ Newly created files:
 <p id="fig:created_rUM_files" >
 </p>
 ```
-![](created_rUM_quarto_files.png){width="80%"}
+![Display of newly created rUM project files in the RStudio Files pane](created_rUM_quarto_files.png){width="80%"}
 
 `analysis.qmd`:
 
@@ -127,7 +127,7 @@ Newly created files:
 <p id="fig:analysis_quarto_file" >
 </p>
 ```
-![](analysis_quarto_file.png){width="80%"}
+![Screenshot of analysis.qmd template structure using the visual editor layout](analysis_quarto_file.png){width="80%"}
 
 ### Session
 
