@@ -9,6 +9,7 @@
 #' @importFrom glue glue
 #' @importFrom gtsummary tbl_summary
 #' @importFrom labelled var_label
+#' @importFrom lifecycle deprecate_warn
 #' @import quarto
 #' @importFrom readr read_file write_file
 #' @importFrom rio import
