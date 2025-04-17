@@ -43,7 +43,7 @@ rUM::make_project("./", overwrite = TRUE)
 If you want to make a new project that will be a package with a vignette written with Quarto, use code like this:
 
 ```
-rUM::make_project('./', 'Q', example = F, vignette = T, overwrite = TRUE) 
+rUM::make_package('./', overwrite = TRUE) 
 ```
 
 After typing that in the console and pushing return/enter on your keyboard, you will need to confirm that you really want to make a new project.  Choose the option that means **Yes** when RStudio asks you to confirm that you want to overwrite the existing project and namespace files. Say **Yes** when it asks you if you want to quit and **Switch Projects**.  

@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-If you would like to see an example paper, that has code blocks to produce a summary table and a graphic, include the `example = TRUE` argument when you use the `make_project()` function.  For example, if you type `rUM::make_project("~/Desktop/my.example", "R", example = TRUE)`, in the **Results** section of the paper you will see code like:
+If you would like to see an example paper, that has code blocks to produce a summary table and a graphic, include the `example = TRUE` argument when you use the `make_project()` function.  For example, if you type `rUM::make_project("~/Desktop/my.example", example = TRUE)` or `rUM::make_package("~/Desktop/my.example", example = TRUE)`, in the **Results** section of the paper you will see code like:
 
 ````r
 #| tbl-cap: |
@@ -41,7 +41,6 @@ analysis |>
 and 
 
 ````r
-
 #| fig-cap: |
 #|   Your real caption belongs here.  Remember that cross references to figures 
 #|   use labels for the code chunk starting with fig-.
