@@ -324,7 +324,9 @@
 }
 
 #' Helper for write_man (2)
-#' @description Function needed to clean labels for manual variable descriptions.
+#' @description Function needed to clean labels for manual variable descriptions. Used
+#' to replace square brackets (\code{[]}) with backticks \code{``} for the info piped
+#' into variable labels.
 #' 
 #' @param text Character. The text to parse.
 #' @noRd
