@@ -46,6 +46,7 @@ reference:
       - write_readme
       - write_notes
       - write_scss
+      - write_man
       # - make_man
   - title: "Slideshows"
     contents:

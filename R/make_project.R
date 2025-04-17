@@ -55,7 +55,7 @@ make_project <- function(
     openInteractive = TRUE
 ) {
 
-  # Depreciation warning for version >= 2.2.0
+  # Deprecation warning for version >= 2.2.0
   lifecycle::deprecate_warn(
     when = "2.2.0", 
     what = "make_project(vignette)", 

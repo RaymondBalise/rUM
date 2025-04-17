@@ -272,9 +272,9 @@
 #----------------------------------------------------------------------------------------
 #' Build and convert to package
 #' @description
-#' This helper functon will convert an ordinary rUM project into a rUM package. , and modifies the
-#' vignettes/analysis.* YAML header with content appropriate to build the respective
-#' vignette using the correct engine.
+#' This helper functon will convert an ordinary rUM project into a rUM package. It 
+#' modifies the vignettes/analysis.* YAML header with content appropriate to build 
+#' the respective vignette using the correct engine.
 #' 
 #' This was the previously-named internal function \code{.run_me_first()}.
 #' 
@@ -309,4 +309,27 @@
   # Return to original location where rUM::make_project() was executed
   setwd(current_wd)
 
+}
+
+
+#----------------------------------------------------------------------------------------
+#' Helper for write_man (1)
+#' @description Function needed to clean labels for manual variable descriptions. Remove
+#' {text} typically used for {other}
+#' 
+#' @param text Character. The text to parse.
+#' @noRd
+.remove_braces <- function(text) {
+  gsub("\\{[^\\}]*\\}", "", text)
+}
+
+#' Helper for write_man (2)
+#' @description Function needed to clean labels for manual variable descriptions. Used
+#' to replace square brackets (\code{[]}) with backticks \code{``} for the info piped
+#' into variable labels.
+#' 
+#' @param text Character. The text to parse.
+#' @noRd
+.replace_brackets_with_backticks <- function(text) {
+  gsub("\\[(.*?)\\]", "`\\1`", text)
 }
