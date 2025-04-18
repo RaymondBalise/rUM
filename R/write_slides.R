@@ -118,7 +118,38 @@ write_slides <- function(
     ))
   }
 
-  # Create each slide .qmd file
+  # Part 1: Determine the slides template type:
+
+  # 1. No example, no template (the function's default):
+  if (!example & template == "none") {
+    # use inst/gists/quarto_slides.qmd
+    template_path <- system.file('gists/quarto_slides.qmd', package = 'rUM')
+
+  # 2. Use example, but no template:
+  } else if (example & template == "none") {
+    # use inst/slides/rUM_the_package.qmd
+    template_path <- system.file('slides/rUM_the_package.qmd', package = 'rUM')
+
+  # 3. No example, but using the R/Med 2025 template
+  } else if (!example & template == "rmed2025") {
+    # use inst/gists/quarto_slides_rmed2025.qmd
+    template_path <- system.file('gists/quarto_slides_rmed2025.qmd', package = 'rUM')
+
+  # 4. Use example AND R/Med 2025 template
+  } else if (example & template == "rmed2025") {
+    # use the inst/slides/rUM_the_package.qmd with rmed2025 CSS styling & backgrounds
+    template_path <- system.file('gists/quarto_slides_example_rmed.qmd', package = 'rUM')
+
+  # 5. Use example AND any other template -- when would this happen?
+  # } else if (example) {
+  } else {
+    # use inst/slides/rUM_the_word.qmd
+    template_path <- system.file('slides/rUM_the_word.qmd', package = 'rUM')
+  }
+
+
+  # Part 2: Create each slide .qmd file:
+
   for (slide_file in filenames) {
     # Set up full file path
     the_quarto_file <- file.path(path, paste0(slide_file, '.qmd'))
@@ -128,24 +159,14 @@ write_slides <- function(
       stop(sprintf("%s.qmd already exists in the specified path.", the_quarto_file))
     }
 
-    # Write the Quarto file based on template
-    if (template != "rmed2025") {
-      template_path <- system.file('gists/quarto_slides.qmd', package = 'rUM')
-    } else {
-      template_path <- system.file('gists/quarto_slides_rmed2025.qmd', package = 'rUM')
-    }
-    
-    if (template_path == "") {
-      stop("Could not find Quarto template in package installation")
-    }
-
     file.copy(from = template_path, to = the_quarto_file, overwrite = FALSE)
   }
 
-  # Check for SCSS file in slide folder:
+  # Part 3: Add SCSS file for slides: 
+
+  # Check for SCSS file in slide folder
   if (!file.exists(file.path(path, "slides.scss"))) {
-    
-    # Add SCSS file for slides
+
     if (template == "rmed2025") {
       # For R/Med 2025:
       # SCSS file
@@ -175,6 +196,7 @@ write_slides <- function(
         from = system.file("gists/clean_title_page.html", package = "rUM"),
         to = file.path(path, "clean_title_page.html")
       )
+
     } else {
       # Normal styling
       rum_scss_path <- system.file('gists/slides.scss', package = 'rUM')
@@ -189,7 +211,7 @@ write_slides <- function(
     file.copy(from = rum_scss_path, to = the_project_scss_file, overwrite = FALSE)
   }
 
-  # Check for RStudio light theme file:
+  # Part 4: Check for RStudio light theme file:
   if (!file.exists(file.path(path, "rstudio_default-light.theme"))) {
     # Add RStudio theme file
     rs_theme_path <- system.file('gists/rstudio_default-light.theme', package = 'rUM')
