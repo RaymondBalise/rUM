@@ -2,9 +2,9 @@
 title: "Mix, Pour, Share: The rUM Cocktail for Biomedical Project Packagin"
 subtitle: "R Medicine 2025 Talk"
 author:
-  - name: "Kyle"
+  - name: "Kyle Grealis & Raymond Balise"
     affiliation:
-      - "Institution, <br>Department, <br>Division"
+      - "University of Miami, <br>Department of Public Health Sciences, <br>Division of Biostatistics and Bioinformatics"
 date: last-modified
 date-format: "MMMM D, YYYY"
 format:
@@ -49,4 +49,59 @@ library(knitr)
 ```
  
 
-## The plan
+
+## Using rUM
+
++ Big Things... You can make:
++ Less Big Things...  You can add:
++ Sorta Big Things... You can:
+
+
+## Using rUM 
+
++ Big Things... You can make:
+  + A research paper template with `make_project()`
+  + A package with a research paper template `make_package()`
++ Less Big Things...  You can add:
++ Sorta Big Things... You can:
+
+
+## Using rUM 
+
++ Big Things... You can make:
++ Less Big Things...  You can add:
+  + A README file with `write_readme()`
+  + A progress notes with `write_notes()`
+  + A scss style template with `write_scss()`
+  + A manual page for a data set `write_man()`
++ Sorta Big Things... You can:
+
+
+## Using rUM
+
++ Big Things... You can make:
++ Less Big Things...  You can add:
++ Sorta Big Things... You can:
+  + Add a slide deck with write_slides
+    + Into a folder
+    + into a package
+  + Find slides in a package with `find_slides()`
+  + Display slides from a package with `show_slides()`
+
+## rUM Slides Use Themes
+
+Note: The slides use the RStudio color theme by default
+```{r}
+#| eval: false
+#| echo: true
+library(rUM)
+rUM::find_slides("rUM")
+```
+
+You can display all parts of a code bock using {{r}}
+```{{r}}
+#| eval: false
+#| echo: true
+library(rUM)
+rUM::find_slides("rUM")
+```
