@@ -8,7 +8,8 @@ write_slides(
   filenames,
   path = here::here(),
   new_folder = "slides",
-  example = "FALSE",
+  example = FALSE,
+  template = "none",
   format = "revealjs"
 )
 }
@@ -33,8 +34,11 @@ the current project's base directory.}
 
   * A character value.}
 
-\item{example}{Whether to include example slides with demonstrations
-  of common slide layouts and formatting (default: FALSE)
+\item{example}{Logical. Whether to include example slides with demonstrations of 
+including content.}
+
+\item{template}{Character. Whether to include a slide template for common slide 
+  layouts and formatting (default: "none")
 
   * optional: \code{"rmed2025"} for a R/Med 2025 theme.}
 

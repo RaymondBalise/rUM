@@ -1,4 +1,4 @@
-#' Create a project README file
+#' Create a project progress note
 #'
 #' This function streamlines project documentation by creating and managing both README.md
 #' and dated_progress_notes.md files. It provides interactive prompts for existing files

@@ -1,10 +1,10 @@
 ---
-title: "what is rUM"
-subtitle: "Quarto slide template for your project"
+title: "What is rum ..."
+subtitle: "and rUM?"
 author:
-  - name: "you"
+  - name: "Raymond R. Balise"
     affiliation:
-      - "Institution, <br>Department, <br>Division"
+      - "University of Miami, <br>Department of Public Health Sciences, <br>Division of Biostatistics and Bioinformatics"
 date: last-modified
 date-format: "MMMM D, YYYY"
 format:
@@ -48,23 +48,41 @@ library(knitr)
 # library(kableExtra)
 ```
 
-https://www.merriam-webster.com/dictionary/rum
+## Rum the Noun
 
-Noun
-1: an alcoholic beverage distilled from a fermented cane product (such as molasses)
-2: alcoholic liquor
-the demon rum
-rum
+_Noun_
 
-adjective
+- 1: [an alcoholic beverage distilled from a fermented cane product (such as molasses)]{.red}
+- 2: [alcoholic liquor]{.red}
+
+> the demon rum
+
+::: {.footer}
+<https://www.merriam-webster.com/dictionary/rum>
+:::
+
+
+## Rum the Adjective
+
+_Adjective_
+
 rummer; rummest
-British, informal + somewhat old-fashioned : strange, odd
 
-Now writing is rum trade and eyes are rum things, and what is all right one day is all wrong the next.
-—Angela Thirkell
-2
-British, informal + somewhat old-fashioned : difficult, dangerous
+- 1. British, informal + somewhat old-fashioned: [strange, odd]{.red}
 
-## rUM
+> Now writing is rum trade and eyes are rum things, and what is all right one day is all wrong the next.
+> —Angela Thirkell
 
-A package from you friends at the University of Miami
+- 2. British, informal + somewhat old-fashioned: [difficult, dangerous]{.red}
+
+::: {.footer}
+<https://www.merriam-webster.com/dictionary/rum>
+:::
+
+## rUM the Package
+
+A package from you friends at the University of Miami.
+
+::: {.footer}
+<https://raymondbalise.github.io/rUM/>
+:::

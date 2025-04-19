@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_notes.R
 \name{write_notes}
 \alias{write_notes}
-\title{Create a project README file}
+\title{Create a project progress note}
 \usage{
 write_notes(path = here::here())
 }

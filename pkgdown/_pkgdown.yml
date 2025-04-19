@@ -29,7 +29,7 @@ articles:
       - OO5_make_a_package
       - OO6_show_example
       - OO7_write_scss
-      - OO8_write_readme
+      - OO8_write_slides
       - OO9_find_show_slides
       - O10_write_man
 
@@ -47,7 +47,6 @@ reference:
       - write_notes
       - write_scss
       - write_man
-      # - make_man
   - title: "Slideshows"
     contents:
       - find_slides
