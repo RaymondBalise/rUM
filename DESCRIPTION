@@ -42,7 +42,7 @@ Authors@R:
 Description: This holds some r markdown and quarto templates and a template to 
     create a research project in "R Studio".
 Depends: 
-    R (>= 4.1)
+    R (>= 4.1.0)
 Imports:
     bookdown,
     conflicted,
