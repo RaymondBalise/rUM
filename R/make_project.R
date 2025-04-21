@@ -84,23 +84,36 @@ make_project <- function(
   #    directory if the package name is invalid.
   #    code from: https://github.com/r-lib/usethis/blob/main/R/description.R
   #    The name will be checked only for packages; it's "valid" otherwise
+  # if (vignette) {
+  #   dir_name_char <- stringr::word(path, -1, sep = "[\\|\\/]")
+  #   valid_name_lgl <- .valid_package_name(path = dir_name_char)
+  # } else {
+  #   valid_name_lgl <- TRUE
+  # }
+  # if (!vignette && valid_name_lgl) {
+  #   dir.create(path, recursive = TRUE, showWarnings = FALSE)
+  # }
   if (vignette) {
-    dir_name_char <- stringr::word(path, -1, sep = "[\\|\\/]")
-    valid_name_lgl <- .valid_package_name(path = dir_name_char)
+    make_package(
+      path = path,
+      type = type,
+      example = example,
+      overwrite = overwrite,
+      openInteractive = openInteractive
+    )
+    
+  # Once the vignette argument is phased out, remove the make_package() section above
+  # and keep everything contained within this "else" section. Also, fix indentation:
   } else {
-    valid_name_lgl <- TRUE
-  }
-  if (!vignette && valid_name_lgl) {
+    
+    # 3) Create directory and perform initial project setup
     dir.create(path, recursive = TRUE, showWarnings = FALSE)
-  }
   
-  
-  # get version of Quarto on the machine and save it as a version
-  the_version <- quarto::quarto_version()
-  # Is there a .Rproj in the provided path?
-  has_rproj <- length(list.files(path = path, pattern = "\\.Rproj$")) > 0
+    # get version of Quarto on the machine and save it as a version
+    the_version <- quarto::quarto_version()
+    # Is there a .Rproj in the provided path?
+    has_rproj <- length(list.files(path = path, pattern = "\\.Rproj$")) > 0
 
-  if (!vignette){ # make paper project w/o package infrastructure
     # If the project object does not exist add it.
     if (!has_rproj) {
       # Prior to version 2.0.0, the option `open` was set to TRUE, which worked
@@ -112,102 +125,51 @@ make_project <- function(
         path = path, open = openInteractive, rstudio = TRUE
       )
     }
-  } else { # make paper project with package infrastructure
-    # Quarto version 1.4.549 was the first to allow the building of vignettes
-    if (is_quarto_project & the_version < "1.4.549"){
-      message(
-        paste0(
-          "STOPPING: You need a modern version of Quarto from ", 
-          "https://quarto.org/docs/download/ in order to make the package ",
-          "with a Quarto vignette."
-        )
-      )
-      return(invisible(NULL))
-    }
 
-    # browser()
-    if (has_rproj & !overwrite){
-      message(
-        paste0(
-          "STOPPING: The folder/directory you chose to hold the package ",
-          "already has a RStudio project file (.Rproj) in it. If you want to ",
-          "create a package in a directory/folder that already has an RStudio ",
-          "project in it, add the overwrite = TRUE option when you use ",
-          "make_project()."
-        )
-      )
-      return(invisible(NULL))
-    }
+    # Now that the project directory has been successfully created, normalize the
+    # path to work across OS and prevent path issues ahead.
+    path <- normalizePath(path, mustWork = TRUE)
+  
+    #############################################################################
+    # This section creates the project directory and adds the appropriate files #
+    #############################################################################
     
-    if (!has_rproj | overwrite) {
-      usethis::create_package(path = path, open = openInteractive, rstudio = TRUE)
+    # Prevent user from overwriting an analysis file
+    if (file.exists(file.path(path, "analysis.Rmd")) ||
+        file.exists(file.path(path, "analysis.qmd"))
+    ) {
+      abort("The directory you choose already has an analysis file. Stopping.")
     }
+  
+    #############################################################################
+    #          Add template with or without included example?                   #
+    #############################################################################
+    if (is_quarto_project) {
+      .add_quarto_doc(example = example, path = path)
+    } else {
+      .add_rmd_doc(example = example, path = path)
+    }
+
+    #############################################################################
+    #            Add project directories and supplemental files                 #
+    #############################################################################
+    
+    # 1. Create the data directory in the project's root
+    dir.create(file.path(path, "data"), recursive = TRUE, showWarnings = FALSE)
+    
+    # 2. Create custom.scss
+    if (is_quarto_project) rUM::write_scss(name = "custom", path = path) 
+
+    # 3. Add enhanced .gitignore from inst/gists
+    .add_gitignore(path = path)
+
+    # 4. Add project documentation files
+    rUM::write_readme(path = path)
+    rUM::write_notes(path = path)
+
+    # 5. Add .bib & .csl files
+    .add_citation_files(path = path)
+
   }
 
-  # Now that the project directory has been successfully created, normalize the
-  # path to work across OS and prevent path issues ahead.
-  path <- normalizePath(path, mustWork = TRUE)
-  
-  #############################################################################
-  # This section creates the project directory and adds the appropriate files #
-  #############################################################################
-  
-  # Prevent user from overwriting an analysis file
-  if (file.exists(file.path(path, "analysis.Rmd")) ||
-      file.exists(file.path(path, "analysis.qmd"))
-  ) {
-    abort("The directory you choose already has an analysis file. Stopping.")
-  }
-  
-  
-  # Create vignette folder. If the project will NOT be using vignettes (ie., making
-  # a R package), the `updated_path` created below will resolve correctly.
-  # Packages require that the "analysis.*md" file is located in the vignettes directory.
-  # However, non-packages can store all files in the main project root.
-  # When `vignette == TRUE` the `updated_path` will look like: path/vignettes
-  # When `vignette == FALSE` the `updated_path` will be equal to path
-  if (vignette) {
-    updated_path <- file.path(path, "vignettes")
-    dir.create(updated_path, recursive = TRUE, showWarnings = FALSE)
-  } else {
-    updated_path <- path
-  }
-  
-  #############################################################################
-  #          Add template with or without included example?                   #
-  #############################################################################
-  if (is_quarto_project) {
-    .add_quarto_doc(example = example, path = updated_path)
-  } else {
-    .add_rmd_doc(example = example, path = updated_path)
-  }
-
-  #############################################################################
-  #            Add project directories and supplemental files                 #
-  #############################################################################
-  # Add custom.scss to Quarto non-package projects only. 
-  #  "The minimal default format is a deliberate limitation of the current 
-  #  implementaton of the vignette engine. It ensures that the HTML vignettes
-  #  produced are reasonable size and can be published on CRAN without problems".
-  # source: https://cran.r-project.org/web/packages/quarto/vignettes/hello.html
-  
-  # 1. Create the data directory in the project's root
-  dir.create(file.path(path, "data"), recursive = TRUE, showWarnings = FALSE)
-  
-  # 2. Create custom.scss
-  if (is_quarto_project && !vignette) rUM::write_scss(name = "custom", path = path) 
-
-  # 3. Add enhanced .gitignore from inst/gists
-  .add_gitignore(path = path)
-
-  # 4. Add project documentation files
-  rUM::write_readme(path = path)
-  rUM::write_notes(path = path)
-
-  # 5. Add .bib & .csl files
-  .add_citation_files(path = updated_path)
-
-  # 6. Modify DESCRIPTION, main vignette template, and other package files
-  if (vignette) .rUM_package_builder(path, is_quarto_project)
-  
 }
