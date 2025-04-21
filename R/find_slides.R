@@ -23,13 +23,22 @@ find_slides <- function(package = NULL) {
   # Returns the path to the package slide deck
   folder_path <- glue::glue("{find.package(package)}/slides")
 
-  the_slides <- list.files(
+  # Get a list of all file paths
+  file_paths <- list.files(
     path = folder_path, 
     pattern = "\\.qmd$", 
     full.names = TRUE, 
     recursive = TRUE
-  ) |> 
-    tibble(filepath = _) |> 
+  )
+  
+  # Create a tibble of the filepaths
+  the_slides <- tibble(filepath = file_paths)
+  
+  # Only proceed if files are found
+  if (nrow(the_slides) == 0) return(character(0))
+  
+  # Process each file
+  result <- the_slides |> 
     rowwise() |> 
     mutate(
       content = readLines(.data$filepath, n = 30) |> paste(collapse = "\n"), 
@@ -40,6 +49,6 @@ find_slides <- function(package = NULL) {
     basename() |> 
     fs::path_ext_remove()
 
-  return(the_slides)
+  return(result)
 
 }
