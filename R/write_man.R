@@ -23,10 +23,29 @@
 #' if (interactive()) write_man(mtcars)
 write_man <- function(the_dataset) {
 
-  # Get the string name of the dataset from the unevaluated expression
-  # This allows us to use unquoted dataset names like: 
-  # write_man(mtcars) instead of write_man("mtcars")
-  the_dataset_name <- deparse(substitute(the_dataset))
+  # Handle both quoted and unquoted dataset names
+  if (is.character(the_dataset) && length(the_dataset) == 1) {
+    # Input is a string:
+    # This allows write_man("mtcars")
+    the_dataset_name <- the_dataset
+    
+    # Check if the dataset exists
+    if (!exists(the_dataset_name, envir = .GlobalEnv)) {
+      stop("Dataset '", the_dataset_name, "' not found in the global environment")
+    }
+    
+    # Get the actual dataset object
+    the_dataset <- get(the_dataset_name, envir = .GlobalEnv)
+  } else {
+    # Input is an unquoted object:
+    # This allows write_man(mtcars)
+    the_dataset_name <- deparse(substitute(the_dataset))
+    
+    # Check if the unquoted dataset exists
+    if (!exists(the_dataset_name, envir = .GlobalEnv)) {
+      stop("Dataset '", the_dataset_name, "' not found in the global environment")
+    }
+  }
 
   # rUM needs labelled dependencies for labelled::var_label
   # Check if the dataset exists in the global environment: use the quoted name
