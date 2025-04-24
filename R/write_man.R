@@ -12,7 +12,7 @@
 #' or packages which use labelled, like \code{tidyREDCap}) the variable label will be 
 #' used as the default description.
 #' 
-#' @param the_dataset Dataset object (unquoted)
+#' @param the_dataset Dataset object (unquoted) or dataset as character (quoted)
 #' 
 #' @return A \code{.Rd} file in the \code{man} package directory corresponding to the 
 #' name of the supplied dataset.
@@ -20,7 +20,13 @@
 #' @export
 #' 
 #' @examples
-#' if (interactive()) write_man(mtcars)
+#' if (interactive()) {
+#'   # Dataset object from Global Environment (unquoted)
+#'   write_man(mtcars)
+#'   
+#'   # Dataset object from Global Environment as character string (quoted)
+#'   write_man("mtcars")
+#' }
 write_man <- function(the_dataset) {
 
   # Handle both quoted and unquoted dataset names
