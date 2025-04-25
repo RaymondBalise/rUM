@@ -46,7 +46,7 @@ highlight-style: rstudio_default-light.theme
  
 # Introduction
  
-```{r, echo=FALSE}
+```{r echo=FALSE}
 # Helper packages - need dplyr and ggplot
 library(conflicted)
 suppressPackageStartupMessages(library(tidymodels))

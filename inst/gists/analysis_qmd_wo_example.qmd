@@ -26,7 +26,7 @@ bibliography: [references.bib, packages.bib]
 csl: the-new-england-journal-of-medicine.csl
 ---
 
-```{r, load-tidyverse-tidymodels}
+```{r load-tidyverse-tidymodels}
 #| echo: false
 
 library(conflicted)
@@ -38,7 +38,7 @@ suppressPackageStartupMessages(library(tidyverse))
 options(dplyr.summarise.inform = FALSE)
 ```
 
-```{r, load-other-packages}
+```{r load-other-packages}
 library(glue)  # for glue()
 library(rUM)  # needed for the bibliography
 library(rio)  # for import() 
@@ -48,11 +48,11 @@ library(table1)  # for table1()
 suppressPackageStartupMessages(library(gtsummary)) 
 ```
 
-```{r, load-data}
+```{r load-data}
 # raw_data <- import("")  # your data file goes inside the ""
 ```
 
-```{r, make-analysis}
+```{r make-analysis}
 # preprocess your data and ultimately make a dataset called analysis
 
 ```
@@ -67,14 +67,14 @@ Analyses were conducted with `r stringr::word(R.Version()$version.string, 1, 3)`
 
 # Results
 
-```{r, tbl-table1}
+```{r tbl-table1}
 #| tbl-cap: "Cross references to tables use labels for the code chunk starting with tbl-."
 
 ```
 
 As can be seen in @tbl-table1 ....
 
-```{r, fig-figure-1}
+```{r fig-figure-1}
 #| fig-cap: "Remember figure labels begin with fig-"
 
 ggplot()
@@ -86,7 +86,7 @@ As can be seen in @fig-figure-1 ...
 
 # References {.unnumbered}
 
-```{r, make-references}
+```{r make-references}
 #| include: false
 
 # automatically create a bib database for loaded R packages & rUM
