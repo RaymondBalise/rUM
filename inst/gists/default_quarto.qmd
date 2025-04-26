@@ -23,7 +23,7 @@ knitr:
 editor: source
 ---
 
-```{r, tidyverse-tidymodels}
+```{r tidyverse-tidymodels}
 #| echo: false
 
 library(conflicted)
@@ -35,14 +35,14 @@ suppressPackageStartupMessages(library(tidyverse))
 options(dplyr.summarise.inform = FALSE)
 ```
 
-```{r, other-packages}
+```{r other-packages}
 #| echo: false
 
 library(rio)
 # library()  # type a package name inside the parentheses
 ```
 
-```{r, load-data}
+```{r load-data}
 #| echo: false
 
 # raw_data <- import("")  # your data file goes inside the ""

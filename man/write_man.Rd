@@ -7,7 +7,7 @@
 write_man(the_dataset)
 }
 \arguments{
-\item{the_dataset}{Dataset object (unquoted)}
+\item{the_dataset}{Dataset object (unquoted) or dataset as character (quoted)}
 }
 \value{
 A \code{.Rd} file in the \code{man} package directory corresponding to the 
@@ -26,5 +26,11 @@ or packages which use labelled, like \code{tidyREDCap}) the variable label will 
 used as the default description.
 }
 \examples{
-if (interactive()) write_man(mtcars)
+if (interactive()) {
+  # Dataset object from Global Environment (unquoted)
+  write_man(mtcars)
+  
+  # Dataset object from Global Environment as character string (quoted)
+  write_man("mtcars")
+}
 }

@@ -1,5 +1,5 @@
 ---
-title: "Mix, Pour, Share: The rUM Cocktail for Biomedical Project Packagin"
+title: "Mix, Pour, Share: The rUM Cocktail for Biomedical Project Packaging"
 subtitle: "R Medicine 2025 Talk"
 author:
   - name: "Kyle Grealis & Raymond Balise"
@@ -21,7 +21,7 @@ format:
     slide-number: c/t
     show-slide-number: all
     highlight-style: rstudio_default-light.theme
-    logo: "rmed.png"
+    logo: "R-Med-25-Hex-Logo.png"
     footer: "[Slides are here](https://){target='_blank'}"  # complete the URL
     include-after-body: "clean_title_page.html"
 include-in-header:
@@ -46,7 +46,7 @@ highlight-style: rstudio_default-light.theme
  
 # Introduction
  
-```{r, echo=FALSE}
+```{r echo=FALSE}
 # Helper packages - need dplyr and ggplot
 library(conflicted)
 suppressPackageStartupMessages(library(tidymodels))

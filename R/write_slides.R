@@ -181,10 +181,14 @@ write_slides <- function(
         from = system.file("img/rmed_narrow.png", package = "rUM"),
         to = file.path(path, "rmed_narrow.png")
       )
-      # Add logo:
+      # Add logos:
       file.copy(
         from = system.file("img/rmed.png", package = "rUM"),
         to = file.path(path, "rmed.png")
+      )
+      file.copy(
+        from = system.file("img/R-Med-25-Hex-Logo.png", package = "rUM"),
+        to = file.path(path, "R-Med-25-Hex-Logo.png")
       )
       # Add favicon:
       file.copy(
