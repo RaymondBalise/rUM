@@ -55,3 +55,10 @@ $link-color: $primary;
   padding: 0.1em 0.2em;
   border-radius: 3px;     
 }
+
+.reveal .slide-logo {
+  height: 100px !important;
+  width: 100px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
