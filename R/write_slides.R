@@ -1,68 +1,68 @@
 #' Create a Quarto slide deck template
-#' 
+#'
 #' @description
-#' Creates a pre-formatted .qmd file for presentation slides along with necessary 
-#' supporting files (SCSS styling and RStudio theme). The generated template 
-#' includes optimized YAML configuration and slide structure to quickly start 
+#' Creates a pre-formatted .qmd file for presentation slides along with necessary
+#' supporting files (SCSS styling and RStudio theme). The generated template
+#' includes optimized YAML configuration and slide structure to quickly start
 #' building academic & professional presentations.
-#' 
+#'
 #' @param filenames Character vector with minimal length of 1. This allows for the ability
 #'   to batch create multiple slide decks in one function call.
 #' @param path Character string. Directory where the file will be created. Defaults to
 #'   the current project's base directory.
-#' @param new_folder Character. Default folder is \code{"slides"}. Options are:  
-#' 
-#'   * \code{"none"}: No folder is created. All files (.qmd & other) are created 
+#' @param new_folder Character. Default folder is \code{"slides"}. Options are:
+#'
+#'   * \code{"none"}: No folder is created. All files (.qmd & other) are created
 #'   in the working directory (path of \code{here::here()}).
-#' 
-#'   * \code{"all"}: One folder is created for each value in the length of 
-#'   \code{filenames}.  
-#' 
+#'
+#'   * \code{"all"}: One folder is created for each value in the length of
+#'   \code{filenames}.
+#'
 #'   * \code{"slide_"}: One folder is created by appending "slides_" to the first file
 #'   in \code{filenames} argument. If \code{filenames = "day_1"}, then the folder will
-#'   be named \code{"slides_day_1"}.  
-#' 
-#'   * A character value.  
-#' 
-#' @param example Logical. Whether to include example slides with demonstrations of 
+#'   be named \code{"slides_day_1"}.
+#'
+#'   * A character value.
+#'
+#' @param example Logical. Whether to include example slides with demonstrations of
 #'   including content.
-#' 
-#' @param template Character. Whether to include a slide template for common slide 
+#'
+#' @param template Character. Whether to include a slide template for common slide
 #'   layouts and formatting (default: "none")
-#' 
+#'
 #'   * optional: \code{"miami"} for a University of Miami theme.
 #'   * optional: \code{"rmed2025"} for a R/Med 2025 theme.
-#' 
+#'
 #' @param format Character string. Slide format to use. Currently supports 'revealjs',
 #'   with planned support for PowerPoint and Beamer in future releases.
-#' 
+#'
 #' @return Invisibly returns NULL. The created .qmd file is automatically opened
 #'   in the RStudio editor upon successful creation.
-#' 
+#'
 #' @details
 #' The function creates three files:
 #'   * A .qmd file with the specified filename containing the slide template
-#'   * A slides.scss file for custom styling 
+#'   * A slides.scss file for custom styling
 #'   * An RStudio theme file for consistent code highlighting
 #'
 #' All filenames must contain only letters, numbers, hyphens, and underscores.
-#' 
+#'
 #' @examples
 #' if (interactive()) {
 #'   # Create basic slides template in current directory
 #'   write_slides(filenames = "my_presentation")
-#' 
+#'
 #'   # Create slides with example content in a specific directory
 #'   tmp <- tempdir()
 #'   write_slides(filenames = "tutorial_slides", path = tmp, example = TRUE)
 #' }
-#' 
+#'
 #' @export
 write_slides <- function(
-  filenames, 
-  path = here::here(), 
+  filenames,
+  path = here::here(),
   new_folder = "slides",
-  example = FALSE, 
+  example = FALSE,
   template = "none",
   format = "revealjs"
 ) {
@@ -75,9 +75,11 @@ write_slides <- function(
   for (i in filenames) {
     # Validate filenames: part 1
     if (is.null(i)) stop('Invalid filename. Please input a value.')
-      if (!grepl('^[a-zA-Z0-9_-]+$', i)) {
-        stop('Invalid filename. Use only letters, numbers, hyphens, and underscores.')
-      }
+    if (!grepl('^[a-zA-Z0-9_-]+$', i)) {
+      stop(
+        'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
+      )
+    }
 
     # Remove .qmd if accidentally typed
     i <- str_replace_all(i, '.qmd$', '')
@@ -85,16 +87,20 @@ write_slides <- function(
     # Validate filename: part 2
     if (!is.character(i)) stop('Invalid filename: must be character.')
     if (!grepl('^[a-zA-Z0-9_-]+$', i)) {
-      stop('Invalid filename. Use only letters, numbers, hyphens, and underscores.')
+      stop(
+        'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
+      )
     }
   }
 
   # Validation check for new_folder:
   if (!is.character(new_folder)) stop('Invalid filename: must be character.')
   if (!grepl('^[a-zA-Z0-9_-]+$', new_folder)) {
-    stop('Invalid "new_folder" argument. Use only letters, numbers, hyphens, and underscores.')
+    stop(
+      'Invalid "new_folder" argument. Use only letters, numbers, hyphens, and underscores.'
+    )
   }
-  
+
   # Check the new_folder argument:
   if (new_folder == "none") {
     path <- path
@@ -114,42 +120,40 @@ write_slides <- function(
 
   if (file.access(path, mode = 2) != 0) {
     stop(sprintf(
-      'You do not have permission to write to the path location: %s\nTry `rUM::write_quarto(filename = "", path = "")`', 
+      'You do not have permission to write to the path location: %s\nTry `rUM::write_quarto(filename = "", path = "")`',
       path
     ))
   }
 
-
   # Part 1: Determine the slides template type:
   # list of valid slide templates
   valid_templates <- c("miami", "rmed2025")
-  
+
   # 1a. Check if chosen template is an available template
   if (template %in% valid_templates) {
-  # 1b. Check if using example themed template
+    # 1b. Check if using example themed template
     if (example) {
       slide_path <- glue::glue("gists/quarto_slides_example_{template}.qmd")
     } else {
       slide_path <- glue::glue("gists/quarto_slides_{template}.qmd")
     }
 
-  # 2a. Check if template == "none"
+    # 2a. Check if template == "none"
   } else if (template == "none") {
-  # 2b. Check if using example themed template
+    # 2b. Check if using example themed template
     if (example) {
       slide_path <- "slides/rUM_the_package.qmd"
     } else {
       slide_path <- "gists/quarto_slides.qmd"
     }
 
-  # 3. Supplied named template is not valid, so use generic template
+    # 3. Supplied named template is not valid, so use generic template
   } else {
     slide_path <- "slides/rUM_the_word.qmd"
   }
 
   # Complete template_path:
   template_path <- system.file(slide_path, package = "rUM")
-
 
   # Part 2: Create each slide .qmd file:
 
@@ -159,22 +163,26 @@ write_slides <- function(
 
     # Check for existing Quarto doc
     if (file.exists(the_quarto_file)) {
-      stop(sprintf("%s.qmd already exists in the specified path.", the_quarto_file))
+      stop(sprintf(
+        "%s.qmd already exists in the specified path.",
+        the_quarto_file
+      ))
     }
 
     file.copy(from = template_path, to = the_quarto_file, overwrite = FALSE)
   }
 
-  
-  # Part 3: Add SCSS file for slides: 
+  # Part 3: Add SCSS file for slides:
 
   # Check for SCSS file in slide folder
   if (!file.exists(file.path(path, "slides.scss"))) {
-
     if (template == "rmed2025") {
       # For R/Med 2025:
       # SCSS file
-      rum_scss_path <- system.file("gists/slides_example_rmed.scss", package = "rUM")
+      rum_scss_path <- system.file(
+        "gists/slides_example_rmed.scss",
+        package = "rUM"
+      )
       # Add background:
       file.copy(
         from = system.file("img/rmed_background.png", package = "rUM"),
@@ -204,29 +212,42 @@ write_slides <- function(
         from = system.file("gists/clean_title_page.html", package = "rUM"),
         to = file.path(path, "clean_title_page.html")
       )
-
     } else {
       # Normal styling
       rum_scss_path <- system.file('gists/slides.scss', package = 'rUM')
     }
-    
+
     if (rum_scss_path == "") {
       stop("Could not find slides.scss file in package installation")
     }
-    
+
     # Where to write the scss file:
     the_project_scss_file <- file.path(path, 'slides.scss')
-    file.copy(from = rum_scss_path, to = the_project_scss_file, overwrite = FALSE)
+    file.copy(
+      from = rum_scss_path,
+      to = the_project_scss_file,
+      overwrite = FALSE
+    )
+  } else {
+    # Output when a SCSS file exists, but won't be overwritten
+    message(glue::glue(
+      "A SCSS file has been found in the slides project location & will not be modified. Please create the slides in a different folder if you'd like to use the SCSS file from the {template} template."
+    ))
   }
 
   # Part 4: Check for RStudio light theme file:
   if (!file.exists(file.path(path, "rstudio_default-light.theme"))) {
     # Add RStudio theme file
-    rs_theme_path <- system.file('gists/rstudio_default-light.theme', package = 'rUM')
+    rs_theme_path <- system.file(
+      'gists/rstudio_default-light.theme',
+      package = 'rUM'
+    )
     the_rstheme_file <- file.path(path, 'rstudio_default-light.theme')
 
     if (rs_theme_path == "") {
-      stop("Could not find rstudio_default-light.theme file in package installation")
+      stop(
+        "Could not find rstudio_default-light.theme file in package installation"
+      )
     }
 
     file.copy(from = rs_theme_path, to = the_rstheme_file, overwrite = FALSE)
