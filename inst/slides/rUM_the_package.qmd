@@ -1,5 +1,5 @@
 ---
-title: "Mix, Pour, Share: The rUM Cocktail for Biomedical Project Packagin"
+title: "Mix, Pour, Share: The rUM Cocktail for Biomedical Project Packaging"
 subtitle: "R Medicine 2025 Talk"
 author:
   - name: "Kyle Grealis & Raymond Balise"
