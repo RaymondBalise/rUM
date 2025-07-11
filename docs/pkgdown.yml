@@ -1,18 +1,18 @@
 pandoc: '3.4'
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
-  O10_write_man: O10_write_man.html
-  OO1_using_posit_cloud: OO1_using_posit_cloud.html
-  OO2_make_research_project: OO2_make_research_project.html
-  OO3_make_research_project_markdown: OO3_make_research_project_markdown.html
-  OO4_R_Markdown_Templates: OO4_R_Markdown_Templates.html
-  OO5_make_a_package: OO5_make_a_package.html
-  OO6_show_example: OO6_show_example.html
-  OO7_write_scss: OO7_write_scss.html
-  OO8_write_slides: OO8_write_slides.html
-  OO9_find_show_slides: OO9_find_show_slides.html
-last_built: 2025-04-17T16:58Z
+  aa_using_posit_cloud: aa_using_posit_cloud.html
+  ab_make_research_project: ab_make_research_project.html
+  ac_make_research_project_markdown: ac_make_research_project_markdown.html
+  ad_R_Markdown_Templates: ad_R_Markdown_Templates.html
+  ae_make_a_package: ae_make_a_package.html
+  af_show_example: af_show_example.html
+  ag_write_scss: ag_write_scss.html
+  ah_write_slides: ah_write_slides.html
+  ai_find_show_slides: ai_find_show_slides.html
+  aj_write_man: aj_write_man.html
+last_built: 2025-07-11T15:00Z
 urls:
   reference: https://raymondbalise.github.io/rUM/reference
   article: https://raymondbalise.github.io/rUM/articles

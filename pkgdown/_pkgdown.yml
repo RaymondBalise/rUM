@@ -22,16 +22,16 @@ articles:
   - title: Get Started
     navbar: ~
     contents:
-      - OO1_using_posit_cloud
-      - OO2_make_research_project
-      - OO3_make_research_project_markdown
-      - OO4_R_Markdown_Templates
-      - OO5_make_a_package
-      - OO6_show_example
-      - OO7_write_scss
-      - OO8_write_slides
-      - OO9_find_show_slides
-      - O10_write_man
+      - aa_using_posit_cloud
+      - ab_make_research_project
+      - ac_make_research_project_markdown
+      - ad_R_Markdown_Templates
+      - ae_make_a_package
+      - af_show_example
+      - ag_write_scss
+      - ah_write_slides
+      - ai_find_show_slides
+      - aj_write_man
 
 reference:
   - title: "Project Setup"
