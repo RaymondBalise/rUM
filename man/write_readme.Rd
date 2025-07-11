@@ -21,10 +21,10 @@ project documentation structure.
 \details{
 The README.md template includes structured sections for:
 \itemize{
-  \item Project description (study name, principal investigator, author)
-  \item Project setup steps for reproducibility
-  \item File and directory descriptions
-  \item Miscellaneous project notes
+\item Project description (study name, principal investigator, author)
+\item Project setup steps for reproducibility
+\item File and directory descriptions
+\item Miscellaneous project notes
 }
 
 If the README file already exists, the function will stop and warn the user. The

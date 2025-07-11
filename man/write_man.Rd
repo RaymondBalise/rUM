@@ -10,19 +10,19 @@ write_man(the_dataset)
 \item{the_dataset}{Dataset object (unquoted) or dataset as character (quoted)}
 }
 \value{
-A \code{.Rd} file in the \code{man} package directory corresponding to the 
+A \code{.Rd} file in the \code{man} package directory corresponding to the
 name of the supplied dataset.
 }
 \description{
-This function produces a \code{roxygen2} R manual (man) page for a dataset that will 
-be included in an R package. To be documented, the dataset needs to be in the global 
+This function produces a \code{roxygen2} R manual (man) page for a dataset that will
+be included in an R package. To be documented, the dataset needs to be in the global
 environment. The new documentation template will be named to match the datasets and
-will be saved in the R folder (i.e., using an \code{analysis} dataset will produce the 
+will be saved in the R folder (i.e., using an \code{analysis} dataset will produce the
 \code{R/analysis.Rd} file). The page will indicate if the dataset is a data frame
 or tibble along with the number of rows and columns. For each variable documentation
-will indicate the variables a type, factor level information (if appropriate), and a 
-generic description section. If the variable is labelled (using the labelled package 
-or packages which use labelled, like \code{tidyREDCap}) the variable label will be 
+will indicate the variables a type, factor level information (if appropriate), and a
+generic description section. If the variable is labelled (using the labelled package
+or packages which use labelled, like \code{tidyREDCap}) the variable label will be
 used as the default description.
 }
 \examples{

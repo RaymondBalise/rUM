@@ -75,3 +75,4 @@ BugReports: https://github.com/RaymondBalise/rUM/issues
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)

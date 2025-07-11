@@ -2,7 +2,9 @@
 #' 
 #' @description
 #' Returns the names of all Quarto slide decks in a package. This is designed to work
-#' with \code{rUM::show_slides()} to preview the slide deck.
+#' with \code{rUM::show_slides()} to preview the slide deck. For more 
+#' information look in the 
+#' [Creating Slides with write_slides()](../doc/ah_write_slides.html) vignette.
 #' 
 #' @param package Character. Provide the package containing one or more slide decks. 
 #' 

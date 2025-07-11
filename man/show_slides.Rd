@@ -14,7 +14,7 @@ show_slides(package = NULL, deck = NULL, ...)
 \item{...}{Optional arguments passed to \code{quarto::quarto_preview()}.}
 }
 \value{
-Uses \code{quarto::quarto_preview()} to display the slide deck in the 
+Uses \code{quarto::quarto_preview()} to display the slide deck in the
 Viewer pane or browser.
 }
 \description{

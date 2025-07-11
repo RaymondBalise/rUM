@@ -4,7 +4,9 @@
 #' Creates a pre-formatted .qmd file for presentation slides along with necessary
 #' supporting files (SCSS styling and RStudio theme). The generated template
 #' includes optimized YAML configuration and slide structure to quickly start
-#' building academic & professional presentations.
+#' building academic & professional presentations. For more information look 
+#' in the [Creating Slides with write_slides()](../doc/ah_write_slides.html) 
+#' vignette.
 #'
 #' @param filenames Character vector with minimal length of 1. This allows for the ability
 #'   to batch create multiple slide decks in one function call.

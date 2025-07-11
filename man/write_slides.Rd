@@ -21,45 +21,48 @@ to batch create multiple slide decks in one function call.}
 the current project's base directory.}
 
 \item{new_folder}{Character. Default folder is \code{"slides"}. Options are:
-
-  * \code{"none"}: No folder is created. All files (.qmd & other) are created
-  in the working directory (path of \code{here::here()}).
-
-  * \code{"all"}: One folder is created for each value in the length of
-  \code{filenames}.
-
-  * \code{"slide_"}: One folder is created by appending "slides_" to the first file
-  in \code{filenames} argument. If \code{filenames = "day_1"}, then the folder will
-  be named \code{"slides_day_1"}.
-
-  * A character value.}
+\itemize{
+\item \code{"none"}: No folder is created. All files (.qmd & other) are created
+in the working directory (path of \code{here::here()}).
+\item \code{"all"}: One folder is created for each value in the length of
+\code{filenames}.
+\item \code{"slide_"}: One folder is created by appending "slides_" to the first file
+in \code{filenames} argument. If \code{filenames = "day_1"}, then the folder will
+be named \code{"slides_day_1"}.
+\item A character value.
+}}
 
 \item{example}{Logical. Whether to include example slides with demonstrations of
 including content.}
 
 \item{template}{Character. Whether to include a slide template for common slide
-  layouts and formatting (default: "none")
-
-  * optional: \code{"rmed2025"} for a R/Med 2025 theme.}
+layouts and formatting (default: "none")
+\itemize{
+\item optional: \code{"rmed2025"} for a R/Med 2025 theme.
+}}
 
 \item{format}{Character string. Slide format to use. Currently supports 'revealjs',
 with planned support for PowerPoint and Beamer in future releases.}
 }
 \value{
 Invisibly returns NULL. The created .qmd file is automatically opened
-  in the RStudio editor upon successful creation.
+in the RStudio editor upon successful creation.
 }
 \description{
 Creates a pre-formatted .qmd file for presentation slides along with necessary
 supporting files (SCSS styling and RStudio theme). The generated template
 includes optimized YAML configuration and slide structure to quickly start
-building academic & professional presentations.
+building academic & professional presentations. For more information look
+in the \href{../doc/ah_write_slides.html}{Creating Slides with write_slides()}
+vignette.
 }
 \details{
 The function creates three files:
-  * A .qmd file with the specified filename containing the slide template
-  * A slides.scss file for custom styling
-  * An RStudio theme file for consistent code highlighting
+\itemize{
+\item A .qmd file with the specified filename containing the slide template
+\item A slides.scss file for custom styling
+\item An RStudio theme file for consistent code highlighting
+}
 
 All filenames must contain only letters, numbers, hyphens, and underscores.
 }
