@@ -8,7 +8,7 @@ date: last-modified
 date-format: "MMMM D, YYYY"
 format: 
   revealjs:
-    theme: [default, slides]
+    theme: [default, slides.scss]
     slideNumber: true
     fontsize: 2em
     html-math-method: mathjax
