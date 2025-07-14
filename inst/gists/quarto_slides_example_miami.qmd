@@ -1,37 +1,29 @@
 ---
-title: "Mix, Pour, Share: The rUM Cocktail for Biomedical Project Packaging"
-subtitle: "R Medicine 2025 Talk"
-author:
-  - name: "Kyle Grealis & Raymond Balise"
+title: "Your title goes here"
+author: 
+  - name: "Your name goes here"
     affiliation:
-      - "University of Miami, <br>Department of Public Health Sciences, <br>Division of Biostatistics and Bioinformatics"
+      - "Department of Public Health Sciences, <br>Division of Biostatistics and Bioinformatics"
 date: last-modified
 date-format: "MMMM D, YYYY"
-format:
+format: 
   revealjs:
-    theme: 
-      - default
-      - slides.scss
-    title-slide-attributes:
-      data-background-image: "rmed_background.png"
-      data-background-size: cover
-      data-background-opacity: "50"
+    theme: [default, slides]
+    slideNumber: true
     fontsize: 2em
     html-math-method: mathjax
     slide-number: c/t
     show-slide-number: all
     highlight-style: rstudio_default-light.theme
-    logo: "R-Med-25-Hex-Logo.png"
-    footer: "[Slides are here](https://){target='_blank'}"  # complete the URL
-    include-after-body: "clean_title_page.html"
-include-in-header:
-  text: |
-    <link rel="shortcut icon" href="rmed.ico"/>
+    title-slide-attributes:
+      data-background: "linear-gradient(to right, white 25%, #F47321 25%)"
+    pdf-max-pages-per-slide: 1
+    pdf-separate-fragments: true
 embed-resources: true
 knitr:
   opts_chunk:      ########## set global options ############
     collapse: true # keep code from blocks together (if shown)
-    echo: false    # don't show code
+    echo: true     # don't show code
     message: true  # show messages
     warning: true  # show warnings
     error: true    # show error messages
@@ -41,7 +33,6 @@ knitr:
 editor_options:
   chunk_output_type: console
 editor: source
-highlight-style: rstudio_default-light.theme
 ---
  
 # Introduction
