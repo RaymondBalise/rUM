@@ -13,7 +13,7 @@ format:
       - default
       - slides.scss
     title-slide-attributes:
-      data-background-image: "rmed_background.png"
+      data-background-image: "img/rmed_background.png"
       data-background-size: cover
       data-background-opacity: "50"
     fontsize: 2em
@@ -21,12 +21,12 @@ format:
     slide-number: c/t
     show-slide-number: all
     highlight-style: rstudio_default-light.theme
-    logo: "R-Med-25-Hex-Logo.png"
+    logo: "img/rmed.png"
     footer: "[Slides are here](https://){target='_blank'}"  # complete the URL
-    include-after-body: "clean_title_page.html"
+    include-after-body: "img/clean_title_page.html"
 include-in-header:
   text: |
-    <link rel="shortcut icon" href="rmed.ico"/>
+    <link rel="shortcut icon" href="img/rmed.ico"/>
 embed-resources: true
 knitr:
   opts_chunk:      ########## set global options ############
