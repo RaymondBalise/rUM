@@ -1,0 +1,123 @@
+/*-- scss:defaults --*/
+$miami-green: #005030;
+$miami-orange: #F47321;
+$link-color: #0000EE; // Standard blue link color
+$font-family: "Helvetica", "Arial";
+
+/*-- scss:rules --*/
+
+.tiny {
+  font-size: 0.25em;
+}
+
+
+.orange {
+  color: $miami-orange;
+}
+
+#title-slide {
+  .title {
+    color: $miami-green;
+    margin-left: 30%;
+    text-align: left;
+    font-size: 1.5em;  /* Half the default size (3em) */
+  }
+  
+  .subtitle, .date {
+    color: $miami-green;
+    margin-left: 30%;
+    text-align: left;
+  }
+  
+  /* Target author container */
+  .quarto-title-authors {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 30%;
+    width: 70%;
+  }
+  
+  /* Target individual author */
+  .quarto-title-author {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  
+  /* Target author name specifically */
+  .quarto-title-author-name {
+    color: $miami-green;
+    text-align: left;
+  }
+  
+    /* Target author name specifically */
+  .quarto-title-affiliation {
+    color: $miami-green;
+    text-align: left;
+  }
+  
+  /* Refined logo positioning */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0%;  /* Center point of the white region (25% / 2) */
+    width: 20%;
+    height: 150px;
+    transform: translate(-60%, -50%);  /* Center both horizontally and vertically */
+    background-image: url('https://ucomm.miami.edu/_assets/images/tools-and-resources/signatures/png/um-horizontal-rgb.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 100;
+    
+    /* Ensure it stays within white region */
+    max-width: 22%;
+    box-sizing: border-box;
+    padding-left: 10%;
+    padding-right: 10%;  /* Buffer to keep away from orange section */
+  }
+}
+
+/* Hide slide number on title slide */
+#title-slide .slide-number {
+  display: none !important;
+}
+
+/* Global link styling */
+.reveal a {
+  color: $link-color;
+  text-decoration: underline;
+  
+  &:hover {
+    color: darken($link-color, 15%);
+    text-decoration: underline;
+  }
+  
+  &:visited {
+    color: #551A8B; // Standard visited link color
+  }
+}
+
+.reveal .slide-number a {
+  color: #6F6F6F;
+  text-decoration: none;
+  
+  &:hover a {
+    color: #6F6F6F;
+    text-decoration: none;
+  }
+  
+  
+}
+
+/* Regular slides styling */
+.reveal .slides > section:not(#title-slide) {
+  h1, h2, h3, h4, h5, h6 {
+    color: $miami-green;
+  }
+  
+  p, li, td {
+    color: #333333; /* Default text color for regular content */
+  }
+}
