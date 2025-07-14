@@ -38,6 +38,7 @@ including content.}
 \item{template}{Character. Whether to include a slide template for common slide
 layouts and formatting (default: "none")
 \itemize{
+\item optional: \code{"miami"} for a University of Miami theme.
 \item optional: \code{"rmed2025"} for a R/Med 2025 theme.
 }}
 
@@ -52,8 +53,8 @@ in the RStudio editor upon successful creation.
 Creates a pre-formatted .qmd file for presentation slides along with necessary
 supporting files (SCSS styling and RStudio theme). The generated template
 includes optimized YAML configuration and slide structure to quickly start
-building academic & professional presentations. For more information look
-in the \href{../doc/ah_write_slides.html}{Creating Slides with write_slides()}
+building academic & professional presentations. Fro more information look in the
+\href{../doc/ah_write_slides.html}{Creating Slides with write_slides()}
 vignette.
 }
 \details{
