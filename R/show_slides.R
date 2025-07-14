@@ -2,6 +2,8 @@
 #' 
 #' @description
 #' Render a Quarto slide deck from the supplied package in the Viewer or browser. 
+#' For more information look in the 
+#' [Creating Slides with write_slides()](../doc/ah_write_slides.html) vignette.
 #' 
 #' @param package Character. Provide the package containing one or more slide decks. 
 #' @param deck Character. The name of the slide deck to render without ".qmd".

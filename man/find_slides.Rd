@@ -14,7 +14,9 @@ A character vector of slide deck names within the provided package.
 }
 \description{
 Returns the names of all Quarto slide decks in a package. This is designed to work
-with \code{rUM::show_slides()} to preview the slide deck.
+with \code{rUM::show_slides()} to preview the slide deck. For more
+information look in the
+\href{../doc/ah_write_slides.html}{Creating Slides with write_slides()} vignette.
 }
 \examples{
 if (interactive()) {

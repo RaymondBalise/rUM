@@ -1,5 +1,15 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://raymondbalise.github.io/rUM/404.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/aa_using_posit_cloud.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/ab_make_research_project.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/ac_make_research_project_markdown.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/ad_R_Markdown_Templates.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/ae_make_a_package.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/af_show_example.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/ag_write_scss.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/ah_write_slides.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/ai_find_show_slides.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/articles/aj_write_man.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/articles/index.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/articles/make_a_package.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/articles/make_research_project.html</loc></url>

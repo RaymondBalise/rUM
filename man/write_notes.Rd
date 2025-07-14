@@ -20,7 +20,7 @@ and maintains consistent project documentation structure.
 }
 \details{
 The dated_progress_notes.md file is initialized with the current date and is designed
-to help track project milestones chronologically. If the progress notes file already 
+to help track project milestones chronologically. If the progress notes file already
 exists, the function will stop and warn the user.
 }
 \examples{

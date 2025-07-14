@@ -1,0 +1,61 @@
+---
+title: "8. Creating Slides with `write_slides()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{8. Creating Slides with `write_slides()`}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+If you would like to produce a slide deck, and optionally include the slides in an R package, `rUM` can help you.  The `write_slides()` function will give you a folder that contains a slide template, which will render a Quarto (Reveal.js) slide deck, along with a couple configuration files.  If you have used R Markdown or Quarto to write papers, writing slides will be simple for you.  The `write_slides()` function takes care of the configuration of the title slide and sets the details you need in a YAML header. You can add slides using the syntax you already know - a line that starts with `#` will make a "section heading" slide and `##` makes a slide with a title at the top of the page.  The rest is the same old R Markdown and Quarto magic you already know augmented to give you control of things like slide transitions and animations.  To learn how to make beautiful slides take a look [here](https://quarto.org/docs/presentations/revealjs/). 
+
+The `write_slides()` function also provides an example of a complex template, the slide deck for the R Medicine 2025 conference, which features details like a image on the title page, custom coloring, details on where viewers can find your slides, and custom logos. To make a fancy slide deck, all you need to do is swap out a few image files and specify your content.
+
+## Getting Started
+
+To create a slide deck write code like this: 
+
+```
+rUM::write_slides(filenames = "slide_demo", path = "~/Desktop/")
+```
+
+You will get a folder called slides that contains three files. 
+
+1. A revealjs quarto slide deck (here named **slide_demo.qmd**).
+2. A theme file, named **rstudio_default-light.theme**, that shows code chunks with the colors of RStudio
+3. A Sassy Cascading Style Sheet file, named slides.csss, that lets you set coloring and font options for your slide deck.
+
+### The R Medicine 2025 template
+
+When you use the `template = "rmed2025"` argument to `write_slides()` you get a folder called **img** in the slides folder.  It contains a html file you don't want to touch and a few image files that you will replace with your own files.
+
+Open the **img** folder to see the image files and open the .qmd file and look at the YAML header. There are a couple files and lines of code you will want to tweak.
+
+1. Replace the rmed_background.png file with the background image you would like on the title slide.  Change this line to reflect your file's name:  
+`data-background-image: "img/rmed_background.png"`
+2. Replace the rmed.png file with the logo you would like to appear in the bottom right corner of your slides.  Change this line to reflect your file's name:  
+`logo: "img/rmed.png"`
+3. Change this like so the hyperlink details point to where people can find your slides:  
+`footer: "[Slides are here](https://){target='_blank'}"  # complete the URL`
+4. Replace the rmed.ico file with the image that you would like to appear on browser tabs.  Be sure your image is square that is 32x32 pixels or larger and convert it to ico format with a tool like Preview on Mac.  Change this line to reflect your ico file name:  
+`<link rel="shortcut icon" href="img/rmed.ico"/>`  
+Be careful to not change the indenting or other details on that line.  
+
+
+### Saving Slides into a Package
+
+If you would like to add a slide deck to project that will build into an R package, first make a project with the necessary package details (take a look at the [Make a Package](ae_make_a_package.html) vignette.  Then come up with a name for your slide deck (here I am calling it **final_results**). Finally, request that the slides are saved in a **slides** folder in the **inst** folder like this:
+
+`rUM::write_slides("final_results", "./inst")`
+
+People will be able to access your slides using the `find_slides` and `show_slides()` functions. Take a look at the [Find and Show Slides in a Package](ai_find_show_slides.html) vignette to learn about those functions.
+

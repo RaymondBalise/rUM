@@ -15,9 +15,10 @@
 #' write_quarto(filename = "data_cleaning", path = tempdir())
 #' }
 #' @export
-#' 
+#'
 write_quarto <- function(filename = NULL, path = here::here()) {
   # Validate path
+  if (!dir.exists(path)) dir.create(path)
   if (is.null(path) || !dir.exists(path)) {
     stop("Invalid `path`. Please enter a valid project directory.")
   }
@@ -31,7 +32,9 @@ write_quarto <- function(filename = NULL, path = here::here()) {
   # Validate filename: part 2
   if (!is.character(filename)) stop('Invalid filename: must be character.')
   if (!grepl('^[a-zA-Z0-9_-]+$', filename)) {
-    stop('Invalid filename. Use only letters, numbers, hyphens, and underscores.')
+    stop(
+      'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
+    )
   }
 
   # Normalize the path for consistency
@@ -39,7 +42,7 @@ write_quarto <- function(filename = NULL, path = here::here()) {
 
   if (file.access(path, mode = 2) != 0) {
     stop(sprintf(
-      'You do not have permission to write to the path location: %s\nTry `rUM::write_quarto(filename = "", path = "")`', 
+      'You do not have permission to write to the path location: %s\nTry `rUM::write_quarto(filename = "", path = "")`',
       path
     ))
   }

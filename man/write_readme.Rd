@@ -15,19 +15,19 @@ Creates a comprehensive README template for project documentation.
 }
 \description{
 This function streamlines project documentation by creating and managing a README.md
-file. It provides interactive prompts for existing files and maintains consistent 
+file. It provides interactive prompts for existing files and maintains consistent
 project documentation structure.
 }
 \details{
 The README.md template includes structured sections for:
 \itemize{
-  \item Project description (study name, principal investigator, author)
-  \item Project setup steps for reproducibility
-  \item File and directory descriptions
-  \item Miscellaneous project notes
+\item Project description (study name, principal investigator, author)
+\item Project setup steps for reproducibility
+\item File and directory descriptions
+\item Miscellaneous project notes
 }
 
-If the README file already exists, the function will stop and warn the user. The 
+If the README file already exists, the function will stop and warn the user. The
 templates include example documentation that can be modified to suit project needs.
 }
 \examples{

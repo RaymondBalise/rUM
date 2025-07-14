@@ -24,11 +24,11 @@ make_project(
 
 \item{vignette}{Will the analysis file be saved as a package vignette?}
 
-\item{overwrite}{Will an existing RStudio project be overwritten?  This is 
+\item{overwrite}{Will an existing RStudio project be overwritten?  This is
 needed for for Posit.Cloud.  You will be prompted to confirm this option.}
 
 \item{openInteractive}{Should this new project be opened in a new RStudio
-window? Defaults to \code{TRUE}. NOTE: this option exists to prevent 
+window? Defaults to \code{TRUE}. NOTE: this option exists to prevent
 RStudio from opening two duplicate versions of the new project when
 this function is executed from RStudio menus. MODIFY WITH CAUTION.}
 }

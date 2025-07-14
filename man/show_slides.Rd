@@ -14,11 +14,13 @@ show_slides(package = NULL, deck = NULL, ...)
 \item{...}{Optional arguments passed to \code{quarto::quarto_preview()}.}
 }
 \value{
-Uses \code{quarto::quarto_preview()} to display the slide deck in the 
+Uses \code{quarto::quarto_preview()} to display the slide deck in the
 Viewer pane or browser.
 }
 \description{
 Render a Quarto slide deck from the supplied package in the Viewer or browser.
+For more information look in the
+\href{../doc/ah_write_slides.html}{Creating Slides with write_slides()} vignette.
 }
 \examples{
 if (interactive()) {
