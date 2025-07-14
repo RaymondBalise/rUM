@@ -4,8 +4,8 @@
 #' Creates a pre-formatted .qmd file for presentation slides along with necessary
 #' supporting files (SCSS styling and RStudio theme). The generated template
 #' includes optimized YAML configuration and slide structure to quickly start
-#' building academic & professional presentations. For more information look 
-#' in the [Creating Slides with write_slides()](../doc/ah_write_slides.html) 
+#' building academic & professional presentations. Fro more information look in the 
+#' [Creating Slides with write_slides()](../doc/ah_write_slides.html) 
 #' vignette.
 #'
 #' @param filenames Character vector with minimal length of 1. This allows for the ability
@@ -32,6 +32,7 @@
 #' @param template Character. Whether to include a slide template for common slide
 #'   layouts and formatting (default: "none")
 #'
+#'   * optional: \code{"miami"} for a University of Miami theme.
 #'   * optional: \code{"rmed2025"} for a R/Med 2025 theme.
 #'
 #' @param format Character string. Slide format to use. Currently supports 'revealjs',
@@ -127,39 +128,34 @@ write_slides <- function(
   }
 
   # Part 1: Determine the slides template type:
+  # list of valid slide templates
+  valid_templates <- c("miami", "rmed2025")
 
-  # 1. No example, no template (the function's default):
-  if (!example & template == "none") {
-    # use inst/gists/quarto_slides.qmd
-    template_path <- system.file('gists/quarto_slides.qmd', package = 'rUM')
+  # 1a. Check if chosen template is an available template
+  if (template %in% valid_templates) {
+    # 1b. Check if using example themed template
+    if (example) {
+      slide_path <- glue::glue("gists/quarto_slides_example_{template}.qmd")
+    } else {
+      slide_path <- glue::glue("gists/quarto_slides_{template}.qmd")
+    }
 
-    # 2. Use example, but no template:
-  } else if (example & template == "none") {
-    # use inst/slides/rUM_the_package.qmd
-    template_path <- system.file('slides/rUM_the_package.qmd', package = 'rUM')
-
-    # 3. No example, but using the R/Med 2025 template
-  } else if (!example & template == "rmed2025") {
-    # use inst/gists/quarto_slides_rmed2025.qmd
-    template_path <- system.file(
-      'gists/quarto_slides_rmed2025.qmd',
-      package = 'rUM'
-    )
-
-    # 4. Use example AND R/Med 2025 template
-  } else if (example & template == "rmed2025") {
-    # use the inst/slides/rUM_the_package.qmd with rmed2025 CSS styling & backgrounds
-    template_path <- system.file(
-      'gists/quarto_slides_example_rmed.qmd',
-      package = 'rUM'
-    )
-
-    # 5. Use example AND any other template -- when would this happen?
-    # } else if (example) {
+    # 2a. Check if template == "none"
+  } else if (template == "none") {
+    # 2b. Check if using example themed template
+    if (example) {
+      slide_path <- "slides/rUM_the_package.qmd"
+    } else {
+      slide_path <- "gists/quarto_slides.qmd"
+    }
+    
+    # 3. Supplied named template is not valid, so use generic template
   } else {
-    # use inst/slides/rUM_the_word.qmd
-    template_path <- system.file('slides/rUM_the_word.qmd', package = 'rUM')
+    slide_path <- "slides/rUM_the_word.qmd"
   }
+
+  # Complete template_path:
+  template_path <- system.file(slide_path, package = "rUM")
 
   # Part 2: Create each slide .qmd file:
 
@@ -189,39 +185,43 @@ write_slides <- function(
         "gists/slides_example_rmed.scss",
         package = "rUM"
       )
-
-      # Create img directory for art
-      dir.create(file.path(path, "img"))
-
       # Add background:
       file.copy(
         from = system.file("img/rmed_background.png", package = "rUM"),
-        to = file.path(path, "img/rmed_background.png")
+        to = file.path(path, "rmed_background.png")
       )
       # Add header strip
       file.copy(
         from = system.file("img/rmed_narrow.png", package = "rUM"),
-        to = file.path(path, "img/rmed_narrow.png")
+        to = file.path(path, "rmed_narrow.png")
       )
       # Add logos:
       file.copy(
         from = system.file("img/rmed.png", package = "rUM"),
-        to = file.path(path, "img/rmed.png")
+        to = file.path(path, "rmed.png")
       )
       file.copy(
-        from = system.file("img/rmed.png", package = "rUM"),
-        to = file.path(path, "img/rmed.png")
+        from = system.file("img/R-Med-25-Hex-Logo.png", package = "rUM"),
+        to = file.path(path, "R-Med-25-Hex-Logo.png")
       )
       # Add favicon:
       file.copy(
         from = system.file("img/rmed.ico", package = "rUM"),
-        to = file.path(path, "img/rmed.ico")
+        to = file.path(path, "rmed.ico")
       )
       # Add JavaScript HTML file that cleans up title page and adds slide content:
       file.copy(
         from = system.file("gists/clean_title_page.html", package = "rUM"),
-        to = file.path(path, "img/clean_title_page.html")
+        to = file.path(path, "clean_title_page.html")
       )
+
+    } else if (template == 'miami') {
+      # SCSS file
+      rum_scss_path <- system.file(
+        "gists/custom_miami.scss",
+        package = "rUM"
+      )
+
     } else {
       # Normal styling
       rum_scss_path <- system.file('gists/slides.scss', package = 'rUM')
@@ -238,6 +238,11 @@ write_slides <- function(
       to = the_project_scss_file,
       overwrite = FALSE
     )
+  } else {
+    # Output when a SCSS file exists, but won't be overwritten
+    message(glue::glue(
+      "A SCSS file has been found in the slides project location & will not be modified. Please create the slides in a different folder if you'd like to use the SCSS file from the {template} template."
+    ))
   }
 
   # Part 4: Check for RStudio light theme file:
