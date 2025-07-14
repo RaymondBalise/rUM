@@ -16,9 +16,20 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-With write_slides you can save a deck into a package. How can you check to see if a package contains slides?  If there is one or more deck how can you see the slides?
+With `write_slides()` you can save a deck into a package. To learn about that function look at the [Creating Slides with write_slides()](ah_write_slides.html)  vignette. How can you check to see if a package contains slides?  If there is one or more deck, how can you see the slides?
 
 ## Getting Started
 
+To see if a package has slides use `rUM::find_slides()`. If you want to know if the `rUM` package has slides, you would check with:
 
-## Conclusion
+`find_slides("rUM")`
+ 
+It will give you a vector containing the names of the slide decks. 
+ 
+```{r}
+rUM::find_slides("rUM")
+```
+
+To see the slide deck use `rUM::show_slides()`.  For example to see the slide deck called **rUM_the_package** from inside the `rUM` package you would type:
+
+`rUM::show_slides("rUM", "rUM_the_package")`

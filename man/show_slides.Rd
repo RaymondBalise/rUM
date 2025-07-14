@@ -19,6 +19,8 @@ Viewer pane or browser.
 }
 \description{
 Render a Quarto slide deck from the supplied package in the Viewer or browser.
+For more information look in the
+\href{../doc/ah_write_slides.html}{Creating Slides with write_slides()} vignette.
 }
 \examples{
 if (interactive()) {
