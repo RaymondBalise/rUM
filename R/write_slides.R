@@ -146,7 +146,7 @@ write_slides <- function(
     } else {
       slide_path <- "gists/quarto_slides.qmd"
     }
-
+    
     # 3. Supplied named template is not valid, so use generic template
   } else {
     slide_path <- "slides/rUM_the_word.qmd"
@@ -212,6 +212,14 @@ write_slides <- function(
         from = system.file("gists/clean_title_page.html", package = "rUM"),
         to = file.path(path, "clean_title_page.html")
       )
+
+    } else if (template == 'miami') {
+      # SCSS file
+      rum_scss_path <- system.file(
+        "gists/custom_miami.scss",
+        package = "rUM"
+      )
+
     } else {
       # Normal styling
       rum_scss_path <- system.file('gists/slides.scss', package = 'rUM')
