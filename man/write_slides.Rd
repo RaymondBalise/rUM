@@ -54,7 +54,9 @@ Invisibly returns NULL. The created .qmd file is automatically opened
 Creates a pre-formatted .qmd file for presentation slides along with necessary
 supporting files (SCSS styling and RStudio theme). The generated template
 includes optimized YAML configuration and slide structure to quickly start
-building academic & professional presentations.
+building academic & professional presentations. Fro more information look in the 
+[Creating Slides with write_slides()](../doc/ah_write_slides.html) 
+vignette.
 }
 \details{
 The function creates three files:
