@@ -25,6 +25,10 @@ generic description section. If the variable is labelled (using the labelled pac
 or packages which use labelled, like \code{tidyREDCap}) the variable label will be
 used as the default description.
 }
+\note{
+You will need to import the \code{roxygen2} package and add \code{Roxygen: list(markdown = TRUE)}
+to your DESCRIPTION file. If you made a project using rUM this happens automatically.
+}
 \examples{
 if (interactive()) {
   # Dataset object from Global Environment (unquoted)

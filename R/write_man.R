@@ -14,6 +14,10 @@
 #' 
 #' @param the_dataset Dataset object (unquoted) or dataset as character (quoted)
 #' 
+#' @note You will need to import the `roxygen2` package and add \code{Roxygen: list(markdown = TRUE)}
+#' to your DESCRIPTION file. If you made a project using rUM this happens automatically.
+#' 
+#' 
 #' @return A \code{.Rd} file in the \code{man} package directory corresponding to the 
 #' name of the supplied dataset.
 #' 
@@ -132,13 +136,16 @@ write_man <- function(the_dataset) {
     }
     
     # see if a variable has a label
-    var_type <- if(!is.null(labelled::var_label(the_dataset[[var_name]]))){
-      # Get primary class which will be after labelled
-      class(the_dataset[[var_name]])[2]
-    } else {
-      # Get primary class
-      class(the_dataset[[var_name]])[1]
-    }
+    var_type <- 
+      # check to see if the first class is labeled (from from labelVector)
+      if(class(the_dataset[[var_name]])[1] == "labelled"){
+        # Get primary class which will be the second class listed after 
+        #   "labelled" if data was labeled using labelVector instead of labelled
+        class(the_dataset[[var_name]])[2]
+      } else {
+        class(the_dataset[[var_name]])[1]
+      }
+    
     
     # Create markdown table based on variable type
     if (var_type == "integer") {
