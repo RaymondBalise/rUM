@@ -270,7 +270,7 @@ write_slides <- function(
   }
 
   has_description_file <- list.files(
-    path = folder_path, 
+    path = dirname(path),  # search one level up, essentially the package/project root 
     pattern = "DESCRIPTION", 
     full.names = TRUE
   )
