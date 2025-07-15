@@ -114,7 +114,7 @@ write_slides <- function(
     path <- path
   } else if (new_folder == "inst") {
     # For creating slides in a package
-    path <- glue::glue("{path}inst/slides")
+    path <- glue::glue("{path}/inst/slides")
   } else if (new_folder == "slides") {
     path <- glue::glue("{path}/slides")
   } else if (new_folder %in% c("slides_", "slide_")) {
