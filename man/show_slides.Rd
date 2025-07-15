@@ -13,25 +13,22 @@ show_slides(package = NULL, deck = NULL, ...)
 
 \item{...}{Optional arguments passed to \code{quarto::quarto_preview()}.}
 }
-\value{
-Uses \code{quarto::quarto_preview()} to display the slide deck in the
-Viewer pane or browser.
-}
 \description{
 Render a Quarto slide deck from the supplied package in the Viewer or browser.
 For more information look in the
 \href{../doc/ah_write_slides.html}{Creating Slides with write_slides()} vignette.
 }
+\note{
+Uses \code{quarto::quarto_preview()} to display the slide deck in the
+Viewer pane or browser.
+}
 \examples{
 if (interactive()) {
   # Preview a known slide deck name from a package:
-  show_slides(package = "rUM", deck = "hit_the_deck")
+  show_slides(package = "rUM", deck = "rUM_the_package")
 
   # Use find_slides to pipe the output:
-  find_slides(package = "rUM") |> show_slides(package = "rUM")
-
-  # Show second slide deck when find_slides returns more than one file:
-  find_slides(package = "rUM")[1] |> show_slides(package = "rUM")
+  find_slides(package = "rUM") |> show_slides()
 }
 
 }

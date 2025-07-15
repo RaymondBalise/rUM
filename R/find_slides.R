@@ -8,7 +8,8 @@
 #' 
 #' @param package Character. Provide the package containing one or more slide decks. 
 #' 
-#' @return A character vector of slide deck names within the provided package.
+#' @return A list of class "slide_finder" containing the name of the package and the
+#' name of the slides.
 #' 
 #' @examples
 #' if (interactive()) {
@@ -36,8 +37,14 @@ find_slides <- function(package = NULL) {
   # Create a tibble of the filepaths
   the_slides <- tibble(filepath = file_paths)
   
-  # Only proceed if files are found
-  if (nrow(the_slides) == 0) return(character(0))
+  # Only proceed if files are found, but must be same structure as if having an
+  # available slide
+  if (nrow(the_slides) == 0) {
+    return(structure(
+      list(package = package, slides = character(0)),
+      class = 'slide_finder'
+    ))
+  }
   
   # Process each file
   result <- the_slides |> 
@@ -51,6 +58,24 @@ find_slides <- function(package = NULL) {
     basename() |> 
     fs::path_ext_remove()
 
-  return(result)
+  # Only show message if called interactively at top level (not in a pipe/assignment)
+  show_message <- interactive() && sys.nframe() == 1
+  if (show_message) {
+    message(
+      'Available slides in package "', package, '":\n', 
+      paste('  -', result, collapse = '\n')
+    )
+  }
+
+  # Return an invisible structured object to be piped into show_slides()
+  invisible(
+    structure(
+      list(
+        package = package,
+        slides = result
+      ),
+      class = 'slide_finder'
+    )
+  )
 
 }

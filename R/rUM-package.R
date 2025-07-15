@@ -20,6 +20,6 @@
 #' @importFrom tidymodels tidymodels_prefer
 #' @importFrom tidyverse tidyverse_logo
 #' @importFrom usethis create_project ui_done ui_info ui_nope ui_oops ui_yeah
-#' @importFrom utils download.file
+#' @importFrom utils download.file menu
 ## usethis namespace: end
 NULL

@@ -4,7 +4,7 @@
 #' Creates a pre-formatted .qmd file for presentation slides along with necessary
 #' supporting files (SCSS styling and RStudio theme). The generated template
 #' includes optimized YAML configuration and slide structure to quickly start
-#' building academic & professional presentations. Fro more information look in the 
+#' building academic & professional presentations. For more information look in the 
 #' [Creating Slides with write_slides()](../doc/ah_write_slides.html) 
 #' vignette.
 #'
@@ -37,6 +37,8 @@
 #'
 #' @param format Character string. Slide format to use. Currently supports 'revealjs',
 #'   with planned support for PowerPoint and Beamer in future releases.
+#' 
+#' @note Be sure to specify \code{path = "inst"} if you are adding slides to a package.
 #'
 #' @return Invisibly returns NULL. The created .qmd file is automatically opened
 #'   in the RStudio editor upon successful creation.
@@ -57,6 +59,10 @@
 #'   # Create slides with example content in a specific directory
 #'   tmp <- tempdir()
 #'   write_slides(filenames = "tutorial_slides", path = tmp, example = TRUE)
+#' 
+#'   # Create a slidedeck for a package in the inst directory
+#'   tmp <- tempdir()
+#'   write_slides(filenames = "tutorial_slides", path = 'inst', example = TRUE)
 #' }
 #'
 #' @export
@@ -261,6 +267,17 @@ write_slides <- function(
     }
 
     file.copy(from = rs_theme_path, to = the_rstheme_file, overwrite = FALSE)
+  }
+
+  has_description_file <- list.files(
+    path = folder_path, 
+    pattern = "DESCRIPTION", 
+    full.names = TRUE
+  )
+  going_to_inst <- stringr::str_detect(new_folder, 'inst')
+
+  if (length(has_description_file) > 0 && !going_to_inst) {
+    warning('rUM has created your slide deck.\nHowever, we have detected that you are currently in a package environment. If your project does not have an "inst" directory/folder, make one. Move your slide\'s directory to the "inst" directory to pass CRAN checks.')
   }
 
   # Open the first slide file template upon successful copy

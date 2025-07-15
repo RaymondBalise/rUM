@@ -53,7 +53,7 @@ in the RStudio editor upon successful creation.
 Creates a pre-formatted .qmd file for presentation slides along with necessary
 supporting files (SCSS styling and RStudio theme). The generated template
 includes optimized YAML configuration and slide structure to quickly start
-building academic & professional presentations. Fro more information look in the
+building academic & professional presentations. For more information look in the
 \href{../doc/ah_write_slides.html}{Creating Slides with write_slides()}
 vignette.
 }
@@ -67,6 +67,9 @@ The function creates three files:
 
 All filenames must contain only letters, numbers, hyphens, and underscores.
 }
+\note{
+Be sure to specify \code{path = "inst"} if you are adding slides to a package.
+}
 \examples{
 if (interactive()) {
   # Create basic slides template in current directory
@@ -75,6 +78,10 @@ if (interactive()) {
   # Create slides with example content in a specific directory
   tmp <- tempdir()
   write_slides(filenames = "tutorial_slides", path = tmp, example = TRUE)
+
+  # Create a slidedeck for a package in the inst directory
+  tmp <- tempdir()
+  write_slides(filenames = "tutorial_slides", path = 'inst', example = TRUE)
 }
 
 }

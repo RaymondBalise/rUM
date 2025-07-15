@@ -10,7 +10,8 @@ find_slides(package = NULL)
 \item{package}{Character. Provide the package containing one or more slide decks.}
 }
 \value{
-A character vector of slide deck names within the provided package.
+A list of class "slide_finder" containing the name of the package and the
+name of the slides.
 }
 \description{
 Returns the names of all Quarto slide decks in a package. This is designed to work

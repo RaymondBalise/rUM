@@ -24,7 +24,7 @@ To see if a package has slides use `rUM::find_slides()`. If you want to know if 
 
 `find_slides("rUM")`
  
-It will give you a vector containing the names of the slide decks. 
+It will give you an object containing the names of the slide decks. 
  
 ```{r}
 rUM::find_slides("rUM")
@@ -33,3 +33,15 @@ rUM::find_slides("rUM")
 To see the slide deck use `rUM::show_slides()`.  For example to see the slide deck called **rUM_the_package** from inside the `rUM` package you would type:
 
 `rUM::show_slides("rUM", "rUM_the_package")`
+
+You can also pipe from `rUM::find_slides()` to `rUM::show_slides()` like this and it will ask you to choose which slide deck:
+
+```r
+> find_slides('rUM') |> show_slides()
+Select a slide deck from "rUM" package: 
+
+1: rUM_the_package
+2: rUM_the_word
+
+Selection: 1
+```
