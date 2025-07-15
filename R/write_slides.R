@@ -191,34 +191,37 @@ write_slides <- function(
         "gists/slides_example_rmed.scss",
         package = "rUM"
       )
+      # Create the img directory as referenced in the slide's YAML:
+      img_path <- glue::glue("{path}/img")
+      if (!dir.exists(img_path)) dir.create(img_path)
       # Add background:
       file.copy(
         from = system.file("img/rmed_background.png", package = "rUM"),
-        to = file.path(path, "rmed_background.png")
+        to = file.path(img_path, "rmed_background.png")
       )
       # Add header strip
       file.copy(
         from = system.file("img/rmed_narrow.png", package = "rUM"),
-        to = file.path(path, "rmed_narrow.png")
+        to = file.path(img_path, "rmed_narrow.png")
       )
       # Add logos:
       file.copy(
         from = system.file("img/rmed.png", package = "rUM"),
-        to = file.path(path, "rmed.png")
+        to = file.path(img_path, "rmed.png")
       )
       file.copy(
         from = system.file("img/R-Med-25-Hex-Logo.png", package = "rUM"),
-        to = file.path(path, "R-Med-25-Hex-Logo.png")
+        to = file.path(img_path, "R-Med-25-Hex-Logo.png")
       )
       # Add favicon:
       file.copy(
         from = system.file("img/rmed.ico", package = "rUM"),
-        to = file.path(path, "rmed.ico")
+        to = file.path(img_path, "rmed.ico")
       )
       # Add JavaScript HTML file that cleans up title page and adds slide content:
       file.copy(
         from = system.file("gists/clean_title_page.html", package = "rUM"),
-        to = file.path(path, "clean_title_page.html")
+        to = file.path(img_path, "clean_title_page.html")
       )
 
     } else if (template == 'miami') {
