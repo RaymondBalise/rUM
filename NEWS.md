@@ -1,10 +1,11 @@
 # rUM 2.2.0 (rUM Runner)
 
+CRAN release: 2025-07
+
 ## New Features
-+ Added `rum::write_man()` function that make a Roxygen file for a manual page
-+ Add `write_slides()` function....
-+ Add `find_slides()`
-+ Add `show_slides()`
++ Automatic dataset documentation with `write_man()`.
++ Slide templates: Quarto Reveal.js templates with `write_slides()`
++ Functions for embedding and finding slides in a package with `find_slides()` and `show_slides()`
 
 
 # rUM 2.1.0 (rUM and Coke)
