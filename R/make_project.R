@@ -56,11 +56,13 @@ make_project <- function(
 ) {
 
   # Deprecation warning for version >= 2.2.0
-  lifecycle::deprecate_warn(
-    when = "2.2.0", 
-    what = "make_project(vignette)", 
-    with = "make_package()"
-  )
+  if (vignette == TRUE) {
+    lifecycle::deprecate_warn(
+      when = "2.2.0", 
+      what = "make_project(vignette)", 
+      with = "make_package()"
+    )
+  }
 
   # Input validation:--------------------------------------------------------------
   
@@ -74,7 +76,7 @@ make_project <- function(
 
   # 2) Check logical inputs
   if (!is.logical(example))   stop('Parameter `example` must be TRUE or FALSE')
-  if (!is.logical(vignette))  stop('Parameter `vignette` must be TRUE or FALSE')
+  # if (!is.logical(vignette))  stop('Parameter `vignette` must be TRUE or FALSE')
   if (!is.logical(overwrite)) stop('Parameter `overwrite` must be TRUE or FALSE')
   if (!is.logical(openInteractive)) {
     stop('Parameter `openInteractive` must be TRUE or FALSE')
