@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-With `write_slides()` you can save a deck into a package. To learn about that function look at the [Creating Slides with write_slides()](ah_write_slides.html)  vignette. How can you check to see if a package contains slides?  If there is one or more deck, how can you see the slides?
+With `write_slides()` you can save a deck into a package. To learn about that function look at the [Creating Slides from a Template with write_slides()](ah_write_slides.html) vignette. How can you check to see if a package contains slides? If there is one or more deck, how can you see the slides?
 
 ## Getting Started
 
-To see if a package has slides use `rUM::find_slides()`. If you want to know if the `rUM` package has slides, you would check with:
+To see if a package has slides use `rUM::find_slides()`. Note that our functions `find_slides()` and `show_slides()` are designed to work with slides made with `rUM::write_slides()`. These functions should work with other Quarto slide decks built using Reveal.js. [Open an issue](https://github.com/RaymondBalise/rUM/issues) if you run into problems. If you want to know if the `rUM` package has slides, you would check with:
 
 `find_slides("rUM")`
  
@@ -30,7 +30,7 @@ It will give you an object containing the names of the slide decks.
 rUM::find_slides("rUM")
 ```
 
-To see the slide deck use `rUM::show_slides()`.  For example to see the slide deck called **rUM_the_package** from inside the `rUM` package you would type:
+To see the slide deck use `rUM::show_slides()`. For example, to see the slide deck called **rUM_the_package** from inside the `rUM` package you would type:
 
 `rUM::show_slides("rUM", "rUM_the_package")`
 
