@@ -26,6 +26,9 @@ find_slides <- function(package = NULL) {
   # Returns the path to the package slide deck
   folder_path <- glue::glue("{find.package(package)}/slides")
 
+  # Keep this for testing within this package only
+  # folder_path <- glue::glue("{find.package(package)}/inst/slides")
+
   # Get a list of all file paths
   file_paths <- list.files(
     path = folder_path, 
@@ -51,7 +54,7 @@ find_slides <- function(package = NULL) {
     rowwise() |> 
     mutate(
       content = readLines(.data$filepath, n = 30) |> paste(collapse = "\n"), 
-      is_slide = grepl("(revealjs|beamer|pptx)", .data$content)
+      is_slide = str_detect(.data$content, "(revealjs|beamer|pptx)")
     ) |> 
     dplyr::filter(.data$is_slide) |> 
     dplyr::pull(.data$filepath) |> 

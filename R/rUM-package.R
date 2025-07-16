@@ -15,7 +15,7 @@
 #' @importFrom rio import
 #' @importFrom rlang abort
 #' @importFrom rmarkdown html_document
-#' @importFrom stringr fixed str_replace str_replace_all
+#' @importFrom stringr fixed str_detect str_replace str_replace_all
 #' @importFrom table1 t1kable
 #' @importFrom tidymodels tidymodels_prefer
 #' @importFrom tidyverse tidyverse_logo
