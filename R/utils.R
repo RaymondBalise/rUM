@@ -9,7 +9,7 @@
 #' 
 #' @noRd
 .valid_package_name <- function(path) {
-  grepl("^[a-zA-Z][a-zA-Z0-9.]+$", path) && !grepl("\\.$", path)
+  str_detect(path, "^[a-zA-Z][a-zA-Z0-9.]+$") && !str_detect(path, "\\.$")
 }
 
 

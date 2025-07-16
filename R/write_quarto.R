@@ -31,7 +31,7 @@ write_quarto <- function(filename = NULL, path = here::here()) {
 
   # Validate filename: part 2
   if (!is.character(filename)) stop('Invalid filename: must be character.')
-  if (!grepl('^[a-zA-Z0-9_-]+$', filename)) {
+  if (!str_detect(filename, '^[a-zA-Z0-9_-]+$')) {
     stop(
       'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
     )

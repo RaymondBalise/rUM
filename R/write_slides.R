@@ -83,7 +83,7 @@ write_slides <- function(
   for (i in filenames) {
     # Validate filenames: part 1
     if (is.null(i)) stop('Invalid filename. Please input a value.')
-    if (!grepl('^[a-zA-Z0-9_-]+$', i)) {
+    if (!str_detect(i, '^[a-zA-Z0-9_-]+$')) {
       stop(
         'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
       )
@@ -94,7 +94,7 @@ write_slides <- function(
 
     # Validate filename: part 2
     if (!is.character(i)) stop('Invalid filename: must be character.')
-    if (!grepl('^[a-zA-Z0-9_-]+$', i)) {
+    if (!str_detect(i, '^[a-zA-Z0-9_-]+$')) {
       stop(
         'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
       )
@@ -103,7 +103,7 @@ write_slides <- function(
 
   # Validation check for new_folder:
   if (!is.character(new_folder)) stop('Invalid filename: must be character.')
-  if (!grepl('^[a-zA-Z0-9_-]+$', new_folder)) {
+  if (!str_detect(new_folder, '^[a-zA-Z0-9_-]+$')) {
     stop(
       'Invalid "new_folder" argument. Use only letters, numbers, hyphens, and underscores.'
     )
@@ -275,7 +275,7 @@ write_slides <- function(
     pattern = "DESCRIPTION", 
     full.names = TRUE
   )
-  going_to_inst <- stringr::str_detect(new_folder, 'inst')
+  going_to_inst <- str_detect(new_folder, 'inst')
 
   if (length(has_description_file) > 0 && !going_to_inst) {
     warning('rUM has created your slide deck.\nHowever, we have detected that you are currently in a package environment. If your project does not have an "inst" directory/folder, make one. Move your slide\'s directory to the "inst" directory to pass CRAN checks.')

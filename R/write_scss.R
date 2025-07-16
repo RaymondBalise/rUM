@@ -131,7 +131,7 @@ format:
   )
   
   # Attempt to update the YAML or show user how to do it manually
-  if (grepl(original_yaml, qmd_content)) {
+  if (str_detect(qmd_content, original_yaml)) {
     updated_content <- stringr::str_replace(qmd_content, original_yaml, new_yaml)
     readr::write_file(updated_content, file = "analysis.qmd")
     ui_done("The YAML in analysis.qmd has been updated.")
