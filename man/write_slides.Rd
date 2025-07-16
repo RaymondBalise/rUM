@@ -50,12 +50,12 @@ Invisibly returns NULL. The created .qmd file is automatically opened
 in the RStudio editor upon successful creation.
 }
 \description{
-Creates a pre-formatted .qmd file for presentation slides along with necessary
-supporting files (SCSS styling and RStudio theme). The generated template
-includes optimized YAML configuration and slide structure to quickly start
-building academic & professional presentations. For more information look in the
-\href{../doc/ah_write_slides.html}{Creating Slides with write_slides()}
-vignette.
+Creates a pre-formatted .qmd file for presentation slides using Reveal.js
+along with necessary supporting files (SCSS styling and RStudio theme). The
+generated template includes optimized YAML configuration and slide structure
+to quickly start building academic & professional presentations. For more
+information look in the
+\href{../doc/ah_write_slides.html}{Creating Slides with write_slides()} vignette.
 }
 \details{
 The function creates three files:
