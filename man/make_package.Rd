@@ -46,6 +46,10 @@ Behind the scenes, this function used by research_project.dcf when
 a user selects New project... > New Directory > rUM Research Project Template
 within the RSutdio IDE. See \code{./rstudio/templates/project/}.
 }
+\note{
+If you need to create multiple packages from the same session, restart
+RStudio/Positron after making each one. See \href{https://github.com/RaymondBalise/rUM/issues/84}{open issue}.
+}
 \examples{
 \dontrun{
   # This makes a package with an example Quarto paper in the vignettes folder.
