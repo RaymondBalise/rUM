@@ -127,9 +127,8 @@ write_slides <- function(
   path <- normalizePath(path, mustWork = TRUE)
 
   if (file.access(path, mode = 2) != 0) {
-    stop(sprintf(
-      'You do not have permission to write to the path location: %s\nTry `rUM::write_quarto(filename = "", path = "")`',
-      path
+    stop(glue::glue(
+      'You do not have permission to write to the path location: {path}\nTry `rUM::write_quarto(filename = "", path = "")`'
     ))
   }
 
@@ -171,9 +170,8 @@ write_slides <- function(
 
     # Check for existing Quarto doc
     if (file.exists(the_quarto_file)) {
-      stop(sprintf(
-        "%s already exists in the specified path.",
-        the_quarto_file
+      stop(glue::glue(
+        "{the_quarto_file} already exists in the specified path."        
       ))
     }
 

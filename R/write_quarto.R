@@ -41,9 +41,8 @@ write_quarto <- function(filename = NULL, path = here::here()) {
   path <- normalizePath(path, mustWork = TRUE)
 
   if (file.access(path, mode = 2) != 0) {
-    stop(sprintf(
-      'You do not have permission to write to the path location: %s\nTry `rUM::write_quarto(filename = "", path = "")`',
-      path
+    stop(glue::glue(
+      'You do not have permission to write to the path location: {path}\nTry `rUM::write_quarto(filename = "", path = "")`'
     ))
   }
 
@@ -52,7 +51,7 @@ write_quarto <- function(filename = NULL, path = here::here()) {
 
   # Check for existing Quarto doc
   if (file.exists(the_quarto_file)) {
-    stop(sprintf("%s.qmd already exists in the specified path.", filename))
+    stop(glue::glue("{filename}.qmd already exists in the specified path."))
   }
 
   # Write the Quarto file based on template
