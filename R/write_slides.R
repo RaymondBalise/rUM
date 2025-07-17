@@ -83,6 +83,16 @@ write_slides <- function(
   for (i in filenames) {
     # Validate filenames: part 1
     if (is.null(i)) stop('Invalid filename. Please input a value.')
+    if (str_detect(i, "/")) {
+      stop(
+        'Invalid filename. You included a forward slash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
+      )
+    }
+    if (str_detect(i, "\\\\")) {
+      stop(
+        'Invalid filename. You included a backslash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
+      )
+    }
     if (!str_detect(i, '^[a-zA-Z0-9_-]+$')) {
       stop(
         'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
@@ -278,7 +288,7 @@ write_slides <- function(
   going_to_inst <- str_detect(new_folder, 'inst')
 
   if (length(has_description_file) > 0 && !going_to_inst) {
-    warning('rUM has created your slide deck.\nHowever, we have detected that you are currently in a package environment. If your project does not have an "inst" directory/folder, make one. Move your slide\'s directory to the "inst" directory to pass CRAN checks.')
+    warning('rUM has created your slide deck.\nHowever, we have detected that you are currently in a package environment. If your project does not have an "inst" directory/folder, make one. Move your slide\'s directory to the "inst" directory for find_slides() and show_slides() to work and to pass CRAN checks.')
   }
 
   # Open the first slide file template upon successful copy

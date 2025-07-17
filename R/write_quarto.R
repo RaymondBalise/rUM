@@ -31,6 +31,16 @@ write_quarto <- function(filename = NULL, path = here::here()) {
 
   # Validate filename: part 2
   if (!is.character(filename)) stop('Invalid filename: must be character.')
+  if (str_detect(filename, "/")) {
+    stop(
+      'Invalid filename. You included a forward slash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
+    )
+  }
+  if (str_detect(filename, "\\\\")) {
+    stop(
+      'Invalid filename. You included a backslash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
+    )
+  }
   if (!str_detect(filename, '^[a-zA-Z0-9_-]+$')) {
     stop(
       'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
