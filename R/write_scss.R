@@ -49,6 +49,23 @@ write_scss <- function(name = "custom", path = here::here(), add_to_yaml = FALSE
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
   
+  if (!is.character(name)) stop('Invalid filename: must be character.')
+  if (str_detect(name, "/")) {
+    stop(
+      'Invalid filename. You included a forward slash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
+    )
+  }
+  if (str_detect(name, "\\\\")) {
+    stop(
+      'Invalid filename. You included a backslash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
+    )
+  }
+  if (!str_detect(name, '^[a-zA-Z0-9_-]+$')) {
+    stop(
+      'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
+    )
+  }
+  
   # Define the target file path
   the_scss_file <- file.path(path, paste0(name, ".scss"))
 
