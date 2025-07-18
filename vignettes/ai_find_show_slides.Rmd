@@ -20,7 +20,7 @@ With `write_slides()` you can save a deck into a package. To learn about that fu
 
 ## Getting Started
 
-To see if a package has slides use `rUM::find_slides()`. Note that our functions `find_slides()` and `show_slides()` are designed to work with slides made with `rUM::write_slides()`. These functions should work with other Quarto slide decks built using Reveal.js. [Open an issue](https://github.com/RaymondBalise/rUM/issues) if you run into problems. If you want to know if the `rUM` package has slides, you would check with:
+To see if a package has slides use `rUM::find_slides()`. Note that our functions `find_slides()` and `show_slides()` are designed to work with slides made with `rUM::write_slides()`. These functions should work with other Quarto slide decks built using reveal.js. [Open an issue](https://github.com/RaymondBalise/rUM/issues) if you run into problems. If you want to know if the `rUM` package has slides, you would check with:
 
 `find_slides("rUM")`
  
@@ -32,6 +32,7 @@ rUM::find_slides("rUM")
 
 To see the slide deck use `rUM::show_slides()`. For example, to see the slide deck called **rUM_the_package** from inside the `rUM` package you would type:
 
+`rUM::show_slides(package = "rUM", deck = "rUM_the_package")` or  
 `rUM::show_slides("rUM", "rUM_the_package")`
 
 You can also pipe from `rUM::find_slides()` to `rUM::show_slides()` like this and it will ask you to choose which slide deck:

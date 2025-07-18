@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-If you would like to produce a slide deck, and optionally include the slides in an R package, `rUM` can help you.  The `write_slides()` function will give you a folder that contains a slide template, which will render a Quarto (Reveal.js) slide deck, along with a couple configuration files.  If you have used R Markdown or Quarto to write papers, writing slides will be simple for you.  The `write_slides()` function takes care of the configuration of the title slide and sets the details you need in a YAML header. You can add slides using the syntax you already know - a line that starts with `#` will make a "section heading" slide and `##` makes a slide with a title at the top of the page.  The rest is the same old R Markdown and Quarto magic you already know augmented to give you control of things like slide transitions and animations.  To learn how to make beautiful slides take a look [here](https://quarto.org/docs/presentations/revealjs/). 
+If you would like to produce a slide deck, and optionally include the slides in an R package, `rUM` can help you.  The `write_slides()` function will give you a folder that contains a slide template, which will render a Quarto (reveal.js) slide deck, along with a couple configuration files.  If you have used R Markdown or Quarto to write papers, writing slides will be simple for you.  The `write_slides()` function takes care of the configuration of the title slide and sets the details you need in a YAML header. You can add slides using the syntax you already know - a line that starts with `#` will make a "section heading" slide and `##` makes a slide with a title at the top of the page.  The rest is the same old R Markdown and Quarto magic you already know augmented to give you control of things like slide transitions and animations.  To learn how to make beautiful slides take a look [here](https://quarto.org/docs/presentations/revealjs/). 
 
 The `write_slides()` function also provides an example of a complex template, the slide deck for the R Medicine 2025 conference, which features details like a image on the title page, custom coloring, details on where viewers can find your slides, and custom logos. To make a fancy slide deck, all you need to do is swap out a few image files and specify your content.
 
@@ -32,14 +32,18 @@ You will get a folder called **slides** that contains three files.
 
 1. A revealjs quarto slide deck (here named **slide_demo.qmd**).
 2. A theme file, named **rstudio_default-light.theme**, that shows code chunks with the colors of RStudio
-3. A Sassy Cascading Style Sheet file, named slides.csss, that lets you set coloring and font options for your slide deck.
+3. A Sassy Cascading Style Sheet file, named slides.scss, that lets you set coloring and font options for your slide deck.
 
 ### The R Medicine 2025 Template
 
 When you use the `template = "rmed2025"` argument to `write_slides()` you get a folder called **img** in the slides folder.  For example, you could type:
 
 ```
-rUM::write_slides(filenames = "slide_demo", path = "~/Desktop/", template = "rmed2025")
+rUM::write_slides(
+  filenames = "slide_demo", 
+  path = "~/Desktop/", 
+  template = "rmed2025"
+)
 ```
 
 It contains a html file you don't want to touch and a few image files that you will replace with your own files.
@@ -71,5 +75,5 @@ If you would like to add a slide deck to project that will build into an R packa
 rUM::write_slides("final_results", path = "./inst")
 ```
 
-People will be able to access your slides using the `find_slides` and `show_slides()` functions. Take a look at the [Find and Show Slides in a Package](ai_find_show_slides.html) vignette to learn about those functions.
+People will be able to access your slides using the `find_slides()` and `show_slides()` functions. Take a look at the [Find and Show Slides in a Package](ai_find_show_slides.html) vignette to learn about those functions.
 
