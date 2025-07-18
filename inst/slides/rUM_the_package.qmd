@@ -17,7 +17,7 @@ format:
     slide-number: c
     show-slide-number: all
     highlight-style: rstudio_default-light.theme
-embed-resources: true
+embed-resources: true   # true = a single file, false = multiple files
 knitr:
   opts_chunk:      ########## set global options ############
     collapse: true # keep code from blocks together (if shown)
