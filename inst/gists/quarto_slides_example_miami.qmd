@@ -19,7 +19,7 @@ format:
       data-background: "linear-gradient(to right, white 25%, #F47321 25%)"
     pdf-max-pages-per-slide: 1
     pdf-separate-fragments: true
-embed-resources: true
+embed-resources: true   # true = a single file, false = multiple files
 knitr:
   opts_chunk:      ########## set global options ############
     collapse: true # keep code from blocks together (if shown)

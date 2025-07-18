@@ -4,7 +4,7 @@ author: "your_name_goes_here"
 date: last-modified
 format:
   html:
-    embed-resources: true
+    embed-resources: true   # true = a single file, false = multiple files
     theme:
       - default
       - custom.scss
@@ -20,7 +20,7 @@ knitr:
     fig-width: 6.5   # figure width
     fig-height: 4.0  # figure height
     R.options:    
-      digits: 3    # round to three digits
+      digits: 3      # round to three digits
 editor: source
 bibliography: [references.bib, packages.bib]
 csl: the-new-england-journal-of-medicine.csl

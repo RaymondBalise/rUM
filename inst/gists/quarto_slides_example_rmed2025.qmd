@@ -27,7 +27,7 @@ format:
 include-in-header:
   text: |
     <link rel="shortcut icon" href="img/rmed.ico"/>
-embed-resources: true
+embed-resources: true   # true = a single file, false = multiple files
 knitr:
   opts_chunk:      ########## set global options ############
     collapse: true # keep code from blocks together (if shown)
