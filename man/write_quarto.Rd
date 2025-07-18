@@ -4,7 +4,7 @@
 \alias{write_quarto}
 \title{Create a New Quarto Document}
 \usage{
-write_quarto(filename = NULL, path = here::here())
+write_quarto(filename = NULL, path = here())
 }
 \arguments{
 \item{filename}{Character string. The name of the file without the '.qmd' extension.

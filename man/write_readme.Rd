@@ -4,7 +4,7 @@
 \alias{write_readme}
 \title{Create a project README file}
 \usage{
-write_readme(path = here::here())
+write_readme(path = here())
 }
 \arguments{
 \item{path}{The destination directory for the README file. Defaults to \code{

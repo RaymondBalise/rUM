@@ -4,7 +4,7 @@
 \alias{write_notes}
 \title{Create a project progress note}
 \usage{
-write_notes(path = here::here())
+write_notes(path = here())
 }
 \arguments{
 \item{path}{The destination directory for the progress notes file. Defaults to \code{

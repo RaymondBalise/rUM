@@ -6,7 +6,7 @@
 \usage{
 write_slides(
   filenames,
-  path = here::here(),
+  path = here(),
   new_folder = "slides",
   example = FALSE,
   template = "none",
@@ -42,7 +42,7 @@ layouts and formatting (default: "none")
 \item optional: \code{"rmed2025"} for a R/Med 2025 theme.
 }}
 
-\item{format}{Character string. Slide format to use. Currently supports 'revealjs',
+\item{format}{Character string. Slide format to use. Currently supports 'reveal.js',
 with planned support for PowerPoint and Beamer in future releases.}
 }
 \value{
@@ -50,7 +50,7 @@ Invisibly returns NULL. The created .qmd file is automatically opened
 in the RStudio editor upon successful creation.
 }
 \description{
-Creates a pre-formatted .qmd file for presentation slides using Reveal.js
+Creates a pre-formatted .qmd file for presentation slides using reveal.js
 along with necessary supporting files (SCSS styling and RStudio theme). The
 generated template includes optimized YAML configuration and slide structure
 to quickly start building academic & professional presentations. For more
