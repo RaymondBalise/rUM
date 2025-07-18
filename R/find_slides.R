@@ -6,7 +6,12 @@
 #' information look in the 
 #' [Creating Slides with write_slides()](../doc/ah_write_slides.html) vignette.
 #' 
-#' @param package Character. Provide the package containing one or more slide decks. 
+#' @param package Character. Provide the package containing one or more slide decks.
+#' 
+#' @importFrom dplyr filter mutate pull rowwise tibble
+#' @importFrom fs path_ext_remove
+#' @importFrom glue glue
+#' @importFrom stringr str_detect
 #' 
 #' @return A list of class "slide_finder" containing the name of the package and the
 #' name of the slides.
@@ -24,10 +29,10 @@ find_slides <- function(package = NULL) {
   if (!is.character(package)) stop("Argument 'package' must be a character.")
   
   # Returns the path to the package slide deck
-  folder_path <- glue::glue("{find.package(package)}/slides")
+  folder_path <- glue("{find.package(package)}/slides")
 
   # Keep this for testing within this package only
-  # folder_path <- glue::glue("{find.package(package)}/inst/slides")
+  # folder_path <- glue("{find.package(package)}/inst/slides")
 
   # Get a list of all file paths
   file_paths <- list.files(
@@ -54,18 +59,18 @@ find_slides <- function(package = NULL) {
     rowwise() |> 
     mutate(
       content = readLines(.data$filepath, n = 30) |> paste(collapse = "\n"), 
-      is_slide = str_detect(.data$content, "(revealjs|beamer|pptx)")
+      is_slide = str_detect(.data$content, "revealjs")
     ) |> 
-    dplyr::filter(.data$is_slide) |> 
-    dplyr::pull(.data$filepath) |> 
+    filter(.data$is_slide) |> 
+    pull(.data$filepath) |> 
     basename() |> 
-    fs::path_ext_remove()
+    path_ext_remove()
 
   # Only show message if called interactively at top level (not in a pipe/assignment)
   show_message <- interactive() && sys.nframe() == 1
   if (show_message) {
     message(
-      'Available slides in package "', package, '":\n', 
+      'Available reveal.js slides in package "', package, '":\n', 
       paste('  -', result, collapse = '\n')
     )
   }

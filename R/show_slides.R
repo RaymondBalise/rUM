@@ -9,6 +9,11 @@
 #' @param deck Character. The name of the slide deck to render without ".qmd".
 #' @param ... Optional arguments passed to \code{quarto::quarto_preview()}.
 #' 
+#' @importFrom fs path_ext_remove
+#' @importFrom glue glue
+#' @importFrom quarto quarto_preview
+#' @importFrom utils menu
+#' 
 #' @note Uses \code{quarto::quarto_preview()} to display the slide deck in the 
 #' Viewer pane or browser.
 #' 
@@ -64,15 +69,15 @@ show_slides <- function(package = NULL, deck = NULL, ...) {
   }
 
   # Validate we have a deck at this point
-  if (is.null(deck)) stop('No slide deck specified or found.')
+  if (is.null(deck)) stop('No reveal.js Quarto slide deck specified or found.')
     
   # Remove any file extension if added by user
-  deck <- fs::path_ext_remove(deck)
+  deck <- path_ext_remove(deck)
   
   # Returns the path to the package slide deck & appends the deck argument with extension
-  file_path <- glue::glue("{find.package(package)}/slides/{deck}.qmd")
+  file_path <- glue("{find.package(package)}/slides/{deck}.qmd")
 
-  message('Rendering your slideshow...')
-  quarto::quarto_preview(file_path, ...)
+  message('Rendering your reveal.js Quarto slideshow...')
+  quarto_preview(file_path, ...)
 
   }

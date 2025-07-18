@@ -26,6 +26,12 @@
 #' here::here()}.
 #' @param add_to_yaml Boolean. Add the new SCSS filename to YAML structure.
 #' 
+#' @importFrom glue glue
+#' @importFrom here here
+#' @importFrom readr read_file write_file
+#' @importFrom stringr str_detect str_replace
+#' @importFrom usethis ui_done ui_info ui_yeah
+#' 
 #' @return A \code{.scss} file to customize Quarto styling. If \code{name} is not
 #' "custom", the function will also attempt to update the Quarto document's YAML to
 #' include the new SCSS file while preserving any existing SCSS configurations.
@@ -39,7 +45,7 @@
 #' # Add another SCSS file and update YAML in the temporary directory
 #' write_scss(name = "special_theme", path = tmp)
 
-write_scss <- function(name = "custom", path = here::here(), add_to_yaml = FALSE) {
+write_scss <- function(name = "custom", path = here(), add_to_yaml = FALSE) {
   
   # Validate path
   if (is.null(path) || !dir.exists(path)) {
@@ -95,7 +101,7 @@ write_scss <- function(name = "custom", path = here::here(), add_to_yaml = FALSE
 
 # Helper functions
 .generate_scss_template <- function() {
-  glue::glue(
+  glue(
     '/*-- scss:defaults --*/
     // Colors
     // $primary: #2c365e;
@@ -125,35 +131,35 @@ write_scss <- function(name = "custom", path = here::here(), add_to_yaml = FALSE
     return(invisible(NULL))
   }
   
-  qmd_content <- readr::read_file("analysis.qmd")
-  original_yaml <- glue::glue(
+  qmd_content <- read_file("analysis.qmd")
+  original_yaml <- glue(
 "
 format:
   html:
-    embed-resources: true
+    embed-resources: true   # true = a single file, false = multiple files
     theme:
       - default
       - custom.scss"
   )
 
-  new_yaml <- glue::glue(
+  new_yaml <- glue(
 "
 format:
   html:
-    embed-resources: true
+    embed-resources: true   # true = a single file, false = multiple files
     theme:
       - default
       - custom.scss
       - {name}.scss"
   )
   
-  # Attempt to update the YAML or show user how to do it manually
+  # Attempt to update the YAML in the qmd file or show user how to do it manually
   if (str_detect(qmd_content, original_yaml)) {
-    updated_content <- stringr::str_replace(qmd_content, original_yaml, new_yaml)
-    readr::write_file(updated_content, file = "analysis.qmd")
+    updated_content <- str_replace(qmd_content, original_yaml, new_yaml)
+    write_file(updated_content, file = "analysis.qmd")
     ui_done("The YAML in analysis.qmd has been updated.")
   } else {
-    ui_info(glue::glue(
+    ui_info(glue(
       "\nBe sure to update your listed SCSS files in the YAML manually. Example:\n",
       new_yaml
     ))
@@ -161,7 +167,7 @@ format:
 }
 
 .display_reference_links <- function() {
-  links <- glue::glue(
+  links <- glue(
     "For more SCSS styling options, visit:\n",
     "- https://quarto.org/docs/output-formats/html-themes.html#customizing-themes\n",
     "- https://quarto.org/docs/output-formats/html-themes-more.html\n",

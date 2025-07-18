@@ -6,6 +6,11 @@
 #'   Only letters, numbers, hyphens, and underscores are allowed.
 #' @param path Character string. Directory where the file will be created. Defaults to
 #'   the current project's base directory.
+#' 
+#' @importFrom glue glue
+#' @importFrom here here
+#' @importFrom stringr str_detect str_replace_all
+#' @importFrom usethis edit_file
 #'
 #' @return Opens file after creating the Quarto document.
 #'
@@ -16,7 +21,7 @@
 #' }
 #' @export
 #'
-write_quarto <- function(filename = NULL, path = here::here()) {
+write_quarto <- function(filename = NULL, path = here()) {
   # Validate path
   if (!dir.exists(path)) dir.create(path)
   if (is.null(path) || !dir.exists(path)) {
@@ -51,7 +56,7 @@ write_quarto <- function(filename = NULL, path = here::here()) {
   path <- normalizePath(path, mustWork = TRUE)
 
   if (file.access(path, mode = 2) != 0) {
-    stop(glue::glue(
+    stop(glue(
       'You do not have permission to write to the path location: {path}\nTry `rUM::write_quarto(filename = "", path = "")`'
     ))
   }
@@ -61,7 +66,7 @@ write_quarto <- function(filename = NULL, path = here::here()) {
 
   # Check for existing Quarto doc
   if (file.exists(the_quarto_file)) {
-    stop(glue::glue("{filename}.qmd already exists in the specified path."))
+    stop(glue("{filename}.qmd already exists in the specified path."))
   }
 
   # Write the Quarto file based on template
@@ -75,7 +80,7 @@ write_quarto <- function(filename = NULL, path = here::here()) {
 
   # Open the new template upon successful copy
   if (file.exists(the_quarto_file)) {
-    usethis::edit_file(the_quarto_file)
+    edit_file(the_quarto_file)
   } else {
     stop("The file does not exist.")
   }

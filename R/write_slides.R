@@ -1,7 +1,7 @@
 #' Create a Quarto slide deck template
 #'
 #' @description
-#' Creates a pre-formatted .qmd file for presentation slides using Reveal.js 
+#' Creates a pre-formatted .qmd file for presentation slides using reveal.js 
 #' along with necessary supporting files (SCSS styling and RStudio theme). The 
 #' generated template includes optimized YAML configuration and slide structure 
 #' to quickly start building academic & professional presentations. For more 
@@ -35,8 +35,13 @@
 #'   * optional: \code{"miami"} for a University of Miami theme.
 #'   * optional: \code{"rmed2025"} for a R/Med 2025 theme.
 #'
-#' @param format Character string. Slide format to use. Currently supports 'revealjs',
+#' @param format Character string. Slide format to use. Currently supports 'reveal.js',
 #'   with planned support for PowerPoint and Beamer in future releases.
+#' 
+#' @importFrom glue glue
+#' @importFrom here here
+#' @importFrom stringr str_detect str_replace_all
+#' @importFrom usethis edit_file
 #' 
 #' @note Be sure to specify \code{path = "inst"} if you are adding slides to a package.
 #'
@@ -68,7 +73,7 @@
 #' @export
 write_slides <- function(
   filenames,
-  path = here::here(),
+  path = here(),
   new_folder = "slides",
   example = FALSE,
   template = "none",
@@ -123,11 +128,11 @@ write_slides <- function(
   if (new_folder == "none") {
     path <- path
   } else if (new_folder == "slides") {
-    path <- glue::glue("{path}/slides")
+    path <- glue("{path}/slides")
   } else if (new_folder %in% c("slides_", "slide_")) {
-    path <- glue::glue("{path}/slides_{filenames[1]}")
+    path <- glue("{path}/slides_{filenames[1]}")
   } else {
-    path <- glue::glue("{path}/{new_folder}")
+    path <- glue("{path}/{new_folder}")
   }
 
   # Create the slide deck directory:
@@ -137,7 +142,7 @@ write_slides <- function(
   path <- normalizePath(path, mustWork = TRUE)
 
   if (file.access(path, mode = 2) != 0) {
-    stop(glue::glue(
+    stop(glue(
       'You do not have permission to write to the path location: {path}\nTry `rUM::write_quarto(filename = "", path = "")`'
     ))
   }
@@ -150,9 +155,9 @@ write_slides <- function(
   if (template %in% valid_templates) {
     # 1b. Check if using example themed template
     if (example) {
-      slide_path <- glue::glue("gists/quarto_slides_example_{template}.qmd")
+      slide_path <- glue("gists/quarto_slides_example_{template}.qmd")
     } else {
-      slide_path <- glue::glue("gists/quarto_slides_{template}.qmd")
+      slide_path <- glue("gists/quarto_slides_{template}.qmd")
     }
 
     # 2a. Check if template == "none"
@@ -180,7 +185,7 @@ write_slides <- function(
 
     # Check for existing Quarto doc
     if (file.exists(the_quarto_file)) {
-      stop(glue::glue(
+      stop(glue(
         "{the_quarto_file} already exists in the specified path."        
       ))
     }
@@ -200,7 +205,7 @@ write_slides <- function(
         package = "rUM"
       )
       # Create the img directory as referenced in the slide's YAML:
-      img_path <- glue::glue("{path}/img")
+      img_path <- glue("{path}/img")
       if (!dir.exists(img_path)) dir.create(img_path)
       # Add background:
       file.copy(
@@ -257,7 +262,7 @@ write_slides <- function(
     )
   } else {
     # Output when a SCSS file exists, but won't be overwritten
-    message(glue::glue(
+    message(glue(
       "A SCSS file has been found in the slides project location & will not be modified. Please create the slides in a different folder if you'd like to use the SCSS file from the {template} template."
     ))
   }
@@ -294,7 +299,7 @@ write_slides <- function(
   # Open the first slide file template upon successful copy
   the_first_slide_file <- file.path(path, paste0(filenames[1], ".qmd"))
   if (file.exists(the_first_slide_file)) {
-    usethis::edit_file(the_first_slide_file)
+    edit_file(the_first_slide_file)
   } else {
     stop("The file does not exist.")
   }

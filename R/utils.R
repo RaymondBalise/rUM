@@ -7,6 +7,8 @@
 #' 
 #' @param path Character. Path supplied by user for location of new rUM project.
 #' 
+#' @importFrom stringr str_detect
+#' 
 #' @noRd
 .valid_package_name <- function(path) {
   str_detect(path, "^[a-zA-Z][a-zA-Z0-9.]+$") && !str_detect(path, "\\.$")
@@ -24,6 +26,8 @@
 #' document.
 #' @param path Character. Path where to store the document template, either project root
 #' or vignettes folder for package projects.
+#' 
+#' @importFrom usethis ui_done
 #' 
 #' @noRd
 .add_quarto_doc <- function(example, path) {
@@ -53,6 +57,8 @@
 #' 
 #' @inheritParams .add_quarto_doc
 #' 
+#' @importFrom usethis ui_done
+#' 
 #' @noRd
 .add_rmd_doc <- function(example, path) {
   if (example) {
@@ -79,6 +85,8 @@
 #' 
 #' @param path Character. Path to project root directory.
 #' 
+#' @importFrom usethis ui_done
+#' 
 #' @noRd
 .add_gitignore <- function(path) {
   ign_path <- system.file("gists/aggressive_gitignore.md", package = "rUM")
@@ -102,6 +110,8 @@
 #' 
 #' @param path Character. Path to project root directory.
 #' 
+#' @importFrom usethis ui_done
+#' 
 #' @noRd
 .add_notes_to_Rbuildignore <- function(path) {
   cat(
@@ -123,6 +133,8 @@
 #' 
 #' @param path Character. Path where to store the document template, either project root
 #' or vignettes folder for package projects.
+#' 
+#' @importFrom utils download.file
 #' 
 #' @noRd
 .add_citation_files <- function(path) {
@@ -159,23 +171,25 @@
 #' or vignettes folder for package projects.
 #' @param is_quarto_project Logical. Determines Quarto versus RMarkdown project.
 #' 
+#' @importFrom usethis use_package
+#' 
 #' @noRd
 .rUM_build_description <- function(is_quarto_project) {
   # Add quietly to DESCRIPTION:
   suppressMessages({
-    usethis::use_package("here", type = "suggests")
-    usethis::use_package("knitr", type = "suggests")
-    usethis::use_package("rmarkdown", type = "suggests")
-    usethis::use_package("roxygen2", type = "suggests")
+    use_package("here", type = "suggests")
+    use_package("knitr", type = "suggests")
+    use_package("rmarkdown", type = "suggests")
+    use_package("roxygen2", type = "suggests")
     
-    usethis::use_package("conflicted", type = "suggests")
-    usethis::use_package("glue", type = "suggests")
-    usethis::use_package("gtsummary", type = "suggests", min_version = "2.0.3")
-    usethis::use_package("rUM", type = "suggests")
-    usethis::use_package("rio", type = "suggests")
-    usethis::use_package("table1", type = "suggests")
-    usethis::use_package("tidymodels", type = "suggests")
-    usethis::use_package("tidyverse", type = "suggests")
+    use_package("conflicted", type = "suggests")
+    use_package("glue", type = "suggests")
+    use_package("gtsummary", type = "suggests", min_version = "2.0.3")
+    use_package("rUM", type = "suggests")
+    use_package("rio", type = "suggests")
+    use_package("table1", type = "suggests")
+    use_package("tidymodels", type = "suggests")
+    use_package("tidyverse", type = "suggests")
   })
 
   # Add Vignette builder to DESCRIPTION:
@@ -187,7 +201,7 @@
     )
     # Add minimal Quarto version:
     suppressMessages({
-      usethis::use_package("quarto", type = "suggests", min_version = "1.3.12")
+      use_package("quarto", type = "suggests", min_version = "1.3.12")
     })
   } else {  # Rmd project
     cat(
@@ -210,6 +224,9 @@
 #' 
 #' @param is_quarto_project Logical. Determines Quarto versus RMarkdown project.
 #' 
+#' @importFrom readr read_file write_file
+#' @importFrom stringr str_replace str_replace_all
+#' 
 #' @noRd
 .rUM_modify_for_vignette <- function(is_quarto_project) {
   
@@ -221,7 +238,7 @@
 
 
   # Original YAML content to be replaced
-  qmd_pattern <- "format:\n  html:\n    embed-resources: true\n    theme:\n      - default\n      - custom.scss"
+  qmd_pattern <- "format:\n  html:\n    embed-resources: true   # true = a single file, false = multiple files\n    theme:\n      - default\n      - custom.scss"
 
   rmd_pattern <- "output:\n  bookdown::html_document2:\n    number_sections: false\n"
 
@@ -232,11 +249,11 @@
 
   # Apply the OS-conditional change
   if (.Platform$OS.type == 'windows') {
-    qmd_pattern <- stringr::str_replace_all(qmd_pattern, '\n', '\r\n')
-    qmd_replacement <- stringr::str_replace_all(qmd_replacement, '\n', '\r\n')
+    qmd_pattern <- str_replace_all(qmd_pattern, '\n', '\r\n')
+    qmd_replacement <- str_replace_all(qmd_replacement, '\n', '\r\n')
     
-    rmd_pattern <- stringr::str_replace_all(rmd_pattern, '\n', '\r\n')
-    rmd_replacement <- stringr::str_replace_all(rmd_replacement, '\n', '\r\n')
+    rmd_pattern <- str_replace_all(rmd_pattern, '\n', '\r\n')
+    rmd_replacement <- str_replace_all(rmd_replacement, '\n', '\r\n')
   }
   #-----------------------------------------------------------------------------------
 
@@ -245,9 +262,9 @@
   if (is_quarto_project) { # Quarto project
     
     # Replace the YAML pattern with the new structure for Quarto vignette:
-    readr::write_file(
-      x = stringr::str_replace(
-        string = readr::read_file("vignettes/analysis.qmd"),
+    write_file(
+      x = str_replace(
+        string = read_file("vignettes/analysis.qmd"),
         pattern = qmd_pattern,
         replacement = qmd_replacement
       ), 
@@ -257,9 +274,9 @@
   } else { # Rmd project
     
     # Replace the YAML pattern with the new structure for Rmd vignette:
-    readr::write_file(
-      x = stringr::str_replace(
-        string = readr::read_file("vignettes/analysis.Rmd"),
+    write_file(
+      x = str_replace(
+        string = read_file("vignettes/analysis.Rmd"),
         pattern = rmd_pattern,
         replacement = rmd_replacement
         ), 
@@ -287,6 +304,10 @@
 
   .add_notes_to_Rbuildignore(path = path)
 
+  # We need to save the current working directory path & then move to the new project
+  # location in order to add & modify files THERE. Once those tasks are complete, we
+  # will then return to the `current_wd` (where the user is initiating the project or 
+  # package creation).
   # Capture current directory and return to it at the end of this function
   current_wd <- getwd()
   # Move to new project location
@@ -306,7 +327,7 @@
   # Alter document template YAML for vignette builder
   .rUM_modify_for_vignette(is_quarto_project = is_quarto_project)
 
-  # Return to original location where rUM::make_project() was executed
+  # Return to original location where rUM::make_project() was executed. See above comment.
   setwd(current_wd)
 
 }

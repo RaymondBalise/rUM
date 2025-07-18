@@ -20,6 +20,11 @@
 #'   window? Defaults to \code{TRUE}. NOTE: this option exists to prevent 
 #'   RStudio from opening two duplicate versions of the new project when
 #'   this function is executed from RStudio menus. MODIFY WITH CAUTION.
+#' 
+#' @importFrom lifecycle deprecate_warn
+#' @importFrom quarto quarto_version
+#' @importFrom rlang abort
+#' @importFrom usethis create_project
 #'
 #' @details Behind the scenes, this function used by research_project.dcf when
 #' a user selects New project... > New Directory > rUM Research Project Template
@@ -57,7 +62,7 @@ make_project <- function(
 
   # Deprecation warning for version >= 2.2.0
   if (vignette == TRUE) {
-    lifecycle::deprecate_warn(
+    deprecate_warn(
       when = "2.2.0", 
       what = "make_project(vignette)", 
       with = "make_package()"
@@ -112,7 +117,7 @@ make_project <- function(
     dir.create(path, recursive = TRUE, showWarnings = FALSE)
   
     # get version of Quarto on the machine and save it as a version
-    the_version <- quarto::quarto_version()
+    the_version <- quarto_version()
     # Is there a .Rproj in the provided path?
     has_rproj <- length(list.files(path = path, pattern = "\\.Rproj$")) > 0
 
@@ -123,7 +128,7 @@ make_project <- function(
       #   windows when called from RStudio menus via the `research_project.dcf`
       #   file. This is now TRUE by default for interactive calls to this 
       #   function, but set to FALSE via the .dcf file for menu-driven calls.
-      usethis::create_project(
+      create_project(
         path = path, open = openInteractive, rstudio = TRUE
       )
     }
@@ -160,14 +165,14 @@ make_project <- function(
     dir.create(file.path(path, "data"), recursive = TRUE, showWarnings = FALSE)
     
     # 2. Create custom.scss
-    if (is_quarto_project) rUM::write_scss(name = "custom", path = path) 
+    if (is_quarto_project) write_scss(name = "custom", path = path) 
 
     # 3. Add enhanced .gitignore from inst/gists
     .add_gitignore(path = path)
 
     # 4. Add project documentation files
-    rUM::write_readme(path = path)
-    rUM::write_notes(path = path)
+    write_readme(path = path)
+    write_notes(path = path)
 
     # 5. Add .bib & .csl files
     .add_citation_files(path = path)

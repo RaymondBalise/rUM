@@ -6,6 +6,10 @@
 #'
 #' @param path The destination directory for the README file. Defaults to \code{
 #' here::here()}.
+#' 
+#' @importFrom here here
+#' @importFrom usethis ui_done ui_nope
+#' 
 #' @return Creates a comprehensive README template for project documentation.
 #'
 #' @details
@@ -26,7 +30,7 @@
 #' tmp <- tempdir()
 #' write_readme(path = tmp)
 
-write_readme <- function(path = here::here()) {
+write_readme <- function(path = here()) {
   # Validate path
   if (is.null(path) || !dir.exists(path)) {
     stop("Invalid `path`. Please enter a valid project directory.")

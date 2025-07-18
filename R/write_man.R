@@ -14,6 +14,8 @@
 #' 
 #' @param the_dataset Dataset object (unquoted) or dataset as character (quoted)
 #' 
+#' @importFrom labelled var_label
+#' 
 #' @note You will need to import the `roxygen2` package and add \code{Roxygen: list(markdown = TRUE)}
 #' to your DESCRIPTION file. If you made a project using rUM this happens automatically.
 #' 
@@ -98,7 +100,7 @@ write_man <- function(the_dataset) {
     format(n_cols, big.mark = ",", scientific = FALSE, trim = TRUE)
   
   # Choose the appropriate data structure label
-  data_structure <- if (is_tibble) "tibble" else "data frame"
+  data_structure <- if (is_tibble) "tibble" else "data.frame"
   
   # Create the file and open a connection to it
   file_conn <- file(r_file_path, "w")
@@ -116,9 +118,9 @@ write_man <- function(the_dataset) {
     
     cat(paste0("#'   \\item{", var_name, "}{\n"), file = file_conn)
     
-    description <- if(!is.null(labelled::var_label(the_dataset[[var_name]]))){
+    description <- if(!is.null(var_label(the_dataset[[var_name]]))){
       the_label <-
-        labelled::var_label(the_dataset[[var_name]]) |>
+        var_label(the_dataset[[var_name]]) |>
         .remove_braces() |>
         .replace_brackets_with_backticks()
       
@@ -160,6 +162,13 @@ write_man <- function(the_dataset) {
       cat("#'\n", file = file_conn)
       first_level <- levels(the_dataset[[var_name]])[1]
       all_levels <- paste(levels(the_dataset[[var_name]]), collapse = ", ")
+
+      if (length(all_levels) > 100) {
+        warning(paste0(
+          "Variable '", var_name, 
+          "' has more than 100 levels. Your dataset documentation may be huge! Did you mean to do this?"
+        ))
+      }
       
       cat(paste0("#' | *Type:*        | factor (First/Reference level = `", first_level, "`) |\n"), file = file_conn)
       cat("#' | -------------- | ---------------------------------------------------- |\n", file = file_conn)

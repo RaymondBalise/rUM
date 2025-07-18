@@ -6,6 +6,10 @@
 #'
 #' @param path The destination directory for the progress notes file. Defaults to \code{
 #' here::here()}.
+#' 
+#' @importFrom here here
+#' @importFrom usethis ui_done
+#' 
 #' @return Creates a chronological project progress notes tracker
 #'
 #' @details
@@ -19,7 +23,7 @@
 #' tmp <- tempdir()
 #' write_notes(path = tmp)
  
-write_notes <- function(path = here::here()) {
+write_notes <- function(path = here()) {
   
   # Validate path
   if (is.null(path) || !dir.exists(path)) {

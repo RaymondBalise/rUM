@@ -19,6 +19,11 @@
 #'   window? Defaults to \code{TRUE}. NOTE: this option exists to prevent 
 #'   RStudio from opening two duplicate versions of the new project when
 #'   this function is executed from RStudio menus. MODIFY WITH CAUTION.
+#' 
+#' @importFrom quarto quarto_version
+#' @importFrom rlang abort
+#' @importFrom stringr word
+#' @importFrom usethis create_package
 #'
 #' @details Behind the scenes, this function used by research_project.dcf when
 #' a user selects New project... > New Directory > rUM Research Project Template
@@ -86,12 +91,12 @@ make_package <- function(
   #    directory if the package name is invalid.
   #    code from: https://github.com/r-lib/usethis/blob/main/R/description.R
   #    The name will be checked only for packages; it's "valid" otherwise
-  dir_name_char <- stringr::word(path, -1, sep = "[\\|\\/]")
+  dir_name_char <- word(path, -1, sep = "[\\|\\/]")
   valid_name_lgl <- .valid_package_name(path = dir_name_char)
   
   
   # 4) Get version of Quarto on the machine and save it as a version
-  the_version <- quarto::quarto_version()
+  the_version <- quarto_version()
   
   # 5) Is there a .Rproj in the provided path?
   has_rproj <- length(list.files(path = path, pattern = "\\.Rproj$")) > 0
@@ -124,7 +129,7 @@ make_package <- function(
   }
   
   if (!has_rproj | overwrite) {
-    usethis::create_package(path = path, open = openInteractive, rstudio = TRUE)
+    create_package(path = path, open = openInteractive, rstudio = TRUE)
   }
 
   # Now that the project directory has been successfully created, normalize the
@@ -173,8 +178,8 @@ make_package <- function(
   .add_gitignore(path = path)
 
   # 3) Add project documentation files
-  rUM::write_readme(path = path)
-  rUM::write_notes(path = path)
+  write_readme(path = path)
+  write_notes(path = path)
 
   # 4) Add .bib & .csl files
   .add_citation_files(path = updated_path)
