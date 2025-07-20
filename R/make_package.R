@@ -71,7 +71,7 @@ make_package <- function(
   ######################################################################################
 
   # Input validation:--------------------------------------------------------------
-  is_quarto_project <- .arg_validation(path, type, example, overwrite, openInteractive)
+  is_quarto_project <- .arg_validation(type, example, overwrite, openInteractive)
 
   # 1) Check directory name; we don't want to create an empty
   #    directory if the package name is invalid.

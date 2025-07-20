@@ -80,9 +80,7 @@ write_slides <- function(
   format = "revealjs"
 ) {
   # Validate path
-  if (is.null(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please enter a valid project directory.")
-  }
+  .validate_path(path)
 
   # Validate filenames:
   for (i in filenames) {

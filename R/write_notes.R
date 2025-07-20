@@ -26,9 +26,7 @@
 write_notes <- function(path = here()) {
   
   # Validate path
-  if (is.null(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please enter a valid project directory.")
-  }
+  .validate_path(path)
   
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)

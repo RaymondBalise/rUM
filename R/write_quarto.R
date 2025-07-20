@@ -24,9 +24,7 @@
 write_quarto <- function(filename = NULL, path = here()) {
   # Validate path
   if (!dir.exists(path)) dir.create(path)
-  if (is.null(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please enter a valid project directory.")
-  }
+  .validate_path(path)
 
   # Validate filename: part 1
   if (is.null(filename)) stop('Invalid filename. Please input a value.')

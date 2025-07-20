@@ -4,8 +4,6 @@
 #' @description
 #' Argument validation function for rUM functions
 #' 
-#' @param path Path automatically set by research_project.dcf (see
-#'    \code{./rstudio/templates/project/})
 #' @param type Choose between "Quarto (analysis.qmd)" or
 #'    "R Markdown (analysis.Rmd)"
 #' @param example Will the analysis file include an example table/figure?
@@ -19,7 +17,7 @@
 #' @return Logical. Evaluation of `is_quarto_project`.
 #' 
 #' @noRd
-.arg_validation <- function(path, type, example, overwrite, openInteractive) {
+.arg_validation <- function(type, example, overwrite, openInteractive) {
 
   # 1) Type matches available options
   type <- match.arg(type)
@@ -37,6 +35,24 @@
   }
 
   return(is_quarto_project)
+}
+
+
+#----------------------------------------------------------------------------------------
+#' Path validation
+#' 
+#' @description
+#' Validate path to output file(s) specified by user
+#' 
+#' @param path Character string.
+#' 
+#' @return A `stop` message if errors exist.
+#' 
+#' @noRd
+.validate_path <- function(path) {
+  if (is.null(path) || !dir.exists(path)) {
+    stop("Invalid `path`. Please enter a valid project directory.")
+  }
 }
 
 

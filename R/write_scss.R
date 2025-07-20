@@ -48,9 +48,7 @@
 write_scss <- function(name = "custom", path = here(), add_to_yaml = FALSE) {
   
   # Validate path
-  if (is.null(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please enter a valid project directory.")
-  }
+  .validate_path(path)
   
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
