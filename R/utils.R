@@ -57,6 +57,38 @@
 
 
 #----------------------------------------------------------------------------------------
+#' Filename validation
+#' 
+#' @description
+#' Validate path to output file(s) specified by user
+#' 
+#' @param name Character string.
+#' 
+#' @return A `stop` message if errors exist.
+#' 
+#' @noRd
+.validate_filename <- function(name) {
+  if (!is.character(name)) stop('Invalid filename: must be character.')
+  
+  if (str_detect(name, "/")) {
+    stop(
+      'Invalid filename. You included a forward slash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
+    )
+  }
+  if (str_detect(name, "\\\\")) {
+    stop(
+      'Invalid filename. You included a backslash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
+    )
+  }
+  if (!str_detect(name, '^[a-zA-Z0-9_-]+$')) {
+    stop(
+      'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
+    )
+  }
+}
+
+
+#----------------------------------------------------------------------------------------
 #' Add Quarto document
 #' @description
 #' This helper function adds the Quarto document to the supplied path. It is added to the
