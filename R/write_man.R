@@ -199,3 +199,31 @@ write_man <- function(the_dataset) {
   
   message("Documentation file created at ", r_file_path)
 }
+
+
+#----------------------------------------------------------------------------------------
+# Helper functions for write_man()
+#----------------------------------------------------------------------------------------
+
+#' Helper for write_man (1)
+#' @description 
+#' Function needed to clean labels for manual variable descriptions. Remove
+#' {text} typically used for {other}
+#' 
+#' @param text Character. The text to parse.
+#' @noRd
+.remove_braces <- function(text) {
+  gsub("\\{[^\\}]*\\}", "", text)
+}
+
+#' Helper for write_man (2)
+#' @description 
+#' Function needed to clean labels for manual variable descriptions. Used
+#' to replace square brackets (\code{[]}) with backticks \code{``} for the info piped
+#' into variable labels.
+#' 
+#' @param text Character. The text to parse.
+#' @noRd
+.replace_brackets_with_backticks <- function(text) {
+  gsub("\\[(.*?)\\]", "`\\1`", text)
+}
