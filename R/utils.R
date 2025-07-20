@@ -1,5 +1,46 @@
 # Collection of rUM helper functions: ---------------------------------------------------
 
+#' Argument validation
+#' @description
+#' Argument validation function for rUM functions
+#' 
+#' @param path Path automatically set by research_project.dcf (see
+#'    \code{./rstudio/templates/project/})
+#' @param type Choose between "Quarto (analysis.qmd)" or
+#'    "R Markdown (analysis.Rmd)"
+#' @param example Will the analysis file include an example table/figure?
+#' @param overwrite Will an existing RStudio project be overwritten?  This is 
+#' needed for for Posit.Cloud.  You will be prompted to confirm this option.
+#' @param openInteractive Should this new project be opened in a new RStudio
+#'   window? Defaults to \code{TRUE}. NOTE: this option exists to prevent 
+#'   RStudio from opening two duplicate versions of the new project when
+#'   this function is executed from RStudio menus. MODIFY WITH CAUTION.
+#' 
+#' @return Logical. Evaluation of `is_quarto_project`.
+#' 
+#' @noRd
+.arg_validation <- function(path, type, example, overwrite, openInteractive) {
+
+  # 1) Type matches available options
+  type <- match.arg(type)
+  is_quarto_project <- type == "Quarto (analysis.qmd)"
+  is_markdown_project <- type == "R Markdown (analysis.Rmd)"
+  if (!is_quarto_project && !is_markdown_project) {
+    abort("The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'")
+  }
+
+  # 2) Check logical inputs
+  if (!is.logical(example))   stop('Parameter `example` must be TRUE or FALSE')
+  if (!is.logical(overwrite)) stop('Parameter `overwrite` must be TRUE or FALSE')
+  if (!is.logical(openInteractive)) {
+    stop('Parameter `openInteractive` must be TRUE or FALSE')
+  }
+
+  return(is_quarto_project)
+}
+
+
+
 #' Check for valid project name
 #' @description
 #' This helper function parses the provided rUM::make_project or rUM::make_package path

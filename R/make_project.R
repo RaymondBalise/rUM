@@ -60,47 +60,20 @@ make_project <- function(
     openInteractive = TRUE
 ) {
 
-  # Deprecation warning for version >= 2.2.0
+  # Input validation:--------------------------------------------------------------
+  if (!is.logical(vignette))  stop('Parameter `vignette` must be TRUE or FALSE')
+  is_quarto_project <- .arg_validation(path, type, example, overwrite, openInteractive)
+
+  # If the user chooses make_project() to create a R package, warn & continue:
   if (vignette == TRUE) {
+    # Deprecation warning for version >= 2.2.0
     deprecate_warn(
       when = "2.2.0", 
       what = "make_project(vignette)", 
       with = "make_package()"
     )
-  }
-
-  # Input validation:--------------------------------------------------------------
-  
-  # 1) Type matches available options
-  type <- match.arg(type)
-  is_quarto_project <- type == "Quarto (analysis.qmd)"
-  is_markdown_project <- type == "R Markdown (analysis.Rmd)"
-  if (!is_quarto_project && !is_markdown_project) {
-    abort("The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'")
-  }
-
-  # 2) Check logical inputs
-  if (!is.logical(example))   stop('Parameter `example` must be TRUE or FALSE')
-  # if (!is.logical(vignette))  stop('Parameter `vignette` must be TRUE or FALSE')
-  if (!is.logical(overwrite)) stop('Parameter `overwrite` must be TRUE or FALSE')
-  if (!is.logical(openInteractive)) {
-    stop('Parameter `openInteractive` must be TRUE or FALSE')
-  }
-
-  # 3) Check directory name (for packages only); we don't want to create an empty
-  #    directory if the package name is invalid.
-  #    code from: https://github.com/r-lib/usethis/blob/main/R/description.R
-  #    The name will be checked only for packages; it's "valid" otherwise
-  # if (vignette) {
-  #   dir_name_char <- stringr::word(path, -1, sep = "[\\|\\/]")
-  #   valid_name_lgl <- .valid_package_name(path = dir_name_char)
-  # } else {
-  #   valid_name_lgl <- TRUE
-  # }
-  # if (!vignette && valid_name_lgl) {
-  #   dir.create(path, recursive = TRUE, showWarnings = FALSE)
-  # }
-  if (vignette) {
+    # Using make_package() here to continue initializing their package project. This
+    # section will be deprecated in the future.
     make_package(
       path = path,
       type = type,

@@ -71,23 +71,9 @@ make_package <- function(
   ######################################################################################
 
   # Input validation:--------------------------------------------------------------
-  
-  # 1) Type matches available options
-  type <- match.arg(type)
-  is_quarto_project <- type == "Quarto (analysis.qmd)"
-  is_markdown_project <- type == "R Markdown (analysis.Rmd)"
-  if (!is_quarto_project && !is_markdown_project) {
-    abort("The type must be 'R Markdown (analysis.Rmd)' or 'Quarto (analysis.qmd)'")
-  }
+  is_quarto_project <- .arg_validation(path, type, example, overwrite, openInteractive)
 
-  # 2) Check logical inputs
-  if (!is.logical(example))   stop('Parameter `example` must be TRUE or FALSE')
-  if (!is.logical(overwrite)) stop('Parameter `overwrite` must be TRUE or FALSE')
-  if (!is.logical(openInteractive)) {
-    stop('Parameter `openInteractive` must be TRUE or FALSE')
-  }
-
-  # 3) Check directory name; we don't want to create an empty
+  # 1) Check directory name; we don't want to create an empty
   #    directory if the package name is invalid.
   #    code from: https://github.com/r-lib/usethis/blob/main/R/description.R
   #    The name will be checked only for packages; it's "valid" otherwise
@@ -95,13 +81,13 @@ make_package <- function(
   valid_name_lgl <- .valid_package_name(path = dir_name_char)
   
   
-  # 4) Get version of Quarto on the machine and save it as a version
+  # 2) Get version of Quarto on the machine and save it as a version
   the_version <- quarto_version()
   
-  # 5) Is there a .Rproj in the provided path?
+  # 3) Is there a .Rproj in the provided path?
   has_rproj <- length(list.files(path = path, pattern = "\\.Rproj$")) > 0
 
-  # 6) Make paper project with package infrastructure
+  # 4) Make paper project with package infrastructure
   #    Quarto version 1.4.549 was the first to allow the building of vignettes
   if (is_quarto_project & the_version < "1.4.549"){
     message(
@@ -114,7 +100,7 @@ make_package <- function(
     return(invisible(NULL))
   }
 
-  # 7) Validation checks before creating directories & files
+  # 5) Validation checks before creating directories & files
   if (has_rproj & !overwrite){
     message(
       paste0(
