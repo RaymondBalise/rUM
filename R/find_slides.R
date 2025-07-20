@@ -48,10 +48,11 @@ find_slides <- function(package = NULL) {
   # Only proceed if files are found, but must be same structure as if having an
   # available slide
   if (nrow(the_slides) == 0) {
-    return(structure(
-      list(package = package, slides = character(0)),
-      class = 'slide_finder'
-    ))
+    # return(structure(
+    #   list(package = package, slides = character(0)),
+    #   class = 'slide_finder'
+    # ))
+    stop(paste('No slides found for package:', package))
   }
   
   # Process each file
