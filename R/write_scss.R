@@ -82,7 +82,19 @@ write_scss <- function(name = "custom", path = here(), add_to_yaml = FALSE) {
 
 }
 
-# Helper functions
+
+#----------------------------------------------------------------------------------------
+# Helper functions for write_scss()
+#----------------------------------------------------------------------------------------
+#' Generate the SCSS template
+#' 
+#' @description
+#' Creating the SCSS template here. Another future consideration is a package or
+#' GitHub downloaded gist.
+#' 
+#' @return Message object used to write into the SCSS file.
+#' 
+#' @noRd
 .generate_scss_template <- function() {
   glue(
     '/*-- scss:defaults --*/
@@ -108,6 +120,19 @@ write_scss <- function(name = "custom", path = here(), add_to_yaml = FALSE) {
   )
 }
 
+
+#----------------------------------------------------------------------------------------
+#' Update the Quarto document YAML
+#' 
+#' @description
+#' Update the Quarto document YAML with the newly-created SCSS template. Using the
+#' `glue` package, this will add the new SCSS file under the `custom.scss` file in
+#' the Quarto document YAML. If the YAML cannot be updated via this method, a message
+#' is returned to the user & the main `write_scss` function continues.
+#' 
+#' @return Content object
+#' 
+#' @noRd
 .update_yaml <- function(name) {
   if (!file.exists("analysis.qmd")) {
     ui_info("No analysis.qmd file found in the current directory.")
@@ -149,6 +174,16 @@ format:
   }
 }
 
+
+#----------------------------------------------------------------------------------------
+#' Display HTML links for customizing with SCSS
+#' 
+#' @description
+#' SCSS reference links -- how to use, customize, and apply styling with Quarto & SCSS.
+#' 
+#' @return Console output.
+#' 
+#' @noRd
 .display_reference_links <- function() {
   links <- glue(
     "For more SCSS styling options, visit:\n",
