@@ -194,21 +194,31 @@
 #' @noRd
 .add_citation_files <- function(path) {
 
-  writeLines("", con = file.path(path, "packages.bib"))
-  
-  # 7. Write an empty user bibliography file
-  writeLines("", con = file.path(path, "references.bib"))
-  
-  # 8. Add .csl files
-  download.file(
-    "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
-    file.path(path, "the-new-england-journal-of-medicine.csl"),
-    quiet = TRUE
-  )
-  download.file(
-    "https://www.zotero.org/styles/apa",
-    file.path(path, "apa.csl"),
-    quiet = TRUE
-  )
+  # Check if these files exist before creating them
+
+   # 1. Write an empty user bibliography file
+  if (!file.exists(file.path(path, "packages.bib"))) {
+    writeLines("", con = file.path(path, "packages.bib"))
+  }
+
+  if (!file.exists(file.path(path, "references.bib"))) {
+    writeLines("", con = file.path(path, "references.bib"))
+  }
+
+   # 2. Add .csl files
+  if (!file.exists(file.path(path, "the-new-england-journal-of-medicine.csl"))) {
+    download.file(
+      "https://www.zotero.org/styles/the-new-england-journal-of-medicine",
+      file.path(path, "the-new-england-journal-of-medicine.csl"),
+      quiet = TRUE
+    )
+  }
+  if (!file.exists(file.path(path, "apa.csl"))) {
+    download.file(
+      "https://www.zotero.org/styles/apa",
+      file.path(path, "apa.csl"),
+      quiet = TRUE
+    )
+  }
 
 }

@@ -6,6 +6,8 @@
 #'   Only letters, numbers, hyphens, and underscores are allowed.
 #' @param path Character string. Directory where the file will be created. Defaults to
 #'   the current project's base directory.
+#' @param example Logical. Will the analysis file include a paper example with table/
+#'   figure? Default is `NULL` and will use a default, non-paper template.
 #' 
 #' @importFrom glue glue
 #' @importFrom here here
@@ -21,7 +23,7 @@
 #' }
 #' @export
 #'
-write_quarto <- function(filename = NULL, path = here()) {
+write_quarto <- function(filename = NULL, path = here(), example = NULL) {
   # Validate path
   if (!dir.exists(path)) dir.create(path)
   .validate_path(path)
@@ -52,14 +54,31 @@ write_quarto <- function(filename = NULL, path = here()) {
     stop(glue("{filename}.qmd already exists in the specified path."))
   }
 
-  # Write the Quarto file based on template
-  template_path <- system.file('gists/default_quarto.qmd', package = 'rUM')
+  # Check if the user would like to use a paper or default template:
+  if (is.null(example)) {
+    # The user wants a generic non-paper template
+    template_path <- system.file('gists/default_quarto.qmd', package = 'rUM')
 
-  if (template_path == "") {
-    stop("Could not find Quarto template in package installation")
+    if (template_path == "") {
+      stop("Could not find Quarto template in package installation")
+    }
+    
+  } else if (!example) {
+    # The user wants our non-example paper template
+    template_path <- system.file('gists/analysis_qmd_wo_example.qmd', package = 'rUM')
+
+  } else {
+    # The user wants our example paper template
+    template_path <- system.file('gists/analysis_qmd_with_example.qmd', package = 'rUM')
   }
 
+  # Write the selected template to the specified path
   file.copy(from = template_path, to = the_quarto_file, overwrite = FALSE)
+
+  # Add the citation and bibliography files to the project path if they do not exist.
+  if (!is.null(example)) {
+    .add_citation_files(path)
+  }
 
   # Open the new template upon successful copy
   if (file.exists(the_quarto_file)) {

@@ -4,7 +4,7 @@
 \alias{write_quarto}
 \title{Create a New Quarto Document}
 \usage{
-write_quarto(filename = NULL, path = here())
+write_quarto(filename = NULL, path = here(), example = NULL)
 }
 \arguments{
 \item{filename}{Character string. The name of the file without the '.qmd' extension.
@@ -12,6 +12,9 @@ Only letters, numbers, hyphens, and underscores are allowed.}
 
 \item{path}{Character string. Directory where the file will be created. Defaults to
 the current project's base directory.}
+
+\item{example}{Logical. Will the analysis file include a paper example with table/
+figure? Default is \code{NULL} and will use a default, non-paper template.}
 }
 \value{
 Opens file after creating the Quarto document.
