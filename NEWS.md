@@ -7,6 +7,9 @@ CRAN release: 2025-07
 + Slide templates: Quarto reveal.js templates with `write_slides()`
 + Functions for embedding and finding slides in a package with `find_slides()` and `show_slides()`
 
+## Enhnancements
++ `write_quarto()` now accepts an `example` argument.
+
 
 # rUM 2.1.0 (rUM and Coke)
 
