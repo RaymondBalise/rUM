@@ -14,7 +14,10 @@ Only letters, numbers, hyphens, and underscores are allowed.}
 the current project's base directory.}
 
 \item{example}{Logical. Will the analysis file include a paper example with table/
-figure? Default is \code{NULL} and will use a default, non-paper template.}
+figure? Default is \code{NULL} and will use a default, non-paper template. If this is set
+to \code{TRUE}, then it will use the Quarto paper template with examples of a table and
+figure with cross-referencing. If this is \code{FALSE}, then it will use the Quarto paper
+template without examples for tables.}
 }
 \value{
 Opens file after creating the Quarto document.

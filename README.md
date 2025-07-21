@@ -22,6 +22,7 @@ To see a tutorial video on rUM check out our [presentation at R Medicine 2025](h
 * 💥 NEW in Version 2.2.0 (rUM Runner) 💥 
     + `rUM` can make documentation/manual pages for datasets with the `write_man()` function.  
     + `rUM` now includes templates to produce slide decks with the `write_slides()` function.  There are now functions (`find_slides()` and `show_slides()`) to find and render/show slides that are included with a package.
+    + `write_quarto()` now accepts an `example` argument. If this is set to `TRUE`, then it will use the Quarto paper template with examples of a table and figure with cross-referencing. If this is `FALSE`, then it will use the Quarto paper template without examples for tables. The default value is `NULL` and will provide a minimal Quarto template. See `?write_quarto()` for more documentation.
 
 ## How do I add rUM?
 
