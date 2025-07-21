@@ -9,17 +9,19 @@
 # rUM <a href='https://raymondbalise.github.io/rUM/'><img src='man/figures/logo.png' align="right" width="139" /></a>
 This is a collection of R things from your friends at UM (The University of Miami).
 
-rUM includes:
+To see a tutorial video on rUM check out our [presentation at R Medicine 2025](https://www.youtube.com/watch?v=03_5KrQA-mo&list=PL4IzsxWztPdmU2q31ZrTCASr78e0jpKux&index=26){target="_blank"}.
 
-* A research project template.  It creates a new RStudio project that has your choice of an `analysis.qmd` Quarto file or `analysis.Rmd` R markdown file with tidyverse and conflicted.
+`rUM` includes:
 
-* Quarto and R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.
+* A research project template.  It creates a new RStudio project that has your choice of an `analysis.qmd` Quarto file or `analysis.Rmd` R markdown file that load the tidyverse and conflicted packages and set many useful default details.  These files can also include example tables and figures.
 
-* `rUM` can make a package project that includes a paper outline as a vignette.  
+* `rUM` streamlines creating a package that include a paper outline with the `make_package()` function.
 
-* `rUM` can add an example table and figure to it's paper shell.
+* `rUM` helps with project documentation files (`write_readme()` and `write_notes()`), and Quarto styling files (`write_scss()`).
 
-* 💥 NEW in Version 2.1.0 (Rum & Coke) 💥 `rUM` streamlines creating a package. We added new functions to create Quarto documents (`write_quarto()`), project documentation files (`write_readme()` & `write_notes()`), and Quarto styling files (`write_scss()`).
+* 💥 NEW in Version 2.2.0 (rUM Runner) 💥 
+    + `rUM` can make documentation/manual pages for datasets with the `write_man()` function.  
+    + `rUM` now includes templates to produce slide decks with the `write_slides()` function.  There are now functions (`find_slides()` and `show_slides()`) to find and render/show slides that are included with a package.
 
 ## How do I add rUM?
 

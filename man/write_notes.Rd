@@ -2,9 +2,9 @@
 % Please edit documentation in R/write_notes.R
 \name{write_notes}
 \alias{write_notes}
-\title{Create a project README file}
+\title{Create a project progress note}
 \usage{
-write_notes(path = here::here())
+write_notes(path = here())
 }
 \arguments{
 \item{path}{The destination directory for the progress notes file. Defaults to \code{
@@ -20,7 +20,7 @@ and maintains consistent project documentation structure.
 }
 \details{
 The dated_progress_notes.md file is initialized with the current date and is designed
-to help track project milestones chronologically. If the progress notes file already 
+to help track project milestones chronologically. If the progress notes file already
 exists, the function will stop and warn the user.
 }
 \examples{

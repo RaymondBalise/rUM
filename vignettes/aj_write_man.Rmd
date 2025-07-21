@@ -1,0 +1,83 @@
+---
+title: "10. Make Datasets Documentation with write_man()"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{10. Make Datasets Documentation with write_man()}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+R packages which contain datasets need documentation.  The Roxygen2 package helps write R manual pages but there are many details.  The `write_man()` function examines a dataset and writes a R file that contains Roxygen2 code which produces documents the dataset.  The documentation is written using Markdown to organize details including the number of rows and columns in the dataset, the names, the labels (if any) and types of variable.  The levels of categorical variables are also included.
+
+## Getting Started
+
+Load the dataset you want to document into the global environment using tools like `tidyREDCap::import_instruments()` or `the_data <- readr::read_csv("an_csv_file.csv")` or `the_data <- readxl::read_excel("an_excel_file.xlsx")`.  Then use
+`write_man("the_data")`.  For example:
+
+```
+library(tidyverse)
+library(conflicted)
+library(labelled)  # for set_variable_labels()
+demographics <- 
+  readxl::read_excel("demographics.xlsx") |> 
+  mutate(sex2 = as_factor(sex), .keep="unused") |> 
+  labelled::set_variable_labels(
+    age = "Age in Years",
+    sex2 = "Sex assigned at Birth"
+  )
+
+rUM::write_man("demographics")
+```
+
+This produces a R file, whose name matches the dataset, in the R folder, that has details like
+
+```
+#' demographics dataset
+#'
+#' @description Description of the demographics dataset goes here
+#'
+#' @format A tibble with 3 rows and 2 variables:
+#' \describe{
+#'   \item{age}{
+#'
+#' | *Type:*        | numeric       |
+#' | -------------- | ------------- |
+#' |                |               |
+#' | *Description:* | Age in Years |
+#'
+#'   }
+#'   \item{sex2}{
+#'
+#' | *Type:*        | factor (First/Reference level = `Male`) |
+#' | -------------- | ---------------------------------------------------- |
+#' |                |                                                      |
+#' | *Description:* | Sex assigned at Birth |
+#' |                |                                                      |
+#' | *Levels:*      | `Male, Female`           |
+#'
+#'   }
+#' }
+#' @source Where the data came from
+"demographics"
+```
+
+If your dataset does not have labels you will need to modify the  
+`#' | *Description:* | Description for *thingy* goes here |`  
+line to have an useful description.             
+
+You will also want to modify the  
+`@source Where the data came from`  
+line to properly cite the source of the data.
+
+## Conclusion
+
+If you follow this workflow for each of your datasets you will have user friendly documentation which will be ready for CRAN.

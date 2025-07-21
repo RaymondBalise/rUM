@@ -1,4 +1,14 @@
-# rUM 2.1.0 (Rum & Coke) 
+# rUM 2.2.0 (rUM Runner)
+
+CRAN release: 2025-07
+
+## New Features
++ Automatic dataset documentation with `write_man()`.
++ Slide templates: Quarto reveal.js templates with `write_slides()`
++ Functions for embedding and finding slides in a package with `find_slides()` and `show_slides()`
+
+
+# rUM 2.1.0 (rUM and Coke)
 
 CRAN release: 2025-03-21
 

@@ -4,7 +4,7 @@
 \alias{write_scss}
 \title{Create a Quarto SCSS file}
 \usage{
-write_scss(name = "custom", path = here::here(), add_to_yaml = FALSE)
+write_scss(name = "custom", path = here(), add_to_yaml = FALSE)
 }
 \arguments{
 \item{name}{The name of the scss file without extension. Default \code{name} is
@@ -30,9 +30,9 @@ configurations.
 \details{
 The function includes a robust YAML handling mechanism that:
 \itemize{
-  \item Preserves existing YAML structure and indentation
-  \item Safely adds new SCSS files without disrupting existing ones
-  \item Provides manual instructions if the YAML structure differs from expected
+\item Preserves existing YAML structure and indentation
+\item Safely adds new SCSS files without disrupting existing ones
+\item Provides manual instructions if the YAML structure differs from expected
 }
 
 For more information on customizing Quarto documents with SCSS, please refer to

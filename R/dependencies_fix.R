@@ -2,6 +2,9 @@
 #'
 #' @description Does nothing, on purpose.
 #' 
+#' @importFrom here here
+#' @importFrom roxygen2 block_get_tag
+#' 
 #' @details
 #' The \code{here} and \code{roxygen2} packages are needed to build vignettes.
 #'   To make sure people can use the \code{vignette = TRUE} option in the
@@ -14,6 +17,6 @@
 dependencies_fix <- function() {
   # Do NOT call the useless function.
   return()
-  here::here()
-  roxygen2::block_get_tag()
+  here()
+  block_get_tag()
 }

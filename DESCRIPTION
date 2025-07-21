@@ -1,6 +1,6 @@
 Package: rUM
 Title: R Templates from the University of Miami
-Version: 2.1.0
+Version: 2.2.0
 Authors@R: 
     c(
       person(
@@ -42,13 +42,17 @@ Authors@R:
 Description: This holds some r markdown and quarto templates and a template to 
     create a research project in "R Studio".
 Depends: 
-    R (>= 3.5)
+    R (>= 4.1.0)
 Imports:
     bookdown,
     conflicted,
+    dplyr,
+    fs,
     glue,
     gtsummary (>= 2.0.3),
     here,
+    labelled,
+    lifecycle,
     quarto,
     readr,
     rio,
@@ -62,6 +66,7 @@ Imports:
     usethis
 Suggests:
     knitr,
+    testthat (>= 3.0.0),
     tinytex
 License: MIT + file LICENSE
 URL: 
@@ -71,3 +76,5 @@ BugReports: https://github.com/RaymondBalise/rUM/issues
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3

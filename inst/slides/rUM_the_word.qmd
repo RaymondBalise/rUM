@@ -1,0 +1,88 @@
+---
+title: "What is rum ..."
+subtitle: "and rUM?"
+author:
+  - name: "Raymond R. Balise"
+    affiliation:
+      - "University of Miami, <br>Department of Public Health Sciences, <br>Division of Biostatistics and Bioinformatics"
+date: last-modified
+date-format: "MMMM D, YYYY"
+format:
+  revealjs:
+    theme: 
+      - default
+      - slides.scss
+    fontsize: 2em
+    html-math-method: mathjax
+    slide-number: c
+    show-slide-number: all
+    highlight-style: rstudio_default-light.theme
+embed-resources: true   # true = a single file, false = multiple files
+knitr:
+  opts_chunk:      ########## set global options ############
+    collapse: true # keep code from blocks together (if shown)
+    echo: false    # don't show code
+    message: true  # show messages
+    warning: true  # show warnings
+    error: true    # show error messages
+    comment: ""    # don't show ## with printed output
+    R.options:   
+      digits: 3    # round to three digits
+editor_options:
+  chunk_output_type: console
+editor: source
+highlight-style: rstudio_default-light.theme
+---
+ 
+# Defintion of rum
+ 
+```{r echo=FALSE}
+# Helper packages - need dplyr and ggplot
+library(conflicted)
+suppressPackageStartupMessages(library(tidymodels))
+tidymodels_prefer()
+ 
+suppressPackageStartupMessages(library(tidyverse))
+
+library(knitr)
+# library(kableExtra)
+```
+
+## Rum the Noun
+
+_Noun_
+
+- 1: [an alcoholic beverage distilled from a fermented cane product (such as molasses)]{.red}
+- 2: [alcoholic liquor]{.red}
+
+> the demon rum
+
+::: {.footer}
+<https://www.merriam-webster.com/dictionary/rum>
+:::
+
+
+## Rum the Adjective
+
+_Adjective_
+
+rummer; rummest
+
+- 1. British, informal + somewhat old-fashioned: [strange, odd]{.red}
+
+> Now writing is rum trade and eyes are rum things, and what is all right one day is all wrong the next.
+> —Angela Thirkell
+
+- 2. British, informal + somewhat old-fashioned: [difficult, dangerous]{.red}
+
+::: {.footer}
+<https://www.merriam-webster.com/dictionary/rum>
+:::
+
+## rUM the Package
+
+A package from you friends at the University of Miami.
+
+::: {.footer}
+<https://raymondbalise.github.io/rUM/>
+:::

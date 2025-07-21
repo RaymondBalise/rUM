@@ -1,4 +1,4 @@
-#' Create a project README file
+#' Create a project progress note
 #'
 #' This function streamlines project documentation by creating and managing both README.md
 #' and dated_progress_notes.md files. It provides interactive prompts for existing files
@@ -6,6 +6,10 @@
 #'
 #' @param path The destination directory for the progress notes file. Defaults to \code{
 #' here::here()}.
+#' 
+#' @importFrom here here
+#' @importFrom usethis ui_done
+#' 
 #' @return Creates a chronological project progress notes tracker
 #'
 #' @details
@@ -19,19 +23,17 @@
 #' tmp <- tempdir()
 #' write_notes(path = tmp)
  
-write_notes <- function(path = here::here()) {
+write_notes <- function(path = here()) {
   
   # Validate path
-  if (is.null(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please enter a valid project directory.")
-  }
+  .validate_path(path)
   
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
   
   # Handle dated_progress_notes.md creation/overwrite
   progress_notes_content <- paste0(
-    "# Add project updates here\n",
+    "# Project updates\n\n",
     format(Sys.Date(), "%b %d, %Y"),
     ": project started"
   )

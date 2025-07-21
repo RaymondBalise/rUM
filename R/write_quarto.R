@@ -6,6 +6,11 @@
 #'   Only letters, numbers, hyphens, and underscores are allowed.
 #' @param path Character string. Directory where the file will be created. Defaults to
 #'   the current project's base directory.
+#' 
+#' @importFrom glue glue
+#' @importFrom here here
+#' @importFrom stringr str_detect str_replace_all
+#' @importFrom usethis edit_file
 #'
 #' @return Opens file after creating the Quarto document.
 #'
@@ -15,12 +20,11 @@
 #' write_quarto(filename = "data_cleaning", path = tempdir())
 #' }
 #' @export
-#' 
-write_quarto <- function(filename = NULL, path = here::here()) {
+#'
+write_quarto <- function(filename = NULL, path = here()) {
   # Validate path
-  if (is.null(path) || !dir.exists(path)) {
-    stop("Invalid `path`. Please enter a valid project directory.")
-  }
+  if (!dir.exists(path)) dir.create(path)
+  .validate_path(path)
 
   # Validate filename: part 1
   if (is.null(filename)) stop('Invalid filename. Please input a value.')
@@ -29,18 +33,14 @@ write_quarto <- function(filename = NULL, path = here::here()) {
   filename <- str_replace_all(filename, '.qmd$', '')
 
   # Validate filename: part 2
-  if (!is.character(filename)) stop('Invalid filename: must be character.')
-  if (!grepl('^[a-zA-Z0-9_-]+$', filename)) {
-    stop('Invalid filename. Use only letters, numbers, hyphens, and underscores.')
-  }
+  .validate_filename(filename)
 
   # Normalize the path for consistency
   path <- normalizePath(path, mustWork = TRUE)
 
   if (file.access(path, mode = 2) != 0) {
-    stop(sprintf(
-      'You do not have permission to write to the path location: %s\nTry `rUM::write_quarto(filename = "", path = "")`', 
-      path
+    stop(glue(
+      'You do not have permission to write to the path location: {path}\nTry `rUM::write_quarto(filename = "", path = "")`'
     ))
   }
 
@@ -49,7 +49,7 @@ write_quarto <- function(filename = NULL, path = here::here()) {
 
   # Check for existing Quarto doc
   if (file.exists(the_quarto_file)) {
-    stop(sprintf("%s.qmd already exists in the specified path.", filename))
+    stop(glue("{filename}.qmd already exists in the specified path."))
   }
 
   # Write the Quarto file based on template
@@ -63,7 +63,7 @@ write_quarto <- function(filename = NULL, path = here::here()) {
 
   # Open the new template upon successful copy
   if (file.exists(the_quarto_file)) {
-    usethis::edit_file(the_quarto_file)
+    edit_file(the_quarto_file)
   } else {
     stop("The file does not exist.")
   }

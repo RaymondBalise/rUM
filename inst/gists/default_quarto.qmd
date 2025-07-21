@@ -4,7 +4,7 @@ author: "your_name_goes_here"
 date: last-modified
 format:
   html:
-    embed-resources: true
+    embed-resources: true   # true = a single file, false = multiple files
     theme:
       - default
 knitr:
@@ -19,11 +19,11 @@ knitr:
     fig-width: 6.5   # figure width
     fig-height: 4.0  # figure height
     R.options:    
-      digits: 3    # round to three digits
+      digits: 3      # round to three digits
 editor: source
 ---
 
-```{r, tidyverse-tidymodels}
+```{r tidyverse-tidymodels}
 #| echo: false
 
 library(conflicted)
@@ -35,14 +35,14 @@ suppressPackageStartupMessages(library(tidyverse))
 options(dplyr.summarise.inform = FALSE)
 ```
 
-```{r, other-packages}
+```{r other-packages}
 #| echo: false
 
 library(rio)
 # library()  # type a package name inside the parentheses
 ```
 
-```{r, load-data}
+```{r load-data}
 #| echo: false
 
 # raw_data <- import("")  # your data file goes inside the ""

@@ -1,0 +1,117 @@
+---
+title: "Mix, Pour, Share: The rUM Cocktail for Biomedical Project Packaging"
+subtitle: "R Medicine 2025 Talk"
+author:
+  - name: "Kyle Grealis & Raymond Balise"
+    affiliation:
+      - "University of Miami, <br>Department of Public Health Sciences, <br>Division of Biostatistics and Bioinformatics"
+date: last-modified
+date-format: "MMMM D, YYYY"
+format:
+  revealjs:
+    theme: 
+      - default
+      - slides.scss
+    title-slide-attributes:
+      data-background-image: "img/rmed_background.png"
+      data-background-size: cover
+      data-background-opacity: "50"
+    fontsize: 2em
+    html-math-method: mathjax
+    slide-number: c/t
+    show-slide-number: all
+    highlight-style: rstudio_default-light.theme
+    logo: "img/rmed.png"
+    footer: "[Slides are here](https://){target='_blank'}"  # complete the URL
+    include-after-body: "img/clean_title_page.html"
+include-in-header:
+  text: |
+    <link rel="shortcut icon" href="img/rmed.ico"/>
+embed-resources: true   # true = a single file, false = multiple files
+knitr:
+  opts_chunk:      ########## set global options ############
+    collapse: true # keep code from blocks together (if shown)
+    echo: false    # don't show code
+    message: true  # show messages
+    warning: true  # show warnings
+    error: true    # show error messages
+    comment: ""    # don't show ## with printed output
+    R.options:   
+      digits: 3    # round to three digits
+editor_options:
+  chunk_output_type: console
+editor: source
+highlight-style: rstudio_default-light.theme
+---
+ 
+# Introduction
+ 
+```{r echo=FALSE}
+# Helper packages - need dplyr and ggplot
+library(conflicted)
+suppressPackageStartupMessages(library(tidymodels))
+tidymodels_prefer()
+ 
+suppressPackageStartupMessages(library(tidyverse))
+
+library(knitr)
+# library(kableExtra)
+```
+ 
+
+
+## Using rUM
+
++ Big Things... You can make:
++ Less Big Things...  You can add:
++ Sorta Big Things... You can:
+
+
+## Using rUM 
+
++ Big Things... You can make:
+  + A research paper template with `make_project()`
+  + A package with a research paper template `make_package()`
++ Less Big Things...  You can add:
++ Sorta Big Things... You can:
+
+
+## Using rUM 
+
++ Big Things... You can make:
++ Less Big Things...  You can add:
+  + A README file with `write_readme()`
+  + A progress notes with `write_notes()`
+  + A scss style template with `write_scss()`
+  + A manual page for a data set `write_man()`
++ Sorta Big Things... You can:
+
+
+## Using rUM
+
++ Big Things... You can make:
++ Less Big Things...  You can add:
++ Sorta Big Things... You can:
+  + Add a slide deck with write_slides
+    + Into a folder
+    + into a package
+  + Find slides in a package with `find_slides()`
+  + Display slides from a package with `show_slides()`
+
+## rUM Slides Use Themes
+
+Note: The slides use the RStudio color theme by default
+```{r}
+#| eval: false
+#| echo: true
+library(rUM)
+rUM::find_slides("rUM")
+```
+
+You can display all parts of a code bock using {{r}}
+```{{r}}
+#| eval: false
+#| echo: true
+library(rUM)
+rUM::find_slides("rUM")
+```

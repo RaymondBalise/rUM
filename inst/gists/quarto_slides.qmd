@@ -1,0 +1,52 @@
+---
+title: "reveal.js slides with rUM"
+subtitle: "Quarto slide template for your project"
+author:
+  - name: "you"
+    affiliation:
+      - "Institution, <br>Department, <br>Division"
+date: last-modified
+date-format: "MMMM D, YYYY"
+format:
+  revealjs:
+    theme: 
+      - default
+      - slides.scss
+    fontsize: 2em
+    html-math-method: mathjax
+    slide-number: c
+    show-slide-number: all
+    highlight-style: rstudio_default-light.theme
+embed-resources: true   # true = a single file, false = multiple files
+knitr:
+  opts_chunk:      ########## set global options ############
+    collapse: true # keep code from blocks together (if shown)
+    echo: false    # don't show code
+    message: true  # show messages
+    warning: true  # show warnings
+    error: true    # show error messages
+    comment: ""    # don't show ## with printed output
+    R.options:   
+      digits: 3    # round to three digits
+editor_options:
+  chunk_output_type: console
+editor: source
+highlight-style: rstudio_default-light.theme
+---
+ 
+# Introduction
+ 
+```{r echo=FALSE}
+# Helper packages - need dplyr and ggplot
+library(conflicted)
+suppressPackageStartupMessages(library(tidymodels))
+tidymodels_prefer()
+ 
+suppressPackageStartupMessages(library(tidyverse))
+
+library(knitr)
+# library(kableExtra)
+```
+ 
+
+## The plan
