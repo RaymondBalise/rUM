@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">rUM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
     <li><a class="dropdown-item" href="articles/ae_make_a_package.html">5. Make a Package</a></li>
     <li><a class="dropdown-item" href="articles/af_show_example.html">6. Include an example in the analysis paper outline</a></li>
     <li><a class="dropdown-item" href="articles/ag_write_scss.html">7. Customizing Quarto Documents with SCSS</a></li>
-    <li><a class="dropdown-item" href="articles/ah_write_slides.html">8. Creating Slides with write_slides()</a></li>
+    <li><a class="dropdown-item" href="articles/ah_write_slides.html">8. Creating Slides from a Template with `write_slides()`</a></li>
     <li><a class="dropdown-item" href="articles/ai_find_show_slides.html">9. Find and Show Slides in a Package</a></li>
     <li><a class="dropdown-item" href="articles/aj_write_man.html">10. Make Datasets Documentation with write_man()</a></li>
   </ul>
@@ -75,16 +75,27 @@
 </h1>
 </div>
 <p>This is a collection of R things from your friends at UM (The University of Miami).</p>
-<p>rUM includes:</p>
+<p>To see a tutorial video on rUM check out our <a href="https://www.youtube.com/watch?v=03_5KrQA-mo&amp;list=PL4IzsxWztPdmU2q31ZrTCASr78e0jpKux&amp;index=26" target="_blank" class="external-link">presentation at R Medicine 2025</a>.</p>
+<p><code>rUM</code> includes:</p>
 <ul>
-<li><p>A research project template. It creates a new RStudio project that has your choice of an <code>analysis.qmd</code> Quarto file or <code>analysis.Rmd</code> R markdown file with tidyverse and conflicted.</p></li>
-<li><p>Quarto and R Markdown templates which include they YAML header and start up blocks that load the tidyverse and conflicted packages.</p></li>
-<li><p><code>rUM</code> can make a package project that includes a paper outline as a vignette.</p></li>
-<li><p><code>rUM</code> can add an example table and figure to it’s paper shell.</p></li>
-<li><p>💥 NEW in Version 2.1.0 (Rum &amp; Coke) 💥 <code>rUM</code> streamlines creating a package. We added new functions to create Quarto documents (<code><a href="reference/write_quarto.html">write_quarto()</a></code>), project documentation files (<code><a href="reference/write_readme.html">write_readme()</a></code> &amp; <code><a href="reference/write_notes.html">write_notes()</a></code>), and Quarto styling files (<code><a href="reference/write_scss.html">write_scss()</a></code>).</p></li>
+<li><p>A research project template. It creates a new RStudio project that has your choice of an <code>analysis.qmd</code> Quarto file or <code>analysis.Rmd</code> R markdown file that load the tidyverse and conflicted packages and set many useful default details. These files can also include example tables and figures.</p></li>
+<li><p><code>rUM</code> streamlines creating a package that include a paper outline with the <code><a href="reference/make_package.html">make_package()</a></code> function.</p></li>
+<li><p><code>rUM</code> helps with project documentation files (<code><a href="reference/write_readme.html">write_readme()</a></code> and <code><a href="reference/write_notes.html">write_notes()</a></code>), and Quarto styling files (<code><a href="reference/write_scss.html">write_scss()</a></code>).</p></li>
+<li>
+<p>💥 NEW in Version 2.2.0 (rUM Runner) 💥</p>
+<ul>
+<li>
+<code>rUM</code> can make documentation/manual pages for datasets with the <code><a href="reference/write_man.html">write_man()</a></code> function.<br>
+</li>
+<li>
+<code>rUM</code> now includes templates to produce slide decks with the <code><a href="reference/write_slides.html">write_slides()</a></code> function. There are now functions (<code><a href="reference/find_slides.html">find_slides()</a></code> and <code><a href="reference/show_slides.html">show_slides()</a></code>) to find and render/show slides that are included with a package.</li>
+<li>
+<code><a href="reference/write_quarto.html">write_quarto()</a></code> now accepts an <code>example</code> argument. If this is set to <code>TRUE</code>, then it will use the Quarto paper template with examples of a table and figure with cross-referencing. If this is <code>FALSE</code>, then it will use the Quarto paper template without examples for tables. The default value is <code>NULL</code> and will provide a minimal Quarto template. See <code>?write_quarto()</code> for more documentation.</li>
+</ul>
+</li>
 </ul>
 <div class="section level2">
-<h2 id="how-to-i-add-rum">How to I add rUM?<a class="anchor" aria-label="anchor" href="#how-to-i-add-rum"></a>
+<h2 id="how-do-i-add-rum">How do I add rUM?<a class="anchor" aria-label="anchor" href="#how-do-i-add-rum"></a>
 </h2>
 <p>Modern versions of the RStudio interface (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio <a href="https://posit.co/download/rstudio-desktop/" class="external-link">here</a>. You can install the latest version of Quarto directly from <a href="https://quarto.org/docs/get-started/" class="external-link">here</a>.</p>
 <p>Then you should run this in the console of RStudio:</p>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rUM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
     <li><a class="dropdown-item" href="../articles/ae_make_a_package.html">5. Make a Package</a></li>
     <li><a class="dropdown-item" href="../articles/af_show_example.html">6. Include an example in the analysis paper outline</a></li>
     <li><a class="dropdown-item" href="../articles/ag_write_scss.html">7. Customizing Quarto Documents with SCSS</a></li>
-    <li><a class="dropdown-item" href="../articles/ah_write_slides.html">8. Creating Slides with write_slides()</a></li>
+    <li><a class="dropdown-item" href="../articles/ah_write_slides.html">8. Creating Slides from a Template with `write_slides()`</a></li>
     <li><a class="dropdown-item" href="../articles/ai_find_show_slides.html">9. Find and Show Slides in a Package</a></li>
     <li><a class="dropdown-item" href="../articles/aj_write_man.html">10. Make Datasets Documentation with write_man()</a></li>
   </ul></li>
@@ -51,7 +51,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_quarto</span><span class="op">(</span>filename <span class="op">=</span> <span class="cn">NULL</span>, path <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_quarto</span><span class="op">(</span>filename <span class="op">=</span> <span class="cn">NULL</span>, path <span class="op">=</span> <span class="fu">here</span><span class="op">(</span><span class="op">)</span>, example <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -66,6 +66,14 @@ Only letters, numbers, hyphens, and underscores are allowed.</p></dd>
 <dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
 <dd><p>Character string. Directory where the file will be created. Defaults to
 the current project's base directory.</p></dd>
+
+
+<dt id="arg-example">example<a class="anchor" aria-label="anchor" href="#arg-example"></a></dt>
+<dd><p>Logical. Will the analysis file include a paper example with table/
+figure? Default is <code>NULL</code> and will use a default, non-paper template. If this is set
+to <code>TRUE</code>, then it will use the Quarto paper template with examples of a table and
+figure with cross-referencing. If this is <code>FALSE</code>, then it will use the Quarto paper
+template without examples for tables.</p></dd>
 
 </dl></div>
     <div class="section level2">

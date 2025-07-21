@@ -1,4 +1,4 @@
-pandoc: '3.4'
+pandoc: 3.6.3
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
@@ -12,7 +12,7 @@ articles:
   ah_write_slides: ah_write_slides.html
   ai_find_show_slides: ai_find_show_slides.html
   aj_write_man: aj_write_man.html
-last_built: 2025-07-11T15:00Z
+last_built: 2025-07-21T19:35Z
 urls:
   reference: https://raymondbalise.github.io/rUM/reference
   article: https://raymondbalise.github.io/rUM/articles
