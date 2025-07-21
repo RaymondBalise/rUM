@@ -17,7 +17,10 @@
 #' @return Logical. Evaluation of `is_quarto_project`.
 #' 
 #' @noRd
-.arg_validation <- function(type, example, overwrite, openInteractive) {
+.arg_validation <- function(
+  type = c("Quarto (analysis.qmd)", "R Markdown (analysis.Rmd)"), 
+  example, overwrite, openInteractive
+) {
 
   # 1) Type matches available options
   type <- match.arg(type)

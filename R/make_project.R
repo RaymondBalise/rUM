@@ -62,6 +62,7 @@ make_project <- function(
 
   # Input validation:--------------------------------------------------------------
   if (!is.logical(vignette))  stop('Parameter `vignette` must be TRUE or FALSE')
+
   is_quarto_project <- .arg_validation(type, example, overwrite, openInteractive)
 
   # If the user chooses make_project() to create a R package, warn & continue:
