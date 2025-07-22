@@ -155,7 +155,7 @@ This is a basic web page
 This is a basic web page with a table of contents
 
 #### pdf2 showing LaTeX with rUM
-PDF report where table and figures don’t float to other pages. Many thanks to [https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc](https://stackoverflow.com/questions/16626462).
+PDF report where table and figures don’t float to other pages. Many thanks to [https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc]().
 
 #### bookdown_site with rUM
 A bookdown website with a good table of contents for a book
