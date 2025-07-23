@@ -54,6 +54,7 @@ Imports:
     here,
     labelled,
     lifecycle,
+    purrr,
     quarto,
     readr,
     rio,
