@@ -49,7 +49,7 @@ vignettes/*.pdf
 Thumbs.db
 
 # Directories
-docs/
+# docs/
 data/
 development/
 macros/
@@ -163,3 +163,8 @@ _site/
 !docs/articles/*.png
 !docs/articles/*.jpg
 !docs/articles/*.html
+
+!docs/reference/*.html
+!docs/reference/figures/*.png
+
+!docs/*
