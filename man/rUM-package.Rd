@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-This holds some r markdown and quarto templates and a template to create a research project in "R Studio".
+This holds r markdown and quarto templates for academic papers and slide decks. It also has templates to create research projects which contain academic papers as vignettes.
 }
 \seealso{
 Useful links:
