@@ -28,7 +28,7 @@
 #'
 #' @details Behind the scenes, this function used by research_project.dcf when
 #' a user selects New project... > New Directory > rUM Research Project Template
-#' within the RSutdio IDE. See \code{./rstudio/templates/project/}.
+#' within the RStudio IDE. See \code{./rstudio/templates/project/}.
 #'
 #' @return Returns nothing.  See description above.
 #'
