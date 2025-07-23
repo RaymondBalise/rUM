@@ -49,6 +49,7 @@ vignettes/*.pdf
 Thumbs.db
 
 # Directories
+# docs/
 data/
 development/
 macros/
