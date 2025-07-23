@@ -222,30 +222,30 @@ write_slides <- function(
         destfile = glue("{img_path}/{x}"), mode = "wb"
       ))))
       
-      # Add background:
-      file.copy(
-        from = system.file("img/rmed_background.png", package = "rUM"),
-        to = file.path(img_path, "rmed_background.png")
-      )
-      # Add header strip
-      file.copy(
-        from = system.file("img/rmed_narrow.png", package = "rUM"),
-        to = file.path(img_path, "rmed_narrow.png")
-      )
-      # Add logos:
-      file.copy(
-        from = system.file("img/rmed.png", package = "rUM"),
-        to = file.path(img_path, "rmed.png")
-      )
-      file.copy(
-        from = system.file("img/R-Med-25-Hex-Logo.png", package = "rUM"),
-        to = file.path(img_path, "R-Med-25-Hex-Logo.png")
-      )
-      # Add favicon:
-      file.copy(
-        from = system.file("img/rmed.ico", package = "rUM"),
-        to = file.path(img_path, "rmed.ico")
-      )
+      # # Add background:
+      # file.copy(
+      #   from = system.file("img/rmed_background.png", package = "rUM"),
+      #   to = file.path(img_path, "rmed_background.png")
+      # )
+      # # Add header strip
+      # file.copy(
+      #   from = system.file("img/rmed_narrow.png", package = "rUM"),
+      #   to = file.path(img_path, "rmed_narrow.png")
+      # )
+      # # Add logos:
+      # file.copy(
+      #   from = system.file("img/rmed.png", package = "rUM"),
+      #   to = file.path(img_path, "rmed.png")
+      # )
+      # file.copy(
+      #   from = system.file("img/R-Med-25-Hex-Logo.png", package = "rUM"),
+      #   to = file.path(img_path, "R-Med-25-Hex-Logo.png")
+      # )
+      # # Add favicon:
+      # file.copy(
+      #   from = system.file("img/rmed.ico", package = "rUM"),
+      #   to = file.path(img_path, "rmed.ico")
+      # )
       # Add JavaScript HTML file that cleans up title page and adds slide content:
       file.copy(
         from = system.file("gists/clean_title_page.html", package = "rUM"),
