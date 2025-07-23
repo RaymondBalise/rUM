@@ -205,6 +205,23 @@ write_slides <- function(
       # Create the img directory as referenced in the slide's YAML:
       img_path <- glue("{path}/img")
       if (!dir.exists(img_path)) dir.create(img_path)
+      
+      # Creata a list of the RMed-specific art files
+      rmed_art <- c(
+        "rmed_background.png",
+        "rmed_narrow.png",
+        "rmed.png",
+        "R-Med-25-Hex-Logo-with-background.png",
+        "rmed.ico"
+      )
+      # Download art files from GitHub
+      gh_url <- glue("https://github.com/RaymondBalise/rUM/raw/master/inst/img/{}")
+
+      invisible(suppressWarnings(purrr::map_chr(rmed_art, \(x) download.file(
+        url = glue("https://github.com/RaymondBalise/rUM/raw/master/inst/img/{x}"),
+        destfile = glue("{img_path}/{x}"), mode = "wb"
+      ))))
+      
       # Add background:
       file.copy(
         from = system.file("img/rmed_background.png", package = "rUM"),
