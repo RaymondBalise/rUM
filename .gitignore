@@ -160,3 +160,4 @@ _bookdown_files/
 _site/
 
 !inst/gists/clean_title_page.html
+!docs/articles/*
