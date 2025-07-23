@@ -49,7 +49,7 @@ vignettes/*.pdf
 Thumbs.db
 
 # Directories
-# docs/
+docs/
 data/
 development/
 macros/
@@ -160,4 +160,4 @@ _bookdown_files/
 _site/
 
 !inst/gists/clean_title_page.html
-
+!docs/articles/*.html
