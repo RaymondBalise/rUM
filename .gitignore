@@ -73,7 +73,7 @@ rsconnect/
 
 
 # Exclude .Rmd output
-# *.html
+*.html
 **/figure-html/
 
 # Exclude Text
