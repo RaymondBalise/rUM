@@ -216,7 +216,7 @@ write_slides <- function(
         "rmed.ico"
       )
       # Download art files from GitHub
-      invisible(suppressMessages(map_chr(rmed_art, \(x) download.file(
+      invisible(map_chr(rmed_art, \(x) suppressMessages(download.file(
         url = glue("https://github.com/RaymondBalise/rUM/raw/master/inst/img/{x}"),
         destfile = glue("{img_path}/{x}"), mode = "wb"
       ))))
