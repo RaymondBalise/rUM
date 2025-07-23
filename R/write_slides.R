@@ -215,11 +215,17 @@ write_slides <- function(
         "R-Med-25-Hex-Logo-with-background.png",
         "rmed.ico"
       )
+      message("Downloading artwork files...")
       # Download art files from GitHub
-      invisible(map_chr(rmed_art, \(x) suppressMessages(download.file(
-        url = glue("https://github.com/RaymondBalise/rUM/raw/master/inst/img/{x}"),
-        destfile = glue("{img_path}/{x}"), mode = "wb"
-      ))))
+      suppressWarnings(
+        map_chr(
+          rmed_art, 
+          \(x) download.file(
+            url = glue("https://github.com/RaymondBalise/rUM/raw/master/inst/img/{x}"),
+            destfile = glue("{img_path}/{x}"), mode = "wb", quiet = TRUE
+          )
+        )
+      )
       
       # Add JavaScript HTML file that cleans up title page and adds slide content:
       file.copy(
