@@ -1,3 +1,15 @@
+# rUM 2.2.1
+
+## Enhancements
+* The `template` argument for `write_slides()` now uses `"rmed"` instead of `"rmed2025"`. The old value still works but is no longer documented. Year references removed from RMed templates and files.
+
+## Fixes
++ Breaking changes to {purrr} in version 1.2.0 required internal changes to `write_slides()`. Uses `walk()` instead of `map_chr()` to download `"rmed"` slide art & files. See https://purrr.tidyverse.org/news/index.html#breaking-changes-1-2-0 for more information.
+
+## Minor improvements
++ Removed references to 2025 from RMed templates & files.
+
+
 # rUM 2.2.0 (rUM Runner)
 
 CRAN release: 2025-07
