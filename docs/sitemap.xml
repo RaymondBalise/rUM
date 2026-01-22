@@ -1,5 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://raymondbalise.github.io/rUM/404.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/LICENSE-text.html</loc></url>
+<url><loc>https://raymondbalise.github.io/rUM/LICENSE.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/articles/aa_using_posit_cloud.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/articles/ab_make_research_project.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/articles/ac_make_research_project_markdown.html</loc></url>
@@ -13,8 +15,6 @@
 <url><loc>https://raymondbalise.github.io/rUM/articles/index.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/authors.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/index.html</loc></url>
-<url><loc>https://raymondbalise.github.io/rUM/LICENSE-text.html</loc></url>
-<url><loc>https://raymondbalise.github.io/rUM/LICENSE.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/news/index.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/reference/find_slides.html</loc></url>
 <url><loc>https://raymondbalise.github.io/rUM/reference/index.html</loc></url>

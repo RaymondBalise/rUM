@@ -1,0 +1,195 @@
+# 2. Create a Research Project with Quarto and rUM
+
+## Introduction
+
+This is a collection of document templates, available through R, from
+your friends at the University of Miami (UM). $`R+UM=rUM`$
+
+The `rUM` package will help you create research manuscripts by removing
+the configuration hassles commonly encountered when learning to write
+papers using R. `rUM` will initialize a new RStudio project and a Quarto
+file that includes the outline for a research paper. The Quarto file
+comes preconfigured with a YAML header (don’t worry if you don’t know
+what that means yet) with code chunks to load the `tidyverse` and
+`conflicted` packages. Manuscript sections have been created for
+Introduction, Methods, Results, Conclusion, and References. The project
+also includes a `.gitignore` file which is designed to help protect
+against accidentally leaking data when using git with websites like
+[www.github.com](https://github.com/).
+
+rUM’s documentation can be found here:
+
+- <https://raymondbalise.github.io/rUM/>
+- <https://github.com/RaymondBalise/rUM>
+
+## How do I get `quarto` and `rUM`? (Add a “quart o’ `rUM`”!)
+
+1.  Modern version RStudio (v2022.07 or later) ships with Quarto but you
+    can install the latest version of Quarto from
+    [here](https://quarto.org/docs/get-started/).
+
+2.  Add `rUM` to your computer by:
+
+    - using RStudio: click on the Packages tab in the bottom right
+      windowpane, click the Install button, type ***rUM***, and click
+      Install.
+    - downloading rUM from CRAN and installing it by running this code
+      in R console:
+
+    ``` r
+    install.packages("rUM")
+    ```
+
+    - downloading the latest version of rUM from GitHub by running
+      commands into the R console:
+
+    ``` r
+    if (!requireNamespace("remotes")) install.packages("remotes")
+    remotes::install_github("RaymondBalise/rUM")
+    ```
+
+3.  Use `rUM` by running this in the console of RStudio:
+
+``` r
+library(rUM)
+```
+
+## Ordering `rUM` from the Menu
+
+To create a research project that uses `rUM`, follow these steps. This
+will initialize a new RStudio project that has an
+[`analysis.qmd`](#fig:analysis_quarto_file) Quarto file using the
+`tidyverse` and `conflicted` packages and some other useful files which
+are described [below](#stuff).
+
+1.  Using the RStudio menus, choose: File \> New Project \> New
+    Directory
+
+2.  Scroll down and then select **`rUM` Research Project Template**
+
+    ![rUM Research Project Template](project_template.png)
+    rUM Research Project Template
+
+3.  Specify the location of where your research project will be saved
+
+    ![Choose location to save your rUM project in
+    RStudio](save_quarto_project_here.png)
+    Choose location to save your rUM project in RStudio
+
+## Add `rUM` into an existing folder/directory that does not have an RStudio project.
+
+What if you have already created a folder containing the important files
+for your project? Create a new project in your existing folder! This
+will now be your project directory (complete with a `.Rproj` file).
+
+1.  Navigate to File \> New Project \> Existing Directory
+
+2.  Specify the location of where your research project will be saved
+
+    ![Existing project working directory window in
+    RStudio](existing_directory.png)
+    Existing project working directory window in RStudio
+
+3.  Run the following script in your console:
+
+``` r
+# Change the text inside the quotes on the next line to indicate the path to your folder/directory.
+PATH <- "~/Documents/blah"   
+
+make_project(PATH, type = "Quarto (analysis.qmd)")
+```
+
+## What is in the project? (What is served with your `rUM`?)
+
+A new project directory is created and it will be populated with [these
+files](#fig:created_rUM_files):
+
+- An aggressive `.gitignore` to help prevent the unintended sharing of
+  sensitive study information or protected health information (PHI).
+- [`analysis.qmd`](#fig:analysis_quarto_file) is a Quarto template for
+  writing your research project. It has a preconfigured YAML header;
+  Introduction, Methods, Results, Conclusion, and Reference sections;
+  and a code chunk to construct your bibliography using
+  [`knitr::write_bib()`](https://rdrr.io/pkg/knitr/man/write_bib.html).
+- A `README.md` template containing structured sections for
+  comprehensive project documentation, including study details, setup
+  instructions, and file descriptions.
+- A `dated_progress_notes.md` file that automatically tracks project
+  milestones, starting with the project creation date.
+- An empty folder named `data`. This folder is listed within the
+  `.gitignore`. That means that git should not track these files. This
+  should help prevent data leakage but be sure to talk to a data
+  security expert before sharing any biomedical projects on websites
+  like GitHub.
+- A `.Rproj` file with the same name as your project folder.
+- Two text files, `packages.bib` and `references.bib`, which are used to
+  hold details for your paper’s bibliography. Refer to the Methods and
+  References sections, respectively, within the
+  [`analysis.qmd`](#fig:analysis_quarto_file) file for initial examples
+  of how to add/use references.
+- [`the-new-england-journal-of-medicine.csl`](https://www.zotero.org/styles?q=id%3Athe-new-england-journal-of-medicine)
+  is the citation style language (CSL) based on the *New England Journal
+  of Medicine* requirements.
+- [`apa.csl`](https://www.zotero.org/styles?q=id%3Aapa) is the citation
+  style language (CSL) based on the *American Psychological Association
+  7th edition* requirements.
+- **Quarto only**: `custom.scss` provides styling customization options
+  for your Quarto document. Additional style sheets can be added using
+  [`write_scss()`](https://raymondbalise.github.io/rUM/reference/write_scss.md).
+
+Newly created files:
+
+  
+
+![Display of newly created rUM project files in the RStudio Files
+pane](created_rUM_quarto_files.png)
+
+Display of newly created rUM project files in the RStudio Files pane
+
+`analysis.qmd`:
+
+  
+
+![Screenshot of analysis.qmd template structure using the visual editor
+layout](analysis_quarto_file.png)
+
+Screenshot of analysis.qmd template structure using the visual editor
+layout
+
+### Session
+
+If you are new to R, ignore this.
+
+``` r
+sessionInfo()
+#> R version 4.5.2 (2025-10-31)
+#> Platform: x86_64-pc-linux-gnu
+#> Running under: Arch Linux
+#> 
+#> Matrix products: default
+#> BLAS:   /usr/lib/libblas.so.3.12.0 
+#> LAPACK: /usr/lib/liblapack.so.3.12.0  LAPACK version 3.12.0
+#> 
+#> locale:
+#>  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+#>  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+#>  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+#>  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+#>  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+#> [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+#> 
+#> time zone: America/Chicago
+#> tzcode source: system (glibc)
+#> 
+#> attached base packages:
+#> [1] stats     graphics  grDevices utils     datasets  methods   base     
+#> 
+#> loaded via a namespace (and not attached):
+#>  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    
+#>  [5] xfun_0.56         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
+#>  [9] rmarkdown_2.30    lifecycle_1.0.5   cli_3.6.5         sass_0.4.10      
+#> [13] pkgdown_2.2.0     textshaping_1.0.4 jquerylib_0.1.4   systemfonts_1.3.1
+#> [17] compiler_4.5.2    tools_4.5.2       ragg_1.5.0        bslib_0.9.0      
+#> [21] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        jsonlite_2.0.0   
+#> [25] rlang_1.1.7       fs_1.6.6          htmlwidgets_1.6.4
+```
