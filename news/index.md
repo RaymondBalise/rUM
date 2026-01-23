@@ -1,5 +1,31 @@
 # Changelog
 
+## rUM 2.3.0 (rUM Swizzle)
+
+### Enhancements
+
+- The `template` argument for
+  [`write_slides()`](https://raymondbalise.github.io/rUM/reference/write_slides.md)
+  now uses `"rmed"` instead of `"rmed2025"`. The old value still works
+  but is no longer documented. Year references removed from RMed
+  templates and files.
+
+### Minor improvements
+
+- Removed references to 2025 from RMed templates & files.
+
+### Fixes
+
+- Breaking changes to {purrr} in version 1.2.0 required internal changes
+  to
+  [`write_slides()`](https://raymondbalise.github.io/rUM/reference/write_slides.md).
+  Uses [`walk()`](https://purrr.tidyverse.org/reference/map.html)
+  instead of
+  [`map_chr()`](https://purrr.tidyverse.org/reference/map.html) to
+  download `"rmed"` slide art & files. See
+  <https://purrr.tidyverse.org/news/index.html#breaking-changes-1-2-0>
+  for more information.
+
 ## rUM 2.2.1
 
 - Fix bug in write_man() that showed ordered factors as factors

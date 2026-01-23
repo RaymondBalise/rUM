@@ -63,7 +63,7 @@ write_slides(
 
   - optional: `"miami"` for a University of Miami theme.
 
-  - optional: `"rmed2025"` for a R/Med 2025 theme.
+  - optional: `"rmed"` for a R/Med theme.
 
 - format:
 

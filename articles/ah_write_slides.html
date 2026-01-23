@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rUM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,8 +96,8 @@ rest is the same old R Markdown and Quarto magic you already know
 augmented to give you control of things like slide transitions and
 animations. To learn how to make beautiful slides take a look <a href="https://quarto.org/docs/presentations/revealjs/" class="external-link">here</a>.</p>
 <p>The <code><a href="../reference/write_slides.html">write_slides()</a></code> function also provides an example of
-a complex template, the slide deck for the R Medicine 2025 conference,
-which features details like a image on the title page, custom coloring,
+a complex template, the slide deck for the R Medicine conference, which
+features details like a image on the title page, custom coloring,
 details on where viewers can find your slides, and custom logos. To make
 a fancy slide deck, all you need to do is swap out a few image files and
 specify your content.</p>
@@ -118,15 +118,15 @@ that shows code chunks with the colors of RStudio</li>
 set coloring and font options for your slide deck.</li>
 </ol>
 <div class="section level3">
-<h3 id="the-r-medicine-2025-template">The R Medicine 2025 Template<a class="anchor" aria-label="anchor" href="#the-r-medicine-2025-template"></a>
+<h3 id="the-r-medicine-template">The R Medicine Template<a class="anchor" aria-label="anchor" href="#the-r-medicine-template"></a>
 </h3>
-<p>When you use the <code>template = "rmed2025"</code> argument to
+<p>When you use the <code>template = "rmed"</code> argument to
 <code><a href="../reference/write_slides.html">write_slides()</a></code> you get a folder called <strong>img</strong>
 in the slides folder. For example, you could type:</p>
 <pre><code><span><span class="fu">rUM</span><span class="fu">::</span><span class="fu"><a href="../reference/write_slides.html">write_slides</a></span><span class="op">(</span></span>
 <span>  filenames <span class="op">=</span> <span class="st">"slide_demo"</span>, </span>
 <span>  path <span class="op">=</span> <span class="st">"~/Desktop/"</span>, </span>
-<span>  template <span class="op">=</span> <span class="st">"rmed2025"</span></span>
+<span>  template <span class="op">=</span> <span class="st">"rmed"</span></span>
 <span><span class="op">)</span></span></code></pre>
 <p>It contains a html file you don’t want to touch and a few image files
 that you will replace with your own files.</p>

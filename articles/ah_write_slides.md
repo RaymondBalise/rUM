@@ -22,10 +22,10 @@ animations. To learn how to make beautiful slides take a look
 The
 [`write_slides()`](https://raymondbalise.github.io/rUM/reference/write_slides.md)
 function also provides an example of a complex template, the slide deck
-for the R Medicine 2025 conference, which features details like a image
-on the title page, custom coloring, details on where viewers can find
-your slides, and custom logos. To make a fancy slide deck, all you need
-to do is swap out a few image files and specify your content.
+for the R Medicine conference, which features details like a image on
+the title page, custom coloring, details on where viewers can find your
+slides, and custom logos. To make a fancy slide deck, all you need to do
+is swap out a few image files and specify your content.
 
 ## Getting Started
 
@@ -41,9 +41,9 @@ You will get a folder called **slides** that contains three files.
 3.  A Sassy Cascading Style Sheet file, named slides.scss, that lets you
     set coloring and font options for your slide deck.
 
-### The R Medicine 2025 Template
+### The R Medicine Template
 
-When you use the `template = "rmed2025"` argument to
+When you use the `template = "rmed"` argument to
 [`write_slides()`](https://raymondbalise.github.io/rUM/reference/write_slides.md)
 you get a folder called **img** in the slides folder. For example, you
 could type:
@@ -51,7 +51,7 @@ could type:
     rUM::write_slides(
       filenames = "slide_demo", 
       path = "~/Desktop/", 
-      template = "rmed2025"
+      template = "rmed"
     )
 
 It contains a html file you don’t want to touch and a few image files

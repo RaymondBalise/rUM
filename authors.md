@@ -21,13 +21,13 @@ Source:
 [`DESCRIPTION`](https://github.com/RaymondBalise/rUM/blob/master/DESCRIPTION)
 
 Balise R, Odom G, Grealis K, Cardozo F (2026). *rUM: R Templates from
-the University of Miami*. R package version 2.2.1,
+the University of Miami*. R package version 2.3.0,
 <https://raymondbalise.github.io/rUM/>.
 
     @Manual{,
       title = {rUM: R Templates from the University of Miami},
       author = {Raymond Balise and Gabriel Odom and Kyle Grealis and Francisco Cardozo},
       year = {2026},
-      note = {R package version 2.2.1},
+      note = {R package version 2.3.0},
       url = {https://raymondbalise.github.io/rUM/},
     }

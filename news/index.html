@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rUM</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,21 @@
       <small>Source: <a href="https://github.com/RaymondBalise/rUM/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.0" id="rum-230-rum-swizzle">rUM 2.3.0 (rUM Swizzle)<a class="anchor" aria-label="anchor" href="#rum-230-rum-swizzle"></a></h2>
+<div class="section level3">
+<h3 id="enhancements-2-3-0">Enhancements<a class="anchor" aria-label="anchor" href="#enhancements-2-3-0"></a></h3>
+<ul><li>The <code>template</code> argument for <code><a href="../reference/write_slides.html">write_slides()</a></code> now uses <code>"rmed"</code> instead of <code>"rmed2025"</code>. The old value still works but is no longer documented. Year references removed from RMed templates and files.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-improvements-2-3-0">Minor improvements<a class="anchor" aria-label="anchor" href="#minor-improvements-2-3-0"></a></h3>
+<ul><li>Removed references to 2025 from RMed templates &amp; files.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="fixes-2-3-0">Fixes<a class="anchor" aria-label="anchor" href="#fixes-2-3-0"></a></h3>
+<ul><li>Breaking changes to {purrr} in version 1.2.0 required internal changes to <code><a href="../reference/write_slides.html">write_slides()</a></code>. Uses <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">walk()</a></code> instead of <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr()</a></code> to download <code>"rmed"</code> slide art &amp; files. See <a href="https://purrr.tidyverse.org/news/index.html#breaking-changes-1-2-0" class="external-link uri">https://purrr.tidyverse.org/news/index.html#breaking-changes-1-2-0</a> for more information.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.1" id="rum-221">rUM 2.2.1<a class="anchor" aria-label="anchor" href="#rum-221"></a></h2>
 <ul><li>Fix bug in write_man() that showed ordered factors as factors</li>
