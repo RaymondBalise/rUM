@@ -1,3 +1,8 @@
+# rUM 2.2.1
+
++ Fix bug in write_man() that showed ordered factors as factors
+
+
 # rUM 2.2.0 (rUM Runner)
 
 CRAN release: 2025-07
