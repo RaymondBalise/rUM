@@ -1,4 +1,4 @@
-# rUM 2.3.0
+# rUM 2.3.0 (rUM Swizzle)
 
 ## Enhancements
 * The `template` argument for `write_slides()` now uses `"rmed"` instead of `"rmed2025"`. The old value still works but is no longer documented. Year references removed from RMed templates and files.
