@@ -1,0 +1,18 @@
+pandoc: 3.1.11
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  aa_using_posit_cloud: aa_using_posit_cloud.html
+  ab_make_research_project: ab_make_research_project.html
+  ac_make_research_project_markdown: ac_make_research_project_markdown.html
+  ad_R_Markdown_Templates: ad_R_Markdown_Templates.html
+  ae_make_a_package: ae_make_a_package.html
+  af_show_example: af_show_example.html
+  ag_write_scss: ag_write_scss.html
+  ah_write_slides: ah_write_slides.html
+  ai_find_show_slides: ai_find_show_slides.html
+  aj_write_man: aj_write_man.html
+last_built: 2026-01-23T14:34Z
+urls:
+  reference: https://raymondbalise.github.io/rUM/reference
+  article: https://raymondbalise.github.io/rUM/articles
