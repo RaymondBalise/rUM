@@ -157,7 +157,7 @@ write_man <- function(the_dataset) {
       cat("#' |                |               |\n", file = file_conn)
       cat(description, file = file_conn)
       cat("#'\n", file = file_conn)
-    } else if (var_type == "factor") {
+    } else if (var_type %in% c("factor", "ordered")) {
       # For factor variables, include levels information
       cat("#'\n", file = file_conn)
       first_level <- levels(the_dataset[[var_name]])[1]
@@ -170,7 +170,11 @@ write_man <- function(the_dataset) {
         ))
       }
       
-      cat(paste0("#' | *Type:*        | factor (First/Reference level = `", first_level, "`) |\n"), file = file_conn)
+      if (class(the_dataset[[var_name]])[1] == "ordered") {
+        cat(paste0("#' | *Type:*        | Ordered factor (First/Reference level = `", first_level, "`) |\n"), file = file_conn)
+      } else {
+        cat(paste0("#' | *Type:*        | factor (First/Reference level = `", first_level, "`) |\n"), file = file_conn)
+      }
       cat("#' | -------------- | ---------------------------------------------------- |\n", file = file_conn)
       cat("#' |                |                                                      |\n", file = file_conn)
       cat(description, file = file_conn)

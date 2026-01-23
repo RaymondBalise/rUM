@@ -9,3 +9,4 @@
 ^Meta$
 ^codecov\.yml$
 ^inst/img/*$
+.github/
