@@ -160,11 +160,6 @@ _bookdown_files/
 _site/
 
 !inst/gists/clean_title_page.html
-!docs/articles/*.png
-!docs/articles/*.jpg
-!docs/articles/*.html
 
-!docs/reference/*.html
-!docs/reference/figures/*.png
-
-!docs/*
+# Render pkgdown site from gh-pages
+docs/

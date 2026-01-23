@@ -39,7 +39,7 @@ including content.}
 layouts and formatting (default: "none")
 \itemize{
 \item optional: \code{"miami"} for a University of Miami theme.
-\item optional: \code{"rmed2025"} for a R/Med 2025 theme.
+\item optional: \code{"rmed"} for a R/Med theme.
 }}
 
 \item{format}{Character string. Slide format to use. Currently supports 'reveal.js',

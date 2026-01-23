@@ -33,14 +33,14 @@
 #'   layouts and formatting (default: "none")
 #'
 #'   * optional: \code{"miami"} for a University of Miami theme.
-#'   * optional: \code{"rmed2025"} for a R/Med 2025 theme.
+#'   * optional: \code{"rmed"} for a R/Med theme.
 #'
 #' @param format Character string. Slide format to use. Currently supports 'reveal.js',
 #'   with planned support for PowerPoint and Beamer in future releases.
 #' 
 #' @importFrom glue glue
 #' @importFrom here here
-#' @importFrom purrr map_chr
+#' @importFrom purrr walk
 #' @importFrom stringr str_detect str_replace_all
 #' @importFrom usethis edit_file
 #' 
@@ -148,7 +148,11 @@ write_slides <- function(
 
   # Part 1: Determine the slides template type:
   # list of valid slide templates
-  valid_templates <- c("miami", "rmed2025")
+  valid_templates <- c("miami", "rmed")
+
+  # FIX FOR 2.2.1 ---
+  # for deprecated template argument to allow old users to continue:
+  if (template == "rmed2025") template <- "rmed"
 
   # 1a. Check if chosen template is an available template
   if (template %in% valid_templates) {
@@ -196,8 +200,8 @@ write_slides <- function(
 
   # Check for SCSS file in slide folder
   if (!file.exists(file.path(path, "slides.scss"))) {
-    if (template == "rmed2025") {
-      # For R/Med 2025:
+    if (template == "rmed") {
+      # For R/Med themed slides:
       # SCSS file
       rum_scss_path <- system.file(
         "gists/slides_example_rmed.scss",
@@ -218,7 +222,10 @@ write_slides <- function(
       message("Downloading artwork files...")
       # Download art files from GitHub
       suppressWarnings(
-        map_chr(
+        # Change from `map_chr` to `walk`
+        # See this about {purrr}: https://purrr.tidyverse.org/news/index.html#breaking-changes-1-2-0
+        # "`map_chr()` no longer coereces from logical, integer, or double to strings."
+        walk(
           rmed_art, 
           \(x) download.file(
             url = glue("https://github.com/RaymondBalise/rUM/raw/master/inst/img/{x}"),
