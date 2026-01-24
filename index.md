@@ -33,25 +33,30 @@ To see a tutorial video on rUM check out our [presentation at R Medicine
   and Quarto styling files
   ([`write_scss()`](https://raymondbalise.github.io/rUM/reference/write_scss.md)).
 
-- 💥 NEW in Version 2.2.0 (rUM Runner) 💥
+- `rUM` can make documentation/manual pages for datasets with the
+  [`write_man()`](https://raymondbalise.github.io/rUM/reference/write_man.md)
+  function.  
 
-  - `rUM` can make documentation/manual pages for datasets with the
-    [`write_man()`](https://raymondbalise.github.io/rUM/reference/write_man.md)
-    function.  
-  - `rUM` now includes templates to produce slide decks with the
-    [`write_slides()`](https://raymondbalise.github.io/rUM/reference/write_slides.md)
-    function. There are now functions
-    ([`find_slides()`](https://raymondbalise.github.io/rUM/reference/find_slides.md)
-    and
-    [`show_slides()`](https://raymondbalise.github.io/rUM/reference/show_slides.md))
-    to find and render/show slides that are included with a package.
-  - [`write_quarto()`](https://raymondbalise.github.io/rUM/reference/write_quarto.md)
-    now accepts an `example` argument. If this is set to `TRUE`, then it
-    will use the Quarto paper template with examples of a table and
-    figure with cross-referencing. If this is `FALSE`, then it will use
-    the Quarto paper template without examples for tables. The default
-    value is `NULL` and will provide a minimal Quarto template. See
-    `?write_quarto()` for more documentation.
+- `rUM` now includes templates to produce slide decks with the
+  [`write_slides()`](https://raymondbalise.github.io/rUM/reference/write_slides.md)
+  function. There are now functions
+  ([`find_slides()`](https://raymondbalise.github.io/rUM/reference/find_slides.md)
+  and
+  [`show_slides()`](https://raymondbalise.github.io/rUM/reference/show_slides.md))
+  to find and render/show slides that are included with a package.
+
+- [`write_quarto()`](https://raymondbalise.github.io/rUM/reference/write_quarto.md)
+  now accepts an `example` argument. If this is set to `TRUE`, then it
+  will use the Quarto paper template with examples of a table and figure
+  with cross-referencing. If this is `FALSE`, then it will use the
+  Quarto paper template without examples for tables. The default value
+  is `NULL` and will provide a minimal Quarto template. See
+  `?write_quarto()` for more documentation.
+
+- 💥 NEW in Version 2.3.0 (rUM Swizzle) 💥
+
+  - Improvements to the R Medicine slide templates & files.
+  - Minor bug fixes.
 
 ## How do I add rUM?
 
