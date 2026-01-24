@@ -62,3 +62,18 @@ $link-color: $primary;
   max-width: unset !important;
   max-height: unset !important;
 }
+
+.reveal div.sourceCode {
+  border: 1px solid #ccc !important;
+  box-shadow: none !important;
+}
+
+.reveal pre {
+  /* Remove the inner border */
+  border: none !important;  
+  box-shadow: none !important;
+}
+
+.reveal pre code {
+  background-color: #F1F3F5;
+}
