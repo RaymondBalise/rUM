@@ -9,20 +9,20 @@
 # rUM <a href='https://raymondbalise.github.io/rUM/'><img src='man/figures/logo.png' align="right" width="139" /></a>
 This is a collection of R things from your friends at UM (The University of Miami).
 
-To see a tutorial video on rUM check out our [presentation at R Medicine 2025](https://www.youtube.com/watch?v=03_5KrQA-mo&list=PL4IzsxWztPdmU2q31ZrTCASr78e0jpKux&index=26){target="_blank"}.
+To see a tutorial video on rUM check out our [presentation at R Medicine 2025](https://www.youtube.com/watch?v=03_5KrQA-mo&list=PL4IzsxWztPdmU2q31ZrTCASr78e0jpKux&index=26).
 
 `rUM` includes:
 
 * A research project template.  It creates a new RStudio project that has your choice of an `analysis.qmd` Quarto file or `analysis.Rmd` R markdown file that load the tidyverse and conflicted packages and set many useful default details.  These files can also include example tables and figures.
 
 * `rUM` streamlines creating a package that include a paper outline with the `make_package()` function.
-
 * `rUM` helps with project documentation files (`write_readme()` and `write_notes()`), and Quarto styling files (`write_scss()`).
-
-* 💥 NEW in Version 2.2.0 (rUM Runner) 💥 
-    + `rUM` can make documentation/manual pages for datasets with the `write_man()` function.  
-    + `rUM` now includes templates to produce slide decks with the `write_slides()` function.  There are now functions (`find_slides()` and `show_slides()`) to find and render/show slides that are included with a package.
-    + `write_quarto()` now accepts an `example` argument. If this is set to `TRUE`, then it will use the Quarto paper template with examples of a table and figure with cross-referencing. If this is `FALSE`, then it will use the Quarto paper template without examples for tables. The default value is `NULL` and will provide a minimal Quarto template. See `?write_quarto()` for more documentation.
++ `rUM` can make documentation/manual pages for datasets with the `write_man()` function.  
++ `rUM` now includes templates to produce slide decks with the `write_slides()` function.  There are now functions (`find_slides()` and `show_slides()`) to find and render/show slides that are included with a package.
++ `write_quarto()` now accepts an `example` argument. If this is set to `TRUE`, then it will use the Quarto paper template with examples of a table and figure with cross-referencing. If this is `FALSE`, then it will use the Quarto paper template without examples for tables. The default value is `NULL` and will provide a minimal Quarto template. See `?write_quarto()` for more documentation.
++ 💥 NEW in Version 2.3.0 (rUM Swizzle) 💥 
+   + Improvements to the R Medicine slide templates & files.
+   + Minor bug fixes.
 
 ## How do I add rUM?
 
