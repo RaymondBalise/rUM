@@ -1,6 +1,7 @@
    <!-- badges: start -->
    <!-- [![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen)](https://github.com/RaymondBalise/rUM) -->
   [![CRAN status](https://www.r-pkg.org/badges/version/rUM)](https://CRAN.R-project.org/package=rUM)
+  [![R-CMD-check](https://github.com/RaymondBalise/rUM/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RaymondBalise/rUM/actions/workflows/R-CMD-check.yaml)
   [![Lifecycle: stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
   [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/rUM)](https://www.r-pkg.org/pkg/rUM)
   <!-- [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rUM)](https://cran.r-project.org/package=rUM) -->
