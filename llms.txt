@@ -2,6 +2,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rUM)](https://CRAN.R-project.org/package=rUM)
+[![R-CMD-check](https://github.com/RaymondBalise/rUM/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RaymondBalise/rUM/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN monthly
