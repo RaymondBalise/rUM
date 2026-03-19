@@ -9,6 +9,8 @@ date: last-modified
 date-format: "MMMM D, YYYY"
 format:
   revealjs:
+    link-external-newwindow: true
+    link-external-icon: false
     theme: 
       - default
       - slides.scss

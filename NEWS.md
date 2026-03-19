@@ -1,3 +1,15 @@
+# rUM 2.3.1 (patch release)
+
+## Enhancements
+* Adding to slides templates to open links in new tab and add default link icon:
+```
+format: 
+  revealjs:
+    link-external-newwindow: true
+    link-external-icon: false
+```
+
+
 # rUM 2.3.0 (rUM Swizzle)
 
 ## Enhancements
