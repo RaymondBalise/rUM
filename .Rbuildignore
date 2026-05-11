@@ -10,3 +10,7 @@
 ^codecov\.yml$
 ^inst/img/*$
 .github/
+^.claude$
+^CLAUDE\.md$
+^.gemini$
+^GEMINI\.md$

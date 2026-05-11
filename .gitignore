@@ -163,3 +163,10 @@ _site/
 
 # Render pkgdown site from gh-pages
 docs/
+
+
+# AI & LLM
+.claude
+CLAUDE.md
+.gemini
+GEMINI.md
