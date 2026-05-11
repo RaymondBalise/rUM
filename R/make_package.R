@@ -146,9 +146,9 @@ make_package <- function(
   #          Add template with or without included example?                   #
   #############################################################################
   if (is_quarto_project) {
-    .add_quarto_doc(example = example, path = updated_path)
+    .add_quarto_doc(example = example, path = updated_path, vignette = TRUE)
   } else {
-    .add_rmd_doc(example = example, path = updated_path)
+    .add_rmd_doc(example = example, path = updated_path, vignette = TRUE)
   }
 
   #############################################################################
@@ -232,9 +232,6 @@ make_package <- function(
   # Needed to prevent devtools::check() warning:
   cat("inst/.gitkeep\n", file = ".Rbuildignore", append = TRUE)
 
-  # Alter document template YAML for vignette builder
-  .rUM_modify_for_vignette(is_quarto_project = is_quarto_project)
-
   # Return to original location where rUM::make_project() was executed. See above comment.
   setwd(current_wd)
 
@@ -309,78 +306,6 @@ make_package <- function(
       "VignetteBuilder: knitr\n", 
       file = file.path("DESCRIPTION"),
       append = TRUE # add, don't overwrite current file
-    )
-  }
-}
-
-
-#----------------------------------------------------------------------------------------
-#' Modify the YAML header to write a vignette
-#' @description
-#' This helper functon will modify the YAML structure for the document template. It will
-#' evaluate the operating system and apply the appropriate new line syntax. Due to the 
-#' differences in Unix-based systems using \code{"\n"} versus Windows syntax to use
-#' \code{"\r\n"}, the search & replace must be carefully applied.
-#' 
-#' @param is_quarto_project Logical. Determines Quarto versus RMarkdown project.
-#' 
-#' @importFrom readr read_file write_file
-#' @importFrom stringr str_replace str_replace_all
-#' 
-#' @noRd
-.rUM_modify_for_vignette <- function(is_quarto_project) {
-  
-  # Setup OS-specific string parsing--------------------------------------------------
-  # Unix-based OS's use a end of line return like "\n"
-  # Windows uses a carriage return and line break like "\r\n"
-  # This section will adjust the YAML pattern to be read and replaced by inserting
-  # the appropriate line return items if on Windows:
-
-
-  # Original YAML content to be replaced
-  qmd_pattern <- "format:\n  html:\n    embed-resources: true   # true = a single file, false = multiple files\n    theme:\n      - default\n      - custom.scss"
-
-  rmd_pattern <- "output:\n  bookdown::html_document2:\n    number_sections: false\n"
-
-  # rUM will replace the pattern with this to be able write & create package vignettes
-  qmd_replacement <- "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{quarto::html}\n  %\\\\VignetteEncoding{UTF-8}"
-
-  rmd_replacement <- "output: rmarkdown::html_vignette\nvignette: >\n  %\\\\VignetteIndexEntry{your_title_goes_here}\n  %\\\\VignetteEngine{knitr::rmarkdown}\n  %\\\\VignetteEncoding{UTF-8}\n"
-
-  # Apply the OS-conditional change
-  if (.Platform$OS.type == 'windows') {
-    qmd_pattern <- str_replace_all(qmd_pattern, '\n', '\r\n')
-    qmd_replacement <- str_replace_all(qmd_replacement, '\n', '\r\n')
-    
-    rmd_pattern <- str_replace_all(rmd_pattern, '\n', '\r\n')
-    rmd_replacement <- str_replace_all(rmd_replacement, '\n', '\r\n')
-  }
-  #-----------------------------------------------------------------------------------
-
-  
-  # Append Vignette builder to DESCRIPTION file & modify YAML content
-  if (is_quarto_project) { # Quarto project
-    
-    # Replace the YAML pattern with the new structure for Quarto vignette:
-    write_file(
-      x = str_replace(
-        string = read_file("vignettes/analysis.qmd"),
-        pattern = qmd_pattern,
-        replacement = qmd_replacement
-      ), 
-      file = "vignettes/analysis.qmd"
-    )
-
-  } else { # Rmd project
-    
-    # Replace the YAML pattern with the new structure for Rmd vignette:
-    write_file(
-      x = str_replace(
-        string = read_file("vignettes/analysis.Rmd"),
-        pattern = rmd_pattern,
-        replacement = rmd_replacement
-        ), 
-      file = "vignettes/analysis.Rmd"
     )
   }
 }

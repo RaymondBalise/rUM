@@ -106,18 +106,25 @@
 #' @importFrom usethis ui_done
 #' 
 #' @noRd
-.add_quarto_doc <- function(example, path) {
-  if (example) {
-    invisible(file.copy(
-      from = system.file("gists/analysis_qmd_with_example.qmd", package = "rUM"),
-      to = file.path(path, "analysis.qmd")
-    ))
+.add_quarto_doc <- function(example, path, vignette = FALSE) {
+  if (vignette) {
+    gist <- if (example) {
+      "gists/analysis_qmd_vignette_with_example.qmd"
+    } else {
+      "gists/analysis_qmd_vignette_wo_example.qmd"
+    }
   } else {
-    invisible(file.copy(
-      from = system.file("gists/analysis_qmd_wo_example.qmd", package = "rUM"),
-      to = file.path(path, "analysis.qmd")
-    ))
+    gist <- if (example) {
+      "gists/analysis_qmd_with_example.qmd"
+    } else {
+      "gists/analysis_qmd_wo_example.qmd"
+    }
   }
+
+  invisible(file.copy(
+    from = system.file(gist, package = "rUM"),
+    to = file.path(path, "analysis.qmd")
+  ))
 
   # Provide user feedback
   ui_done("analysis.qmd has been created.")
@@ -136,18 +143,25 @@
 #' @importFrom usethis ui_done
 #' 
 #' @noRd
-.add_rmd_doc <- function(example, path) {
-  if (example) {
-    invisible(file.copy(
-      from = system.file("gists/analysis_rmd_with_example.Rmd", package = "rUM"),
-      to = file.path(path, "analysis.Rmd")
-    ))
+.add_rmd_doc <- function(example, path, vignette = FALSE) {
+  if (vignette) {
+    gist <- if (example) {
+      "gists/analysis_rmd_vignette_with_example.Rmd"
+    } else {
+      "gists/analysis_rmd_vignette_wo_example.Rmd"
+    }
   } else {
-    invisible(file.copy(
-      from = system.file("gists/analysis_rmd_wo_example.Rmd", package = "rUM"),
-      to = file.path(path, "analysis.Rmd")
-    ))
+    gist <- if (example) {
+      "gists/analysis_rmd_with_example.Rmd"
+    } else {
+      "gists/analysis_rmd_wo_example.Rmd"
+    }
   }
+
+  invisible(file.copy(
+    from = system.file(gist, package = "rUM"),
+    to = file.path(path, "analysis.Rmd")
+  ))
 
   # Provide user feedback
   ui_done("analysis.Rmd has been created.")
