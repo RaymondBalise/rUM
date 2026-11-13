@@ -6,12 +6,8 @@ output:
   bookdown::html_document2:
     df_print: kable
     toc: true
-    config:
-      toc:
-        collapsed: 2
     toc_depth: 4
     toc_float: true
-    
     theme: default
     highlight: tango
 ---
@@ -38,6 +34,11 @@ options(digits = 3) # round to three digits
 library(conflicted)
 conflict_prefer("filter", "dplyr", quiet = TRUE)
 conflict_prefer("lag", "dplyr", quiet = TRUE)
+if (requireNamespace("palmerpenguins", quietly = TRUE)) {
+  conflict_prefer("penguins", "palmerpenguins", quiet = TRUE)
+} else {
+  conflict_prefer("penguins", "modeldata", losers = "datasets", quiet = TRUE)
+}
 suppressPackageStartupMessages(library(tidyverse))
 
 # suppress "`summarise()` has grouped output by " messages
@@ -49,4 +50,4 @@ suppressPackageStartupMessages(library(tidymodels))
 tidymodels_prefer()
 ```
 
-# 
+# Introduction

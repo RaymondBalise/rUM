@@ -32,10 +32,11 @@ articles:
       - ah_write_slides
       - ai_find_show_slides
       - aj_write_man
+      - ak_ai_agents_and_skills
 
 reference:
   - title: "Project Setup"
-    desc: "Function for creating a Quarto or RMarkdown project"
+    desc: "Functions for creating a Quarto or R Markdown project"
     contents:
       - make_project
       - make_package

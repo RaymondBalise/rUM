@@ -36,17 +36,19 @@ Here we explain how to use rUM on Posit.Cloud (or other IDEs like Positron).
 
 The other vignettes for `rUM` show you that it integrates with the RStudio IDE menus.  Unfortunately, on Posit.Cloud the **New Project** button does not know about `rUM`. So you will need to type a command to create a new `rUM` based project. Because Posit.Cloud treats each project as its own walled-off environment, you need to tell `rUM` to only work in the current folder/directory.  Most of rUM's functions will do that automatically.  However, `rUM`'s primary function `make_project()` needs you to do this by specifying the location for the project to be `"./"`  (that is UNIX code shorthand that means "in this folder/directory").  Because Posit.Cloud projects have a **project.Rproj** file, you will also need to add the `overwrite = TRUE` option to tell rUM to overwrite the default Posit.Cloud project file.  Here is an example:
 
-```
+```r
 rUM::make_project("./", overwrite = TRUE)
 ```
 
-If you want to make a new project that will be a package with a vignette written with Quarto, use code like this:
+`make_project("./", overwrite = TRUE)` replaces the default Posit.Cloud `.Rproj` file and populates your research project files directly without extra prompts.
 
-```
-rUM::make_package('./', overwrite = TRUE) 
+If you want to make a new project that will be an R package with a vignette written with Quarto, first make sure your project folder name is a valid R package name (letters, numbers, and periods only, starting with a letter and at least two characters long, such as `my.study`), then run:
+
+```r
+rUM::make_package("./", overwrite = TRUE)
 ```
 
-After typing that in the console and pushing return/enter on your keyboard, you will need to confirm that you really want to make a new project.  Choose the option that means **Yes** when RStudio asks you to confirm that you want to overwrite the existing project and namespace files. Say **Yes** when it asks you if you want to quit and **Switch Projects**.  
+When running `make_package()`, RStudio may ask you to confirm overwriting the existing project and `NAMESPACE` files; choose the option that means **Yes**, and say **Yes** if asked to **Switch Projects**.
 
 ### Session
 

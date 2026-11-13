@@ -27,14 +27,14 @@ body > h1 > img {
 ## Introduction
 This is a collection of document templates, available through R, from your friends at the University of Miami (UM). $R+UM=rUM$
 
-The `rUM` package will help you create research manuscripts by removing the configuration hassles commonly encountered when learning to write papers using R. `rUM` will initialize a new RStudio project and a Markdown file that includes the outline for a research paper. The Markdown file comes preconfigured with a YAML header (don't worry if you don't know what that means yet) with code chunks to load the `tidyverse` and `conflicted` packages. Manuscript sections have been created for Introduction, Methods, Results, Conclusion, and References. The project also includes a `.gitignore` file which is designed to help protect against accidentally leaking data when using git with websites like [www.github.com](https://github.com/).
+The `rUM` package will help you create research manuscripts by removing the configuration hassles commonly encountered when learning to write papers using R. `rUM` will initialize a new RStudio project and an R Markdown file that includes the outline for a research paper. The R Markdown file comes preconfigured with a YAML header (don't worry if you don't know what that means yet) with code chunks to load the `tidyverse`, `tidymodels`, `conflicted`, and (when installed) `arrow` packages. Manuscript sections have been created for Abstract, Introduction, Methods, Results, Discussion, and References. The project also includes a `.gitignore` file which is designed to help protect against accidentally leaking data when using git with websites like [www.github.com](https://github.com/).
 
 rUM's documentation can be found here:
 
 -   <https://raymondbalise.github.io/rUM/>
 -   <https://github.com/RaymondBalise/rUM>
 
-## How do I get `RMarkdown` and `rUM`? (Add a "quart o' `rUM`"!)
+## How do I get `R Markdown` and `rUM`?
 
 1.  Modern version RStudio (v2022.07 or later) ships with R Markdown integrated into the RStudio IDE.
 
@@ -91,19 +91,20 @@ What if you have already created a folder containing the important files for you
 # Change the text inside the quotes on the next line to indicate the path to your folder/directory.
 PATH <- "~/Documents/blah"   
 
-make_project(PATH, type = "R Markdown (analysis.Rmd)")
+rUM::make_project(PATH, type = "R Markdown")
 ```
 
-## After your `rUM` has been served
+## After your `rUM` has been served {#stuff}
 
 A new project directory has been created and it will be populated with [these files](#fig:created_rUM_markdown_files):
 
 -   An aggressive `.gitignore` to help prevent the unintended sharing of sensitive study information or protected health information (PHI).
--   [`analysis.Rmd`](#fig:analysis_Rmd_file) is a Markdown template for writing your research project. It has a preconfigured YAML header; Introduction, Methods, Results, Conclusion, and Reference sections; and a code chunk to construct your bibliography using `knitr::write_bib()`.
+-   [`analysis.Rmd`](#fig:analysis_Rmd_file) is an R Markdown template for writing your research project. It has a preconfigured YAML header; Abstract, Introduction, Methods, Results, Discussion, and References sections; and a code chunk to construct your bibliography using `knitr::write_bib()`.
+-   A `README.md` template containing structured sections for comprehensive project documentation, including study details, setup instructions, and file descriptions.
+-   AI coding assistant instructions (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`) and `.agents/skills/` (`rum-workflow`, `rum-devlog` for `DECISIONS.md` and `CHANGELOG.md`, and `rum-commit`) tailored to `{rUM}` research projects. See the [Built-in AI Coding Assistants and Project Skills](ak_ai_agents_and_skills.html) vignette for details.
 -   An empty folder named `data`. This folder is listed within the `.gitignore`. That means that git should not track these files. This should help prevent data leakage but be sure to talk to a data security expert before sharing any biomedical projects on websites like GitHub.
 -   A `.Rproj` file with the same name as your project folder.
--   Two text files, `packages.bib` and `references.bib`, which are used to hold details for your paper's bibliography. Refer to the Methods and References sections, respectively, within the [`analysis.Rmd`](#fig:analysis_Rmd_file) file for initial examples of how to add/use references.
--   [`the-new-england-journal-of-medicine.csl`](https://www.zotero.org/styles?q=id%3Athe-new-england-journal-of-medicine) is the citation style language (CSL) based on the *New England Journal of Medicine* requirements.
+-   A `bib/` folder containing two bibliography files (`bib/packages.bib` and `bib/references.bib`) and three bundled Citation Style Language (`.csl`) files: [`apa.csl`](https://www.zotero.org/styles?q=id%3Aapa) (*American Psychological Association 7th edition*, set as the default), [`mla.csl`](https://www.zotero.org/styles?q=id%3Amodern-language-association) (*Modern Language Association 9th edition*), and [`the-new-england-journal-of-medicine.csl`](https://www.zotero.org/styles?q=id%3Athe-new-england-journal-of-medicine) (*New England Journal of Medicine*). Refer to the Methods and References sections within [`analysis.Rmd`](#fig:analysis_Rmd_file) for examples of how to add and use citations.
 
 Newly created files:
 
@@ -121,7 +122,7 @@ Newly created files:
 <p id="fig:analysis_Rmd_file" >
 </p>
 ``` 
-![Screenshot of analysis.qmd template structure using the visual editor layout](analysis_Rmd_file.jpg){width=80%}
+![Screenshot of analysis.Rmd template structure using the visual editor layout](analysis_Rmd_file.jpg){width=80%}
 
 
 
@@ -143,7 +144,7 @@ Newly created files:
 * pdf2 showing LaTeX with rUM
 * bookdown_site with rUM
 
-This will create a new subdirectory in your current working directory with the same name as the name of the `.Rmd` file you specified. Within this directory, you will find the `analysis.Rmd` R Markdown file. For example, if you created an R Markdown file called `wrangle_cytometry_data.Rmd` with the steps above, then your current directory will now have a subdirectory called `wrangle_cytometry_data/` which will contain the file `wrangle_cytometry_data.Rmd` and any subsequent files from the knitting process (such as `.PDF`, `.html`, or `.docx` files created by knitting the R Markdown document).
+This saves the `.Rmd` file directly in the directory you select (rather than creating an extra nested subdirectory). When choosing **bookdown_site with rUM**, save the root file as `index.Rmd`; default `style.css` and `bibliography.bib` files are copied automatically into the same directory.
 
 
 ### What are the headers
@@ -155,7 +156,7 @@ This is a basic web page
 This is a basic web page with a table of contents
 
 #### pdf2 showing LaTeX with rUM
-PDF report where table and figures don’t float to other pages. 
+PDF report where table and figures don't float to other pages. 
 
 #### bookdown_site with rUM
 A bookdown website with a good table of contents for a book

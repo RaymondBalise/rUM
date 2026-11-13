@@ -14,40 +14,63 @@ import(dplyr)
 import(quarto)
 importFrom(bookdown,html_document2)
 importFrom(conflicted,conflict_prefer)
-importFrom(dplyr,filter)
-importFrom(dplyr,mutate)
-importFrom(dplyr,pull)
-importFrom(dplyr,rowwise)
-importFrom(dplyr,tibble)
-importFrom(fs,path_ext_remove)
+importFrom(dplyr,
+  filter,
+  mutate,
+  pull,
+  rowwise,
+  tibble
+)
+importFrom(fs,
+  path_abs,
+  path_ext_remove,
+  path_rel
+)
 importFrom(glue,glue)
 importFrom(gtsummary,tbl_summary)
 importFrom(here,here)
 importFrom(labelled,var_label)
-importFrom(lifecycle,deprecate_warn)
+importFrom(lifecycle,
+  deprecate_warn,
+  deprecated,
+  is_present
+)
 importFrom(purrr,walk)
-importFrom(quarto,quarto_preview)
-importFrom(quarto,quarto_version)
-importFrom(readr,read_file)
-importFrom(readr,write_file)
+importFrom(quarto,
+  quarto_preview,
+  quarto_version
+)
+importFrom(readr,read_lines)
 importFrom(rio,import)
-importFrom(rlang,abort)
+importFrom(rlang,
+  abort,
+  is_interactive
+)
 importFrom(rmarkdown,html_document)
 importFrom(roxygen2,block_get_tag)
-importFrom(stringr,str_detect)
-importFrom(stringr,str_replace)
-importFrom(stringr,str_replace_all)
-importFrom(stringr,word)
+importFrom(stringr,
+  fixed,
+  regex,
+  str_detect,
+  str_replace_all,
+  str_squish
+)
 importFrom(table1,t1kable)
 importFrom(tidymodels,tidymodels_prefer)
 importFrom(tidyverse,tidyverse_logo)
-importFrom(usethis,create_package)
-importFrom(usethis,create_project)
-importFrom(usethis,edit_file)
-importFrom(usethis,ui_done)
-importFrom(usethis,ui_info)
-importFrom(usethis,ui_nope)
-importFrom(usethis,ui_yeah)
-importFrom(usethis,use_package)
-importFrom(utils,download.file)
-importFrom(utils,menu)
+importFrom(tools,R_user_dir)
+importFrom(usethis,
+  create_package,
+  create_project,
+  edit_file,
+  local_project,
+  ui_done,
+  ui_info,
+  use_package
+)
+importFrom(utils,
+  download.file,
+  menu,
+  unzip
+)
+importFrom(yaml,read_yaml)

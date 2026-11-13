@@ -7,16 +7,22 @@
 show_slides(package = NULL, deck = NULL, ...)
 }
 \arguments{
-\item{package}{Character. Provide the package containing one or more slide decks.}
+\item{package}{Character (or \code{"slide_finder"} object piped from
+\code{find_slides()}). Package containing one or more slide decks.}
 
-\item{deck}{Character. The name of the slide deck to render without ".qmd".}
+\item{deck}{Character. Name of the slide deck to render (without \code{".qmd"}).}
 
 \item{...}{Optional arguments passed to \code{quarto::quarto_preview()}.}
 }
+\value{
+Invisibly returns \code{NULL}.
+}
 \description{
-Render a Quarto slide deck from the supplied package in the Viewer or browser.
-For more information look in the
-\href{../doc/ah_write_slides.html}{Creating Slides with write_slides()} vignette.
+Render and preview a Quarto reveal.js slide deck from an installed or
+development package in the Viewer pane or browser. Slide assets are staged in
+a temporary directory so read-only system libraries and package source trees
+are never modified. For more information, see
+\code{vignette("ah_write_slides", package = "rUM")}.
 }
 \note{
 Uses \code{quarto::quarto_preview()} to display the slide deck in the
@@ -24,10 +30,7 @@ Viewer pane or browser.
 }
 \examples{
 if (interactive()) {
-  # Preview a known slide deck name from a package:
   show_slides(package = "rUM", deck = "rUM_the_package")
-
-  # Use find_slides to pipe the output:
   find_slides(package = "rUM") |> show_slides()
 }
 

@@ -1,93 +1,107 @@
 #' Create a New Quarto Document
 #'
-#' This function creates a new Quarto document (.qmd file) complete with a useful header. 
+#' This function creates a new Quarto document (`.qmd` file) complete with a
+#' starter YAML header.
 #'
-#' @param filename Character string. The name of the file without the '.qmd' extension.
-#'   Only letters, numbers, hyphens, and underscores are allowed.
-#' @param path Character string. Directory where the file will be created. Defaults to
-#'   the current project's base directory.
-#' @param example Logical. Will the analysis file include a paper example with table/
-#'   figure? Default is `NULL` and will use a default, non-paper template. If this is set
-#'   to `TRUE`, then it will use the Quarto paper template with examples of a table and 
-#'   figure with cross-referencing. If this is `FALSE`, then it will use the Quarto paper
-#'   template without examples for tables. 
-#' 
+#' @param filename Character string. Name of the file without the `.qmd`
+#'   extension. Only letters, numbers, hyphens, and underscores are allowed.
+#' @param path Character string. Directory where the file will be created.
+#'   Defaults to `here::here()`.
+#' @param example Logical or `NULL`. Default `NULL` writes a lean standalone
+#'   Quarto document. `TRUE` writes a manuscript template with worked table and
+#'   figure cross-references, custom SCSS, and `bib/` citations. `FALSE` writes
+#'   the manuscript template with placeholder chunks.
+#'
 #' @importFrom glue glue
 #' @importFrom here here
-#' @importFrom stringr str_detect str_replace_all
+#' @importFrom rlang is_interactive
+#' @importFrom stringr regex str_replace_all
 #' @importFrom usethis edit_file
+#' @importFrom yaml read_yaml
 #'
-#' @return Opens file after creating the Quarto document.
+#' @return Invisibly returns `NULL` (and opens the file when interactive).
 #'
 #' @examples
 #' \dontrun{
-#' # Create a new Quarto document
 #' write_quarto(filename = "data_cleaning", path = tempdir())
 #' }
 #' @export
-#'
 write_quarto <- function(filename = NULL, path = here(), example = NULL) {
-  # Validate path
-  if (!dir.exists(path)) dir.create(path)
-  .validate_path(path)
+  # Validate example and filename before creating any directories on disk
+  if (!is.null(example) && !.is_bool(example)) {
+    stop("Parameter `example` must be NULL, TRUE, or FALSE.")
+  }
 
-  # Validate filename: part 1
-  if (is.null(filename)) stop('Invalid filename. Please input a value.')
+  if (is.null(filename)) stop("Invalid filename. Please input a value.")
+  if (!is.character(filename) || length(filename) != 1L || is.na(filename)) {
+    stop("Invalid filename: must be character.")
+  }
 
-  # Remove .qmd if accidentally typed
-  filename <- str_replace_all(filename, '.qmd$', '')
-
-  # Validate filename: part 2
+  filename <- str_replace_all(
+    filename,
+    regex("\\.qmd$", ignore_case = TRUE),
+    ""
+  )
   .validate_filename(filename)
 
-  # Normalize the path for consistency
+  if (
+    is.null(path) ||
+      !is.character(path) ||
+      length(path) != 1L ||
+      is.na(path) ||
+      !nzchar(trimws(path))
+  ) {
+    stop("Invalid `path`. Please enter a valid project directory.")
+  }
+  if (!dir.exists(path)) {
+    dir.create(path, recursive = TRUE, showWarnings = FALSE)
+  }
+  .validate_path(path)
   path <- normalizePath(path, mustWork = TRUE)
 
   if (file.access(path, mode = 2) != 0) {
     stop(glue(
-      'You do not have permission to write to the path location: {path}\nTry `rUM::write_quarto(filename = "", path = "")`'
+      "You do not have permission to write to the path location: {path}\n",
+      "Specify a writable directory via `rUM::write_quarto(..., path = ...)`."
     ))
   }
 
-  # Set up full file path
-  the_quarto_file <- file.path(path, paste0(filename, '.qmd'))
-
-  # Check for existing Quarto doc
+  the_quarto_file <- file.path(path, paste0(filename, ".qmd"))
   if (file.exists(the_quarto_file)) {
     stop(glue("{filename}.qmd already exists in the specified path."))
   }
 
-  # Check if the user would like to use a paper or default template:
-  if (is.null(example)) {
-    # The user wants a generic non-paper template
-    template_path <- system.file('gists/default_quarto.qmd', package = 'rUM')
-
-    if (template_path == "") {
-      stop("Could not find Quarto template in package installation")
-    }
-    
-  } else if (!example) {
-    # The user wants our non-example paper template
-    template_path <- system.file('gists/analysis_qmd_wo_example.qmd', package = 'rUM')
-
-  } else {
-    # The user wants our example paper template
-    template_path <- system.file('gists/analysis_qmd_with_example.qmd', package = 'rUM')
+  if (
+    basename(path) == "vignettes" &&
+      file.exists(file.path(dirname(path), "DESCRIPTION"))
+  ) {
+    message(paste(
+      "Note: write_quarto() scaffolds a standalone Quarto document (without",
+      "`vignette:` package metadata). Use `usethis::use_vignette()` or",
+      "copy the `vignette:` YAML block from `vignettes/analysis.qmd` if",
+      "registering a package vignette."
+    ))
   }
 
-  # Write the selected template to the specified path
-  file.copy(from = template_path, to = the_quarto_file, overwrite = FALSE)
+  scaffold_path <- .get_rum_scaffold()
+  manifest <- read_yaml(
+    file.path(scaffold_path, "manifests", "quarto_standalone.yml")
+  )
+  variant <- .resolve_variant(manifest, list(example = example))
 
-  # Add the citation and bibliography files to the project path if they do not exist.
-  if (!is.null(example)) {
-    .add_citation_files(path)
-  }
+  .execute_kit(
+    scaffold_path = scaffold_path,
+    kit = variant,
+    target_path = path,
+    placeholders = list(filename = paste0(filename, ".qmd")),
+    overwrite = FALSE
+  )
 
-  # Open the new template upon successful copy
-  if (file.exists(the_quarto_file)) {
-    edit_file(the_quarto_file)
-  } else {
+  if (!file.exists(the_quarto_file)) {
     stop("The file does not exist.")
+  }
+  if (is_interactive()) {
+    edit_file(the_quarto_file)
   }
 
   invisible(NULL)

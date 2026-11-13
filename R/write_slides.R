@@ -1,74 +1,70 @@
 #' Create a Quarto slide deck template
 #'
 #' @description
-#' Creates a pre-formatted .qmd file for presentation slides using reveal.js 
-#' along with necessary supporting files (SCSS styling and RStudio theme). The 
-#' generated template includes optimized YAML configuration and slide structure 
-#' to quickly start building academic & professional presentations. For more 
-#' information look in the 
-#' [Creating Slides with write_slides()](../doc/ah_write_slides.html) vignette.
+#' Creates a pre-formatted `.qmd` file for presentation slides using reveal.js
+#' along with necessary supporting files (SCSS styling and RStudio theme). The
+#' generated template includes optimized YAML configuration and slide structure
+#' to quickly start building academic and professional presentations. For more
+#' information, see `vignette("ah_write_slides", package = "rUM")`.
 #'
-#' @param filenames Character vector with minimal length of 1. This allows for the ability
-#'   to batch create multiple slide decks in one function call.
-#' @param path Character string. Directory where the file will be created. Defaults to
-#'   the current project's base directory.
-#' @param new_folder Character. Default folder is \code{"slides"}. Options are:
+#' @param filenames Character vector with minimal length of 1. Allows batch
+#'   creation of multiple slide decks in one function call.
+#' @param path Character string. Directory where the file will be created.
+#'   Defaults to the current project's base directory.
+#' @param new_folder Character. Default folder is `"slides"`. Options are:
 #'
-#'   * \code{"none"}: No folder is created. All files (.qmd & other) are created
-#'   in the working directory (path of \code{here::here()}).
+#'   * `"none"`: No subfolder is created. All files (`.qmd` & styling) are
+#'   created directly in `path`.
 #'
-#'   * \code{"all"}: One folder is created for each value in the length of
-#'   \code{filenames}.
+#'   * `"slides_"` (or `"slide_"`): One folder is created by prepending
+#'   `"slides_"` to the first entry in `filenames`. If `filenames = "day_1"`,
+#'   the folder will be named `"slides_day_1"`.
 #'
-#'   * \code{"slide_"}: One folder is created by appending "slides_" to the first file
-#'   in \code{filenames} argument. If \code{filenames = "day_1"}, then the folder will
-#'   be named \code{"slides_day_1"}.
+#'   * A character value naming the subfolder.
 #'
-#'   * A character value.
+#' @param example Logical. Whether to include example slides demonstrating
+#'   content layouts.
 #'
-#' @param example Logical. Whether to include example slides with demonstrations of
-#'   including content.
+#' @param template Character. Case-insensitive slide theme template (default:
+#'   `"none"`):
 #'
-#' @param template Character. Whether to include a slide template for common slide
-#'   layouts and formatting (default: "none")
+#'   * `"none"`: Clean default reveal.js slide template.
+#'   * `"miami"`: University of Miami theme.
+#'   * `"rmed"`: R/Medicine conference theme.
 #'
-#'   * optional: \code{"miami"} for a University of Miami theme.
-#'   * optional: \code{"rmed"} for a R/Med theme.
+#' @param format Character string. Slide format to use. Currently supports
+#'   `"revealjs"`.
 #'
-#' @param format Character string. Slide format to use. Currently supports 'reveal.js',
-#'   with planned support for PowerPoint and Beamer in future releases.
-#' 
 #' @importFrom glue glue
 #' @importFrom here here
 #' @importFrom purrr walk
-#' @importFrom stringr str_detect str_replace_all
+#' @importFrom rlang is_interactive
+#' @importFrom stringr regex str_detect str_replace_all
 #' @importFrom usethis edit_file
-#' 
-#' @note Be sure to specify \code{path = "inst"} if you are adding slides to a package.
+#' @importFrom yaml read_yaml
 #'
-#' @return Invisibly returns NULL. The created .qmd file is automatically opened
-#'   in the RStudio editor upon successful creation.
+#' @note Specify `path = "inst"` if you are adding slides to an R package (saves
+#'   decks into `inst/slides/` so `find_slides()` and `show_slides()` can
+#'   discover them).
+#'
+#' @return Invisibly returns `NULL`. When interactive, the created `.qmd` file
+#'   is opened in the IDE editor.
 #'
 #' @details
-#' The function creates three files:
-#'   * A .qmd file with the specified filename containing the slide template
-#'   * A slides.scss file for custom styling
-#'   * An RStudio theme file for consistent code highlighting
+#' The function creates:
+#'   * A `.qmd` file for each entry in `filenames`
+#'   * A `slides.scss` file for custom styling
+#'   * An RStudio `.theme` file for code syntax highlighting
+#'   * Theme artwork in `img/` when `template = "rmed"`
 #'
-#' All filenames must contain only letters, numbers, hyphens, and underscores.
+#' Requires an internet connection on first use to download templates from
+#' `rum_templates`; downloaded templates are cached locally for offline use.
 #'
 #' @examples
 #' if (interactive()) {
-#'   # Create basic slides template in current directory
-#'   write_slides(filenames = "my_presentation")
-#'
-#'   # Create slides with example content in a specific directory
 #'   tmp <- tempdir()
+#'   write_slides(filenames = "my_presentation", path = tmp)
 #'   write_slides(filenames = "tutorial_slides", path = tmp, example = TRUE)
-#' 
-#'   # Create a slidedeck for a package in the inst directory
-#'   tmp <- tempdir()
-#'   write_slides(filenames = "tutorial_slides", path = 'inst', example = TRUE)
 #' }
 #'
 #' @export
@@ -80,231 +76,178 @@ write_slides <- function(
   template = "none",
   format = "revealjs"
 ) {
-  # Validate path
-  .validate_path(path)
-
-  # Validate filenames:
-  for (i in filenames) {
-    # Validate filenames: part 1
-    if (is.null(i)) stop('Invalid filename. Please input a value.')
-    if (str_detect(i, "/")) {
-      stop(
-        'Invalid filename. You included a forward slash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
-      )
-    }
-    if (str_detect(i, "\\\\")) {
-      stop(
-        'Invalid filename. You included a backslash in the file name. If you are trying to give a folder/directory location, use the `path =` argument.'
-      )
-    }
-    if (!str_detect(i, '^[a-zA-Z0-9_-]+$')) {
-      stop(
-        'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
-      )
-    }
-
-    # Remove .qmd if accidentally typed
-    i <- str_replace_all(i, '.qmd$', '')
-
-    # Validate filename: part 2
-    if (!is.character(i)) stop('Invalid filename: must be character.')
-    if (!str_detect(i, '^[a-zA-Z0-9_-]+$')) {
-      stop(
-        'Invalid filename. Use only letters, numbers, hyphens, and underscores.'
-      )
-    }
+  # 1) Validate scalar flags and strings before touching the filesystem
+  if (!.is_bool(example)) {
+    stop("Parameter `example` must be TRUE or FALSE.")
   }
 
-  # Validation check for new_folder:
-  if (!is.character(new_folder)) stop('Invalid filename: must be character.')
-  if (!str_detect(new_folder, '^[a-zA-Z0-9_-]+$')) {
-    stop(
-      'Invalid "new_folder" argument. Use only letters, numbers, hyphens, and underscores.'
-    )
+  if (
+    !is.character(template) ||
+      length(template) != 1L ||
+      is.na(template)
+  ) {
+    stop('Parameter `template` must be one of "none", "miami", or "rmed".')
+  }
+  template <- tolower(trimws(template))
+  if (identical(template, "rmed2025")) template <- "rmed"
+  valid_templates <- c("none", "miami", "rmed")
+  if (!template %in% valid_templates) {
+    stop('Parameter `template` must be one of "none", "miami", or "rmed".')
   }
 
-  # Check the new_folder argument:
-  if (new_folder == "none") {
-    path <- path
-  } else if (new_folder == "slides") {
-    path <- glue("{path}/slides")
-  } else if (new_folder %in% c("slides_", "slide_")) {
-    path <- glue("{path}/slides_{filenames[1]}")
-  } else {
-    path <- glue("{path}/{new_folder}")
+  if (
+    !is.character(format) ||
+      length(format) != 1L ||
+      is.na(format) ||
+      tolower(trimws(format)) != "revealjs"
+  ) {
+    stop('Parameter `format` currently only supports "revealjs".')
   }
 
-  # Create the slide deck directory:
-  if (!dir.exists(path)) dir.create(path)
+  if (is.null(filenames) || length(filenames) == 0L) {
+    stop("Invalid filename. Please input a value.")
+  }
+  if (!is.character(filenames) || anyNA(filenames)) {
+    stop("Invalid filename: must be character.")
+  }
+  filenames <- str_replace_all(
+    filenames,
+    regex("\\.qmd$", ignore_case = TRUE),
+    ""
+  )
+  walk(filenames, .validate_filename)
 
-  # Normalize the path for consistency
-  path <- normalizePath(path, mustWork = TRUE)
-
-  if (file.access(path, mode = 2) != 0) {
-    stop(glue(
-      'You do not have permission to write to the path location: {path}\nTry `rUM::write_quarto(filename = "", path = "")`'
+  if (
+    !is.character(new_folder) ||
+      length(new_folder) != 1L ||
+      is.na(new_folder)
+  ) {
+    stop('Invalid "new_folder": must be a single character string.')
+  }
+  if (!str_detect(new_folder, "^[a-zA-Z0-9_-]+$")) {
+    stop(paste(
+      'Invalid "new_folder" argument.',
+      "Use only letters, numbers, hyphens, and underscores."
     ))
   }
 
-  # Part 1: Determine the slides template type:
-  # list of valid slide templates
-  valid_templates <- c("miami", "rmed")
-
-  # FIX FOR 2.2.1 ---
-  # for deprecated template argument to allow old users to continue:
-  if (template == "rmed2025") template <- "rmed"
-
-  # 1a. Check if chosen template is an available template
-  if (template %in% valid_templates) {
-    # 1b. Check if using example themed template
-    if (example) {
-      slide_path <- glue("gists/quarto_slides_example_{template}.qmd")
-    } else {
-      slide_path <- glue("gists/quarto_slides_{template}.qmd")
+  # 2) Validate path (auto-creating missing package `inst` or `inst/slides`)
+  if (
+    !is.null(path) &&
+      is.character(path) &&
+      length(path) == 1L &&
+      !is.na(path) &&
+      nzchar(trimws(path)) &&
+      !dir.exists(path)
+  ) {
+    base_nm <- basename(path)
+    parent_nm <- dirname(path)
+    can_make_inst <- base_nm == "inst" && dir.exists(parent_nm)
+    can_make_inst_slides <- base_nm == "slides" &&
+      basename(parent_nm) == "inst" &&
+      (dir.exists(parent_nm) || dir.exists(dirname(parent_nm)))
+    if (can_make_inst || can_make_inst_slides) {
+      dir.create(path, recursive = TRUE, showWarnings = FALSE)
     }
-
-    # 2a. Check if template == "none"
-  } else if (template == "none") {
-    # 2b. Check if using example themed template
-    if (example) {
-      slide_path <- "slides/rUM_the_package.qmd"
-    } else {
-      slide_path <- "gists/quarto_slides.qmd"
-    }
-    
-    # 3. Supplied named template is not valid, so use generic template
-  } else {
-    slide_path <- "slides/rUM_the_word.qmd"
   }
+  .validate_path(path)
+  orig_path <- normalizePath(path, mustWork = TRUE)
 
-  # Complete template_path:
-  template_path <- system.file(slide_path, package = "rUM")
-
-  # Part 2: Create each slide .qmd file:
+  # 3) Resolve target slide directory (avoiding inst/slides/slides nesting)
+  slide_dir <- if (new_folder == "none") {
+    orig_path
+  } else if (new_folder == "slides" && basename(orig_path) == "slides") {
+    orig_path
+  } else if (new_folder == "slides") {
+    file.path(orig_path, "slides")
+  } else if (new_folder %in% c("slides_", "slide_")) {
+    file.path(orig_path, paste0("slides_", filenames[1]))
+  } else {
+    file.path(orig_path, new_folder)
+  }
 
   for (slide_file in filenames) {
-    # Set up full file path
-    the_quarto_file <- file.path(path, paste0(slide_file, '.qmd'))
-
-    # Check for existing Quarto doc
-    if (file.exists(the_quarto_file)) {
-      stop(glue(
-        "{the_quarto_file} already exists in the specified path."        
-      ))
+    candidate <- file.path(slide_dir, paste0(slide_file, ".qmd"))
+    if (file.exists(candidate)) {
+      stop(glue("{candidate} already exists in the specified path."))
     }
-
-    file.copy(from = template_path, to = the_quarto_file, overwrite = FALSE)
   }
 
-  # Part 3: Add SCSS file for slides:
+  # 4) Fetch external templates scaffold before mutating the filesystem
+  scaffold_path <- .get_rum_scaffold()
+  manifest <- read_yaml(file.path(scaffold_path, "manifests", "slides.yml"))
 
-  # Check for SCSS file in slide folder
-  if (!file.exists(file.path(path, "slides.scss"))) {
-    if (template == "rmed") {
-      # For R/Med themed slides:
-      # SCSS file
-      rum_scss_path <- system.file(
-        "gists/slides_example_rmed.scss",
-        package = "rUM"
-      )
-      # Create the img directory as referenced in the slide's YAML:
-      img_path <- glue("{path}/img")
-      if (!dir.exists(img_path)) dir.create(img_path)
-      
-      # Creata a list of the RMed-specific art files
-      rmed_art <- c(
-        "rmed_background.png",
-        "rmed_narrow.png",
-        "rmed.png",
-        "R-Med-25-Hex-Logo-with-background.png",
-        "rmed.ico"
-      )
-      message("Downloading artwork files...")
-      # Download art files from GitHub
-      suppressWarnings(
-        # Change from `map_chr` to `walk`
-        # See this about {purrr}: https://purrr.tidyverse.org/news/index.html#breaking-changes-1-2-0
-        # "`map_chr()` no longer coereces from logical, integer, or double to strings."
-        walk(
-          rmed_art, 
-          \(x) download.file(
-            url = glue("https://github.com/RaymondBalise/rUM/raw/master/inst/img/{x}"),
-            destfile = glue("{img_path}/{x}"), mode = "wb", quiet = TRUE
-          )
-        )
-      )
-      
-      # Add JavaScript HTML file that cleans up title page and adds slide content:
-      file.copy(
-        from = system.file("gists/clean_title_page.html", package = "rUM"),
-        to = file.path(img_path, "clean_title_page.html")
-      )
+  if (!dir.exists(slide_dir)) dir.create(slide_dir, recursive = TRUE)
+  target_dir <- normalizePath(slide_dir, mustWork = TRUE)
 
-    } else if (template == 'miami') {
-      # SCSS file
-      rum_scss_path <- system.file(
-        "gists/custom_miami.scss",
-        package = "rUM"
-      )
-
-    } else {
-      # Normal styling
-      rum_scss_path <- system.file('gists/slides.scss', package = 'rUM')
-    }
-
-    if (rum_scss_path == "") {
-      stop("Could not find slides.scss file in package installation")
-    }
-
-    # Where to write the scss file:
-    the_project_scss_file <- file.path(path, 'slides.scss')
-    file.copy(
-      from = rum_scss_path,
-      to = the_project_scss_file,
-      overwrite = FALSE
-    )
-  } else {
-    # Output when a SCSS file exists, but won't be overwritten
-    message(glue(
-      "A SCSS file has been found in the slides project location & will not be modified. Please create the slides in a different folder if you'd like to use the SCSS file from the {template} template."
+  if (file.access(target_dir, mode = 2) != 0) {
+    stop(glue(
+      "You do not have permission to write to: {target_dir}\n",
+      "Specify a writable directory via `rUM::write_slides(..., path = ...)`."
     ))
   }
 
-  # Part 4: Check for RStudio light theme file:
-  if (!file.exists(file.path(path, "rstudio_default-light.theme"))) {
-    # Add RStudio theme file
-    rs_theme_path <- system.file(
-      'gists/rstudio_default-light.theme',
-      package = 'rUM'
+  scss_already_exists <- file.exists(file.path(target_dir, "slides.scss"))
+
+  if (!is.null(manifest$common)) {
+    .execute_kit(
+      scaffold_path = scaffold_path,
+      kit = manifest$common,
+      target_path = target_dir,
+      overwrite = FALSE
     )
-    the_rstheme_file <- file.path(path, 'rstudio_default-light.theme')
-
-    if (rs_theme_path == "") {
-      stop(
-        "Could not find rstudio_default-light.theme file in package installation"
-      )
-    }
-
-    file.copy(from = rs_theme_path, to = the_rstheme_file, overwrite = FALSE)
   }
 
-  has_description_file <- list.files(
-    path = dirname(path),  # search one level up, essentially the package/project root 
-    pattern = "DESCRIPTION", 
-    full.names = TRUE
+  variant <- .resolve_variant(
+    manifest,
+    list(template = template, example = example)
   )
-  going_to_inst <- str_detect(new_folder, 'inst')
-
-  if (length(has_description_file) > 0 && !going_to_inst) {
-    warning('rUM has created your slide deck.\nHowever, we have detected that you are currently in a package environment. If your project does not have an "inst" directory/folder, make one. Move your slide\'s directory to the "inst" directory for find_slides() and show_slides() to work and to pass CRAN checks.')
+  for (slide_file in filenames) {
+    .execute_kit(
+      scaffold_path = scaffold_path,
+      kit = variant,
+      target_path = target_dir,
+      placeholders = list(filename = paste0(slide_file, ".qmd")),
+      overwrite = FALSE
+    )
   }
 
-  # Open the first slide file template upon successful copy
-  the_first_slide_file <- file.path(path, paste0(filenames[1], ".qmd"))
-  if (file.exists(the_first_slide_file)) {
-    edit_file(the_first_slide_file)
-  } else {
-    stop("The file does not exist.")
+  if (scss_already_exists) {
+    message(glue(
+      "A SCSS file has been found in the slides project location & will not ",
+      "be modified. Please create the slides in a different folder if you'd ",
+      "like to use the SCSS file from the {template} template."
+    ))
+  }
+
+  in_package <- file.exists(file.path(orig_path, "DESCRIPTION")) ||
+    file.exists(file.path(dirname(orig_path), "DESCRIPTION")) ||
+    (basename(orig_path) == "slides" &&
+      basename(dirname(orig_path)) == "inst" &&
+      file.exists(file.path(dirname(dirname(orig_path)), "DESCRIPTION")))
+
+  going_to_inst_slides <- grepl(
+    "(^|/|\\\\)inst(/|\\\\)slides($|/|\\\\)",
+    target_dir
+  )
+
+  if (in_package && !going_to_inst_slides) {
+    warning(paste0(
+      "rUM has created your slide deck.\n",
+      "However, we have detected that you are currently in a package ",
+      'environment. Place slide decks inside "inst/slides" (for example via ',
+      '`write_slides(..., path = "inst")`) so find_slides() and ',
+      "show_slides() can find them and CRAN checks pass."
+    ))
+  }
+
+  if (is_interactive()) {
+    walk(filenames, function(slide_file) {
+      the_quarto_file <- file.path(target_dir, paste0(slide_file, ".qmd"))
+      if (file.exists(the_quarto_file)) {
+        edit_file(the_quarto_file)
+      }
+    })
   }
 
   invisible(NULL)

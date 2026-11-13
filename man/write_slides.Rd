@@ -14,74 +14,69 @@ write_slides(
 )
 }
 \arguments{
-\item{filenames}{Character vector with minimal length of 1. This allows for the ability
-to batch create multiple slide decks in one function call.}
+\item{filenames}{Character vector with minimal length of 1. Allows batch
+creation of multiple slide decks in one function call.}
 
-\item{path}{Character string. Directory where the file will be created. Defaults to
-the current project's base directory.}
+\item{path}{Character string. Directory where the file will be created.
+Defaults to the current project's base directory.}
 
 \item{new_folder}{Character. Default folder is \code{"slides"}. Options are:
 \itemize{
-\item \code{"none"}: No folder is created. All files (.qmd & other) are created
-in the working directory (path of \code{here::here()}).
-\item \code{"all"}: One folder is created for each value in the length of
-\code{filenames}.
-\item \code{"slide_"}: One folder is created by appending "slides_" to the first file
-in \code{filenames} argument. If \code{filenames = "day_1"}, then the folder will
-be named \code{"slides_day_1"}.
-\item A character value.
+\item \code{"none"}: No subfolder is created. All files (\code{.qmd} & styling) are
+created directly in \code{path}.
+\item \code{"slides_"} (or \code{"slide_"}): One folder is created by prepending
+\code{"slides_"} to the first entry in \code{filenames}. If \code{filenames = "day_1"},
+the folder will be named \code{"slides_day_1"}.
+\item A character value naming the subfolder.
 }}
 
-\item{example}{Logical. Whether to include example slides with demonstrations of
-including content.}
+\item{example}{Logical. Whether to include example slides demonstrating
+content layouts.}
 
-\item{template}{Character. Whether to include a slide template for common slide
-layouts and formatting (default: "none")
+\item{template}{Character. Case-insensitive slide theme template (default:
+\code{"none"}):
 \itemize{
-\item optional: \code{"miami"} for a University of Miami theme.
-\item optional: \code{"rmed"} for a R/Med theme.
+\item \code{"none"}: Clean default reveal.js slide template.
+\item \code{"miami"}: University of Miami theme.
+\item \code{"rmed"}: R/Medicine conference theme.
 }}
 
-\item{format}{Character string. Slide format to use. Currently supports 'reveal.js',
-with planned support for PowerPoint and Beamer in future releases.}
+\item{format}{Character string. Slide format to use. Currently supports
+\code{"revealjs"}.}
 }
 \value{
-Invisibly returns NULL. The created .qmd file is automatically opened
-in the RStudio editor upon successful creation.
+Invisibly returns \code{NULL}. When interactive, the created \code{.qmd} file
+is opened in the IDE editor.
 }
 \description{
-Creates a pre-formatted .qmd file for presentation slides using reveal.js
+Creates a pre-formatted \code{.qmd} file for presentation slides using reveal.js
 along with necessary supporting files (SCSS styling and RStudio theme). The
 generated template includes optimized YAML configuration and slide structure
-to quickly start building academic & professional presentations. For more
-information look in the
-\href{../doc/ah_write_slides.html}{Creating Slides with write_slides()} vignette.
+to quickly start building academic and professional presentations. For more
+information, see \code{vignette("ah_write_slides", package = "rUM")}.
 }
 \details{
-The function creates three files:
+The function creates:
 \itemize{
-\item A .qmd file with the specified filename containing the slide template
-\item A slides.scss file for custom styling
-\item An RStudio theme file for consistent code highlighting
+\item A \code{.qmd} file for each entry in \code{filenames}
+\item A \code{slides.scss} file for custom styling
+\item An RStudio \code{.theme} file for code syntax highlighting
+\item Theme artwork in \verb{img/} when \code{template = "rmed"}
 }
 
-All filenames must contain only letters, numbers, hyphens, and underscores.
+Requires an internet connection on first use to download templates from
+\code{rum_templates}; downloaded templates are cached locally for offline use.
 }
 \note{
-Be sure to specify \code{path = "inst"} if you are adding slides to a package.
+Specify \code{path = "inst"} if you are adding slides to an R package (saves
+decks into \verb{inst/slides/} so \code{find_slides()} and \code{show_slides()} can
+discover them).
 }
 \examples{
 if (interactive()) {
-  # Create basic slides template in current directory
-  write_slides(filenames = "my_presentation")
-
-  # Create slides with example content in a specific directory
   tmp <- tempdir()
+  write_slides(filenames = "my_presentation", path = tmp)
   write_slides(filenames = "tutorial_slides", path = tmp, example = TRUE)
-
-  # Create a slidedeck for a package in the inst directory
-  tmp <- tempdir()
-  write_slides(filenames = "tutorial_slides", path = 'inst', example = TRUE)
 }
 
 }

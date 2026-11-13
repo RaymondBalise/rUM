@@ -2,39 +2,40 @@
 % Please edit documentation in R/write_man.R
 \name{write_man}
 \alias{write_man}
-\title{Write a manual page for package dataset documentation}
+\title{Write a manual page template for package dataset documentation}
 \usage{
 write_man(the_dataset)
 }
 \arguments{
-\item{the_dataset}{Dataset object (unquoted) or dataset as character (quoted)}
+\item{the_dataset}{Dataset object (unquoted, such as \code{mtcars} or
+\code{palmerpenguins::penguins}) or dataset name as a character string
+(\code{"mtcars"}).}
 }
 \value{
-A \code{.Rd} file in the \code{man} package directory corresponding to the
-name of the supplied dataset.
+Invisibly returns \code{NULL} after writing \verb{R/<dataset>.R}.
 }
 \description{
-This function produces a \code{roxygen2} R manual (man) page for a dataset that will
-be included in an R package. To be documented, the dataset needs to be in the global
-environment. The new documentation template will be named to match the datasets and
-will be saved in the R folder (i.e., using an \code{analysis} dataset will produce the
-\code{R/analysis.Rd} file). The page will indicate if the dataset is a data frame
-or tibble along with the number of rows and columns. For each variable documentation
-will indicate the variables a type, factor level information (if appropriate), and a
-generic description section. If the variable is labelled (using the labelled package
-or packages which use labelled, like \code{tidyREDCap}) the variable label will be
-used as the default description.
+Generates a \code{roxygen2} dataset documentation file inside \verb{R/} (for example,
+passing \code{penguins_clean} creates \code{R/penguins_clean.R}). Run
+\code{devtools::document()} (or \code{roxygen2::roxygenise()}) afterward to compile
+\verb{man/<dataset>.Rd}. The generated template records whether the dataset is a
+\code{data.frame} or \code{tibble}, its row and column counts, and each variable's
+type, factor levels (if applicable), and variable label (from \code{labelled} /
+\code{haven} / \code{tidyREDCap} when present).
 }
 \note{
-You will need to import the \code{roxygen2} package and add \code{Roxygen: list(markdown = TRUE)}
-to your DESCRIPTION file. If you made a project using rUM this happens automatically.
+Ensure \code{Roxygen: list(markdown = TRUE)} is set in \code{DESCRIPTION}
+(configured automatically by \code{rUM::make_package()}), save the dataset to
+\verb{data/} with \code{usethis::use_data()}, and run \code{devtools::document()} to
+generate \verb{man/<dataset>.Rd}.
 }
 \examples{
-if (interactive()) {
-  # Dataset object from Global Environment (unquoted)
+\dontrun{
+  # Inside an R package root containing an R/ folder:
   write_man(mtcars)
-  
-  # Dataset object from Global Environment as character string (quoted)
-  write_man("mtcars")
+
+  # Or pass a dataset name as a quoted string:
+  iris_copy <- iris
+  write_man("iris_copy")
 }
 }

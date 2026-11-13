@@ -4,48 +4,45 @@
 \alias{write_scss}
 \title{Create a Quarto SCSS file}
 \usage{
-write_scss(name = "custom", path = here(), add_to_yaml = FALSE)
+write_scss(
+  filename = "custom",
+  path = here(),
+  add_to_yaml = FALSE,
+  name = deprecated()
+)
 }
 \arguments{
-\item{name}{The name of the scss file without extension. Default \code{name} is
-"custom".}
+\item{filename}{Name of the SCSS file (with or without \code{.scss} extension).
+Defaults to \code{"custom"}.}
 
-\item{path}{The destination directory for the SCSS file. Defaults to \code{
-here::here()}.}
+\item{path}{Destination directory for the SCSS file. Defaults to
+\code{here::here()}.}
 
-\item{add_to_yaml}{Boolean. Add the new SCSS filename to YAML structure.}
+\item{add_to_yaml}{Logical. Append the SCSS filename to the \verb{theme:} list in
+\code{analysis.qmd}? Defaults to \code{FALSE}.}
+
+\item{name}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{filename} instead.}
 }
 \value{
-A \code{.scss} file to customize Quarto styling. If \code{name} is not
-"custom", the function will also attempt to update the Quarto document's YAML to
-include the new SCSS file while preserving any existing SCSS configurations.
+Invisibly returns \code{NULL}.
 }
 \description{
-This function creates the \code{.scss} file so that any Quarto project can be easily
-customized with SCSS styling variables, mixins, and rules. When creating additional
-SCSS files beyond the default \code{custom.scss}, the function will attempt to
-update the YAML of your Quarto document while preserving any existing SCSS
-configurations.
+This function creates a \code{.scss} file so that any Quarto project can be
+customized with SCSS styling variables, mixins, and rules. When
+\code{add_to_yaml = TRUE}, the function appends the SCSS file to the \verb{theme:}
+block of \code{analysis.qmd} while preserving existing theme cascade order.
 }
 \details{
-The function includes a robust YAML handling mechanism that:
-\itemize{
-\item Preserves existing YAML structure and indentation
-\item Safely adds new SCSS files without disrupting existing ones
-\item Provides manual instructions if the YAML structure differs from expected
-}
-
-For more information on customizing Quarto documents with SCSS, please refer to
+For more information on customizing Quarto documents with SCSS, refer to
 \url{https://quarto.org/docs/output-formats/html-themes.html#customizing-themes},
 \url{https://quarto.org/docs/output-formats/html-themes-more.html}, and
-\url{https://github.com/twbs/bootstrap/blob/main/scss/_variables.scss} will provide
-you with over 1500 lines of SCSS variables.
+\url{https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss} for
+over 1500 lines of SCSS variables.
 }
 \examples{
-# Create the default custom.scss in a temporary directory
-tmp <- tempdir()
-write_scss(name = "custom", path = tmp)
-
-# Add another SCSS file and update YAML in the temporary directory
-write_scss(name = "special_theme", path = tmp)
+if (interactive()) {
+  tmp <- tempdir()
+  write_scss(filename = "custom", path = tmp)
+  write_scss(filename = "special_theme", path = tmp)
+}
 }

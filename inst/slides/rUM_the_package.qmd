@@ -9,6 +9,8 @@ date: last-modified
 date-format: "MMMM D, YYYY"
 format:
   revealjs:
+    link-external-newwindow: true
+    link-external-icon: false  # true = show icon next to external links
     theme: 
       - default
       - slides.scss
@@ -31,7 +33,7 @@ knitr:
 editor_options:
   chunk_output_type: console
 editor: source
-highlight-style: rstudio_default-light.theme
+template-version: 1
 ---
  
 # Introduction
@@ -71,7 +73,7 @@ library(knitr)
 + Big Things... You can make:
 + Less Big Things...  You can add:
   + A README file with `write_readme()`
-  + A progress notes with `write_notes()`
+  + A Quarto document with `write_quarto()`
   + A scss style template with `write_scss()`
   + A manual page for a data set `write_man()`
 + Sorta Big Things... You can:

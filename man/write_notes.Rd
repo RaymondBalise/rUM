@@ -2,29 +2,34 @@
 % Please edit documentation in R/write_notes.R
 \name{write_notes}
 \alias{write_notes}
-\title{Create a project progress note}
+\title{Create a project progress note (Deprecated)}
 \usage{
 write_notes(path = here())
 }
 \arguments{
-\item{path}{The destination directory for the progress notes file. Defaults to \code{
-here::here()}.}
+\item{path}{The destination directory for the progress notes file. Defaults
+to \code{here::here()}.}
 }
 \value{
-Creates a chronological project progress notes tracker
+Invisibly returns \code{NULL} after creating
+\code{dated_progress_notes.md}.
 }
 \description{
-This function streamlines project documentation by creating and managing both README.md
-and dated_progress_notes.md files. It provides interactive prompts for existing files
-and maintains consistent project documentation structure.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{write_notes()} was deprecated in rUM 2.4.0 because scaffolded projects and
+packages now include built-in AI assistant instructions (\code{AGENTS.md}) and the
+\code{rum-devlog} skill (\code{DECISIONS.md} and \code{CHANGELOG.md} / \code{NEWS.md}) instead of
+\code{dated_progress_notes.md}.
 }
 \details{
-The dated_progress_notes.md file is initialized with the current date and is designed
-to help track project milestones chronologically. If the progress notes file already
-exists, the function will stop and warn the user.
+The \code{dated_progress_notes.md} file is initialized with the current date
+to track project milestones chronologically. If the progress notes file
+already exists, the function stops with an error.
 }
 \examples{
-# Create new progress note file in temporary directory
-tmp <- tempdir()
-write_notes(path = tmp)
+if (interactive()) {
+  tmp <- tempdir()
+  write_notes(path = tmp)
+}
 }

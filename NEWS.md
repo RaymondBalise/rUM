@@ -1,3 +1,39 @@
+# rUM 2.4.0 (rUM Sommelier)
+
+## New Features
++ Templates are now sourced from an external repository ([rum_templates](https://github.com/RaymondBalise/rum_templates)) instead of bundled `inst/gists`. This allows template updates without requiring a package release, and all scaffolded templates now carry `template-version: 1` in YAML frontmatter (#105).
++ Manifest-driven scaffolding: YAML manifests in the external repo define which files, `{{knitr_opts}}` partial injections, and actions each project type requires, replacing hardcoded template logic.
++ Downloaded templates (including R/Medicine slide artwork) are cached for the R session and persisted locally in `tools::R_user_dir("rUM", which = "cache")` for automatic offline fallback, with local override support via `RUM_TEMPLATES_PATH`.
++ Bundled Citation Style Language (`.csl`) files for APA 7th (`apa.csl`, new default), MLA 9th (`mla.csl`), and NEJM (`the-new-england-journal-of-medicine.csl`) ship alongside `references.bib` and `packages.bib` in a dedicated `bib/` subdirectory (`vignettes/bib/` for packages) without live Zotero downloads (#88).
++ Projects and packages now include built-in AI coding assistant instructions (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`) and `.agents/skills/` (`rum-workflow`, `rum-devlog`, `rum-commit`), documented in a new `ak_ai_agents_and_skills` vignette.
++ `make_package()` now scaffolds `inst/extdata/`, `inst/scripts/libraries.R`, and `inst/scripts/do_everything.R` (#104), conditionally loads `library(arrow)` when installed (#101), and includes a dev-first `read_extdata()` dataset loader loop in vignette templates (#103).
+
+## Enhancements
++ `make_project()` and `make_package()` accept case-insensitive `type` values (`"Quarto"`, `"q"`, `"qmd"`, `"R"`, `"rmd"`, `"R Markdown"`), check external template availability and existing `analysis.*` files before modifying `.Rproj` skeletons, gate `quarto_version()` checks strictly to Quarto vignettes, and configure `.Rbuildignore` for agent, decision log, and `do_everything_summary.RData` files.
++ `make_project()` into an existing folder is now non-destructive by default (`overwrite = FALSE` preserves existing `.Rproj`, `.gitignore`, `README.md`, `custom.scss`, and agent instruction files while adding missing scaffold assets).
++ R Markdown vignette templates now use `bookdown::html_vignette2` (with `bookdown` added to `Suggests`) so `\@ref()` table and figure cross-references resolve cleanly, and Quarto templates open external links in a new tab by default (`link-external-newwindow: true`, #93, #98).
++ Enhanced `.gitignore` templates now ignore `*.arrow` (#102), additional SAS/tabular/database formats (`*.sas7bndx`, `*.xpt`, `*.sd2`, `*.sd7`, `*.ssd*`, `*.tsv`, `*.dat`, `*.db`, `*.sqlite*`, `*.duckdb`, #100), `data-raw/`, `raw-data/`, and Quarto `*_files/` artifact directories while keeping slide `clean_title_page.html` assets trackable.
++ `write_quarto()` resolves templates, `{{knitr_opts}}` partials, and bundled `.csl` files via `quarto_standalone.yml` (#83).
++ `write_slides()` resolves `"none"`, `"miami"`, and `"rmed"` decks case-insensitively via `slides.yml`, accepts `.qmd` extensions cleanly via `.validate_filename()` (#87), auto-creates `inst/slides` without double-nesting, and validates `template` and `format` strictly.
++ `show_slides()` stages installed package slide directories into a writable temporary folder before calling `quarto::quarto_preview()`, supporting read-only system libraries and nested `inst/slides/` subdirectories discovered by `find_slides()`.
++ `write_scss()` standardizes on the `filename` parameter (soft-deprecating `name`, #87), strips optional `.scss` extensions, appends new stylesheets in proper CSS cascade order after `custom.scss`, and copies its starter template from `rum_templates`.
++ `write_readme()` sources the README template from `rum_templates` with deterministic overwrite prompts.
++ `write_man()` accepts `pkg::dataset` references and data frames directly, unwraps `haven_labelled` columns cleanly, sanitizes multi-line, pipe (`|`), and brace (`{}`) variable labels, and writes complete UTF-8 `.R` files atomically.
++ Bundled `style.css` and `bibliography.bib` directly in the `bookdown_siteWithRum` R Markdown skeleton and fixed YAML headers across R Markdown skeletons.
++ Updated package vignettes and `README.md` to reflect `bib/` citation directories, package `inst/scripts/` and `read_extdata()` helpers, `write_scss(filename, add_to_yaml = TRUE)`, and built-in AI assistant workflows.
+
+## Deprecations & Breaking Changes
++ Soft-deprecated `write_notes()` and removed `dated_progress_notes.md` from default project/package scaffolding in favor of `DECISIONS.md` and `CHANGELOG.md` / `NEWS.md` via the bundled `rum-devlog` skill.
++ Soft-deprecated `write_scss(name = )` in favor of `write_scss(filename = )` (#87).
++ Removed bundled `inst/gists` and `inst/img` directories now served from `rum_templates`.
++ An internet connection is required once to populate the local `rum_templates` cache (unless `RUM_TEMPLATES_PATH` points to a local checkout); subsequent offline sessions use the cached bundle automatically.
+
+## Testing & Internal Cleanup
++ Added `yaml` to Imports.
++ Removed legacy internal helpers replaced by manifest infrastructure: `.add_quarto_doc()`, `.add_rmd_doc()`, `.add_gitignore()`, `.generate_scss_template()`, `.add_citation_files()`, `.rUM_package_builder()`, and `.add_notes_to_Rbuildignore()`.
++ Expanded offline mocked unit tests across manifest infrastructure, persistent offline cache fallback, exported artifact functions, `find_slides()`, and `show_slides()`, and added a Codecov GitHub Actions workflow and badge (#86).
+
+
 # rUM 2.3.0 (rUM Swizzle)
 
 ## Enhancements

@@ -1,6 +1,6 @@
 Package: rUM
 Title: R Templates from the University of Miami
-Version: 2.3.0
+Version: 2.4.0
 Authors@R: 
     c(
       person(
@@ -65,18 +65,20 @@ Imports:
     table1,
     tidymodels,
     tidyverse,
-    usethis
+    usethis,
+    yaml
 Suggests:
     knitr,
     testthat (>= 3.0.0),
-    tinytex
+    tinytex,
+    withr
 License: MIT + file LICENSE
 URL: 
     https://raymondbalise.github.io/rUM/,
     https://github.com/RaymondBalise/rUM
 BugReports: https://github.com/RaymondBalise/rUM/issues
 Encoding: UTF-8
-RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.1

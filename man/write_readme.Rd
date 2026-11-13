@@ -7,31 +7,33 @@
 write_readme(path = here())
 }
 \arguments{
-\item{path}{The destination directory for the README file. Defaults to \code{
-here::here()}.}
+\item{path}{Destination directory for \code{README.md}. Defaults to
+\code{here::here()}.}
 }
 \value{
-Creates a comprehensive README template for project documentation.
+Invisibly returns \code{NULL}.
 }
 \description{
-This function streamlines project documentation by creating and managing a README.md
-file. It provides interactive prompts for existing files and maintains consistent
-project documentation structure.
+Creates a structured \code{README.md} template for project documentation. If
+\code{README.md} already exists, interactive sessions prompt for confirmation
+before overwriting.
 }
 \details{
-The README.md template includes structured sections for:
+The \code{README.md} template includes structured sections for:
 \itemize{
 \item Project description (study name, principal investigator, author)
 \item Project setup steps for reproducibility
 \item File and directory descriptions
-\item Miscellaneous project notes
+\item Ordered analysis pipeline and data provenance notes
 }
 
-If the README file already exists, the function will stop and warn the user. The
-templates include example documentation that can be modified to suit project needs.
+If \code{README.md} already exists, interactive sessions ask whether to overwrite
+it; non-interactive sessions stop with an error to avoid clobbering existing
+documentation.
 }
 \examples{
-# Create new README in temporary directory
-tmp <- tempdir()
-write_readme(path = tmp)
+if (interactive()) {
+  tmp <- tempdir()
+  write_readme(path = tmp)
+}
 }
