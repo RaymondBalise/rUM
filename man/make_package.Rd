@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_package.R
 \name{make_package}
 \alias{make_package}
-\title{Make an Analysis Project}
+\title{Make an Analysis Package}
 \usage{
 make_package(
   path,
@@ -13,55 +13,59 @@ make_package(
 )
 }
 \arguments{
-\item{path}{Path automatically set by research_project.dcf (see
-\code{./rstudio/templates/project/})}
+\item{path}{Path to the new package directory. Its basename must be a valid
+CRAN R package name (at least two characters, starting with a letter,
+containing only letters, numbers, and periods, and not ending with a
+period).}
 
-\item{type}{Choose between "Quarto (analysis.qmd)" or
-"R Markdown (analysis.Rmd)"}
+\item{type}{Choose between \code{"Quarto (analysis.qmd)"} (\code{"Q"}) or
+\code{"R Markdown (analysis.Rmd)"} (\code{"R"}). Case-insensitive abbreviations
+(\code{"q"}, \code{"quarto"}, \code{"r"}, \code{"rmd"}) are accepted.}
 
-\item{example}{Will the analysis file include an example table/figure?}
+\item{example}{Logical. Will the analysis file include an example
+table/figure?}
 
-\item{overwrite}{Will an existing RStudio project be overwritten?  This is
-needed for for Posit.Cloud.  You will be prompted to confirm this option.}
+\item{overwrite}{Logical. Overwrite an existing \code{.Rproj} and supporting
+files in \code{path}? Required on Posit.Cloud (\code{make_package("./", overwrite = TRUE)}). Existing \code{analysis.qmd} / \code{analysis.Rmd} files are never
+overwritten.}
 
-\item{openInteractive}{Should this new project be opened in a new RStudio
-window? Defaults to \code{TRUE}. NOTE: this option exists to prevent
-RStudio from opening two duplicate versions of the new project when
-this function is executed from RStudio menus. MODIFY WITH CAUTION.}
+\item{openInteractive}{Logical. Should this new package be opened in a new
+IDE window when interactive? Defaults to \code{TRUE}.}
 }
 \value{
-Returns nothing.  See description above.
+Invisibly returns \code{NULL}.
 }
 \description{
-This function creates the structure for an R package. An analysis.Qmd (or
-analysis.Rmd) is created in the vignettes directory. This
-project includes an aggressive .gitignore which is designed to
-help protect against leaking data (with protected  health information), a
-starter bibliography file called "references" (in standard .bib format),
-and a stock Citation Style Language (.csl) file for the New England Journal
-of Medicine.
+This function creates the structure for an R package with an
+\code{analysis.qmd} (or \code{analysis.Rmd}) manuscript in the \verb{vignettes/} directory.
+This package includes an aggressive \code{.gitignore} designed to help protect
+against leaking data (with protected health information), starter
+bibliography and Citation Style Language (\code{.csl}) files in \verb{vignettes/bib/}
+for APA 7th (default), MLA 9th, and the New England Journal of Medicine,
+starter scripts in \verb{inst/scripts/} and \verb{inst/extdata/}, and AI coding
+assistant skills.
 }
 \details{
-Behind the scenes, this function used by research_project.dcf when
-a user selects New project... > New Directory > rUM Research Project Template
-within the RStudio IDE. See \code{./rstudio/templates/project/}.
+Requires an internet connection on first use to download templates
+from \code{rum_templates}; downloaded templates are cached locally for offline use
+(or override via the \code{RUM_TEMPLATES_PATH} environment variable).
 }
 \note{
 If you need to create multiple packages from the same session, restart
-RStudio/Positron after making each one. See \href{https://github.com/RaymondBalise/rUM/issues/84}{open issue}.
+RStudio/Positron after making each one. See
+\href{https://github.com/RaymondBalise/rUM/issues/84}{open issue}.
 }
 \examples{
 \dontrun{
-  # This makes a package with an example Quarto paper in the vignettes folder.
-  make_package(path = "~/test", type = "Quarto (analysis.qmd)", example = TRUE)
-  
-  # make_package() allows abbreviations on the project type: "Q" for Quarto or "R" for R Markdown
-  make_package(path = "~/test_project", "Q", TRUE)
-  
-  # This makes a package with an example R Markdown paper in the vignettes folder.
-  make_package(path = "~/test", type = "R Markdown (analysis.Rmd)", example = TRUE)
-              
-  # This makes a project with an example paper in the vignettes folder.
-  make_package(path = "~/test_project", "R", example = TRUE)
+  # Make a package with an example Quarto paper in vignettes/
+  make_package(
+    path = "~/testpkgquarto",
+    type = "Quarto (analysis.qmd)",
+    example = TRUE
+  )
+
+  # Abbreviations on project type: "Q" for Quarto or "R" for R Markdown
+  make_package(path = "~/testpkgq", "Q", TRUE)
+  make_package(path = "~/testpkgrmd", "R", example = TRUE)
 }
 }

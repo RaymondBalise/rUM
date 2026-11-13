@@ -24,6 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Raymond Balise \email{balise@miami.edu} (\href{https://orcid.org/0000-0002-9856-5901}{ORCID})
   \item Gabriel Odom \email{gabriel.odom@fiu.edu} (\href{https://orcid.org/0000-0003-1341-4555}{ORCID})
   \item Kyle Grealis \email{kxg679@miami.edu} (\href{https://orcid.org/0000-0002-9223-8854}{ORCID})
   \item Francisco Cardozo \email{foc9@miami.edu} (\href{https://orcid.org/0000-0002-1925-4954}{ORCID})

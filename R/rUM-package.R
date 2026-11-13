@@ -2,11 +2,13 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @import dplyr
+#' @import quarto
 #' @importFrom bookdown html_document2
 #' @importFrom conflicted conflict_prefer
-#' @import dplyr
 #' @importFrom gtsummary tbl_summary
-#' @import quarto
+#' @importFrom lifecycle deprecated
+#' @importFrom readr read_lines
 #' @importFrom rio import
 #' @importFrom rmarkdown html_document
 #' @importFrom table1 t1kable

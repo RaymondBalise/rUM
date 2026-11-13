@@ -16,27 +16,36 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-R packages which contain datasets need documentation.  The Roxygen2 package helps write R manual pages but there are many details.  The `write_man()` function examines a dataset and writes a R file that contains Roxygen2 code which produces documents the dataset.  The documentation is written using Markdown to organize details including the number of rows and columns in the dataset, the names, the labels (if any) and types of variable.  The levels of categorical variables are also included.
+R packages which contain datasets need documentation. The Roxygen2 package helps write R manual pages but there are many details. The `write_man()` function examines a dataset and writes an R file that contains Roxygen2 code documenting the dataset. The documentation is written using Markdown to organize details including the number of rows and columns in the dataset, the names, the labels (if any) and types of variables. The levels of categorical variables are also included.
 
 ## Getting Started
 
-Load the dataset you want to document into the global environment using tools like `tidyREDCap::import_instruments()` or `the_data <- readr::read_csv("an_csv_file.csv")` or `the_data <- readxl::read_excel("an_excel_file.xlsx")`.  Then use
-`write_man("the_data")`.  For example:
+Inside an R package project (for example, one created with `rUM::make_package()`), load or create the dataset you want to document using tools like `tidyREDCap::import_instruments()`, `readr::read_csv("a_csv_file.csv")`, or `readxl::read_excel("an_excel_file.xlsx")`. Save the dataset into `data/` with `usethis::use_data()`, run `rUM::write_man()`, and build the `.Rd` manual page with `devtools::document()`:
 
-```
+```r
 library(tidyverse)
 library(conflicted)
 library(labelled)  # for set_variable_labels()
+
 demographics <- 
   readxl::read_excel("demographics.xlsx") |> 
-  mutate(sex2 = as_factor(sex), .keep="unused") |> 
+  mutate(sex2 = as_factor(sex), .keep = "unused") |> 
   labelled::set_variable_labels(
     age = "Age in Years",
     sex2 = "Sex assigned at Birth"
   )
 
-rUM::write_man("demographics")
+# 1. Save the clean R dataset to data/demographics.rda
+usethis::use_data(demographics, overwrite = TRUE)
+
+# 2. Generate R/demographics.R with Roxygen2 documentation
+rUM::write_man(demographics)
+
+# 3. Render man/demographics.Rd so ?demographics works
+devtools::document()
 ```
+
+Note: Remember to review your `.gitignore` if you want Git to track exported `.rda` files inside `data/` (by default, `rUM`'s PHI-safe `.gitignore` ignores `*.rda` to prevent accidental raw-data leaks).
 
 This produces a R file, whose name matches the dataset, in the R folder, that has details like
 
@@ -72,7 +81,7 @@ This produces a R file, whose name matches the dataset, in the R folder, that ha
 
 If your dataset does not have labels you will need to modify the  
 `#' | *Description:* | Description for *thingy* goes here |`  
-line to have an useful description.             
+line to have a useful description.             
 
 You will also want to modify the  
 `@source Where the data came from`  

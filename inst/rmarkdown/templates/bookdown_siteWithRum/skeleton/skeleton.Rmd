@@ -36,16 +36,23 @@ knitr::opts_chunk$set(
 options(digits = 3) # round to three digits
 ```
 
-# 
+# Introduction
 
-Save this file as index.Rmd
-
-Add the style.css file and bibliography.bib files to the directory hold with this file.  They can be found here: https://github.com/RaymondBalise/rUM/tree/master/inst/bookFiles.  Click the Raw button.  Use the file menu to save the file.  Be sure to keep the original names.
+Save this root file as `index.Rmd` when starting a new `bookdown` project.
+Default `style.css` and `bibliography.bib` files are copied automatically into
+the target folder when created via `rmarkdown::draft()` or RStudio's **From
+Template** menu (and are also available in
+`system.file("bookFiles", package = "rUM")`).
 
 ```{r tidyverse, include=FALSE, message=FALSE}
 library(conflicted)
 conflict_prefer("filter", "dplyr", quiet = TRUE)
 conflict_prefer("lag", "dplyr", quiet = TRUE)
+if (requireNamespace("palmerpenguins", quietly = TRUE)) {
+  conflict_prefer("penguins", "palmerpenguins", quiet = TRUE)
+} else {
+  conflict_prefer("penguins", "modeldata", losers = "datasets", quiet = TRUE)
+}
 suppressPackageStartupMessages(library(tidyverse))
 
 # suppress "`summarise()` has grouped output by " messages
@@ -58,4 +65,4 @@ tidymodels_prefer()
 ```
 
 
-# 
+# Methods

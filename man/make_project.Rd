@@ -14,55 +14,60 @@ make_project(
 )
 }
 \arguments{
-\item{path}{Path automatically set by research_project.dcf (see
-\code{./rstudio/templates/project/})}
+\item{path}{Path to the project directory (also used by
+\code{research_project.dcf} in \verb{./rstudio/templates/project/}).}
 
-\item{type}{Choose between "Quarto (analysis.qmd)" or
-"R Markdown (analysis.Rmd)"}
+\item{type}{Choose between \code{"Quarto (analysis.qmd)"} (\code{"Q"}) or
+\code{"R Markdown (analysis.Rmd)"} (\code{"R"}). Case-insensitive abbreviations
+(\code{"q"}, \code{"quarto"}, \code{"r"}, \code{"rmd"}) are accepted.}
 
-\item{example}{Will the analysis file include an example table/figure?}
+\item{example}{Logical. Will the analysis file include an example
+table/figure?}
 
-\item{vignette}{Will the analysis file be saved as a package vignette?}
+\item{vignette}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{make_package()}
+instead.}
 
-\item{overwrite}{Will an existing RStudio project be overwritten?  This is
-needed for for Posit.Cloud.  You will be prompted to confirm this option.}
+\item{overwrite}{Logical. When \code{FALSE} (default), existing \code{.Rproj} and
+supporting files (\code{.gitignore}, \code{README.md}, \code{custom.scss}, \code{AGENTS.md})
+are preserved untouched. When \code{TRUE} (useful on Posit.Cloud), existing
+\code{.Rproj} and supporting files are replaced. Existing \code{analysis.qmd} or
+\code{analysis.Rmd} files are never overwritten.}
 
-\item{openInteractive}{Should this new project be opened in a new RStudio
-window? Defaults to \code{TRUE}. NOTE: this option exists to prevent
-RStudio from opening two duplicate versions of the new project when
-this function is executed from RStudio menus. MODIFY WITH CAUTION.}
+\item{openInteractive}{Logical. Should this new project be opened in a new
+IDE window when interactive? Defaults to \code{TRUE}.}
 }
 \value{
-Returns nothing.  See description above.
+Invisibly returns \code{NULL}.
 }
 \description{
-This function makes an R project that includes an analysis.Rmd
-or analysis.qmd file using the conflicted and tidyverse packages.  This
-project automatically includes an aggressive .gitignore which is designed to
-help protect against leaking data (with protected  health information), a
-starter bibliography file called "references" (in standard .bib format),
-and a stock Citation Style Language (.csl) file for the New England Journal
-of Medicine.
+This function makes an R project that includes an \code{analysis.Rmd}
+or \code{analysis.qmd} file using the \code{conflicted} and \code{tidyverse} packages. This
+project automatically includes an aggressive \code{.gitignore} designed to help
+protect against leaking data (with protected health information), starter
+bibliography files (\code{bib/references.bib} and \code{bib/packages.bib}), Citation
+Style Language (\code{.csl}) files in \verb{bib/} for APA 7th (default), MLA 9th, and
+the New England Journal of Medicine, and AI coding assistant skills.
 }
 \details{
-Behind the scenes, this function used by research_project.dcf when
-a user selects New project... > New Directory > rUM Research Project Template
-within the RStudio IDE. See \code{./rstudio/templates/project/}.
+Behind the scenes, this function is used by \code{research_project.dcf}
+when a user selects New project... > New Directory > rUM Research Project
+Template within the RStudio IDE.
+
+Requires an internet connection on first use to download templates from
+\code{rum_templates}; downloaded templates are cached locally for offline use (or
+override via the \code{RUM_TEMPLATES_PATH} environment variable).
 }
 \examples{
 \dontrun{
-  # This makes a project with an example Quarto paper in the project's folder.
-  make_project(path = "~/test", type = "Quarto (analysis.qmd)", 
-              example = TRUE, vignette = TRUE)
-  
-  # make_project() allows abbreviations on the project type: "Q" for Quarto or "R" for R Markdown
-  make_project(path = "~/test_project", "Q", TRUE, TRUE)
-  
-  # This makes a project with an example R Markdown paper in the project's folder.
-  make_project(path = "~/test", type = "R Markdown (analysis.Rmd)", 
-              example = TRUE, vignette = TRUE)
-              
-  # This makes a project with an example paper in the project's folder.
-  make_project(path = "~/test_project", "R", example = TRUE)
+  # Make a project with an example Quarto paper
+  make_project(
+    path = "~/test_project_quarto",
+    type = "Quarto (analysis.qmd)",
+    example = TRUE
+  )
+
+  # Abbreviations on project type: "Q" for Quarto or "R" for R Markdown
+  make_project(path = "~/test_project_q", "Q", example = TRUE)
+  make_project(path = "~/test_project_rmd", "R", example = TRUE)
 }
 }

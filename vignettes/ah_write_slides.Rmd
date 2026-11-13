@@ -31,8 +31,10 @@ rUM::write_slides(filenames = "slide_demo", path = "~/Desktop/")
 You will get a folder called **slides** that contains three files. 
 
 1. A revealjs quarto slide deck (here named **slide_demo.qmd**).
-2. A theme file, named **rstudio_default-light.theme**, that shows code chunks with the colors of RStudio
-3. A Sassy Cascading Style Sheet file, named slides.scss, that lets you set coloring and font options for your slide deck.
+2. A theme file, named **rstudio_default-light.theme**, that shows code chunks with the colors of RStudio.
+3. A Sassy Cascading Style Sheet file, named **slides.scss**, that lets you set coloring and font options for your slide deck.
+
+You can also pass `example = TRUE` to include worked layout examples, or set `template = "miami"` for a University of Miami themed deck.
 
 ### The R Medicine Template
 
@@ -70,10 +72,10 @@ If you would like to share your template, leave us a note on the rUM github page
 
 If you would like to add a slide deck to project that will build into an R package, first make a project with the necessary package details (take a look at the [Make a Package](ae_make_a_package.html) vignette).  Then come up with a name for your slide deck (here I am calling it **final_results**). Finally, request that the slides are saved in a **slides** subfolder in the **inst** folder like this:
 
-```
+```r
 # write into the inst/slides/ folder
 rUM::write_slides("final_results", path = "./inst")
 ```
 
-People will be able to access your slides using the `find_slides()` and `show_slides()` functions. Take a look at the [Find and Show Slides in a Package](ai_find_show_slides.html) vignette to learn about those functions.
+After editing your deck, run `devtools::install()` so the slides are installed with your package. People will then be able to discover and view your slides using the `find_slides()` and `show_slides()` functions. Take a look at the [Find and Show Slides in a Package](ai_find_show_slides.html) vignette to learn about those functions.
 

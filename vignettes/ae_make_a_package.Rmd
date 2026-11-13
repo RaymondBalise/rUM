@@ -22,12 +22,24 @@ library(rUM)
 Saving your data and analyses into an R package helps to create reproducible research.  Someone who wants to reproduce your work can load a package to have access to your data and your paper(s).  **`rUM`** can help you by creating a project that has all the files/directories needed for an R package including a vignette folder that contains the outline of a paper.
 
 ## How do I make a package project?
-All you need to do is use the `make_package()` function. We've automated necessary changes to facilitate the R package structure, such as modifying the `analysis.qmd` (or `analysis.Rmd`) YAML structure to create a vignette, including a `.Rbuildignore` file, and including the `DESCRIPTION` & `NAMESPACE` package files. To get started, type:
+All you need to do is use the `make_package()` function. We have automated the setup needed for a research R package, including:
 
-1. `rUM::make_package("~/Desktop/my.example", "R", example = TRUE)`.  This creates a new project with all the files for a package in the current directory.  The vignette includes an example table and figure and all the R Markdown syntax for adding hyperlinks to the table and figures.
+* A vignette paper template (`vignettes/analysis.qmd` or `vignettes/analysis.Rmd`) with bundled bibliography and `.csl` citation style files (`apa.csl` default, `mla.csl`, and `the-new-england-journal-of-medicine.csl`) inside `vignettes/bib/`, plus a dev-first `read_extdata()` helper that works both before and after installing the package.
+* Starter package data and workflow folders: `inst/extdata/` and `inst/scripts/` (`libraries.R` and `do_everything.R`). When you are ready to export clean R datasets, `usethis::use_data()` will create `data/` on demand while raw data patterns remain gitignored.
+* Standard package metadata (`DESCRIPTION`, `NAMESPACE`, `.Rbuildignore`, `README.md`, and an aggressive PHI-safe `.gitignore`), alongside AI coding assistant instructions (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`) and `.agents/skills/` tailored to R package development.
 
-2. Set the license for your package.  **REMEMBER: Do share NOT sensitive data. Talk to the data privacy officer at your institution/organization before sharing any data.  Ask them for advice on setting a software license.** If you are not planning on publicly sharing your data consider using a proprietary license.  For example, type `usethis::use_proprietary_license("Your Name Goes Here")`.  To learn more about licences look at the documentation for `use_proprietary_license()` by typing: `?usethis::use_proprietary_license`.  You can also learn more at [choosealicense.com](https://choosealicense.com/) or [here](https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633) but talk to the legal counsel at your institution/organization before making a decision. The information presented is not legal advice, is not to be acted on as such, may not be current and is subject to change without notice.
+To get started, type:
+
+1. `rUM::make_package("~/Desktop/my.example", "R", example = TRUE)` (or use `"Quarto"` for a Quarto vignette). This creates a new package project at `~/Desktop/my.example`. When `example = TRUE`, the vignette includes an example summary table and figure with cross-reference hyperlinks.
+
+2. Set the license for your package. **REMEMBER: Do NOT share sensitive data. Talk to the data privacy officer at your institution/organization before sharing any data. Ask them for advice on setting a software license.** If you are not planning on publicly sharing your data consider using a proprietary license. For example, type `usethis::use_proprietary_license("Your Name Goes Here")`. To learn more about licenses look at the documentation for `use_proprietary_license()` by typing: `?usethis::use_proprietary_license`. You can also learn more at [choosealicense.com](https://choosealicense.com/) or [here](https://gist.github.com/nicolasdao/a7adda51f2f185e8d2700e1573d8a633) but talk to the legal counsel at your institution/organization before making a decision. The information presented is not legal advice, is not to be acted on as such, may not be current and is subject to change without notice.
+
+3. Document and install your package with `devtools::document()` and `devtools::install()` (or `devtools::install(build_vignettes = TRUE)` to build your paper vignette) so your functions, datasets, and embedded slides are available via `library(my.example)`.
 
 ## Can I write my vignette with Quarto?
 
 Yes!  When you install **`rUM`** we make sure you have a modern version of the R `quarto` package but we do not install the most modern copy of the Quarto language itself (which lives outside of R).  You can make sure that your version of Quarto is modern enough by running `quarto::quarto_version()`.  If your version is not 1.4.549 or higher, install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
+
+## Built-in AI coding assistant skills
+
+Every package created with `make_package()` includes `AGENTS.md` (along with `CLAUDE.md` and `GEMINI.md` pointers) and three package-aware skills in `.agents/skills/` (`rum-workflow`, `rum-devlog` for `DECISIONS.md` and `NEWS.md`, and `rum-commit`). These files are automatically listed in `.Rbuildignore` so `R CMD check` passes cleanly while your team can still track them in git. See the [Built-in AI Coding Assistants and Project Skills](ak_ai_agents_and_skills.html) vignette for the full guide.

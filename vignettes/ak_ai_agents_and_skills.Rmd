@@ -1,0 +1,107 @@
+---
+title: "11. Built-in AI Coding Assistants and Project Skills"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{11. Built-in AI Coding Assistants and Project Skills}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Why include AI instructions in a project template?
+
+Many researchers and students now pair RStudio, Positron, or terminal editors with AI coding assistants such as Claude Code, Gemini, Positron Assistant, GitHub Copilot, and Cursor. Without project context, an assistant has to guess where your bibliography lives, how you load datasets, whether your directory is a standalone manuscript or an R package, and which folders hold sensitive study data.
+
+Starting in `rUM` 2.4.0, both `make_project()` and `make_package()` automatically scaffold project-level AI instructions (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`) and task-specific workflows inside `.agents/skills/`. If you use an AI assistant, it understands `{rUM}` conventions immediately without manual prompting. If you do not use AI tools, these plain Markdown files sit quietly in your project and require zero setup.
+
+## What gets added to your project or package?
+
+### Research projects (`rUM::make_project()`)
+
+```text
+my_project/
+├── .agents/
+│   └── skills/
+│       ├── rum-commit/SKILL.md     # Structured git commit messages
+│       ├── rum-devlog/SKILL.md     # Code comments, DECISIONS.md, CHANGELOG.md
+│       └── rum-workflow/SKILL.md   # Quarto/Rmd docs, R/ scripts, SCSS, slides
+├── bib/                            # references.bib, packages.bib, .csl styles
+├── data/                           # Study datasets (gitignored)
+├── AGENTS.md                       # Canonical project rules & privacy gates
+├── CLAUDE.md                       # Pointer to AGENTS.md and .agents/skills/
+├── GEMINI.md                       # Pointer to AGENTS.md and .agents/skills/
+├── analysis.qmd                    # Manuscript (or analysis.Rmd)
+├── custom.scss                     # Quarto styling (Quarto projects)
+├── .gitignore                      # Aggressive PHI-safe git protection
+├── README.md
+└── my_project.Rproj
+```
+
+### Research packages (`rUM::make_package()`)
+
+```text
+my.package/
+├── .agents/
+│   └── skills/
+│       ├── rum-commit/SKILL.md     # Structured git commit messages
+│       ├── rum-devlog/SKILL.md     # Code comments, DECISIONS.md, NEWS.md
+│       └── rum-workflow/SKILL.md   # CRAN-clean R/, write_man(), vignettes, check
+├── R/                              # Package functions and write_man() docs
+├── inst/
+│   ├── extdata/                    # Non-.rda files (.rds, .parquet, .xlsx)
+│   └── scripts/                    # libraries.R and do_everything.R runner
+├── vignettes/
+│   ├── bib/                        # Vignette .bib and .csl styles
+│   ├── .gitignore
+│   └── analysis.qmd                # Paper vignette (or analysis.Rmd)
+├── AGENTS.md                       # Package rules, CRAN & privacy boundaries
+├── CLAUDE.md                       # Pointer to AGENTS.md and .agents/skills/
+├── GEMINI.md                       # Pointer to AGENTS.md and .agents/skills/
+├── .Rbuildignore                   # Excludes agent files from CRAN tarballs
+├── .gitignore                      # Aggressive PHI-safe git protection
+├── DESCRIPTION
+├── NAMESPACE
+├── README.md
+└── my.package.Rproj
+```
+
+## Two-layer design: `AGENTS.md` + `.agents/skills/`
+
+Different coding assistants look for different filenames when a project opens (`AGENTS.md`, `CLAUDE.md`, or `GEMINI.md`). Maintaining three separate copies of your project rules quickly drifts out of sync, so `{rUM}` uses a two-layer layout:
+
+1. **`AGENTS.md` (single source of truth)**: Defines directory routing, `here::here()` path discipline, modern R (`|>`) and Quarto standards, and raw-data privacy boundaries. `CLAUDE.md` and `GEMINI.md` are thin pointer files that direct Claude and Gemini straight to `AGENTS.md` and `.agents/skills/`. When you customize a rule for your study, you only edit `AGENTS.md`.
+2. **`.agents/skills/` (task-specific workflows)**: Modular `SKILL.md` guides that assistants load on demand when scaffolding files, logging analytical decisions, or drafting git commits.
+
+## Built-in `.agents/skills/` workflows
+
+Every `{rUM}` project and package ships with three skills inside `.agents/skills/`:
+
+- **`rum-workflow`**: Tailored automatically to whether you ran `make_project()` or `make_package()`:
+  - *In a research project*: Guides adding Quarto documents with `rUM::write_quarto()`, moving multi-step data cleaning into modular `R/` scripts sourced via `here::here()`, adding stylesheets with `rUM::write_scss()`, creating Revealjs slide decks with `rUM::write_slides()`, and switching bundled `.csl` citation styles (`apa.csl`, `mla.csl`, `the-new-england-journal-of-medicine.csl`) in `bib/`.
+  - *In an R package*: Enforces CRAN-safe `R/` standards (never calling `library()`, `source()`, or `setwd()` inside `R/`), registers dependencies via `usethis::use_package()`, documents clean datasets with `usethis::use_data()` + `rUM::write_man()`, places package slide decks inside `inst/` (`rUM::write_slides(path = "inst")`), and runs closed-loop `devtools::document()`, `devtools::test()`, and `devtools::check()`.
+- **`rum-devlog`**: Audits modified `.R`, `.qmd`, and `.Rmd` files so comments explain *why* an analytical choice or exclusion threshold was used rather than restating R syntax, logs substantive statistical or architectural decisions chronologically in `DECISIONS.md`, and updates `CHANGELOG.md` (in research projects) or `NEWS.md` (in R packages).
+- **`rum-commit`**: Inspects `git status` and `git diff` to draft structured `type(scope): summary` commit messages (`<= 72` characters) with indented bullets explaining what changed and why.
+
+## Data privacy, Quarto chunks, and CRAN build safety
+
+Biomedical and academic workflows have strict requirements around sensitive data and reproducible builds. The scaffolded instructions enforce three guardrails out of the box:
+
+1. **Protected data confirmation gate**: `AGENTS.md` and `rum-workflow` instruct assistants never to stage participant-level data or weaken `.gitignore`, and to ask for explicit confirmation before reading raw data files in `data/`, `data-raw/`, or `inst/extdata/`. **Important**: Prompt instructions complement, rather than replace, institutional data governance. Always consult your institution's data privacy officer or IRB before using external AI tools in projects containing protected health information (PHI) or restricted datasets.
+2. **Adaptive Quarto chunk headers**: Whether your `.qmd` manuscript uses inline `{r label}` headers (preserving chunk names when collapsed in RStudio or Positron) or `#| label:` YAML hashpipes, `AGENTS.md` and `rum-workflow` match the style already present in your file without rewriting existing chunks unprompted.
+3. **Zero `R CMD check` warnings or NOTEs**: In `make_package()`, `{rUM}` keeps `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and `.agents/` trackable in git so collaborators share the same assistant setup, while automatically registering `^AGENTS\.md$`, `^CLAUDE\.md$`, `^GEMINI\.md$`, `^\.agents$`, and `^DECISIONS\.md$` in `.Rbuildignore` so `R CMD check --as-cran` passes cleanly.
+
+## Customizing `AGENTS.md` for your study
+
+Because `AGENTS.md` lives in your project root, you can add study-specific context directly to it as your analysis evolves, such as:
+
+- Cohort inclusion/exclusion rules or primary outcome definitions.
+- Shared variable naming conventions or `labelled` dictionary scripts.
+- Target journal formatting rules (for example, switching `csl:` to `bib/the-new-england-journal-of-medicine.csl` or word-count limits).
+
+Any updates you save to `AGENTS.md` are automatically picked up through `CLAUDE.md` and `GEMINI.md` as well.

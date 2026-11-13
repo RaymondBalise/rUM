@@ -3,6 +3,7 @@
   [![CRAN status](https://www.r-pkg.org/badges/version/rUM)](https://CRAN.R-project.org/package=rUM)
   [![R-CMD-check](https://github.com/RaymondBalise/rUM/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RaymondBalise/rUM/actions/workflows/R-CMD-check.yaml)
   [![Lifecycle: stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+  [![Codecov test coverage](https://codecov.io/gh/RaymondBalise/rUM/graph/badge.svg)](https://app.codecov.io/gh/RaymondBalise/rUM)
   [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/rUM)](https://www.r-pkg.org/pkg/rUM)
   <!-- [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rUM)](https://cran.r-project.org/package=rUM) -->
   <!-- badges: end -->
@@ -17,33 +18,39 @@ To see a tutorial video on rUM check out our [presentation at R Medicine 2025](h
 * A research project template.  It creates a new RStudio project that has your choice of an `analysis.qmd` Quarto file or `analysis.Rmd` R markdown file that load the tidyverse and conflicted packages and set many useful default details.  These files can also include example tables and figures.
 
 * `rUM` streamlines creating a package that include a paper outline with the `make_package()` function.
-* `rUM` helps with project documentation files (`write_readme()` and `write_notes()`), and Quarto styling files (`write_scss()`).
+* `rUM` helps with project documentation files (`write_readme()`) and Quarto styling files (`write_scss()`).
 + `rUM` can make documentation/manual pages for datasets with the `write_man()` function.  
 + `rUM` now includes templates to produce slide decks with the `write_slides()` function.  There are now functions (`find_slides()` and `show_slides()`) to find and render/show slides that are included with a package.
 + `write_quarto()` now accepts an `example` argument. If this is set to `TRUE`, then it will use the Quarto paper template with examples of a table and figure with cross-referencing. If this is `FALSE`, then it will use the Quarto paper template without examples for tables. The default value is `NULL` and will provide a minimal Quarto template. See `?write_quarto()` for more documentation.
-+ 💥 NEW in Version 2.3.0 (rUM Swizzle) 💥 
-   + Improvements to the R Medicine slide templates & files.
-   + Minor bug fixes.
++ 💥 NEW in Version 2.4.0 (rUM Sommelier) 💥 
+   + Manifest-driven templates served from [`rum_templates`](https://github.com/RaymondBalise/rum_templates) with `template-version` frontmatter and automatic local offline caching (plus `RUM_TEMPLATES_PATH` override support).
+   + Bundled APA 7th (new default), MLA 9th, and NEJM `.csl` citation styles in `bib/` (`vignettes/bib/` for packages).
+   + Starter package data and orchestration scripts (`inst/extdata/`, `inst/scripts/libraries.R`, `inst/scripts/do_everything.R`) plus dev-first `read_extdata()` vignette loaders.
+   + Built-in AI coding assistant instructions (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`) and `.agents/skills/` workflows (`vignette("ak_ai_agents_and_skills", package = "rUM")`).
 
 ## How do I add rUM?
 
-Modern versions of the RStudio interface (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio [here](https://posit.co/download/rstudio-desktop/). You can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
+Modern versions of the RStudio interface (v2022.07 or later) ships with Quarto; update to the most recent version of RStudio [here](https://docs.posit.co/ide/user/). You can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
 
-Then you should run this in the console of RStudio:
+Then run this in the R console to install the latest CRAN release:
 
 ```r
 if (!requireNamespace("remotes")) install.packages("remotes")
 remotes::install_cran("rUM")
 ```
 
-If you would like the (unstable) development version, use the following code instead:
+If you would like the latest GitHub version (or the `dev` branch before a CRAN release), run:
 ```r
 if (!requireNamespace("remotes")) install.packages("remotes")
 remotes::install_github("RaymondBalise/rUM")
+# Or for the active development branch:
+# remotes::install_github("RaymondBalise/rUM", ref = "dev")
 ```
 
-## Can I make a R package that includes my paper as a vignette?  
-Yes!  When you use the `make_project()` function set `vignette = TRUE`.  See the "Make a Package" vignette which ships with rUM. Run this line `vignette("Make a Package", package = "rUM")` to see it now. 
+Note: The first time you scaffold a project, package, slide deck, style sheet, or README in `rUM` 2.4.0+, `rUM` downloads the latest template bundle from `rum_templates` and caches it locally on your machine so subsequent projects also work offline.
+
+## Can I make an R package that includes my paper as a vignette?  
+Yes! Use the `make_package()` function to create a package with an academic paper vignette. See the "Make a Package" vignette which ships with rUM (`vignette("ae_make_a_package", package = "rUM")`). 
 
 ### Can I make a Quarto based vignette?
 Yes!  If you would like to write a Quarto vignette you need have Quarto version 1.4.549 or higher.  You can check your version with `quarto::quarto_version()`.  You can install the latest version of Quarto directly from [here](https://quarto.org/docs/get-started/).
@@ -59,8 +66,8 @@ https://github.com/RaymondBalise/rUM
 1. Scroll down and then click **rUM Research Project Template**
 1. Specify where you want your research project to be saved.
 
-#### How do change the reference style for my paper?
-The default reference style is the New England Journal of Medicine.  The style is set by the [Citation Style Language](https://citationstyles.org/) (`csl:`) option near the top of the file.  To use a different style, download a csl file from [https://www.zotero.org/styles/](https://www.zotero.org/styles/) into the folder with your analysis file.  Then change *the-new-england-journal-of-medicine.csl* to the name of the file you downloaded.
+#### How do I change the reference style for my paper?
+The default reference style is APA 7th edition (`bib/apa.csl`). Each project and package also ships with MLA 9th edition (`bib/mla.csl`) and the New England Journal of Medicine (`bib/the-new-england-journal-of-medicine.csl`) inside the `bib/` directory (`vignettes/bib/` for packages). The style is set by the [Citation Style Language](https://citationstyles.org/) (`csl:`) option near the top of the file. To use another style from [https://www.zotero.org/styles/](https://www.zotero.org/styles/), place the `.csl` file in `bib/` and update `csl:` in your YAML header.
 
 #### How do I control what files appear in my reference section?
 The analysis file includes this code near the bottom:
@@ -68,14 +75,13 @@ The analysis file includes this code near the bottom:
 ```
   c(
     .packages(),
-    "rUM",
-    "table1"
+    "rUM"
   ),
 ```
 
 If you want to acknowledge a package that is not used directly in your analysis file, add its name inside of the `c()` function.  The authors of the packages that you used for exploratory data analysis will thank you.  
 
-After you knit/render the analysis file once the packages will appear in the "packages.bib" file in the same directory/folder as your analysis file. If you are using the RStudio **Visual Editor**, put the cursor when you want to add the citation, then use the Insert Menu and choose *@ Citation...* and pick the article.  If you are using the Visual Studio **Source Editor**, open the "packages.bib" file, find the manual reference for the package that you want to add and copy it.  For example, if you needed to add a reference to the `rUM` package you would find this line:
+After you knit/render the analysis file once, the packages will appear in `bib/packages.bib` (`vignettes/bib/packages.bib` for packages). If you are using the RStudio **Visual Editor**, put the cursor where you want to add the citation, then use the Insert Menu and choose *@ Citation...* and pick the article.  If you are using the **Source Editor**, open `bib/packages.bib`, find the manual reference for the package that you want to add, and copy it.  For example, if you needed to add a reference to the `rUM` package you would find this line:
 
 ```
 @Manual{R-rUM
@@ -93,7 +99,7 @@ and copy the reference name.  Here the name is `R-rUM`. Paste that where you wan
   + pdf2 showing LaTeX with rUM
   + bookdown_site with rUM 
   
-This will create a new subdirectory in your current working directory with the same name as the name of the `.Rmd` file you specified. Within this directory, you will find the analysis R Markdown file. For example, if you created an R Markdown file called `wrangle_cytometry_data.Rmd` with the steps above, then your current directory will now have a subdirectory called `wrangle_cytometry_data/` which will contain the file `wrangle_cytometry_data.Rmd` and any subsequent files from the knitting process (such as `.PDF`, `.html`, or `.docx` files created by knitting the RMarkdown document).
+This saves the `.Rmd` file directly in the folder you select (rather than creating an extra nested subdirectory). When choosing **bookdown_site with rUM**, save the root file as `index.Rmd`; default `style.css` and `bibliography.bib` files are copied automatically into the same folder.
 
 ### What are the headers?
 

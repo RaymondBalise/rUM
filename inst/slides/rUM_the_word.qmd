@@ -9,6 +9,8 @@ date: last-modified
 date-format: "MMMM D, YYYY"
 format:
   revealjs:
+    link-external-newwindow: true
+    link-external-icon: false  # true = show icon next to external links
     theme: 
       - default
       - slides.scss
@@ -31,10 +33,10 @@ knitr:
 editor_options:
   chunk_output_type: console
 editor: source
-highlight-style: rstudio_default-light.theme
+template-version: 1
 ---
  
-# Defintion of rum
+# Definition of rum
  
 ```{r echo=FALSE}
 # Helper packages - need dplyr and ggplot
@@ -71,7 +73,7 @@ rummer; rummest
 - 1. British, informal + somewhat old-fashioned: [strange, odd]{.red}
 
 > Now writing is rum trade and eyes are rum things, and what is all right one day is all wrong the next.
-> —Angela Thirkell
+> -- Angela Thirkell
 
 - 2. British, informal + somewhat old-fashioned: [difficult, dangerous]{.red}
 
@@ -81,7 +83,7 @@ rummer; rummest
 
 ## rUM the Package
 
-A package from you friends at the University of Miami.
+A package from your friends at the University of Miami.
 
 ::: {.footer}
 <https://raymondbalise.github.io/rUM/>

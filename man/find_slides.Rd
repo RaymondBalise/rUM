@@ -7,17 +7,16 @@
 find_slides(package = NULL)
 }
 \arguments{
-\item{package}{Character. Provide the package containing one or more slide decks.}
+\item{package}{Character. Package name containing one or more slide decks.}
 }
 \value{
-A list of class "slide_finder" containing the name of the package and the
-name of the slides.
+Invisibly returns a list of class \code{"slide_finder"} containing
+\code{package} and \code{slides}.
 }
 \description{
-Returns the names of all Quarto slide decks in a package. This is designed to work
-with \code{rUM::show_slides()} to preview the slide deck. For more
-information look in the
-\href{../doc/ah_write_slides.html}{Creating Slides with write_slides()} vignette.
+Returns the names of all Quarto reveal.js slide decks in a package. Designed
+to work with \code{rUM::show_slides()} to preview a slide deck. For more
+information, see \code{vignette("ah_write_slides", package = "rUM")}.
 }
 \examples{
 if (interactive()) {

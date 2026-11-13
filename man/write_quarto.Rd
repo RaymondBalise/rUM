@@ -7,27 +7,26 @@
 write_quarto(filename = NULL, path = here(), example = NULL)
 }
 \arguments{
-\item{filename}{Character string. The name of the file without the '.qmd' extension.
-Only letters, numbers, hyphens, and underscores are allowed.}
+\item{filename}{Character string. Name of the file without the \code{.qmd}
+extension. Only letters, numbers, hyphens, and underscores are allowed.}
 
-\item{path}{Character string. Directory where the file will be created. Defaults to
-the current project's base directory.}
+\item{path}{Character string. Directory where the file will be created.
+Defaults to \code{here::here()}.}
 
-\item{example}{Logical. Will the analysis file include a paper example with table/
-figure? Default is \code{NULL} and will use a default, non-paper template. If this is set
-to \code{TRUE}, then it will use the Quarto paper template with examples of a table and
-figure with cross-referencing. If this is \code{FALSE}, then it will use the Quarto paper
-template without examples for tables.}
+\item{example}{Logical or \code{NULL}. Default \code{NULL} writes a lean standalone
+Quarto document. \code{TRUE} writes a manuscript template with worked table and
+figure cross-references, custom SCSS, and \verb{bib/} citations. \code{FALSE} writes
+the manuscript template with placeholder chunks.}
 }
 \value{
-Opens file after creating the Quarto document.
+Invisibly returns \code{NULL} (and opens the file when interactive).
 }
 \description{
-This function creates a new Quarto document (.qmd file) complete with a useful header.
+This function creates a new Quarto document (\code{.qmd} file) complete with a
+starter YAML header.
 }
 \examples{
 \dontrun{
-# Create a new Quarto document
 write_quarto(filename = "data_cleaning", path = tempdir())
 }
 }

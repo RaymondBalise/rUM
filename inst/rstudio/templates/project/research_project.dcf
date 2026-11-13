@@ -18,4 +18,4 @@ Position: left
 Parameter: openInteractive
 Widget: CheckboxInput
 Label: Open Duplicate RStudio Windows? (Leave unchecked!)
-Default: FALSE
+Default: Off
